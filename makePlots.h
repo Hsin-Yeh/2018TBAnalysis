@@ -22,6 +22,7 @@ class makePlots{
   makePlots();
   makePlots( TChain *c1,TChain *c2,TChain *c3,string filename );
   makePlots( TChain *c1,TChain *c2,string filename );
+  makePlots( TChain *c1,string filename );
  
   ~makePlots();
   
@@ -47,6 +48,7 @@ class makePlots{
   TTree        *T_Meta;
   TTree        *T_MC;
   int          nevents;
+  bool         TestRun;
   
   // Mainframe functions
   void Init();

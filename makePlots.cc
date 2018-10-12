@@ -91,6 +91,42 @@ makePlots::makePlots( TChain *c1,TChain *c2,string filename ):T_Rechit(c1),T_DWC
   rechit_toaFall = 0;
 
 }
+makePlots::makePlots( TChain *c1,string filename ):T_Rechit(c1){
+  cout << "Test Data: Constructor of makePlot ... \n\n" << endl;
+  fname = filename;
+  // Set object pointer(Data)
+  rechit_detid = 0;
+  rechit_module = 0;
+  rechit_layer = 0;
+  rechit_chip = 0;
+  rechit_channel = 0;
+  rechit_type = 0;
+  rechit_x = 0;
+  rechit_y = 0;
+  rechit_z = 0;
+  rechit_iu = 0;
+  rechit_iv = 0;
+  rechit_energy = 0;
+  rechit_energy_noHG = 0;
+  rechit_amplitudeHigh = 0;
+  rechit_amplitudeLow = 0;
+  rechit_hg_goodFit = 0;
+  rechit_lg_goodFit = 0;
+  rechit_hg_saturated = 0;
+  rechit_lg_saturated = 0;
+  rechit_fully_calibrated = 0;
+  rechit_TS2High = 0;
+  rechit_TS2Low = 0;
+  rechit_TS3High = 0;
+  rechit_TS3Low = 0;
+  rechit_Tot = 0;
+  rechit_time = 0;
+  rechit_timeMaxHG = 0;
+  rechit_timeMaxLG = 0;
+  rechit_toaRise = 0;
+  rechit_toaFall = 0;
+  TestRun = true;
+}
 
 //Destructor
 makePlots::~makePlots()
@@ -148,30 +184,32 @@ void makePlots::Init(){
     T_Rechit->SetBranchAddress("rechit_TS2Low", &rechit_TS2Low);
     T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
     T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);}
-  
-  T_DWC ->SetBranchAddress("ntracks", &ntracks);
-  T_DWC->SetBranchAddress("trackChi2_X", &trackChi2_X);
-  T_DWC->SetBranchAddress("trackChi2_Y", &trackChi2_Y);
-  T_DWC->SetBranchAddress("dwcReferenceType", &dwcReferenceType);
-  T_DWC->SetBranchAddress("m_x", &m_x);
-  T_DWC->SetBranchAddress("m_y", &m_y);
-  T_DWC->SetBranchAddress("b_x", &b_x);
-  T_DWC->SetBranchAddress("b_y", &b_y);
+
+
+  if(!TestRun){
+    T_DWC ->SetBranchAddress("ntracks", &ntracks);
+    T_DWC->SetBranchAddress("trackChi2_X", &trackChi2_X);
+    T_DWC->SetBranchAddress("trackChi2_Y", &trackChi2_Y);
+    T_DWC->SetBranchAddress("dwcReferenceType", &dwcReferenceType);
+    T_DWC->SetBranchAddress("m_x", &m_x);
+    T_DWC->SetBranchAddress("m_y", &m_y);
+    T_DWC->SetBranchAddress("b_x", &b_x);
+    T_DWC->SetBranchAddress("b_y", &b_y);
 
 
   
-  if(Is_Data){
-    T_Meta->SetBranchAddress("configuration", &configuration);
-    T_Meta->SetBranchAddress("biasCurrentCh0", &biasCurrentCh0);
-    T_Meta->SetBranchAddress("biasCurrentCh1", &biasCurrentCh1);
-    T_Meta->SetBranchAddress("biasCurrentCh2", &biasCurrentCh2);
-    T_Meta->SetBranchAddress("biasCurrentCh3", &biasCurrentCh3);
-    T_Meta->SetBranchAddress("humidity_RHDP4", &humidity_RHDP4);
-    T_Meta->SetBranchAddress("TCassette07", &TCassette07);
-    T_Meta->SetBranchAddress("tablePositionY", &tablePositionY);
-    T_Meta->SetBranchAddress("humidity_air", &humidity_air);
-    T_Meta->SetBranchAddress("temperature_air", &temperature_air);}
-
+    if(Is_Data){
+      T_Meta->SetBranchAddress("configuration", &configuration);
+      T_Meta->SetBranchAddress("biasCurrentCh0", &biasCurrentCh0);
+      T_Meta->SetBranchAddress("biasCurrentCh1", &biasCurrentCh1);
+      T_Meta->SetBranchAddress("biasCurrentCh2", &biasCurrentCh2);
+      T_Meta->SetBranchAddress("biasCurrentCh3", &biasCurrentCh3);
+      T_Meta->SetBranchAddress("humidity_RHDP4", &humidity_RHDP4);
+      T_Meta->SetBranchAddress("TCassette07", &TCassette07);
+      T_Meta->SetBranchAddress("tablePositionY", &tablePositionY);
+      T_Meta->SetBranchAddress("humidity_air", &humidity_air);
+      T_Meta->SetBranchAddress("temperature_air", &temperature_air);}
+  }
   Init_Runinfo();
 }
 void makePlots::Init_Runinfo(){
@@ -198,13 +236,18 @@ void makePlots::Init_Runinfo(){
 }
 
 void makePlots::GetData(int evt){
-  if(Is_Data){
+  if(TestRun){
     T_Rechit-> GetEntry(evt);
-    T_DWC   -> GetEntry(evt);
-    T_Meta  -> GetEntry(evt);}
-  else{
-    T_Rechit-> GetEntry(evt);
-    T_DWC   -> GetEntry(evt);}
+  }
+  if(!TestRun){
+    if(Is_Data){
+      T_Rechit-> GetEntry(evt);
+      T_DWC   -> GetEntry(evt);
+      T_Meta  -> GetEntry(evt);}
+    else{
+      T_Rechit-> GetEntry(evt);
+      T_DWC   -> GetEntry(evt);}
+  }
 }
 
 void makePlots::Getinfo(int ihit,int &layer,double &x, double &y,double &z,double &ene){
@@ -229,7 +272,8 @@ void makePlots::NtupleMaker(){
   cout << "output file: " << title << endl;
   TFile outf(title,"recreate");
   TTree *outT1 = T_Rechit->CopyTree("");
-  TTree *outT2 = T_DWC->CopyTree("");
+  if(!TestRun)
+    TTree *outT2 = T_DWC->CopyTree("");
   TTree *outT3 = new TTree("rechit_var","rechit_var");
   
   vector<vector<double> > hit_tmp(NLAYER);
@@ -284,6 +328,8 @@ void makePlots::NtupleMaker(){
     for(int h = 0; h < Nhits ; ++h){
       
       Getinfo(h,layer,posx,posy,posz,energy);
+      if(layer >= 29) continue;
+
       totalE += energy;
       layerNhit[layer-1]++;
       hit_tmp[layer-1].push_back(energy);
@@ -316,7 +362,7 @@ void makePlots::NtupleMaker(){
     outT3->Fill();
   }
   outT1->Write();
-  outT2->Write();
+  //outT2->Write();
   outT3->Write();
   outf.Close();
 }

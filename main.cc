@@ -45,8 +45,8 @@ int main(int argc, char** argv){
       if(Is_Data){
 	chain->Add(filename.c_str());
 	chain2->Add(filename.c_str());
-	chain3->Add(filename.c_str());
-	int check = chain3->GetEntries();
+	//chain3->Add(filename.c_str());
+	int check = 1;//chain3->GetEntries();
 	if(check == 0){
 	  cout << "\n\n======================================" << endl;
 	  cout << "This file is probably MC" << endl;
@@ -67,11 +67,13 @@ int main(int argc, char** argv){
 
 
   makePlots *M;
+  M = new makePlots(chain,filename);
+  /*
   if(Is_Data){
     M = new makePlots(chain,chain2,chain3,filename);}
   else{
     M = new makePlots(chain,chain2,filename);}
-
+  */
   M->Is_Data = Is_Data ;
   M->NtupleMaker();
   //M->Event_Display();
