@@ -585,22 +585,27 @@ void makePlots::InitTH2Poly_flower(TH2Poly& poly)
     rotate_module_centery =
       module_centerx * sin(TB_rotate) + module_centery * cos(TB_rotate);
 
+
     while(true){
       getline(file,line);
+
       if( file.eof() ) break;
-      file >> iu >> iv >> CellXYsize;    
+      bool goodbin = true;
+      file >> iu >> iv >> CellXYsize;
+      for(int i = 0; i < CellXYsize ; ++i){
+	HexX[i] = 0;
+	HexY[i] = 0;      }      
       for(int i = 0; i < CellXYsize ; ++i){
 	getline(file,line);
 	file >> HexX[i] >> HexY[i];
+	
 	HexX[i] += rotate_module_centerx;
 	HexY[i] += rotate_module_centery;
       }
-    
       poly.AddBin(CellXYsize, HexX, HexY);
     }
     file.close();
   }
-  
 }
 
 double* makePlots::Set_X0(double X0_arr[]){
