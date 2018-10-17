@@ -16,6 +16,9 @@
 #include <vector>
 
 using namespace std;
+const int NLAYER = 28+12;
+const int setup_config = 0; //0 For 28EE+ 12FH(7module*9layer + 1module*3layer)
+const double ENEPERMIP = 86.5e-06; //(GeV) Based on 150GeV muon for 300um Si
 
 class makePlots{
  public:
@@ -27,7 +30,8 @@ class makePlots{
   ~makePlots();
   
   void Loop();
-  void Event_Display();
+  void Energy_Distribution_Display(bool ignore_EE = 0,bool hitmap = 0); // ignoreEE when you only want to see FH part
+  // hitmap == 1 is one want to see hit map or it will fill by energy(mip) normalized by total energy
   void NtupleMaker();
   
   //member
@@ -57,6 +61,8 @@ class makePlots{
   void Getinfo(int nhit, int &layer,double &x, double &y,double &z,double &ene);    
   // Tool functions
   void InitTH2Poly(TH2Poly& poly); //Give frame to TH2Poly
+  void InitTH2Poly_flower(TH2Poly& poly); //Give flower frame to TH2Poly
+  void Event_Display(int ev); // Event Display
   void root_logon();
   double* Set_X0(double X0_arr[]);
   

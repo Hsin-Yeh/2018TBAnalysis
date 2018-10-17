@@ -30,7 +30,7 @@ int main(int argc, char** argv){
 
   TChain *chain = new TChain("rechitntupler/hits");
   TChain *chain2 = new TChain("trackimpactntupler/impactPoints");
-  TChain *chain3 = new TChain("metadatantupler/meta");
+  //TChain *chain3 = new TChain("metadatantupler/meta");
   
   string filename;
   string inputfile="input.txt";
@@ -68,14 +68,17 @@ int main(int argc, char** argv){
 
   makePlots *M;
   M = new makePlots(chain,filename);
+  M->Is_Data = Is_Data ;
+
+  M->Energy_Distribution_Display(1,0);
+  //M->NtupleMaker();
+  
   /*
   if(Is_Data){
     M = new makePlots(chain,chain2,chain3,filename);}
   else{
     M = new makePlots(chain,chain2,filename);}
   */
-  M->Is_Data = Is_Data ;
-  M->NtupleMaker();
   //M->Event_Display();
   //M->Loop();
   //M->DBG();

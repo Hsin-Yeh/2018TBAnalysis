@@ -259,8 +259,6 @@ void makePlots::Getinfo(int ihit,int &layer,double &x, double &y,double &z,doubl
 }
 
 void makePlots::NtupleMaker(){
-  int NLAYER = 28;
-  double ENEPERMIP = 86.5e-06; //(GeV) Based on 150GeV muon for 300um Si
   
   Init();
   char title[50];
@@ -271,9 +269,13 @@ void makePlots::NtupleMaker(){
 
   cout << "output file: " << title << endl;
   TFile outf(title,"recreate");
-  TTree *outT1 = T_Rechit->CopyTree("");
-  if(!TestRun)
-    TTree *outT2 = T_DWC->CopyTree("");
+  TTree *outT1,*outT2;
+  if(!TestRun && Is_Data){
+    outT1 = T_Rechit->CopyTree("");
+    outT2 = T_DWC->CopyTree("");}
+  else{
+    outT1 = T_Rechit->CopyTree("");
+  }
   TTree *outT3 = new TTree("rechit_var","rechit_var");
   
   vector<vector<double> > hit_tmp(NLAYER);
@@ -282,7 +284,7 @@ void makePlots::NtupleMaker(){
   vector<vector<double> > hit_z(NLAYER);
   int Nhits;
   int layerNhit[NLAYER];
-  double totalE;
+  double totalE,totalE_CEE,totalE_CEH;
   double layerE[NLAYER];
   double E_1[NLAYER];
   double E_7[NLAYER];
@@ -294,13 +296,16 @@ void makePlots::NtupleMaker(){
   outT3->Branch("hit_x","std::vector< std::vector<double> >",&hit_x);
   outT3->Branch("hit_y","std::vector< std::vector<double> >",&hit_y);
   outT3->Branch("hit_z","std::vector< std::vector<double> >",&hit_z);
-  outT3->Branch("layerNhit",layerNhit,"layerNhit[28]/I");
+  outT3->Branch("layerNhit",layerNhit,"layerNhit[40]/I");
   outT3->Branch("totalE",&totalE,"totalE/D");
-  outT3->Branch("layerE",layerE,"layerE[28]/D");
-  outT3->Branch("layerE1",E_1,"layerE1[28]/D");
-  outT3->Branch("layerE7",E_7,"layerE7[28]/D");
-  outT3->Branch("layerE19",E_19,"layerE19[28]/D");
-  outT3->Branch("layerE37",E_37,"layerE37[28]/D");
+  outT3->Branch("totalE_CEE",&totalE_CEE,"totalE_CEE/D");
+  outT3->Branch("totalE_CEH",&totalE_CEH,"totalE_CEH/D");
+
+  outT3->Branch("layerE",layerE,"layerE[40]/D");
+  outT3->Branch("layerE1",E_1,"layerE1[40]/D");
+  outT3->Branch("layerE7",E_7,"layerE7[40]/D");
+  outT3->Branch("layerE19",E_19,"layerE19[40]/D");
+  outT3->Branch("layerE37",E_37,"layerE37[40]/D");
 
   
   
@@ -324,13 +329,18 @@ void makePlots::NtupleMaker(){
     int layer;
     double posx,posy,posz,energy;
     totalE = 0;
-    
+    totalE_CEE = 0;
+    totalE_CEH = 0;
     for(int h = 0; h < Nhits ; ++h){
       
       Getinfo(h,layer,posx,posy,posz,energy);
-      if(layer >= 29) continue;
-
+      //Be careful here layerID start from 1
       totalE += energy;
+      if(layer <= 28)
+	totalE_CEE += energy;      
+      else
+	totalE_CEH += energy;
+      
       layerNhit[layer-1]++;
       hit_tmp[layer-1].push_back(energy);
       hit_x[layer-1].push_back(posx);
@@ -367,174 +377,135 @@ void makePlots::NtupleMaker(){
   outf.Close();
 }
 
-void makePlots::Loop(){
-  int NLAYER = 28;
-  double GEVTOMEV = 1000;
-
-  double X0_arr[28];
-  double *SHD_layer = Set_X0(X0_arr);
-  
-  Init();
-  
-  char title[50],pngtitle[50];
-  if(Is_Data)
-    sprintf(title,"root_plot/%iGeV_%s.root",beamE,beam_str.c_str());    
-  else
-    sprintf(title,"root_plot/%iGeV_%s_MC.root",beamE,beam_str.c_str());
-
-  TFile outf(title,"recreate");
-
-  TCanvas *c1 = new TCanvas();
-  TH1D *hEsum = new TH1D("ETotalinMIP","ETotalinMIP",100,0,120000);
-  TH1D *hNhit = new TH1D("Nofhit","Nofhit",200,0,1000);
-  TH1D *hNhit_f5 = new TH1D("Nofhit_first5","Nofhit_f5",40,0,200);
-  TH1D *hNhit_l5 = new TH1D("Nofhit_last5","Nofhit_l5",40,0,200);
-  TH1D *hEratio_f5 = new TH1D("Eratio_first5","Eratio_first5",25,0,100);
-  TH1D *hEratio_l5 = new TH1D("Eratio_last5","Eratio_last5",25,0,50);
-  TH1D *hSHD = new TH1D("SHD","SHD",56,0,28);
-
-
-  vector<vector<double> > hit_tmp(NLAYER);
-  
-  for(int ev = 0; ev < nevents; ++ev){
-    if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
-    GetData(ev);
-    int Nhits;
-    Nhits = NRechits;
-
-    // Event Selection
-    if (Nhits < 200) continue;
-    
-    for(int iL = 0; iL < NLAYER ; ++iL)
-      hit_tmp[iL].clear();
-    
-    int layer;
-    double posx,posy,posz,energy;
-    int Nhit_f5 = 0;
-    int Nhit_l5 = 0;
-    double totalE = 0;
-
-    
-    for(int h = 0; h < Nhits ; ++h){
-      Getinfo(h,layer,posx,posy,posz,energy);
-      //Hit selection
-      if( energy < 2) continue; // 2 mip cut ->not sure for 2018 June TB
-      totalE += energy;
-      hit_tmp[layer-1].push_back(energy);    }
-    //getchar();
-    double SHD = 0.;
-    double E_f5 = 0.;
-    double E_l5 = 0.;
-    for(int iL = 0; iL < NLAYER ; ++iL){
-      double layerE = 0.;
-      
-      for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
-	if(iL < 5)  Nhit_f5++;
-	if(iL > 22) Nhit_l5++;
-	layerE += hit_tmp[iL].at(iH);
-      }
-      if(iL < 5)  E_f5 += layerE;
-      if(iL > 22) E_l5 += layerE;
-    }
-    hEsum     -> Fill(totalE);
-    hNhit     -> Fill(Nhits);
-    hNhit_f5  -> Fill(Nhit_f5);
-    hNhit_l5  -> Fill(Nhit_l5);
-    hEratio_f5-> Fill(E_f5/totalE*100.);
-    hEratio_l5-> Fill(E_l5/totalE*100.);
-    hSHD      -> Fill(SHD);
-  }
-
-  //Drawing
-  gStyle->SetPalette(54);
-  gStyle->SetOptStat(0);
-  if(Is_Data)
-    hEsum->Draw("error");
-  else
-    hEsum->Draw();
-  c1->Update();
-
-  if(Is_Data)
-    sprintf(pngtitle,"%iGeV_%s_Esum.png",beamE,beam_str.c_str());
-  else
-    sprintf(pngtitle,"%iGeV_%s_Esum_MC.png",beamE,beam_str.c_str());
-  c1->SaveAs(pngtitle);
-  
-  outf.Write();
-  outf.Close();
-}
-
-void makePlots::Event_Display(){
+void makePlots::Energy_Distribution_Display(bool ignore_EE,bool hitmap){
 
   Init();
-  gStyle->SetPalette(54);
+  gStyle->SetPalette(53);
   gStyle->SetOptStat(0);
   gROOT->SetBatch(kTRUE);
-  //TCanvas *c1 = new TCanvas("c1","c1",1200,600);
+
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
-  c1->Divide(7,4);
+  if(!ignore_EE)
+    c1->Divide(8,5);
+  else
+    c1->Divide(4,3);
   char title[50];
 
-  int Nlayer = 28;
-  TH2Poly *evtdis[Nlayer];
 
-  for(int iL = 0; iL < Nlayer ; ++iL){
+  TH2Poly *evtdis[NLAYER];
+
+  for(int iL = 0; iL < NLAYER ; ++iL){
     evtdis[iL] = new TH2Poly();
-    InitTH2Poly(*evtdis[iL]);
+    if(setup_config == 0){
+      if(iL < 28)
+	InitTH2Poly(*evtdis[iL]);
+      else
+	InitTH2Poly_flower(*evtdis[iL]);
+    }
     sprintf(title,"Layer_%i",iL+1);
     evtdis[iL]->SetTitle(title);
   }
-
-  TH2Poly *firstL = new TH2Poly();
-  InitTH2Poly(*firstL);
+  
   int counts = 0;
+
   for(int ev = 0; ev < nevents; ++ev){
-    if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
-    
+    if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;    
     GetData(ev);
     int Nhits;
     Nhits = NRechits;
     //cout << Nhits << endl;
     int layer;
     double posx,posy,posz,energy;
-    double ENEPERMIP = 52.8e-03;
+   
     
     double totalE = 0;
     for(int h = 0; h < Nhits ; ++h){
       Getinfo(h,layer,posx,posy,posz,energy);
-      totalE += energy/ENEPERMIP;
+      totalE += energy;
     }
-    if(totalE >= 140000 && totalE <= 150000 && ev < 10000){
-      counts++;
-      for(int h = 0; h < Nhits ; ++h){
-	Getinfo(h,layer,posx,posy,posz,energy);
-	//cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
-	evtdis[layer-1]->Fill(posx,posy,energy/ENEPERMIP);
-	if(layer == 1)
-	  firstL->Fill(posx,posy,energy/ENEPERMIP);
-	//cout << "hello~" << endl;
-      }
+    counts++;
+    for(int h = 0; h < Nhits ; ++h){
+      Getinfo(h,layer,posx,posy,posz,energy);
+      //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy <<endl;
+      if(hitmap)
+	evtdis[layer-1]->Fill(posx,posy,1);
+      else
+	evtdis[layer-1]->Fill(posx,posy,energy/totalE);	
+      //cout << "hello~" << endl;
+      
     }
   }
-  for(int iL = 0; iL < Nlayer ; ++iL){
+  for(int iL = 0; iL < NLAYER ; ++iL){
+    if(!ignore_EE){
+      c1->cd(iL+1);
+      evtdis[iL]->Draw("colz");}
+    else{
+      int tmpL = iL+1 - 28 ;
+      if(tmpL > 0){
+	c1->cd(tmpL);
+	evtdis[iL]->Draw("colz");}
+    }
+  }
+  c1->Update();
+  sprintf(title,"plots/evt_dis/energy_display_Run%i.png",runN);
+  c1->SaveAs(title);
+  delete c1;
+
+}
+
+void makePlots::Event_Display(int ev){
+
+  TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
+  c1->Divide(8,5);
+  char title[50];
+
+
+  TH2Poly *evtdis[NLAYER];
+
+  for(int iL = 0; iL < NLAYER ; ++iL){
+    evtdis[iL] = new TH2Poly();
+    if(setup_config == 0){
+      if(iL < 28)
+	InitTH2Poly(*evtdis[iL]);
+      else
+	InitTH2Poly_flower(*evtdis[iL]);
+    }
+    sprintf(title,"Layer_%i",iL+1);
+    evtdis[iL]->SetTitle(title);
+  }
+
+  GetData(ev);
+  int Nhits;
+  Nhits = NRechits;
+  //cout << Nhits << endl;
+  int layer;
+  double posx,posy,posz,energy;
+
+  
+  double totalE = 0;
+  for(int h = 0; h < Nhits ; ++h){
+    Getinfo(h,layer,posx,posy,posz,energy);
+      totalE += energy;
+  }
+
+  for(int h = 0; h < Nhits ; ++h){
+    Getinfo(h,layer,posx,posy,posz,energy);
+    //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
+    evtdis[layer-1]->Fill(posx,posy,energy/totalE);
+    //cout << "hello~" << endl;
+  }
+  
+  for(int iL = 0; iL < NLAYER ; ++iL){
     c1->cd(iL+1);
     evtdis[iL]->Draw("colz");
   }
-  //c1->Update();
-  sprintf(title,"plots/evt_dis/evt_display_%iavg.png",counts);
-  //getchar();
-  //c1->Update();
 
+  c1->Update();
+  sprintf(title,"plots/evt_dis/event_display_%ievt.png",ev);
   c1->SaveAs(title);
   
-  TCanvas *c2 = new TCanvas();
-  firstL->Draw("samecolz");
-  c2->Update();
-  sprintf(title,"plots/evt_dis/evt_display_1st.png");
-  c2->SaveAs(title);
-  cout << "End?!" << endl;
-  //getchar();
-  
+  delete c1;
+
 }
 
 void makePlots::InitTH2Poly(TH2Poly& poly)
@@ -562,6 +533,74 @@ void makePlots::InitTH2Poly(TH2Poly& poly)
   }
   file.close();
 
+}
+
+void makePlots::InitTH2Poly_flower(TH2Poly& poly)
+{
+  //For module Geometry
+  double a = 0.6496345; // HGCAL_TB_CELL::FULL_CELL_SIDE,  Size in terms of 1 unit of x/y co-ordinates of a cell side which is 0.064 cm
+  double A = 11*a; // One side of a full sensor(neglecting the cut at the MB)
+  double x_a = sqrt(3) / 2; // cosine pi/6
+  //double y_a = 1 / 2.; // sine pi/6
+  double vy_a = 3. / 2;
+  double  X0 = 2 * x_a * A; //Translation in Cartesian x for 1 unit of Sensor_iu
+  double VX0 = x_a * A; // Cartesian x component of translation for 1 unit of Sensor_iv
+  double VY0 = vy_a * A; // Cartesian y component of translation for 1 unit of Sensor_iv
+  vector< pair<int,int> > sensor_iu_iv;
+  sensor_iu_iv.push_back( make_pair(0,0) );
+  sensor_iu_iv.push_back( make_pair(-1,0) );
+  sensor_iu_iv.push_back( make_pair(1,0) );
+  sensor_iu_iv.push_back( make_pair(0,-1) );
+  sensor_iu_iv.push_back( make_pair(0,1) );
+  sensor_iu_iv.push_back( make_pair(1,-1) );
+  sensor_iu_iv.push_back( make_pair(-1,1) );
+
+  
+  double PI = 3.14159265;
+  double TB_rotate = -PI/2;
+
+    
+  //For channel Geometry
+  int MAXVERTICES = 6;
+  double HexX[MAXVERTICES];
+  double HexY[MAXVERTICES];
+  int iu,iv,CellXYsize;
+  string line;
+
+  double module_centerx = 0;
+  double module_centery = 0;
+  double rotate_module_centerx = 0;
+  double rotate_module_centery = 0;
+
+  for(int moduleID = 0; moduleID < (int)sensor_iu_iv.size(); ++moduleID){
+    ifstream file("src_txtfile/poly_frame.txt");
+  
+    for(int header = 0; header < 4; ++header )     getline(file,line);
+    module_centerx = sensor_iu_iv[moduleID].first*X0 + sensor_iu_iv[moduleID].second*VX0;
+    module_centery = sensor_iu_iv[moduleID].second*VY0;
+
+    rotate_module_centerx =
+      module_centerx * cos(TB_rotate) - module_centery * sin(TB_rotate);
+    
+    rotate_module_centery =
+      module_centerx * sin(TB_rotate) + module_centery * cos(TB_rotate);
+
+    while(true){
+      getline(file,line);
+      if( file.eof() ) break;
+      file >> iu >> iv >> CellXYsize;    
+      for(int i = 0; i < CellXYsize ; ++i){
+	getline(file,line);
+	file >> HexX[i] >> HexY[i];
+	HexX[i] += rotate_module_centerx;
+	HexY[i] += rotate_module_centery;
+      }
+    
+      poly.AddBin(CellXYsize, HexX, HexY);
+    }
+    file.close();
+  }
+  
 }
 
 double* makePlots::Set_X0(double X0_arr[]){
@@ -596,8 +635,8 @@ double* makePlots::Set_X0(double X0_arr[]){
   21 0.909  22 0.976  23 0.909  24 0.976  25 0.909
   26 0.976  27 0.909  28 0.976
   */
-  double single_layer_X0[28];
-  for( int i = 0 ; i < 28 ; ++i){
+  double single_layer_X0[NLAYER];
+  for( int i = 0 ; i < NLAYER ; ++i){
     if ( i % 2 == 0) single_layer_X0[i] = 0.909;
     else single_layer_X0[i] = 0.976;
   }
@@ -605,11 +644,18 @@ double* makePlots::Set_X0(double X0_arr[]){
   single_layer_X0[15] = 1.143;
   single_layer_X0[19] = 1.43;
 
+  //Temporarily assign 4.5X0 to the layer in FH
+  for(int i = 28 ; i < NLAYER ; ++i){
+    single_layer_X0[i]  = 4.5;    
+  }
+  
   double X0_sum = 0.;
-  for(int iL = 0 ; iL < 28 ; ++iL){
+  for(int iL = 0 ; iL < NLAYER ; ++iL){
     X0_sum += single_layer_X0[iL];
     X0_arr[iL] = X0_sum;
   }
   
   return X0_arr;
 }
+
+
