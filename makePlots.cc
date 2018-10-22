@@ -454,7 +454,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_EE_Energy = new TH1D("h_FH_Energy","",100,0,10000);
   TH1D* h_FH_Energy = new TH1D("h_FH_Energy","",100,0,10000);
   TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,10000);
-  //  TH1D* h_TotalEnergy_high
+  TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,10000);
+  TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,10000);
   TH2D* h_CoG = new TH2D("h_CoG","",100,200,0,100,0,10000);  
   
 
@@ -468,29 +469,31 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     Nhits = NRechits;
     //cout << Nhits << endl;
     int layer, chip, channel;
-    double posx, posy, posz, energy, TOT;
+    double posx, posy, posz, energy, E_TOT, E_HG, E_LG;
    
     
-    double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT;
-    for(int h = 0; h < Nhits ; ++h){
-      Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
-      totalE += energy;
-      CoG += energy*posz;
-      totalE_TOT += TOT;
-      if(layer <= EE_NLAYER) { EE_energy += energy; }
-      else { FH_energy += energy; }
+    double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
+    for(int ihit = 0; ihit < Nhits ; ++ihit){
+      //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
+      totalE += rechit_energy->at(ihit);
+      CoG += rechit_energy->at(ihit) * rechit_z->at(ihit);
+      totalE_TOT += rechit_Tot->at(ihit);
+      totalE_HG += rechit_amplitudeHigh->at(ihit);
+      totalE_LG += rechit_amplitudeLow->at(ihit);
+      if(layer <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
+      else { FH_energy += rechit_energy->at(ihit); }
     }
     
     counts++;
-    for(int h = 0; h < Nhits ; ++h){
-      Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
+    for(int ihit = 0; ihit < Nhits ; ++ihit){
+      //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
       //Energy_distribution_display
-      if( !Mask_NoisyChannel(layer, chip, channel, posx, posy) ) {
+      if( !Mask_NoisyChannel(rechit_layer->at(ihit), rechit_chip->at(ihit), rechit_channel->at(ihit), rechit_x->at(ihit), rechit_y->at(ihit)) ) {
 	if( hitmap ) {
-	    evtdis[layer-1]->Fill(posx, posy, 1);
+	  evtdis[layer-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), 1);
 	}
 	else {
-	  evtdis[layer-1]->Fill(posx, posy, energy/totalE);}	
+	  evtdis[layer-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
       }
     }
     cout << totalE_TOT << endl;
@@ -498,6 +501,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_CoG->Fill(CoG/totalE, totalE);
     h_EE_Energy->Fill(EE_energy);
     h_FH_Energy->Fill(FH_energy);
+    h_TotalEnergy_HG->Fill(totalE_HG);
+    h_TotalEnergy_LG->Fill(totalE_LG);
     h_TotalEnergy_TOT->Fill(totalE_TOT);
   }
 
@@ -558,6 +563,16 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   sprintf(title,"plots/%i/TotalE_TOT%i",runN,runN);
   c2->SaveAs(title);
 
+  h_TotalEnergy_HG->Draw();
+  c2->Update();
+  sprintf(title,"plots/%i/TotalE_HG%i",runN,runN);
+  c2->SaveAs(title);
+  
+  h_TotalEnergy_LG->Draw();
+  c2->Update();
+  sprintf(title,"plots/%i/TotalE_LG%i",runN,runN);
+  c2->SaveAs(title);
+  
 
   delete c1;
   delete c2;
@@ -591,17 +606,17 @@ void makePlots::Event_Display(int ev){
   Nhits = NRechits;
   //cout << Nhits << endl;
   int layer,chip,channel;
-  double posx, posy, posz, energy, TOT;
+  double posx, posy, posz, energy, TOT, E_HG, E_LG;
 
   
   double totalE = 0;
   for(int h = 0; h < Nhits ; ++h){
-    Getinfo(h,layer, chip, channel, posx, posy, posz, energy, TOT);
+    //Getinfo(h,layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
       totalE += energy;
   }
 
   for(int h = 0; h < Nhits ; ++h){
-    Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
+    //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
     //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
     evtdis[layer-1]->Fill(posx,posy,energy/totalE);
     //cout << "hello~" << endl;
