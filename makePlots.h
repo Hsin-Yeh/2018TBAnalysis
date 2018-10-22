@@ -17,6 +17,7 @@
 
 using namespace std;
 const int NLAYER = 28+12;
+const int EE_NLAYER = 28;
 const int setup_config = 0; //0 For 28EE+ 12FH(7module*9layer + 1module*3layer)
 const double ENEPERMIP = 86.5e-06; //(GeV) Based on 150GeV muon for 300um Si
 
@@ -30,8 +31,9 @@ class makePlots{
   ~makePlots();
   
   void Loop();
-  void Energy_Distribution_Display(bool ignore_EE = 0,bool hitmap = 0); // ignoreEE when you only want to see FH part
-  // hitmap == 1 is one want to see hit map or it will fill by energy(mip) normalized by total energy
+  void PlotProducer(bool ignore_EE = 0,bool hitmap = 0); // ignoreEE when you only want to see FH part
+  // hitmap == 1 if one want to see hit map or it will fill by energy(mip) normalized by total energy
+  void NoisyChannelCheck_WithMuons();
   void NtupleMaker();
   
   //member
@@ -58,10 +60,11 @@ class makePlots{
   void Init();
   void Init_Runinfo();
   void GetData(int evt);
-  void Getinfo(int nhit, int &layer,double &x, double &y,double &z,double &ene);    
+  void Getinfo(int nhit, int &layer, int &chip, int &channel, double &x, double &y,double &z,double &ene, double &TOT);    
   // Tool functions
   void InitTH2Poly(TH2Poly& poly); //Give frame to TH2Poly
   void InitTH2Poly_flower(TH2Poly& poly); //Give flower frame to TH2Poly
+  bool Mask_NoisyChannel(int layer, int chip, int channel, double posx, double posy);
   void Event_Display(int ev); // Event Display
   void root_logon();
   double* Set_X0(double X0_arr[]);

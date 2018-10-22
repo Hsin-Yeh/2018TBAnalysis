@@ -250,12 +250,25 @@ void makePlots::GetData(int evt){
   }
 }
 
-void makePlots::Getinfo(int ihit,int &layer,double &x, double &y,double &z,double &ene){
+void makePlots::Getinfo(int ihit,int &layer,int &chip,int &channel,double &x, double &y, double &z, double &ene, double &TOT){
     layer = rechit_layer->at(ihit);
+    chip = rechit_chip->at(ihit);
+    channel = rechit_channel->at(ihit);
     x     = rechit_x    ->at(ihit);
     y     = rechit_y    ->at(ihit);
     z     = rechit_z    ->at(ihit);
     ene   = rechit_energy->at(ihit);
+    TOT   = rechit_Tot->at(ihit);
+}
+
+bool makePlots::Mask_NoisyChannel(int layer, int chip, int channel, double posx, double posy){
+  if(chip==0&&channel==44){return true;}
+  else if(chip==3&&channel==28){return true;}
+  else if(chip==3&&channel==22){return true;}
+  else if(layer==38 && posx<=2.0 && posx>=1.9 && posy<=4.6 && posy>= 3.3){return true;}
+  else if(layer==37 && posx<=0 && posx>=-2 && posy<=-5.5 && posy>=-6.2){return true;}
+  else if(layer==37 && posx<=-15 && posx>=-16 && posy<=-1.5 && posy>=-3){return true;}
+  else{return false;}
 }
 
 void makePlots::NtupleMaker(){
@@ -326,14 +339,14 @@ void makePlots::NtupleMaker(){
       E_19[iL] = 0;
       E_37[iL] = 0;}
     
-    int layer;
-    double posx,posy,posz,energy;
+    int layer, chip, channel;
+    double posx, posy, posz, energy, TOT;
     totalE = 0;
     totalE_CEE = 0;
     totalE_CEH = 0;
     for(int h = 0; h < Nhits ; ++h){
       
-      Getinfo(h,layer,posx,posy,posz,energy);
+      Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
       //Be careful here layerID start from 1
       totalE += energy;
       if(layer <= 28)
@@ -377,11 +390,43 @@ void makePlots::NtupleMaker(){
   outf.Close();
 }
 
-void makePlots::Energy_Distribution_Display(bool ignore_EE,bool hitmap){
+void makePlots::NoisyChannelCheck_WithMuons(){
+  
+  Init();
+  
+  TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
+  c1->Divide(8,5);
+  
+  int TotalLayer = 40;
+  int EElayer = 28;
+  TH2Poly* evtdis[TotalLayer];
+  for(int layer=0; layer<TotalLayer; layer++){
+    if(layer<EElayer){
+      InitTH2Poly(*evtdis[layer]);}
+    else{
+      InitTH2Poly_flower(*evtdis[layer]);}
+  }
+  
+  int layer, chip, channel; 
+  double posx, posy, posz, energy, TOT;
+  
+  for(int ev=0; ev<nevents; ev++){
+    T_Rechit->GetEntry(ev);
+    int NHits = NRechits;
+    for(int ihit=0; ihit<NHits; ihit++){
+      Getinfo(ihit, layer, chip, channel, posx, posy, posz, energy, TOT);
+      evtdis[layer-1]->Fill(posx,posy,1);
+    }
+  }
+}
 
+
+void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
+  
+  //******************** Call Parameters and Initialize ********************//
   Init();
   gStyle->SetPalette(53);
-  gStyle->SetOptStat(0);
+  //gStyle->SetOptStat(0);
   gROOT->SetBatch(kTRUE);
 
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
@@ -390,10 +435,9 @@ void makePlots::Energy_Distribution_Display(bool ignore_EE,bool hitmap){
   else
     c1->Divide(4,3);
   char title[50];
-
+  TCanvas *c2 = new TCanvas();
 
   TH2Poly *evtdis[NLAYER];
-
   for(int iL = 0; iL < NLAYER ; ++iL){
     evtdis[iL] = new TH2Poly();
     if(setup_config == 0){
@@ -405,53 +449,121 @@ void makePlots::Energy_Distribution_Display(bool ignore_EE,bool hitmap){
     sprintf(title,"Layer_%i",iL+1);
     evtdis[iL]->SetTitle(title);
   }
-  
-  int counts = 0;
 
+  TH1D* h_TotalEnergy = new TH1D("h_TotalEnergy","",200,0,15000);
+  TH1D* h_EE_Energy = new TH1D("h_FH_Energy","",100,0,10000);
+  TH1D* h_FH_Energy = new TH1D("h_FH_Energy","",100,0,10000);
+  TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,10000);
+  //  TH1D* h_TotalEnergy_high
+  TH2D* h_CoG = new TH2D("h_CoG","",100,200,0,100,0,10000);  
+  
+
+  //******************** Loop over events ********************//
+
+  int counts = 0;
   for(int ev = 0; ev < nevents; ++ev){
     if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;    
     GetData(ev);
     int Nhits;
     Nhits = NRechits;
     //cout << Nhits << endl;
-    int layer;
-    double posx,posy,posz,energy;
+    int layer, chip, channel;
+    double posx, posy, posz, energy, TOT;
    
     
-    double totalE = 0;
+    double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT;
     for(int h = 0; h < Nhits ; ++h){
-      Getinfo(h,layer,posx,posy,posz,energy);
+      Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
       totalE += energy;
+      CoG += energy*posz;
+      totalE_TOT += TOT;
+      if(layer <= EE_NLAYER) { EE_energy += energy; }
+      else { FH_energy += energy; }
     }
+    
     counts++;
     for(int h = 0; h < Nhits ; ++h){
-      Getinfo(h,layer,posx,posy,posz,energy);
-      //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy <<endl;
-      if(hitmap)
-	evtdis[layer-1]->Fill(posx,posy,1);
-      else
-	evtdis[layer-1]->Fill(posx,posy,energy/totalE);	
-      //cout << "hello~" << endl;
-      
+      Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
+      //Energy_distribution_display
+      if( !Mask_NoisyChannel(layer, chip, channel, posx, posy) ) {
+	if( hitmap ) {
+	    evtdis[layer-1]->Fill(posx, posy, 1);
+	}
+	else {
+	  evtdis[layer-1]->Fill(posx, posy, energy/totalE);}	
+      }
     }
+    cout << totalE_TOT << endl;
+    h_TotalEnergy->Fill(totalE);
+    h_CoG->Fill(CoG/totalE, totalE);
+    h_EE_Energy->Fill(EE_energy);
+    h_FH_Energy->Fill(FH_energy);
+    h_TotalEnergy_TOT->Fill(totalE_TOT);
   }
+
+  //******************** End Loop over events ********************//
+  //
+  //
+  //******************** Plots ********************//
+
   for(int iL = 0; iL < NLAYER ; ++iL){
+    evtdis[iL]->SetMaximum(10000);
     if(!ignore_EE){
       c1->cd(iL+1);
-      evtdis[iL]->Draw("colz");}
+      evtdis[iL]->Draw("colztext0");
+      //      c1->Update();
+      //sprintf(title,"plots/evt_dis/layercheck/energy_display_Run%i_layer%i.png",runN,iL+1);
+      //c1->SaveAs(title);
+    }
+
     else{
       int tmpL = iL+1 - 28 ;
       if(tmpL > 0){
 	c1->cd(tmpL);
-	evtdis[iL]->Draw("colz");}
+	evtdis[iL]->Draw("colztext0");
+      }
     }
   }
+  //evtdis[36]->Draw("colztext0");
   c1->Update();
-  sprintf(title,"plots/evt_dis/energy_display_Run%i.png",runN);
+  sprintf(title,"plots/evt_dis/%i/energy_display_Run%i.png",runN,runN);
   c1->SaveAs(title);
+  
+  c2->cd();
+  h_TotalEnergy->SetTitle("Total_energy");
+  h_TotalEnergy->Draw();
+  c2->Update();
+  sprintf(title,"plots/%i/TotalEnergy%i",runN,runN);
+  c2->SaveAs(title);
+
+  h_CoG->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG->GetYaxis()->SetTitle("TotalE");
+  h_CoG->Draw("colz");
+  c2->Update();
+  sprintf(title,"plots/%i/CoG%i",runN,runN);
+  c2->SaveAs(title);
+
+  h_EE_Energy->Draw();
+  c2->Update();
+  sprintf(title,"plots/%i/EE_Energy%i",runN,runN);
+  c2->SaveAs(title);
+
+  h_FH_Energy->Draw();
+  c2->Update();
+  sprintf(title,"plots/%i/FH_Energy%i",runN,runN);
+  c2->SaveAs(title);
+
+  h_TotalEnergy_TOT->Draw();
+  c2->Update();
+  sprintf(title,"plots/%i/TotalE_TOT%i",runN,runN);
+  c2->SaveAs(title);
+
+
   delete c1;
+  delete c2;
 
 }
+//============================== End of PlotProducer ==============================//
 
 void makePlots::Event_Display(int ev){
 
@@ -478,18 +590,18 @@ void makePlots::Event_Display(int ev){
   int Nhits;
   Nhits = NRechits;
   //cout << Nhits << endl;
-  int layer;
-  double posx,posy,posz,energy;
+  int layer,chip,channel;
+  double posx, posy, posz, energy, TOT;
 
   
   double totalE = 0;
   for(int h = 0; h < Nhits ; ++h){
-    Getinfo(h,layer,posx,posy,posz,energy);
+    Getinfo(h,layer, chip, channel, posx, posy, posz, energy, TOT);
       totalE += energy;
   }
 
   for(int h = 0; h < Nhits ; ++h){
-    Getinfo(h,layer,posx,posy,posz,energy);
+    Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
     //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
     evtdis[layer-1]->Fill(posx,posy,energy/totalE);
     //cout << "hello~" << endl;
@@ -516,7 +628,6 @@ void makePlots::InitTH2Poly(TH2Poly& poly)
   int iu,iv,CellXYsize;
   ifstream file("src_txtfile/poly_frame.txt");
   string line;
-
   
   for(int header = 0; header < 4; ++header )     getline(file,line);
   
@@ -532,9 +643,42 @@ void makePlots::InitTH2Poly(TH2Poly& poly)
     poly.AddBin(CellXYsize, HexX, HexY);
   }
   file.close();
-
 }
 
+void makePlots::InitTH2Poly_flower(TH2Poly& poly){
+  int MAXVERTICES = 6;
+  double HexX[MAXVERTICES];
+  double HexY[MAXVERTICES];
+  double positionX, positionY, centerX, centerY;
+  int iu,iv,CellXYsize,Daisy_N;
+  ifstream file("src_txtfile/poly_frame.txt");
+  string line;
+  ifstream daisyfile("src_txtfile/daisy_frame_center_position.txt");
+
+  for(int header = 0; header < 4; ++header )     getline(file,line);
+  daisyfile >> Daisy_N;
+  
+  for(int j = 0; j < Daisy_N ; j++){
+    daisyfile >> centerX >> centerY;
+    if( file.eof() ) {
+      file.clear();
+      file.seekg(0, ios::beg);
+      for(int header = 0; header < 4; ++header )     getline(file,line);
+    } 
+    while(!file.eof()){
+      file >> iu >> iv >> CellXYsize;
+      for(int i = 0; i < CellXYsize ; ++i){
+	file >> positionX >> positionY;
+	HexX[i] = centerX + positionX;
+	HexY[i] = centerY + positionY;
+      }
+      poly.AddBin(CellXYsize, HexX, HexY);
+    }
+  }
+  file.close();
+  daisyfile.close();
+}
+/*
 void makePlots::InitTH2Poly_flower(TH2Poly& poly)
 {
   //For module Geometry
@@ -557,7 +701,9 @@ void makePlots::InitTH2Poly_flower(TH2Poly& poly)
 
   
   double PI = 3.14159265;
-  double TB_rotate = -PI/2;
+  //  double TB_rotate = -PI/2;
+  double TB_rotate = -PI/6;
+  
 
     
   //For channel Geometry
@@ -602,11 +748,11 @@ void makePlots::InitTH2Poly_flower(TH2Poly& poly)
   }
   
 }
-
+*/
 double* makePlots::Set_X0(double X0_arr[]){
 
   // len["Cu"] = 1.436; //cm                                  
-  // len["W"] = 0.35; //cm                                  
+  // Len["W"] = 0.35; //cm                                  
   // len["Lead"] = 0.56; //cm                               
   // len["Pb"] = 0.56; //cm                                 
   // len["CuW"] = 0.43; //cm                                
