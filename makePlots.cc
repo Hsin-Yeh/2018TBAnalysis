@@ -430,7 +430,15 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,100000);
   TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,100000);
   TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,100000);
-  TH2D* h_CoG = new TH2D("h_CoG","",100,200,0,200,0,10000);  
+  TH2D* h_CoG = new TH2D("h_CoG","",100,200,0,200,0,10000);
+
+  TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,150000);
+  TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,100000);
+  TH1D* h_FH_Energy_Mask = new TH1D("h_FH_Energy_Mask","",100,0,100000);
+  TH1D* h_TotalEnergy_TOT_Mask = new TH1D("h_TotalEnergy_TOT_Mask","",100,0,100000);
+  TH1D* h_TotalEnergy_HG_Mask = new TH1D("h_TotalEnergy_HG_Mask","",100,0,100000);
+  TH1D* h_TotalEnergy_LG_Mask = new TH1D("h_TotalEnergy_LG_Mask","",100,0,100000);
+  TH2D* h_CoG_Mask = new TH2D("h_CoG_Mask","",100,200,0,200,0,10000);  
   
 
   //******************** Loop over events ********************//
@@ -473,16 +481,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     }
     
     counts++;
-    if( !Mask_NoisyChannel( rechit_layer->at(ihit), rechit_chip->at(ihit), rechit_channel->at(ihit), rechit_x->at(ihit), rechit_y->at(ihit) ) ){
-      h_TotalEnergy_Mask->Fill(totalE);
-      h_CoG_Mask->Fill(CoG/totalE, totalE);
-      h_EE_Energy_Mask->Fill(EE_energy);
-      h_FH_Energy_Mask->Fill(FH_energy);
-      h_TotalEnergy_HG_Mask->Fill(totalE_HG);
-      h_TotalEnergy_LG_Mask->Fill(totalE_LG);
-      h_TotalEnergy_TOT_Mask->Fill(totalE_TOT);
-    }
-    
+    h_TotalEnergy_Mask->Fill(totalE_Mask);
+    h_CoG_Mask->Fill(CoG_Mask/totalE_Mask, totalE_Mask);
+    h_EE_Energy_Mask->Fill(EE_energy_Mask);
+    h_FH_Energy_Mask->Fill(FH_energy_Mask);
+    h_TotalEnergy_HG_Mask->Fill(totalE_HG_Mask);
+    h_TotalEnergy_LG_Mask->Fill(totalE_LG_Mask);
+    h_TotalEnergy_TOT_Mask->Fill(totalE_TOT_Mask);
+        
     h_TotalEnergy->Fill(totalE);
     h_CoG->Fill(CoG/totalE, totalE);
     h_EE_Energy->Fill(EE_energy);
