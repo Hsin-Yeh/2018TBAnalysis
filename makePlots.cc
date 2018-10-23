@@ -451,7 +451,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       totalE_TOT += rechit_Tot->at(ihit);
       totalE_HG += rechit_amplitudeHigh->at(ihit);
       totalE_LG += rechit_amplitudeLow->at(ihit);
-      if(rechit_layer <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
+      if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
       else { FH_energy += rechit_energy->at(ihit); }
     }
     
@@ -461,10 +461,10 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       //Energy_distribution_display
       if( !Mask_NoisyChannel(rechit_layer->at(ihit), rechit_chip->at(ihit), rechit_channel->at(ihit), rechit_x->at(ihit), rechit_y->at(ihit)) ) {
 	if( hitmap ) {
-	  evtdis[layer-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), 1);
+	  evtdis[rechit_layer->at(ihit) - 1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), 1);
 	}
 	else {
-	  evtdis[layer-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
+	  evtdis[rechit_layer->at(ihit)-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
       }
     }
     cout << totalE_TOT << endl;
