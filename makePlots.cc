@@ -464,10 +464,9 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 	  evtdis[rechit_layer->at(ihit) - 1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), 1);
 	}
 	else {
-	  evtdis[rechit_layer->at(ihit)-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
+	  evtdis[ rechit_layer->at(ihit)-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
       }
     }
-    cout << totalE_TOT << endl;
     h_TotalEnergy->Fill(totalE);
     h_CoG->Fill(CoG/totalE, totalE);
     h_EE_Energy->Fill(EE_energy);
@@ -483,7 +482,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //******************** Plots ********************//
 
   for(int iL = 0; iL < NLAYER ; ++iL){
-    evtdis[iL]->SetMaximum(10000);
+    evtdis[iL]->SetMaximum(1000000);
     if(!ignore_EE){
       c1->cd(iL+1);
       evtdis[iL]->Draw("colztext0");
