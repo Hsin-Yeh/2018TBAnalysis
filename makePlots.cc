@@ -408,6 +408,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   char title[50];
   TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
   c2->Divide(4,2);
+  TCanvas *c3 = new TCanvas("c3","c3",6400,3600);
+  c3->Divide(4,2);
 
   TH2Poly *evtdis[NLAYER];
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -446,6 +448,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     
     double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
     double totalE_Mask = 0, CoG_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0;
+    
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
       
@@ -467,11 +470,28 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 	if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy_Mask += rechit_energy->at(ihit); }
 	else { FH_energy_Mask += rechit_energy->at(ihit); }
       }
-	
-	
     }
     
     counts++;
+    if( !Mask_NoisyChannel( rechit_layer->at(ihit), rechit_chip->at(ihit), rechit_channel->at(ihit), rechit_x->at(ihit), rechit_y->at(ihit) ) ){
+      h_TotalEnergy_Mask->Fill(totalE);
+      h_CoG_Mask->Fill(CoG/totalE, totalE);
+      h_EE_Energy_Mask->Fill(EE_energy);
+      h_FH_Energy_Mask->Fill(FH_energy);
+      h_TotalEnergy_HG_Mask->Fill(totalE_HG);
+      h_TotalEnergy_LG_Mask->Fill(totalE_LG);
+      h_TotalEnergy_TOT_Mask->Fill(totalE_TOT);
+    }
+    
+    h_TotalEnergy->Fill(totalE);
+    h_CoG->Fill(CoG/totalE, totalE);
+    h_EE_Energy->Fill(EE_energy);
+    h_FH_Energy->Fill(FH_energy);
+    h_TotalEnergy_HG->Fill(totalE_HG);
+    h_TotalEnergy_LG->Fill(totalE_LG);
+    h_TotalEnergy_TOT->Fill(totalE_TOT);
+
+    
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
       //Energy_distribution_display
@@ -483,19 +503,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 	  evtdis[ rechit_layer->at(ihit)-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
       }
     }
-    h_TotalEnergy->Fill(totalE);
-    h_CoG->Fill(CoG/totalE, totalE);
-    h_EE_Energy->Fill(EE_energy);
-    h_FH_Energy->Fill(FH_energy);
-    h_TotalEnergy_HG->Fill(totalE_HG);
-    h_TotalEnergy_LG->Fill(totalE_LG);
-    h_TotalEnergy_TOT->Fill(totalE_TOT);
   }
 
   //******************** End Loop over events ********************//
   //
   //
   //******************** Plots ********************//
+
+  //Energy_display
 
   for(int iL = 0; iL < NLAYER ; ++iL){
     evtdis[iL]->SetMaximum(1000000);
@@ -519,13 +534,13 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   c1->Update();
   sprintf(title,"plots/%i/energy_display_Run%i.png",runN,runN);
   c1->SaveAs(title);
+
+  // Histograms
   
   c2->cd(1);
   h_TotalEnergy->SetTitle("Total_energy");
   h_TotalEnergy->Draw();
   c2->Update();
-  sprintf(title,"plots/%i/TotalEnergy%i",runN,runN);
-  c2->SaveAs(title);
 
   c2->cd(2);
   h_CoG->SetTitle("CoG");
@@ -533,47 +548,81 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   h_CoG->GetYaxis()->SetTitle("TotalE");
   h_CoG->Draw("colz");
   c2->Update();
-  sprintf(title,"plots/%i/CoG%i",runN,runN);
-  c2->SaveAs(title);
 
   c2->cd(3);
   h_EE_Energy->SetTitle("EE_Energy");
   h_EE_Energy->Draw();
   c2->Update();
-  sprintf(title,"plots/%i/EE_Energy%i",runN,runN);
-  c2->SaveAs(title);
 
   c2->cd(4);
   h_FH_Energy->SetTitle("FH_Energy");
   h_FH_Energy->Draw();
   c2->Update();
-  sprintf(title,"plots/%i/FH_Energy%i",runN,runN);
-  c2->SaveAs(title);
 
   c2->cd(5);
   h_TotalEnergy_TOT->SetTitle("TotalE_TOT");
   h_TotalEnergy_TOT->Draw();
   c2->Update();
-  sprintf(title,"plots/%i/TotalE_TOT%i",runN,runN);
-  c2->SaveAs(title);
 
   c2->cd(6);
   h_TotalEnergy_HG->SetTitle("TotalE_HG");
   h_TotalEnergy_HG->Draw();
   c2->Update();
-  sprintf(title,"plots/%i/TotalE_HG%i",runN,runN);
-  c2->SaveAs(title);
 
   c2->cd(7);
   h_TotalEnergy_LG->SetTitle("TotalE_LG");
   h_TotalEnergy_LG->Draw();
   c2->Update();
-  sprintf(title,"plots/%i/TotalE_LG%i",runN,runN);
-  c2->SaveAs(title);
   
+  sprintf(title,"plots/%i/Histograms%i",runN,runN);
+  c2->SaveAs(title);
+
+
+  // Mask_NoisyChannel Histograms
+  
+  c3->cd(1);
+  h_TotalEnergy_Mask->SetTitle("Total_energy_Mask");
+  h_TotalEnergy_Mask->Draw();
+  c3->Update();
+
+  c3->cd(2);
+  h_CoG_Mask->SetTitle("CoG_Mask");
+  h_CoG_Mask->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_Mask->GetYaxis()->SetTitle("TotalE");
+  h_CoG_Mask->Draw("colz");
+  c3->Update();
+
+  c3->cd(3);
+  h_EE_Energy_Mask->SetTitle("EE_Energy_Mask");
+  h_EE_Energy_Mask->Draw();
+  c3->Update();
+
+  c3->cd(4);
+  h_FH_Energy_Mask->SetTitle("FH_Energy_Mask");
+  h_FH_Energy_Mask->Draw();
+  c3->Update();
+
+  c3->cd(5);
+  h_TotalEnergy_TOT_Mask->SetTitle("TotalE_TOT_Mask");
+  h_TotalEnergy_TOT_Mask->Draw();
+  c3->Update();
+
+  c3->cd(6);
+  h_TotalEnergy_HG_Mask->SetTitle("TotalE_HG_Mask");
+  h_TotalEnergy_HG_Mask->Draw();
+  c3->Update();
+
+  c3->cd(7);
+  h_TotalEnergy_LG_Mask->SetTitle("TotalE_LG_Mask");
+  h_TotalEnergy_LG_Mask->Draw();
+  c3->Update();
+  
+  sprintf(title,"plots/%i/Histograms_MaskNoisyChannel%i",runN,runN);
+  c3->SaveAs(title);
 
   delete c1;
   delete c2;
+  delete c3;
 
 }
 //============================== End of PlotProducer ==============================//
