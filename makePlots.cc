@@ -406,7 +406,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   else
     c1->Divide(4,3);
   char title[50];
-  TCanvas *c2 = new TCanvas();
+  TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
+  c1->Divide(4,2);
 
   TH2Poly *evtdis[NLAYER];
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -504,13 +505,15 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   sprintf(title,"plots/%i/energy_display_Run%i.png",runN,runN);
   c1->SaveAs(title);
   
-  c2->cd();
+  c2->cd(1);
   h_TotalEnergy->SetTitle("Total_energy");
   h_TotalEnergy->Draw();
   c2->Update();
   sprintf(title,"plots/%i/TotalEnergy%i",runN,runN);
   c2->SaveAs(title);
 
+  c2->cd(2);
+  h_CoG->SetTitle("CoG");
   h_CoG->GetXaxis()->SetTitle("CoG/TotalE");
   h_CoG->GetYaxis()->SetTitle("TotalE");
   h_CoG->Draw("colz");
@@ -518,26 +521,36 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   sprintf(title,"plots/%i/CoG%i",runN,runN);
   c2->SaveAs(title);
 
+  c2->cd(3);
+  h_EE_Energy->SetTitle("EE_Energy");
   h_EE_Energy->Draw();
   c2->Update();
   sprintf(title,"plots/%i/EE_Energy%i",runN,runN);
   c2->SaveAs(title);
 
+  c2->cd(4);
+  h_FH_Energy->SetTitle("FH_Energy");
   h_FH_Energy->Draw();
   c2->Update();
   sprintf(title,"plots/%i/FH_Energy%i",runN,runN);
   c2->SaveAs(title);
 
+  c2->cd(5);
+  h_TotalEnergy_TOT->SetTitle("TotalE_TOT");
   h_TotalEnergy_TOT->Draw();
   c2->Update();
   sprintf(title,"plots/%i/TotalE_TOT%i",runN,runN);
   c2->SaveAs(title);
 
+  c2->cd(6);
+  h_TotalEnergy_HG->SetTitle("TotalE_HG");
   h_TotalEnergy_HG->Draw();
   c2->Update();
   sprintf(title,"plots/%i/TotalE_HG%i",runN,runN);
   c2->SaveAs(title);
-  
+
+  c2->cd(7);
+  h_TotalEnergy_LG->SetTitle("TotalE_LG");
   h_TotalEnergy_LG->Draw();
   c2->Update();
   sprintf(title,"plots/%i/TotalE_LG%i",runN,runN);
