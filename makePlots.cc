@@ -502,7 +502,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   }
   //evtdis[36]->Draw("colztext0");
   c1->Update();
-  sprintf(title,"plots/evt_dis/%i/energy_display_Run%i.png",runN,runN);
+  sprintf(title,"plots/%i/energy_display_Run%i.png",runN,runN);
   c1->SaveAs(title);
   
   c2->cd();
