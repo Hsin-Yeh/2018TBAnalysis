@@ -407,7 +407,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     c1->Divide(4,3);
   char title[50];
   TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
-  c1->Divide(4,2);
+  c2->Divide(4,2);
 
   TH2Poly *evtdis[NLAYER];
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -445,8 +445,10 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
    
     
     double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
+    double totalE_Mask = 0, CoG_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0;
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
+      
       totalE += rechit_energy->at(ihit);
       CoG += rechit_energy->at(ihit) * rechit_z->at(ihit);
       totalE_TOT += rechit_Tot->at(ihit);
@@ -454,6 +456,19 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       totalE_LG += rechit_amplitudeLow->at(ihit);
       if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
       else { FH_energy += rechit_energy->at(ihit); }
+
+
+      if( !Mask_NoisyChannel( rechit_layer->at(ihit), rechit_chip->at(ihit), rechit_channel->at(ihit), rechit_x->at(ihit), rechit_y->at(ihit) ) ) {
+	totalE_Mask += rechit_energy->at(ihit);
+	CoG_Mask += rechit_energy->at(ihit) * rechit_z->at(ihit);
+	totalE_TOT_Mask += rechit_Tot->at(ihit);
+	totalE_HG_Mask += rechit_amplitudeHigh->at(ihit);
+	totalE_LG_Mask += rechit_amplitudeLow->at(ihit);
+	if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy_Mask += rechit_energy->at(ihit); }
+	else { FH_energy_Mask += rechit_energy->at(ihit); }
+      }
+	
+	
     }
     
     counts++;
