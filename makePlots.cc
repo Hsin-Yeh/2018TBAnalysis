@@ -451,7 +451,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       totalE_TOT += rechit_Tot->at(ihit);
       totalE_HG += rechit_amplitudeHigh->at(ihit);
       totalE_LG += rechit_amplitudeLow->at(ihit);
-      if(layer <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
+      if(rechit_layer <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
       else { FH_energy += rechit_energy->at(ihit); }
     }
     
