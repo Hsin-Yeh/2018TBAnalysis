@@ -390,35 +390,6 @@ void makePlots::NtupleMaker(){
   outf.Close();
 }
 
-void makePlots::NoisyChannelCheck_WithMuons(){
-  
-  Init();
-  
-  TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
-  c1->Divide(8,5);
-  
-  int TotalLayer = 40;
-  int EElayer = 28;
-  TH2Poly* evtdis[TotalLayer];
-  for(int layer=0; layer<TotalLayer; layer++){
-    if(layer<EElayer){
-      InitTH2Poly(*evtdis[layer]);}
-    else{
-      InitTH2Poly_flower(*evtdis[layer]);}
-  }
-  
-  int layer, chip, channel; 
-  double posx, posy, posz, energy, TOT;
-  
-  for(int ev=0; ev<nevents; ev++){
-    T_Rechit->GetEntry(ev);
-    int NHits = NRechits;
-    for(int ihit=0; ihit<NHits; ihit++){
-      Getinfo(ihit, layer, chip, channel, posx, posy, posz, energy, TOT);
-      evtdis[layer-1]->Fill(posx,posy,1);
-    }
-  }
-}
 
 
 void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
@@ -468,8 +439,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     int Nhits;
     Nhits = NRechits;
     //cout << Nhits << endl;
-    int layer, chip, channel;
-    double posx, posy, posz, energy, E_TOT, E_HG, E_LG;
+    //    int layer, chip, channel;
+    //double posx, posy, posz, energy, E_TOT, E_HG, E_LG;
    
     
     double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
@@ -580,6 +551,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 }
 //============================== End of PlotProducer ==============================//
 
+/*
 void makePlots::Event_Display(int ev){
 
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
@@ -634,7 +606,7 @@ void makePlots::Event_Display(int ev){
   delete c1;
 
 }
-
+*/
 void makePlots::InitTH2Poly(TH2Poly& poly)
 {
   int MAXVERTICES = 6;

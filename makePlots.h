@@ -33,7 +33,6 @@ class makePlots{
   void Loop();
   void PlotProducer(bool ignore_EE = 0,bool hitmap = 0); // ignoreEE when you only want to see FH part
   // hitmap == 1 if one want to see hit map or it will fill by energy(mip) normalized by total energy
-  void NoisyChannelCheck_WithMuons();
   void NtupleMaker();
   
   //member
