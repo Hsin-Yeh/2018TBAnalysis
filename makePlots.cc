@@ -538,7 +538,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   }
   //evtdis[36]->Draw("colztext0");
   c1->Update();
-  sprintf(title,"plots/%i/energy_display_Run%i.png",runN,runN);
+  sprintf(title,"energy_display_Run%i.png",runN);
   c1->SaveAs(title);
 
   // Histograms
@@ -580,7 +580,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   h_TotalEnergy_LG->Draw();
   c2->Update();
   
-  sprintf(title,"plots/%i/Histograms%i",runN,runN);
+  sprintf(title,"Histograms%i.png",runN);
   c2->SaveAs(title);
 
 
@@ -623,7 +623,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   h_TotalEnergy_LG_Mask->Draw();
   c3->Update();
   
-  sprintf(title,"plots/%i/Histograms_MaskNoisyChannel%i",runN,runN);
+  sprintf(title,"Histograms_MaskNoisyChannel%i.png",runN);
   c3->SaveAs(title);
 
   delete c1;
