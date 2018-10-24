@@ -430,7 +430,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,50000);
   TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,100000);
   TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,100000);
-  TH2D* h_CoG = new TH2D("h_CoG","",100,200,0,200,0,10000);
+  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",100,200,0,200,0,10000);
+  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",100,200,0,200,0,10000);
 
   TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,50000);
   TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,50000);
@@ -438,7 +439,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_TOT_Mask = new TH1D("h_TotalEnergy_TOT_Mask","",100,0,50000);
   TH1D* h_TotalEnergy_HG_Mask = new TH1D("h_TotalEnergy_HG_Mask","",100,0,100000);
   TH1D* h_TotalEnergy_LG_Mask = new TH1D("h_TotalEnergy_LG_Mask","",100,0,100000);
-  TH2D* h_CoG_Mask = new TH2D("h_CoG_Mask","",100,200,0,200,0,10000);  
+  TH2D* h_CoG_TotalE_Mask = new TH2D("h_CoG_TotalE_Mask","",100,200,0,200,0,10000);
+  TH2D* h_CoG_NHits_Mask = new TH2D("h_CoG_NHits_Mask","",100,200,0,200,0,10000);
   
 
   //******************** Loop over events ********************//
@@ -455,7 +457,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
    
     
     double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
-    double totalE_Mask = 0, CoG_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0;
+    double totalE_Mask = 0, CoG_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0, NHits_Mask;
     
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
@@ -475,6 +477,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 	totalE_TOT_Mask += rechit_Tot->at(ihit);
 	totalE_HG_Mask += rechit_amplitudeHigh->at(ihit);
 	totalE_LG_Mask += rechit_amplitudeLow->at(ihit);
+	NHits_Mask++;
 	if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy_Mask += rechit_energy->at(ihit); }
 	else { FH_energy_Mask += rechit_energy->at(ihit); }
       }
@@ -482,20 +485,22 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     
     counts++;
     h_TotalEnergy_Mask->Fill(totalE_Mask);
-    h_CoG_Mask->Fill(CoG_Mask/totalE_Mask, totalE_Mask);
+    h_CoG_TotalE_Mask->Fill(CoG_Mask/totalE_Mask, totalE_Mask);
     h_EE_Energy_Mask->Fill(EE_energy_Mask);
     h_FH_Energy_Mask->Fill(FH_energy_Mask);
     h_TotalEnergy_HG_Mask->Fill(totalE_HG_Mask);
     h_TotalEnergy_LG_Mask->Fill(totalE_LG_Mask);
     h_TotalEnergy_TOT_Mask->Fill(totalE_TOT_Mask);
+    h_CoG_NHits_Mask->Fill(CoG_Mask/totalE_Mask, NHits_Mask);
         
     h_TotalEnergy->Fill(totalE);
-    h_CoG->Fill(CoG/totalE, totalE);
+    h_CoG_TotalE->Fill(CoG/totalE, totalE);
     h_EE_Energy->Fill(EE_energy);
     h_FH_Energy->Fill(FH_energy);
     h_TotalEnergy_HG->Fill(totalE_HG);
     h_TotalEnergy_LG->Fill(totalE_LG);
     h_TotalEnergy_TOT->Fill(totalE_TOT);
+    h_CoG_NHits->Fill(CoG/totalE, Nhits);
 
     
     for(int ihit = 0; ihit < Nhits ; ++ihit){
@@ -549,33 +554,41 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   c2->Update();
 
   c2->cd(2);
-  h_CoG->SetTitle("CoG");
-  h_CoG->GetXaxis()->SetTitle("CoG/TotalE");
-  h_CoG->GetYaxis()->SetTitle("TotalE");
-  h_CoG->Draw("colz");
+  h_CoG_TotalE->SetTitle("CoG_TotalE");
+  h_CoG_TotalE->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE->GetYaxis()->SetTitle("TotalE");
+  h_CoG_TotalE->Draw("colz");
   c2->Update();
 
   c2->cd(3);
+  h_CoG_TotalE->SetTitle("CoG_NHits");
+  h_CoG_TotalE->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE->GetYaxis()->SetTitle("NHits");
+  h_CoG_TotalE->Draw("colz");
+  c2->Update();
+  
+
+  c2->cd(4);
   h_EE_Energy->SetTitle("EE_Energy");
   h_EE_Energy->Draw();
   c2->Update();
 
-  c2->cd(4);
+  c2->cd(5);
   h_FH_Energy->SetTitle("FH_Energy");
   h_FH_Energy->Draw();
   c2->Update();
 
-  c2->cd(5);
+  c2->cd(6);
   h_TotalEnergy_TOT->SetTitle("TotalE_TOT");
   h_TotalEnergy_TOT->Draw();
   c2->Update();
 
-  c2->cd(6);
+  c2->cd(7);
   h_TotalEnergy_HG->SetTitle("TotalE_HG");
   h_TotalEnergy_HG->Draw();
   c2->Update();
 
-  c2->cd(7);
+  c2->cd(8);
   h_TotalEnergy_LG->SetTitle("TotalE_LG");
   h_TotalEnergy_LG->Draw();
   c2->Update();
@@ -592,33 +605,40 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   c3->Update();
 
   c3->cd(2);
-  h_CoG_Mask->SetTitle("CoG_Mask");
-  h_CoG_Mask->GetXaxis()->SetTitle("CoG/TotalE");
-  h_CoG_Mask->GetYaxis()->SetTitle("TotalE");
-  h_CoG_Mask->Draw("colz");
+  h_CoG_TotalE_Mask->SetTitle("CoG_TotalE_Mask");
+  h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE_Mask->GetYaxis()->SetTitle("TotalE");
+  h_CoG_TotalE_Mask->Draw("colz");
   c3->Update();
 
   c3->cd(3);
+  h_CoG_TotalE_Mask->SetTitle("CoG_NHits_Mask");
+  h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE_Mask->GetYaxis()->SetTitle("NHits");
+  h_CoG_TotalE_Mask->Draw("colz");
+  c3->Update();
+
+  c3->cd(4);
   h_EE_Energy_Mask->SetTitle("EE_Energy_Mask");
   h_EE_Energy_Mask->Draw();
   c3->Update();
 
-  c3->cd(4);
+  c3->cd(5);
   h_FH_Energy_Mask->SetTitle("FH_Energy_Mask");
   h_FH_Energy_Mask->Draw();
   c3->Update();
 
-  c3->cd(5);
+  c3->cd(6);
   h_TotalEnergy_TOT_Mask->SetTitle("TotalE_TOT_Mask");
   h_TotalEnergy_TOT_Mask->Draw();
   c3->Update();
 
-  c3->cd(6);
+  c3->cd(7);
   h_TotalEnergy_HG_Mask->SetTitle("TotalE_HG_Mask");
   h_TotalEnergy_HG_Mask->Draw();
   c3->Update();
 
-  c3->cd(7);
+  c3->cd(8);
   h_TotalEnergy_LG_Mask->SetTitle("TotalE_LG_Mask");
   h_TotalEnergy_LG_Mask->Draw();
   c3->Update();
