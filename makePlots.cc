@@ -397,7 +397,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //******************** Call Parameters and Initialize ********************//
   Init();
   gStyle->SetPalette(53);
-  //gStyle->SetOptStat(0);
+  gStyle->SetOptStat(0);
   gROOT->SetBatch(kTRUE);
 
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
@@ -424,18 +424,18 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     evtdis[iL]->SetTitle(title);
   }
 
-  TH1D* h_TotalEnergy = new TH1D("h_TotalEnergy","",200,0,150000);
-  TH1D* h_EE_Energy = new TH1D("h_EE_Energy","",100,0,100000);
-  TH1D* h_FH_Energy = new TH1D("h_FH_Energy","",100,0,100000);
-  TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,100000);
+  TH1D* h_TotalEnergy = new TH1D("h_TotalEnergy","",200,0,50000);
+  TH1D* h_EE_Energy = new TH1D("h_EE_Energy","",100,0,50000);
+  TH1D* h_FH_Energy = new TH1D("h_FH_Energy","",100,0,50000);
+  TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,50000);
   TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,100000);
   TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,100000);
   TH2D* h_CoG = new TH2D("h_CoG","",100,200,0,200,0,10000);
 
-  TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,150000);
-  TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,100000);
-  TH1D* h_FH_Energy_Mask = new TH1D("h_FH_Energy_Mask","",100,0,100000);
-  TH1D* h_TotalEnergy_TOT_Mask = new TH1D("h_TotalEnergy_TOT_Mask","",100,0,100000);
+  TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,50000);
+  TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,50000);
+  TH1D* h_FH_Energy_Mask = new TH1D("h_FH_Energy_Mask","",100,0,50000);
+  TH1D* h_TotalEnergy_TOT_Mask = new TH1D("h_TotalEnergy_TOT_Mask","",100,0,50000);
   TH1D* h_TotalEnergy_HG_Mask = new TH1D("h_TotalEnergy_HG_Mask","",100,0,100000);
   TH1D* h_TotalEnergy_LG_Mask = new TH1D("h_TotalEnergy_LG_Mask","",100,0,100000);
   TH2D* h_CoG_Mask = new TH2D("h_CoG_Mask","",100,200,0,200,0,10000);  
