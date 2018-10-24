@@ -456,8 +456,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     //double posx, posy, posz, energy, E_TOT, E_HG, E_LG;
    
     
-    double totalE = 0, CoG = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
-    double totalE_Mask = 0, CoG_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0, NHits_Mask = 0;
+    double totalE = 0, CoG = 0, CoG_NHits = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
+    double totalE_Mask = 0, CoG_Mask = 0, CoG_NHits_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0, NHits_Mask = 0;
     
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
@@ -467,6 +467,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       totalE_TOT += rechit_Tot->at(ihit);
       totalE_HG += rechit_amplitudeHigh->at(ihit);
       totalE_LG += rechit_amplitudeLow->at(ihit);
+      CoG_NHits += rechit_z->at(ihit) * 1;
       if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
       else { FH_energy += rechit_energy->at(ihit); }
 
@@ -477,6 +478,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 	totalE_TOT_Mask += rechit_Tot->at(ihit);
 	totalE_HG_Mask += rechit_amplitudeHigh->at(ihit);
 	totalE_LG_Mask += rechit_amplitudeLow->at(ihit);
+	CoG_NHits_Mask += rechit_z->at(ihit) * 1;
 	NHits_Mask++;
 	if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy_Mask += rechit_energy->at(ihit); }
 	else { FH_energy_Mask += rechit_energy->at(ihit); }
@@ -491,7 +493,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_HG_Mask->Fill(totalE_HG_Mask);
     h_TotalEnergy_LG_Mask->Fill(totalE_LG_Mask);
     h_TotalEnergy_TOT_Mask->Fill(totalE_TOT_Mask);
-    h_CoG_NHits_Mask->Fill(CoG_Mask/totalE_Mask, NHits_Mask);
+    h_CoG_NHits_Mask->Fill(CoG_NHits_Mask/NHits_Mask, NHits_Mask);
         
     h_TotalEnergy->Fill(totalE);
     h_CoG_TotalE->Fill(CoG/totalE, totalE);
