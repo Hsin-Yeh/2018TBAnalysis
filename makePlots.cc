@@ -408,10 +408,12 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   else
     c1->Divide(4,3);
   char title[50];
-  TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
+  TCanvas* c2 = new TCanvas("c2","c2",6400,3600);
   c2->Divide(4,2);
-  TCanvas *c3 = new TCanvas("c3","c3",6400,3600);
+  TCanvas* c3 = new TCanvas("c3","c3",6400,3600);
   c3->Divide(4,2);
+  TCanvas* c4 = new TCanvas("c4","c4",6400,3600);
+  c4->Divide(8,5);
 
   TH2Poly *evtdis[NLAYER];
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -432,8 +434,10 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,50000);
   TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,100000);
   TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,100000);
-  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",100,200,0,200,0,10000);
-  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",100,200,0,200,0,10000);
+  TH1D* h_TotalEnergy_Layer[NLAYER];
+  TH1D* h_Longitudinal_Shower_Profile = new TH1D("h_Longitudinal_Shower_Profile","",100,0,10000);
+  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",50,100,0,200,0,10000);
+  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",50,100,0,200,0,10000);
 
   TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,50000);
   TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,50000);
@@ -441,8 +445,15 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_TOT_Mask = new TH1D("h_TotalEnergy_TOT_Mask","",100,0,50000);
   TH1D* h_TotalEnergy_HG_Mask = new TH1D("h_TotalEnergy_HG_Mask","",100,0,100000);
   TH1D* h_TotalEnergy_LG_Mask = new TH1D("h_TotalEnergy_LG_Mask","",100,0,100000);
-  TH2D* h_CoG_TotalE_Mask = new TH2D("h_CoG_TotalE_Mask","",100,200,0,200,0,10000);
-  TH2D* h_CoG_NHits_Mask = new TH2D("h_CoG_NHits_Mask","",100,200,0,200,0,10000);
+  TH1D* h_Longitudinal_Shower_Profile_Mask = new TH1D("h_Longitudinal_Shower_Profile_Mask","",100,0,10000);
+  TH2D* h_CoG_TotalE_Mask = new TH2D("h_CoG_TotalE_Mask","",50,100,0,200,0,10000);
+  TH2D* h_CoG_NHits_Mask = new TH2D("h_CoG_NHits_Mask","",50,100,0,200,0,10000);
+
+  for(int ilayer = 0; ilayer < NLAYER; ilayer++){
+    char histname[50];
+    sprintf(histname,"h_TotalEnergy_Layer_%d",ilayer);
+    h_TotalEnergy_Layer[ilayer] = new TH1D(histname,"",100,0,50000);
+  }
   
 
   //******************** Loop over events ********************//
@@ -460,7 +471,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     
     double totalE = 0, CoG = 0, CoG_NHits = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
     double totalE_Mask = 0, CoG_Mask = 0, CoG_NHits_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0, NHits_Mask = 0;
-    
+    double totalE_layer[NLAYER];
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
       
@@ -469,7 +480,9 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       totalE_TOT += rechit_Tot->at(ihit);
       totalE_HG += rechit_amplitudeHigh->at(ihit);
       totalE_LG += rechit_amplitudeLow->at(ihit);
+      totalE_layer[rechit_layer->at(ihit)-1] += rechit_energy->at(ihit);
       CoG_NHits += rechit_z->at(ihit) * 1;
+      h_TotalEnergy_Layer[rechit_layer->at(ihit)-1]->Fill(rechit_energy->at(ihit));
       if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
       else { FH_energy += rechit_energy->at(ihit); }
 
@@ -507,6 +520,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_CoG_NHits->Fill(CoG/totalE, Nhits);
 
     
+
+    
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
       //Energy_distribution_display
@@ -519,10 +534,21 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       }
     }
   }
-
+  
   //******************** End Loop over events ********************//
-  //
-  //
+
+
+  //******************** Fit ********************//
+
+  for(int ilayer = 0; ilayer < NLAYER; ilayer++){
+    c4->cd(ilayer+1);
+    h_TotalEnergy_Layer[ilayer]->Draw();
+    c4->Update();
+  }
+  c4->Update();
+  sprintf(title,"layer_Energy_Sum%i.png",runN);
+  c4->SaveAs(title);
+  
   //******************** Plots ********************//
 
   //Energy_display
