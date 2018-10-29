@@ -436,8 +436,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,100000);
   TH1D* h_TotalEnergy_Layer[NLAYER];
   TH1D* h_Longitudinal_Shower_Profile = new TH1D("h_Longitudinal_Shower_Profile","",100,0,10000);
-  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",50,100,0,200,0,10000);
-  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",50,100,0,200,0,10000);
+  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",50,50,0,200,0,10000);
+  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",50,50,0,200,0,10000);
 
   TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,50000);
   TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,50000);
@@ -452,7 +452,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
     char histname[50];
     sprintf(histname,"h_TotalEnergy_Layer_%d",ilayer);
-    h_TotalEnergy_Layer[ilayer] = new TH1D(histname,"",100,0,50000);
+    h_TotalEnergy_Layer[ilayer] = new TH1D(histname,"",100,0,2500);
   }
   
 
@@ -609,10 +609,10 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
   c2->cd(3);
   h_CoG_TotalE->SetTitle("CoG_NHits");
-  h_CoG_TotalE->SetTitleOffset(0.8);
-  h_CoG_TotalE->GetXaxis()->SetTitle("CoG");
-  h_CoG_TotalE->GetYaxis()->SetTitle("NHits");
-  h_CoG_TotalE->Draw("colz");
+  h_CoG_NHits->SetTitleOffset(0.8);
+  h_CoG_NHits->GetXaxis()->SetTitle("CoG");
+  h_CoG_NHits->GetYaxis()->SetTitle("NHits");
+  h_CoG_NHits->Draw("colz");
   c2->Update();
   
 
@@ -673,11 +673,11 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   c3->Update();
 
   c3->cd(3);
-  h_CoG_TotalE_Mask->SetTitle("CoG_NHits_Mask");
-  h_CoG_TotalE_Mask->SetTitleOffset(0.8);
-  h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG");
-  h_CoG_TotalE_Mask->GetYaxis()->SetTitle("NHits");
-  h_CoG_TotalE_Mask->Draw("colz");
+  h_CoG_NHits_Mask->SetTitle("CoG_NHits_Mask");
+  h_CoG_NHits_Mask->SetTitleOffset(0.8);
+  h_CoG_NHits_Mask->GetXaxis()->SetTitle("CoG");
+  h_CoG_NHits_Mask->GetYaxis()->SetTitle("NHits");
+  h_CoG_NHits_Mask->Draw("colz");
   c3->Update();
 
   c3->cd(4);
