@@ -14,6 +14,7 @@
 #include "TChain.h"
 #include "TH1.h"
 #include "TH2.h"
+#include "TGaxis.h"
 #include <utility>
 
 //Constructor
@@ -399,6 +400,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   gStyle->SetPalette(53);
   gStyle->SetOptStat(0);
   gROOT->SetBatch(kTRUE);
+  TGaxis::SetMaxDigits(3);
 
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
   if(!ignore_EE)
@@ -557,14 +559,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
   c2->cd(2);
   h_CoG_TotalE->SetTitle("CoG_TotalE");
-  h_CoG_TotalE->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE->GetYaxis()->SetTitle("TotalE");
   h_CoG_TotalE->Draw("colz");
   c2->Update();
 
   c2->cd(3);
   h_CoG_TotalE->SetTitle("CoG_NHits");
-  h_CoG_TotalE->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE->GetYaxis()->SetTitle("NHits");
   h_CoG_TotalE->Draw("colz");
   c2->Update();
@@ -608,14 +610,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
   c3->cd(2);
   h_CoG_TotalE_Mask->SetTitle("CoG_TotalE_Mask");
-  h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE_Mask->GetYaxis()->SetTitle("TotalE");
   h_CoG_TotalE_Mask->Draw("colz");
   c3->Update();
 
   c3->cd(3);
   h_CoG_TotalE_Mask->SetTitle("CoG_NHits_Mask");
-  h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG/TotalE");
+  h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE_Mask->GetYaxis()->SetTitle("NHits");
   h_CoG_TotalE_Mask->Draw("colz");
   c3->Update();
