@@ -473,7 +473,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     double totalE_Mask = 0, CoG_Mask = 0, CoG_NHits_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0, NHits_Mask = 0;
     double totalE_layer[NLAYER];
     for(int ilayer = 0; ilayer < NLAYER; ilayer++){
-      totalE_layer[NLAYER] = 0;
+      totalE_layer[ilayer] = 0;
     }
     
     for(int ihit = 0; ihit < Nhits ; ++ihit){
