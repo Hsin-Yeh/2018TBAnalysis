@@ -472,6 +472,10 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     double totalE = 0, CoG = 0, CoG_NHits = 0, EE_energy = 0, FH_energy = 0, totalE_TOT=0, totalE_HG=0, totalE_LG=0;
     double totalE_Mask = 0, CoG_Mask = 0, CoG_NHits_Mask = 0, EE_energy_Mask = 0, FH_energy_Mask = 0, totalE_TOT_Mask=0, totalE_HG_Mask = 0, totalE_LG_Mask = 0, NHits_Mask = 0;
     double totalE_layer[NLAYER];
+    for(int ilayer = 0; ilayer < NLAYER; ilayer++){
+      totalE_layer[NLAYER] = 0;
+    }
+    
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
       
@@ -480,9 +484,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       totalE_TOT += rechit_Tot->at(ihit);
       totalE_HG += rechit_amplitudeHigh->at(ihit);
       totalE_LG += rechit_amplitudeLow->at(ihit);
-      totalE_layer[rechit_layer->at(ihit)-1] += rechit_energy->at(ihit);
       CoG_NHits += rechit_z->at(ihit) * 1;
-      h_TotalEnergy_Layer[rechit_layer->at(ihit)-1]->Fill(rechit_energy->at(ihit));
       if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy += rechit_energy->at(ihit); }
       else { FH_energy += rechit_energy->at(ihit); }
 
@@ -495,9 +497,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 	totalE_LG_Mask += rechit_amplitudeLow->at(ihit);
 	CoG_NHits_Mask += rechit_z->at(ihit) * 1;
 	NHits_Mask++;
+	totalE_layer[rechit_layer->at(ihit)-1] += rechit_energy->at(ihit);
 	if(rechit_layer->at(ihit) <= EE_NLAYER) { EE_energy_Mask += rechit_energy->at(ihit); }
 	else { FH_energy_Mask += rechit_energy->at(ihit); }
       }
+    }
+
+    for(int ilayer=0; ilayer < NLAYER; ilayer++){
+      h_TotalEnergy_Layer[ilayer]->Fill(totalE_layer[ilayer]);
     }
     
     counts++;
@@ -540,9 +547,11 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //
   //
   //******************** Fit ********************//
-  //
-  //
-  //
+  
+  for(int ilayer = 0; ilayer < NLAYER; ilayer++){
+    h_TotalEnergy_Layer[ilayer]->Fit("gaus");
+  }
+  
   //******************** Plots ********************//
 
   //Layer_Energy_Sum
