@@ -536,10 +536,17 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   }
   
   //******************** End Loop over events ********************//
-
-
+  //
+  //
+  //
   //******************** Fit ********************//
+  //
+  //
+  //
+  //******************** Plots ********************//
 
+  //Layer_Energy_Sum
+  
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
     c4->cd(ilayer+1);
     h_TotalEnergy_Layer[ilayer]->Draw();
@@ -548,8 +555,6 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   c4->Update();
   sprintf(title,"layer_Energy_Sum%i.png",runN);
   c4->SaveAs(title);
-  
-  //******************** Plots ********************//
 
   //Energy_display
 
@@ -580,11 +585,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   
   c2->cd(1);
   h_TotalEnergy->SetTitle("Total_energy");
+  h_TotalEnergy->SetTitleOffset(0.8);
+  h_TotalEnergy->SetLineWidth(5);
   h_TotalEnergy->Draw();
   c2->Update();
 
   c2->cd(2);
   h_CoG_TotalE->SetTitle("CoG_TotalE");
+  h_CoG_TotalE->SetTitleOffset(0.8);
   h_CoG_TotalE->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE->GetYaxis()->SetTitle("TotalE");
   h_CoG_TotalE->Draw("colz");
@@ -592,6 +600,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
   c2->cd(3);
   h_CoG_TotalE->SetTitle("CoG_NHits");
+  h_CoG_TotalE->SetTitleOffset(0.8);
   h_CoG_TotalE->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE->GetYaxis()->SetTitle("NHits");
   h_CoG_TotalE->Draw("colz");
@@ -600,26 +609,36 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
   c2->cd(4);
   h_EE_Energy->SetTitle("EE_Energy");
+  h_EE_Energy->SetTitleOffset(0.8);
+  h_EE_Energy->SetLineWidth(5);
   h_EE_Energy->Draw();
   c2->Update();
 
   c2->cd(5);
   h_FH_Energy->SetTitle("FH_Energy");
+  h_FH_Energy->SetTitleOffset(0.8);
+  h_FH_Energy->SetLineWidth(5);
   h_FH_Energy->Draw();
   c2->Update();
 
   c2->cd(6);
   h_TotalEnergy_TOT->SetTitle("TotalE_TOT");
+  h_TotalEnergy_TOT->SetTitleOffset(0.8);
+  h_TotalEnergy_TOT->SetLineWidth(5);
   h_TotalEnergy_TOT->Draw();
   c2->Update();
 
   c2->cd(7);
   h_TotalEnergy_HG->SetTitle("TotalE_HG");
+  h_TotalEnergy_HG->SetTitleOffset(0.8);
+  h_TotalEnergy_HG->SetLineWidth(5);
   h_TotalEnergy_HG->Draw();
   c2->Update();
 
   c2->cd(8);
   h_TotalEnergy_LG->SetTitle("TotalE_LG");
+  h_TotalEnergy_LG->SetTitleOffset(0.8);
+  h_TotalEnergy_LG->SetLineWidth(5);
   h_TotalEnergy_LG->Draw();
   c2->Update();
   
@@ -631,11 +650,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   
   c3->cd(1);
   h_TotalEnergy_Mask->SetTitle("Total_energy_Mask");
+  h_TotalEnergy_Mask->SetTitleOffset(0.8);
+  h_TotalEnergy_Mask->SetLineWidth(5);
   h_TotalEnergy_Mask->Draw();
   c3->Update();
 
   c3->cd(2);
   h_CoG_TotalE_Mask->SetTitle("CoG_TotalE_Mask");
+  h_CoG_TotalE_Mask->SetTitleOffset(0.8);
   h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE_Mask->GetYaxis()->SetTitle("TotalE");
   h_CoG_TotalE_Mask->Draw("colz");
@@ -643,6 +665,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
   c3->cd(3);
   h_CoG_TotalE_Mask->SetTitle("CoG_NHits_Mask");
+  h_CoG_TotalE_Mask->SetTitleOffset(0.8);
   h_CoG_TotalE_Mask->GetXaxis()->SetTitle("CoG");
   h_CoG_TotalE_Mask->GetYaxis()->SetTitle("NHits");
   h_CoG_TotalE_Mask->Draw("colz");
@@ -650,26 +673,36 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
   c3->cd(4);
   h_EE_Energy_Mask->SetTitle("EE_Energy_Mask");
+  h_EE_Energy_Mask->SetTitleOffset(0.8);
+  h_EE_Energy_Mask->SetLineWidth(5);
   h_EE_Energy_Mask->Draw();
   c3->Update();
 
   c3->cd(5);
   h_FH_Energy_Mask->SetTitle("FH_Energy_Mask");
+  h_FH_Energy_Mask->SetTitleOffset(0.8);
+  h_FH_Energy_Mask->SetLineWidth(5);
   h_FH_Energy_Mask->Draw();
   c3->Update();
 
   c3->cd(6);
   h_TotalEnergy_TOT_Mask->SetTitle("TotalE_TOT_Mask");
+  h_TotalEnergy_TOT_Mask->SetTitleOffset(0.8);
+  h_TotalEnergy_TOT_Mask->SetLineWidth(5);
   h_TotalEnergy_TOT_Mask->Draw();
   c3->Update();
 
   c3->cd(7);
   h_TotalEnergy_HG_Mask->SetTitle("TotalE_HG_Mask");
+  h_TotalEnergy_HG_Mask->SetTitleOffset(0.8);
+  h_TotalEnergy_HG_Mask->SetLineWidth(5);
   h_TotalEnergy_HG_Mask->Draw();
   c3->Update();
 
   c3->cd(8);
   h_TotalEnergy_LG_Mask->SetTitle("TotalE_LG_Mask");
+  h_TotalEnergy_LG_Mask->SetTitleOffset(0.8);
+  h_TotalEnergy_LG_Mask->SetLineWidth(5);
   h_TotalEnergy_LG_Mask->Draw();
   c3->Update();
   
