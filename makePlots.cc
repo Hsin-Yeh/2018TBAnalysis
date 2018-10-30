@@ -502,12 +502,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 	else { FH_energy_Mask += rechit_energy->at(ihit); }
       }
     }
+    counts++;
 
+    // Fill Histograms
+    
     for(int ilayer=0; ilayer < NLAYER; ilayer++){
       h_TotalEnergy_Layer[ilayer]->Fill(totalE_layer[ilayer]);
     }
     
-    counts++;
     h_TotalEnergy_Mask->Fill(totalE_Mask);
     h_CoG_TotalE_Mask->Fill(CoG_Mask/totalE_Mask, totalE_Mask);
     h_EE_Energy_Mask->Fill(EE_energy_Mask);
@@ -527,11 +529,10 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_CoG_NHits->Fill(CoG/totalE, Nhits);
 
     
-
+    // Fill Hexagon Energy Display 
     
     for(int ihit = 0; ihit < Nhits ; ++ihit){
       //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
-      //Energy_distribution_display
       if( !Mask_NoisyChannel(rechit_layer->at(ihit), rechit_chip->at(ihit), rechit_channel->at(ihit), rechit_x->at(ihit), rechit_y->at(ihit)) ) {
 	if( hitmap ) {
 	  evtdis[rechit_layer->at(ihit) - 1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), 1);
@@ -543,14 +544,19 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   }
   
   //******************** End Loop over events ********************//
-  //
-  //
-  //
+
+
+
+  
   //******************** Fit ********************//
+
+
   
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
     h_TotalEnergy_Layer[ilayer]->Fit("gaus");
   }
+
+  
   
   //******************** Plots ********************//
 
@@ -563,7 +569,6 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_Layer[ilayer]->GetXaxis()->SetTitle("Energy");
     h_TotalEnergy_Layer[ilayer]->SetLineWidth(5);
     h_TotalEnergy_Layer[ilayer]->Draw();
-    c4->Update();
   }
   c4->Update();
   sprintf(title,"layer_Energy_Sum%i.png",runN);
@@ -576,9 +581,6 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     if(!ignore_EE){
       c1->cd(iL+1);
       evtdis[iL]->Draw("colztext0");
-      //      c1->Update();
-      //sprintf(title,"plots/evt_dis/layercheck/energy_display_Run%i_layer%i.png",runN,iL+1);
-      //c1->SaveAs(title);
     }
 
     else{
@@ -589,7 +591,6 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       }
     }
   }
-  //evtdis[36]->Draw("colztext0");
   c1->Update();
   sprintf(title,"energy_display_Run%i.png",runN);
   c1->SaveAs(title);
