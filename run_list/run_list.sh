@@ -667,50 +667,59 @@ mu+=(  _323.root )
 mu+=(  _324.root )
 mu+=(  _325.root )
 mu+=(  _326.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-mu+=(  _.root )
-
+mu+=(  _327.root )
+mu+=(  _328.root )
+mu+=(  _329.root )
+mu+=(  _330.root )
+mu+=(  _331.root )
+mu+=(  _332.root )
+mu+=(  _333.root )
+mu+=(  _697.root )
+mu+=(  _698.root )
+mu+=(  _699.root )
+mu+=(  _700.root )
+mu+=(  _701.root )
+mu+=(  _702.root )
+mu+=(  _703.root )
+mu+=(  _704.root )
+mu+=(  _705.root )
+mu+=(  _706.root )
+mu+=(  _707.root )
+mu+=(  _708.root )
+mu+=(  _709.root )
+mu+=(  _710.root )
+mu+=(  _711.root )
+mu+=(  _712.root )
+mu+=(  _713.root )
+mu+=(  _714.root )
+mu+=(  _715.root )
+mu+=(  _717.root )
+mu+=(  _718.root )
+mu+=(  _719.root )
+mu+=(  _721.root )
+mu+=(  _722.root )
+mu+=(  _751.root )
+mu+=(  _752.root )
+mu+=(  _753.root )
+mu+=(  _754.root )
+mu+=(  _803.root )
+mu+=(  _1057.root )
+mu+=(  _1058.root )
+mu+=(  _1059.root )
+mu+=(  _1060.root )
+mu+=(  _1061.root )
+mu+=(  _1062.root )
+mu+=(  _1063.root )
+mu+=(  _1064.root )
 
 
 path="/eos/cms/store/group/dpg_hgcal/tb_hgcal/2018/cern_h2_october/prompt_reco/v5/prompt_reco"
-echo -n "" > 10GeV_list.txt
-for file in ${ele_10[@]}
+echo -n "" > 20GeV_list.txt
+for file in ${ele_20[@]}
 do
     if [ -f "$path$file" ]
     then
-	echo "$path$file" >> 10GeV_list.txt
+	echo "$path$file" >> 20GeV_ele_list.txt
     else
 	echo "$path$file not found."
     fi
@@ -721,7 +730,7 @@ for file in ${ele_30[@]}
 do
     if [ -f "$path$file" ]
     then
-	echo "$path$file" >> 30GeV_list.txt
+	echo "$path$file" >> 30GeV_ele_list.txt
     else
 	echo "$path$file not found."
     fi
@@ -732,7 +741,7 @@ for file in ${ele_50[@]}
 do
     if [ -f "$path$file" ]
     then
-	echo "$path$file" >> 50GeV_list.txt
+	echo "$path$file" >> 50GeV_ele_list.txt
     else
 	echo "$path$file not found."
     fi
@@ -743,7 +752,7 @@ for file in ${ele_80[@]}
 do
     if [ -f "$path$file" ]
     then
-	echo "$path$file" >> 80GeV_list.txt
+	echo "$path$file" >> 80GeV_ele_list.txt
     else
 	echo "$path$file not found."
     fi
@@ -754,7 +763,18 @@ for file in ${ele_100[@]}
 do
     if [ -f "$path$file" ]
     then
-	echo "$path$file" >> 100GeV_list.txt
+	echo "$path$file" >> 100GeV_ele_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 120GeV_list.txt
+for file in ${ele_120[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 120GeV_ele_list.txt
     else
 	echo "$path$file not found."
     fi
@@ -765,11 +785,157 @@ for file in ${ele_150[@]}
 do
     if [ -f "$path$file" ]
     then
-	echo "$path$file" >> 150GeV_list.txt
+	echo "$path$file" >> 150GeV_ele_list.txt
     else
 	echo "$path$file not found."
     fi
 done
+
+
+echo -n "" > 200GeV_list.txt
+for file in ${ele_200[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 200GeV_ele_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 250GeV_list.txt
+for file in ${ele_250[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 250GeV_ele_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+
+echo -n "" > 300GeV_list.txt
+for file in ${ele_300[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 300GeV_ele_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 20GeV_pion_list.txt
+for file in ${pion_20[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 20GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 30GeV_pion_list.txt
+for file in ${pion_20[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 20GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 50GeV_pion_list.txt
+for file in ${pion_50[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 50GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 80GeV_pion_list.txt
+for file in ${pion_80[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 80GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 100GeV_pion_list.txt
+for file in ${pion_100[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 100GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 120GeV_pion_list.txt
+for file in ${pion_120[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 120GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 150GeV_pion_list.txt
+for file in ${pion_150[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 150GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 200GeV_pion_list.txt
+for file in ${pion_200[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 200GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 250GeV_pion_list.txt
+for file in ${pion_250[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 250GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
+echo -n "" > 300GeV_pion_list.txt
+for file in ${pion_300[@]}
+do
+    if [ -f "$path$file" ]
+    then
+	echo "$path$file" >> 300GeV_pion_list.txt
+    else
+	echo "$path$file not found."
+    fi
+done
+
 
 echo -n "" > mu_list.txt
 for file in ${mu[@]}
@@ -781,3 +947,5 @@ do
 	echo "$path$file not found."
     fi
 done
+
+

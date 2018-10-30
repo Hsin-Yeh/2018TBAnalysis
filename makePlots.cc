@@ -6,6 +6,7 @@
 #include "TApplication.h"
 #include "TCanvas.h"
 #include "TGraph.h"
+#include "TGraphErrors.h"
 #include "TMultiGraph.h"
 #include "TLegend.h"
 #include "TStyle.h"
@@ -414,6 +415,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   c3->Divide(4,2);
   TCanvas* c4 = new TCanvas("c4","c4",6400,3600);
   c4->Divide(8,5);
+  TCanvas* c5 = new TCanvas();
 
   TH2Poly *evtdis[NLAYER];
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -450,6 +452,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH2D* h_CoG_NHits_Mask = new TH2D("h_CoG_NHits_Mask","",50,100,0,200,0,10000);
 
   TF1* fit_TotalEnergy_Layer_gaussian[NLAYER];
+  TGraphErrors* g_TotalEnergy_Layer;
 
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
     char histname[50], fitname[50];    
@@ -457,7 +460,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_Layer[ilayer] = new TH1D(histname,"",100,0,2000);
 
     sprintf(fitname,"fit_TotalEnergy_Layer_gaussian%d",ilayer);
-    fit_TotalEnergy_Layer_gaussian[ilayer] = new TF1(fitname,"gaus",0,2000);
+    fit_TotalEnergy_Layer_gaussian[ilayer] = new TF1(fitname,"gaus",100,1500);
   }
   
 
@@ -556,6 +559,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //******************** Fit & Plots ********************//
 
   //Layer_Energy_Sum
+  double Layer_Energy_Mean[NLAYER], Layer_Energy_Sigma[NLAYER], Layer_Number[NLAYER];
   
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
     c4->cd(ilayer+1);
@@ -564,12 +568,21 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_Layer[ilayer]->GetXaxis()->SetTitle("Energy");
     h_TotalEnergy_Layer[ilayer]->SetLineWidth(5);
     h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
+    Layer_Energy_Mean[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(1);
+    Layer_Energy_Sigma[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(2);
+    Layer_Number[ilayer] = ilayer + 1;
   }
   
   c4->Update();
   sprintf(title,"layer_Energy_Sum%i.png",runN);
-  c4->SaveAs(title);  
-  
+  c4->SaveAs(title);
+
+  c5->cd();
+  g_TotalEnergy_Layer = new TGraphErrors(NLAYER,Layer_Number,Layer_Energy_Mean,0,Layer_Energy_Sigma);
+  g_TotalEnergy_Layer->Draw("AP");
+  c5->Update();
+  sprintf(title,"LayerEnergy_MeanValue%i.png",runN);
+  c5->SaveAs(title);
 
   //Energy_display
 
