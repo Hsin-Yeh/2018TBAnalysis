@@ -449,10 +449,15 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH2D* h_CoG_TotalE_Mask = new TH2D("h_CoG_TotalE_Mask","",50,100,0,200,0,10000);
   TH2D* h_CoG_NHits_Mask = new TH2D("h_CoG_NHits_Mask","",50,100,0,200,0,10000);
 
+  TF1* fit_TotalEnergy_Layer_gaussian[NLAYER];
+
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
-    char histname[50];
+    char histname[50], fitname[50];    
     sprintf(histname,"h_TotalEnergy_Layer_%d",ilayer);
     h_TotalEnergy_Layer[ilayer] = new TH1D(histname,"",100,0,2000);
+
+    sprintf(fitname,"fit_TotalEnergy_Layer_gaussian%d",ilayer);
+    fit_TotalEnergy_Layer_gaussian[ilayer] = new TF1(fitname,"gaus",0,2000);
   }
   
 
@@ -553,7 +558,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //Layer_Energy_Sum
   
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
-    h_TotalEnergy_Layer[ilayer]->Fit("gaus");
+    h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
     c4->cd(ilayer+1);
     sprintf(title,"Layer%i",ilayer+1);
     h_TotalEnergy_Layer[ilayer]->SetTitle(title);
