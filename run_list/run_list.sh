@@ -704,44 +704,6 @@ mu+=(  _.root )
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 path="/eos/cms/store/group/dpg_hgcal/tb_hgcal/2018/cern_h2_october/prompt_reco/v5/prompt_reco"
 echo -n "" > 10GeV_list.txt
 for file in ${ele_10[@]}
