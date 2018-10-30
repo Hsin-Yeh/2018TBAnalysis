@@ -551,11 +551,11 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //******************** Fit ********************//
 
 
-  
+  /*
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
     h_TotalEnergy_Layer[ilayer]->Fit("gaus");
   }
-
+  */
   
   
   //******************** Plots ********************//
