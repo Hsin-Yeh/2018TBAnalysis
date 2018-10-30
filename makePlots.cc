@@ -548,21 +548,12 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 
 
   
-  //******************** Fit ********************//
-
-
-  /*
-  for(int ilayer = 0; ilayer < NLAYER; ilayer++){
-    h_TotalEnergy_Layer[ilayer]->Fit("gaus");
-  }
-  */
-  
-  
-  //******************** Plots ********************//
+  //******************** Fit & Plots ********************//
 
   //Layer_Energy_Sum
   
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
+    h_TotalEnergy_Layer[ilayer]->Fit("gaus");
     c4->cd(ilayer+1);
     sprintf(title,"Layer%i",ilayer+1);
     h_TotalEnergy_Layer[ilayer]->SetTitle(title);
@@ -570,9 +561,11 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_Layer[ilayer]->SetLineWidth(5);
     h_TotalEnergy_Layer[ilayer]->Draw();
   }
+  
   c4->Update();
   sprintf(title,"layer_Energy_Sum%i.png",runN);
-  c4->SaveAs(title);
+  c4->SaveAs(title);  
+  
 
   //Energy_display
 
