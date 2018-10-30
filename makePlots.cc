@@ -432,12 +432,12 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_EE_Energy = new TH1D("h_EE_Energy","",100,0,50000);
   TH1D* h_FH_Energy = new TH1D("h_FH_Energy","",100,0,50000);
   TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,50000);
-  TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,100000);
+  TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,1000000);
   TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,100000);
   TH1D* h_TotalEnergy_Layer[NLAYER];
   TH1D* h_Longitudinal_Shower_Profile = new TH1D("h_Longitudinal_Shower_Profile","",100,0,10000);
-  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",50,50,0,200,0,10000);
-  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",50,50,0,200,0,10000);
+  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",50,50,0,200,0,100000);
+  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",50,50,0,200,0,100000);
 
   TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,50000);
   TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,50000);
@@ -558,7 +558,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //Layer_Energy_Sum
   
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
-    h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
+    //h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
     c4->cd(ilayer+1);
     sprintf(title,"Layer%i",ilayer+1);
     h_TotalEnergy_Layer[ilayer]->SetTitle(title);
