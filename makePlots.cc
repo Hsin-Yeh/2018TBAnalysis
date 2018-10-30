@@ -558,13 +558,12 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //Layer_Energy_Sum
   
   for(int ilayer = 0; ilayer < NLAYER; ilayer++){
-    //h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
     c4->cd(ilayer+1);
     sprintf(title,"Layer%i",ilayer+1);
     h_TotalEnergy_Layer[ilayer]->SetTitle(title);
     h_TotalEnergy_Layer[ilayer]->GetXaxis()->SetTitle("Energy");
     h_TotalEnergy_Layer[ilayer]->SetLineWidth(5);
-    h_TotalEnergy_Layer[ilayer]->Draw();
+    h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
   }
   
   c4->Update();
