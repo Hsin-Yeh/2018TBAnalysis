@@ -439,8 +439,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_Layer[NLAYER];
   TH1D* h_Longitudinal_Shower_Profile = new TH1D("h_Longitudinal_Shower_Profile","",100,0,10000);
   TH1D* h_CoG = new TH1D("h_CoG","",100,0,200);
-  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",25,50,0,200,0,50000);
-  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",25,50,0,200,0,50000);
+  TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",50,50,0,200,0,50000);
+  TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",50,50,0,200,0,50000);
 
   TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,50000);
   TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,50000);
@@ -449,8 +449,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_HG_Mask = new TH1D("h_TotalEnergy_HG_Mask","",100,0,100000);
   TH1D* h_TotalEnergy_LG_Mask = new TH1D("h_TotalEnergy_LG_Mask","",100,0,100000);
   TH1D* h_Longitudinal_Shower_Profile_Mask = new TH1D("h_Longitudinal_Shower_Profile_Mask","",100,0,10000);
-  TH2D* h_CoG_TotalE_Mask = new TH2D("h_CoG_TotalE_Mask","",25,50,0,200,0,50000);
-  TH2D* h_CoG_NHits_Mask = new TH2D("h_CoG_NHits_Mask","",25,50,0,200,0,50000);
+  TH2D* h_CoG_TotalE_Mask = new TH2D("h_CoG_TotalE_Mask","",50,50,0,200,0,50000);
+  TH2D* h_CoG_NHits_Mask = new TH2D("h_CoG_NHits_Mask","",50,50,0,200,0,50000);
 
   TF1* fit_TotalEnergy_Layer_gaussian[NLAYER];
   TGraphErrors* g_TotalEnergy_Layer;
