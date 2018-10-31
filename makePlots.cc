@@ -438,6 +438,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH1D* h_TotalEnergy_LG = new TH1D("h_TotalEnergy_LG","",100,0,100000);
   TH1D* h_TotalEnergy_Layer[NLAYER];
   TH1D* h_Longitudinal_Shower_Profile = new TH1D("h_Longitudinal_Shower_Profile","",100,0,10000);
+  TH1D* h_CoG = new TH1D("h_CoG","",100,0,200);
   TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",100,50,0,200,0,100000);
   TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",100,50,0,200,0,100000);
 
@@ -529,6 +530,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
         
     h_TotalEnergy->Fill(totalE);
     h_CoG_TotalE->Fill(CoG/totalE, totalE);
+    h_CoG->Fill(CoG/totalE);
     h_EE_Energy->Fill(EE_energy);
     h_FH_Energy->Fill(FH_energy);
     h_TotalEnergy_HG->Fill(totalE_HG);
@@ -622,6 +624,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   h_CoG_TotalE->Draw("colz");
   c2->Update();
 
+  /*
   c2->cd(3);
   h_CoG_TotalE->SetTitle("CoG_NHits");
   h_CoG_NHits->SetTitleOffset(0.8);
@@ -629,8 +632,15 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   h_CoG_NHits->GetYaxis()->SetTitle("NHits");
   h_CoG_NHits->Draw("colz");
   c2->Update();
-  
+  */
 
+  c2->cd(3);
+  h_CoG->SetTitle("CoGZ");
+  h_CoG->SetTitleOffset(0.8);
+  h_CoG->GetXaxis()->SetTitle("CoGZ[cm]");
+  h_CoG->Draw();
+  c2->Update();
+  
   c2->cd(4);
   h_EE_Energy->SetTitle("EE_Energy");
   h_EE_Energy->SetTitleOffset(0.8);
