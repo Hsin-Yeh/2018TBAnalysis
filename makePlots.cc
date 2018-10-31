@@ -460,7 +460,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_Layer[ilayer] = new TH1D(histname,"",100,0,2000);
 
     sprintf(fitname,"fit_TotalEnergy_Layer_gaussian%d",ilayer);
-    fit_TotalEnergy_Layer_gaussian[ilayer] = new TF1(fitname,"gaus",100,1500);
+    fit_TotalEnergy_Layer_gaussian[ilayer] = new TF1(fitname,"gaus",80,1500);
   }
   
 
