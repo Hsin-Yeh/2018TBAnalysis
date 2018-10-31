@@ -421,7 +421,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   for(int iL = 0; iL < NLAYER ; ++iL){
     evtdis[iL] = new TH2Poly();
     if(setup_config == 0){
-      if(iL < EELAYER)
+      if(iL < EE_NLAYER)
 	InitTH2Poly(*evtdis[iL]);
       else
 	InitTH2Poly_flower(*evtdis[iL]);
