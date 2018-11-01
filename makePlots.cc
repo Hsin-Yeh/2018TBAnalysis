@@ -574,11 +574,14 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
     
     if(fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(1)<0){
-      Layer_Energy_Mean[ilayer] = 0;}
+      Layer_Energy_Mean[ilayer] = 0;
+      Layer_Energy_Sigma[ilayer] = 0;
+    }
     else {
-      Layer_Energy_Mean[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(1);}
+      Layer_Energy_Mean[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(1);
+      Layer_Energy_Sigma[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(2);
+    }
     
-    Layer_Energy_Sigma[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(2);
     Layer_Number[ilayer] = ilayer + 1;
   }
   
