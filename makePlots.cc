@@ -516,7 +516,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     // Fill Histograms
     
     for(int ilayer=0; ilayer < NLAYER; ilayer++){
-      if(totalE_layer[ilayer] > 50){
+      if(totalE_layer[ilayer] > 0){
 	h_TotalEnergy_Layer[ilayer]->Fill(totalE_layer[ilayer]);
       }
     }
@@ -572,7 +572,12 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     h_TotalEnergy_Layer[ilayer]->GetXaxis()->SetTitle("Energy");
     h_TotalEnergy_Layer[ilayer]->SetLineWidth(5);
     h_TotalEnergy_Layer[ilayer]->Fit(fit_TotalEnergy_Layer_gaussian[ilayer]);
-    Layer_Energy_Mean[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(1);
+    
+    if(fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(1)<0){
+      Layer_Energy_Mean[ilayer] = 0;}
+    else {
+      Layer_Energy_Mean[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(1);}
+    
     Layer_Energy_Sigma[ilayer] = fit_TotalEnergy_Layer_gaussian[ilayer]->GetParameter(2);
     Layer_Number[ilayer] = ilayer + 1;
   }
