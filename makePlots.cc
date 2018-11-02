@@ -599,7 +599,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   //Energy_display
 
   for(int iL = 0; iL < NLAYER ; ++iL){
-    evtdis[iL]->SetMaximum(10000000);
+    //    evtdis[iL]->SetMaximum(10000000);
     if(!ignore_EE){
       c1->cd(iL+1);
       evtdis[iL]->Draw("colz");
