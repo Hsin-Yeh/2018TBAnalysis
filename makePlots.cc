@@ -430,8 +430,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     evtdis[iL]->SetTitle(title);
   }
 
-  TH1D* h_TotalEnergy = new TH1D("h_TotalEnergy","",200,0,50000);
-  TH1D* h_EE_Energy = new TH1D("h_EE_Energy","",100,0,50000);
+  TH1D* h_TotalEnergy = new TH1D("h_TotalEnergy","",200,0,20000);
+  TH1D* h_EE_Energy = new TH1D("h_EE_Energy","",100,0,20000);
   TH1D* h_FH_Energy = new TH1D("h_FH_Energy","",100,0,50000);
   TH1D* h_TotalEnergy_TOT = new TH1D("h_TotalEnergy_TOT","",100,0,50000);
   TH1D* h_TotalEnergy_HG = new TH1D("h_TotalEnergy_HG","",100,0,1000000);
@@ -442,8 +442,8 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   TH2D* h_CoG_TotalE = new TH2D("h_CoG_TotalE","",50,50,0,200,0,50000);
   TH2D* h_CoG_NHits = new TH2D("h_CoG_NHits","",50,50,0,200,0,50000);
 
-  TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,50000);
-  TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,50000);
+  TH1D* h_TotalEnergy_Mask = new TH1D("h_TotalEnergy_Mask","",200,0,20000);
+  TH1D* h_EE_Energy_Mask = new TH1D("h_EE_Energy_Mask","",100,0,20000);
   TH1D* h_FH_Energy_Mask = new TH1D("h_FH_Energy_Mask","",100,0,50000);
   TH1D* h_TotalEnergy_TOT_Mask = new TH1D("h_TotalEnergy_TOT_Mask","",100,0,50000);
   TH1D* h_TotalEnergy_HG_Mask = new TH1D("h_TotalEnergy_HG_Mask","",100,0,100000);
