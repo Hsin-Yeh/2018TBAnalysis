@@ -516,7 +516,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
     // Fill Histograms
     
     for(int ilayer=0; ilayer < NLAYER; ilayer++){
-      if(totalE_layer[ilayer] > 0){
+      if(totalE_layer[ilayer] > 25){
 	h_TotalEnergy_Layer[ilayer]->Fill(totalE_layer[ilayer]);
       }
     }
