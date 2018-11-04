@@ -1,7 +1,9 @@
 /////////////////////////////////////////////////////////
-// Arthor: Chia-hung Chien  chchien521@gmail.com       
+// Author : Hsin-Yeh Wu thankyouyou06@gmail.com
+// Original FrameWork Author : Chia-hung Chien  chchien521@gmail.com 
 // Just use the same class name as we used to.
-// Date : 20-June-2018
+// Branch Created Date : Nov 4, 2018
+// For 2018October TestBeamAnalysis
 /////////////////////////////////////////////////////////
 
 #ifndef makePlots_h
@@ -37,6 +39,9 @@ class makePlots{
   // Members
   string fname;
   //TApplication *app;
+  
+  int NLAYER = 40;
+  
   
   TFile        *Inputfile;
   TTree        *T_Rechit;
