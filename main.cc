@@ -3,6 +3,7 @@
 #include <iostream>
 
 int main(int argc, char** argv){
+  if(argv 
 
   TApplication *app = new TApplication("app",0,0);
 
