@@ -72,7 +72,7 @@ int main(int argc, char** argv){
 
   //M->NoisyChannelCheck_WithMuons();
   M->NtupleMaker();
-  M->PlotProducer(0,0);
+  //M->PlotProducer(0,0);
   
   /*
   if(Is_Data){
