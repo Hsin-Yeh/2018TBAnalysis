@@ -193,6 +193,7 @@ void makePlots::Loop(){
   TFile outf(title,"recreate");
   TH1D *h_E1devE7[NLAYER]; 
   TH1D *h_E7devE19[NLAYER];
+  TH1D *h_totalE = new TH1D("h_totalE","",100,0,3000);
 
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
@@ -219,6 +220,7 @@ void makePlots::Loop(){
 	double E7devE19 = layerE7[iL]/layerE19[iL];
 	h_E1devE7 [iL]->Fill(E1devE7);
 	h_E7devE19[iL]->Fill(E7devE19);}
+      h_totalE->Fill(totalE);
 
       //If one wants to do sth with hits
       vector<double> x,y,z,ene;
@@ -237,6 +239,14 @@ void makePlots::Loop(){
       SHD_Elayer += X0_layer[iL]*layerE[iL];}
     SHD_Elayer /= totalE;
     // shower depth = SHD_Elayer (calculation done!)
+  }
+  Double_t scale = 1/h_totalE->Integral();
+  h_totalE->Scale(scale);
+  for (int iL = 0; iL < NLAYER; ++iL){
+    scale = 1/h_E1devE7 [iL]->Integral();
+    h_E1devE7 [iL]->Scale(scale);
+    scale = 1/h_E7devE19[iL]->Integral();
+    h_E7devE19[iL]->Scale(scale);
   }
   outf.Write();
   outf.Close();
