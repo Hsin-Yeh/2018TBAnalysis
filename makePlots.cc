@@ -417,6 +417,7 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
   c4->Divide(8,5);
   TCanvas* c5 = new TCanvas();
 
+
   TH2Poly *evtdis[NLAYER];
   for(int iL = 0; iL < NLAYER ; ++iL){
     evtdis[iL] = new TH2Poly();
@@ -424,11 +425,13 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
       if(iL < EE_NLAYER)
 	InitTH2Poly(*evtdis[iL]);
       else
-	InitTH2Poly_flower(*evtdis[iL]);
+	//	InitTH2Poly_flower(*evtdis[iL]);
+	InitTH2Poly(*evtdis[iL]);
     }
     sprintf(title,"Layer_%i",iL+1);
     evtdis[iL]->SetTitle(title);
   }
+
 
   TH1D* h_TotalEnergy = new TH1D("h_TotalEnergy","",200,0,20000);
   TH1D* h_EE_Energy = new TH1D("h_EE_Energy","",100,0,20000);
@@ -760,9 +763,9 @@ void makePlots::PlotProducer(bool ignore_EE, bool hitmap){
 }
 //============================== End of PlotProducer ==============================//
 
-/*
-void makePlots::Event_Display(int ev){
 
+void makePlots::Event_Display(int ev){
+  
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
   c1->Divide(8,5);
   char title[50];
@@ -807,6 +810,7 @@ void makePlots::Event_Display(int ev){
     c1->cd(iL+1);
     evtdis[iL]->Draw("colz");
   }
+  cout << "start drawing" << endl;
 
   c1->Update();
   sprintf(title,"plots/evt_dis/event_display_%ievt.png",ev);
@@ -815,7 +819,7 @@ void makePlots::Event_Display(int ev){
   delete c1;
 
 }
-*/
+
 void makePlots::InitTH2Poly(TH2Poly& poly)
 {
   int MAXVERTICES = 6;

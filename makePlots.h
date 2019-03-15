@@ -34,6 +34,7 @@ class makePlots{
   void PlotProducer(bool ignore_EE = 0,bool hitmap = 0); // ignoreEE when you only want to see FH part
   // hitmap == 1 if one want to see hit map or it will fill by energy(mip) normalized by total energy
   void NtupleMaker();
+  void Event_Display(int ev); // Event Display
   
   //member
   bool Is_Data;
@@ -64,7 +65,6 @@ class makePlots{
   void InitTH2Poly(TH2Poly& poly); //Give frame to TH2Poly
   void InitTH2Poly_flower(TH2Poly& poly); //Give flower frame to TH2Poly
   bool Mask_NoisyChannel(int layer, int chip, int channel, double posx, double posy);
-  void Event_Display(int ev); // Event Display
   void root_logon();
   double* Set_X0(double X0_arr[]);
   
