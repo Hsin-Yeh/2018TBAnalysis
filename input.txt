@@ -1,1 +1,1 @@
-ntuple_sim_config22_pdgID11_beamMomentum20.0_listFTFP_BERT_EMM_CrossTalk.root
+ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM.root
