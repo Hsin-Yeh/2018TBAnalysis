@@ -119,6 +119,7 @@ class makePlots{
    vector<vector<double> > *hit_z;
    Int_t           layerNhit[28];
    Double_t        totalE;
+   Double_t        totalE_CEE;
    Double_t        layerE[28];
    Double_t        layerE1[28];
    Double_t        layerE7[28];

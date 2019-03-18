@@ -130,6 +130,7 @@ void makePlots::Init(){
   T_rechit_var->SetBranchAddress("hit_z", &hit_z);
   T_rechit_var->SetBranchAddress("layerNhit", layerNhit);
   T_rechit_var->SetBranchAddress("totalE", &totalE);
+  T_rechit_var->SetBranchAddress("totalE_CEE", &totalE_CEE);
   T_rechit_var->SetBranchAddress("layerE", layerE);
   T_rechit_var->SetBranchAddress("layerE1", layerE1);
   T_rechit_var->SetBranchAddress("layerE7", layerE7);
@@ -194,6 +195,7 @@ void makePlots::Loop(){
   TH1D *h_E1devE7[NLAYER]; 
   TH1D *h_E7devE19[NLAYER];
   TH1D *h_totalE = new TH1D("h_totalE","",100,0,3000);
+  TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
 
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
@@ -221,6 +223,7 @@ void makePlots::Loop(){
 	h_E1devE7 [iL]->Fill(E1devE7);
 	h_E7devE19[iL]->Fill(E7devE19);}
       h_totalE->Fill(totalE);
+      h_totalCEE->Fill(totalE_CEE);
 
       //If one wants to do sth with hits
       vector<double> x,y,z,ene;
@@ -242,6 +245,8 @@ void makePlots::Loop(){
   }
   Double_t scale = 1/h_totalE->Integral();
   h_totalE->Scale(scale);
+  scale = 1/h_totalCEE->Integral();
+  h_totalCEE->Scale(scale);
   for (int iL = 0; iL < NLAYER; ++iL){
     scale = 1/h_E1devE7 [iL]->Integral();
     h_E1devE7 [iL]->Scale(scale);
