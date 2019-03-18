@@ -196,6 +196,7 @@ void makePlots::Loop(){
   TH1D *h_E7devE19[NLAYER];
   TH1D *h_totalE = new TH1D("h_totalE","",100,0,3000);
   TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
+  TH1D *h_totalE_no_XTalk = new TH1D("h_totalE_no_XTalk","",100,0,500);
 
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
@@ -224,6 +225,9 @@ void makePlots::Loop(){
 	h_E7devE19[iL]->Fill(E7devE19);}
       h_totalE->Fill(totalE);
       h_totalCEE->Fill(totalE_CEE);
+      if ( iL == 15 && layerE1[iL]/layerE7[iL] == 1 ) {
+	h_totalE_no_XTalk->Fill(layerE1[iL]);
+      }
 
       //If one wants to do sth with hits
       vector<double> x,y,z,ene;
