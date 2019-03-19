@@ -1,1 +1,1 @@
-output_root/MC_20GeV_ntuple_sim_pdgID11_beamMomentum20.0_listFTFP_BERT_EMM_CrossTalk_30Threshold_SameTotalE.root
+output_root/Run436_20GeV_Ele.root
