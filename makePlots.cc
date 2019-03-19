@@ -276,11 +276,11 @@ bool makePlots::Mask_NoisyChannel(int layer, int chip, int channel, double posx,
 void makePlots::NtupleMaker(){
   
   Init();
-  char title[50];
+  char title[200];
   if(Is_Data)
     sprintf(title,"output_root/Run%i_%iGeV_%s.root",runN,beamE,beam_str.c_str());
   else
-    sprintf(title,"output_root/MC_%iGeV_%s.root",beamE,beam_str.c_str());
+    sprintf(title,"output_root/MC_%iGeV_%s",beamE,fname.c_str());
 
   cout << "output file: " << title << endl;
   TFile outf(title,"recreate");
