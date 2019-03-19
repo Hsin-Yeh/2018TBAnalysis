@@ -184,7 +184,7 @@ void makePlots::Loop(){
 
   Init();
   
-  char title[100];
+  char title[200];
   int start = fname.find_last_of("/");
   int end = fname.find(".root");
   string f_substr = fname.substr(start+1,end-start-1);
