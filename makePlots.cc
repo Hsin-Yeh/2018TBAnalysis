@@ -200,9 +200,9 @@ void makePlots::Loop(){
 
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
-    h_E1devE7[iL] = new TH1D(title,title,51,0,1.02);
+    h_E1devE7[iL] = new TH1D(title,title,101,0,1.01);
     sprintf(title,"layer%i_E7devE19",iL);
-    h_E7devE19[iL] = new TH1D(title,title,51,0,1.02);
+    h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
   }
   
   for(int ev = 0; ev < nevents; ++ev){
