@@ -1,1 +1,1 @@
-output_root/MC_20GeV_ntuple_sim_config22_pdgID11_beamMomentum20.0_listFTFP_BERT_EMM_CrossTalk.root
+output_root/MC_20GeV_ntuple.root
