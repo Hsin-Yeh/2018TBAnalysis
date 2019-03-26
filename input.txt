@@ -1,1 +1,0 @@
-ntuple_sim_pdgID11_beamMomentum20.0_listFTFP_BERT_EMM_CrossTalk_20Threshold_SameTotalE.root
