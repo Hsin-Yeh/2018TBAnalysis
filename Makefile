@@ -1,15 +1,25 @@
-CXXFLAGS=-g -std=c++0x -m64 -O2 -Wall
+SRCDIR= src
+BUILDDIR= obj_file
+TARGET= makePlots
+
+SRCTXT= cc
+SOURCES= $(shell find $(SRCDIR) -type f -name *.$(SRCTXT))
+OBJECTS= $(patsubst $(SRCDIR)/%,$(BUILDDIR)/%,$(SOURCES:.$(SRCTXT)=.o))
+INC=-I include
+INCDIR= include
+
+CXXFLAGS=-g -m64 -O2 -Wall -std=c++0x $(INC)
 ROOTFLAGS=$(shell root-config --libs --cflags --glibs)
 
-makePlots: main.o makePlots.o
-	g++ $^ -o makePlots $(CXXFLAGS) $(ROOTFLAGS)
-	mv *.o obj_file
+$(TARGET): $(OBJECTS)
+	g++ $^ -o $@ $(CXXFLAGS) $(ROOTFLAGS)
 
-main.o: main.cc makePlots.h
+$(BUILDDIR)/main.o: $(SRCDIR)/main.cc
 	g++ -c $(CXXFLAGS) $(ROOTFLAGS) $< -o $@
 
-makePlots.o:makePlots.cc makePlots.h
+$(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCTXT) $(INCDIR)/%.h
 	g++ -c $(CXXFLAGS) $(ROOTFLAGS) $< -o $@
 
 clean:
-	rm -f makePlots obj_file/*.o ./*~
+	rm -f $(TARGET) $(BUILDDIR)/*.o include/*~ $(SRCDIR)/*~ ./*~
+
