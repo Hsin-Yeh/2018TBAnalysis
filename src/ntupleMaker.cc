@@ -248,7 +248,7 @@ void ntupleMaker::NtupleMaker(){
   if(Is_Data)
     sprintf(title,"output_root/Run%i_%iGeV_%s.root",runN,beamE,beam_str.c_str());
   else
-    sprintf(title,"output_root/MC_%iGeV_%s.root",beamE,f_substr.c_str());
+    sprintf(title,"output_root/%s.root",f_substr.c_str());
 
   cout << "output file: " << title << endl;
   TFile outf(title,"recreate");
