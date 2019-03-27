@@ -179,10 +179,8 @@ void makePlots::Getinfo(int ihit,int &layer,double &x, double &y,double &z,doubl
 
 void makePlots::Loop(){
   
-    int NLAYER = 28;
-    double ENEPERMIP = 86.5e-03; // in MeV
   
-    double X0_arr[NLAYER];
+    double X0_arr[EE_NLAYER];
     double *X0_layer = Set_X0(X0_arr);
 
     Init();
@@ -195,14 +193,14 @@ void makePlots::Loop(){
     cout << "output name : " << title << endl;
 
     TFile outf(title,"recreate");
-    TH1D *h_E1devE7[NLAYER]; 
-    TH1D *h_E7devE19[NLAYER];
+    TH1D *h_E1devE7[EE_NLAYER]; 
+    TH1D *h_E7devE19[EE_NLAYER];
     TH1D *h_totalE = new TH1D("h_totalE","",100,0,3000);
     TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
     TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","",100,0,300);
     TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","",100,0,300);
 
-    for(int iL = 0; iL < NLAYER ; ++iL){
+    for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	sprintf(title,"layer%i_E1devE7",iL);
 	h_E1devE7[iL] = new TH1D(title,title,101,0,1.01);
 	sprintf(title,"layer%i_E7devE19",iL);
@@ -220,7 +218,7 @@ void makePlots::Loop(){
 	//if ( dwcReferenceType != 15) continue;
 
     
-	for(int iL = 0; iL < NLAYER ; ++iL){
+	for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	    //Fill shower shape histogram
 	    if( layerE1[iL] != 0){
 		double E1devE7  = layerE1[iL]/layerE7[iL];
@@ -249,7 +247,7 @@ void makePlots::Loop(){
 	// Calculate the shower depth
 	double SHD_Elayer = 0;
     
-	for(int iL = 0 ; iL < NLAYER ; ++iL){
+	for(int iL = 0 ; iL < EE_NLAYER ; ++iL){
 	    SHD_Elayer += X0_layer[iL]*layerE[iL];}
 	SHD_Elayer /= totalE;
 	// shower depth = SHD_Elayer (calculation done!)
@@ -258,7 +256,7 @@ void makePlots::Loop(){
     h_totalE->Scale(scale);
     scale = 1/h_totalCEE->Integral();
     h_totalCEE->Scale(scale);
-    for (int iL = 0; iL < NLAYER; ++iL){
+    for (int iL = 0; iL < EE_NLAYER; ++iL){
 	scale = 1/h_E1devE7 [iL]->Integral();
 	h_E1devE7 [iL]->Scale(scale);
 	scale = 1/h_E7devE19[iL]->Integral();
