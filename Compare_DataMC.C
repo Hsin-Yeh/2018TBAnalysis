@@ -63,7 +63,7 @@ void Compare_DataMC(){
 
   TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
 
-  sprintf(title,"Total Energy CEE, %GeV", );
+  sprintf(title,"Total Energy CEE, %GeV");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
   h_totalCEE[0]->Draw("HIST");
   h_totalCEE[1]->Draw("Same");

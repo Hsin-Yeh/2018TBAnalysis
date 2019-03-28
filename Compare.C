@@ -27,7 +27,7 @@ void Compare(){
 
   sprintf(title,"root_plot/ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM_result.root");
   TFile f_MC(title);
-  sprintf(title,"root_plot/sim_20GeV_30Th1_150_Th2_1Xfactor1_0.1Xfactor2_result.root");
+  sprintf(title,"root_plot/sim_20GeV_30Th1_180Th2_1X1_0.7X2_result.root");
   TFile f_MC_CrossTalk(title);
   sprintf(title,"root_plot/ntuple_result.root");
   TFile f_MC_CrossTalk_SameTotalE(title);
