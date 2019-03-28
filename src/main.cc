@@ -28,7 +28,6 @@ int main(int argc, char** argv){
 	if     (all_args[1] == "-n" || all_args[1] == "-N" ){   main_makeNtuple( Is_Data );	}
 	else if(all_args[1] == "-m" || all_args[1] == "-M" ){      main_makePlots();	        }
 	else{   std::cout << "Unknown option... print usage" << std::endl;  }
-	return 1;
     }
     else if(argc == 3){
 	if(all_args[1] == "-n" || all_args[1] == "-N" ){
@@ -40,6 +39,8 @@ int main(int argc, char** argv){
 	}
     }
     else{ cout << "unexpected number of option! QUIT!" << endl; }
+    
+    return 1;
 
 }
 

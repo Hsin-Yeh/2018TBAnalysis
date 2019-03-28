@@ -1,1 +1,1 @@
-output_root/Run436_20GeV_Ele.root
+output_root/sim_20GeV_30Th1_150_Th2_1Xfactor1_0.1Xfactor2.root
