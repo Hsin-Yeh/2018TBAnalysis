@@ -28,10 +28,10 @@ void Compare_DataMC(){
   sprintf(title,"root_plot/Run436_20GeV_Ele_result.root");
   TFile f_Data(title);
   
-  TH1D *h_E1devE7_MC[NLAYER];
-  TH1D *h_E1devE7_Data[NLAYER];
-  TH1D *h_E7devE19_MC[NLAYER];
-  TH1D *h_E7devE19_Data[NLAYER];
+  TH1D *h_E1devE7_MC[28];
+  TH1D *h_E1devE7_Data[28];
+  TH1D *h_E7devE19_MC[28];
+  TH1D *h_E7devE19_Data[28];
   TH1D *h_totalCEE[2];
 
   sprintf(title,"h_totalCEE");
