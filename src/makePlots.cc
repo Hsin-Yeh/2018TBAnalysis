@@ -215,7 +215,7 @@ void makePlots::Loop(){
 	// Event Selection
 	//if ( Nhits < 200 ) continue;
 	//if ( dwcReferenceType != 15) continue;
-	/*
+	
     
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	    //Fill shower shape histogram
@@ -250,8 +250,8 @@ void makePlots::Loop(){
 	    SHD_Elayer += X0_layer[iL]*layerE[iL];}
 	SHD_Elayer /= totalE;
 	// shower depth = SHD_Elayer (calculation done!)
-	*/
-    }/*
+	
+    }
     Double_t scale = 1/h_totalE->Integral();
     h_totalE->Scale(scale);
     scale = 1/h_totalCEE->Integral();
@@ -262,7 +262,7 @@ void makePlots::Loop(){
 	scale = 1/h_E7devE19[iL]->Integral();
 	h_E7devE19[iL]->Scale(scale);
     }
-     */
+     
     outf.Write();
     outf.Close();
 }
