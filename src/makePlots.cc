@@ -198,6 +198,7 @@ void makePlots::Loop(){
     TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
     TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","",100,0,300);
     TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","",100,0,300);
+    
 
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	sprintf(title,"layer%i_E1devE7",iL);

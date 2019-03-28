@@ -33,8 +33,6 @@ void Compare(){
   TFile f_MC_CrossTalk_SameTotalE(title);
   sprintf(title,"root_plot/Run436_20GeV_Ele_result.root");
   TFile f_Data(title);
-
-
   
   TH1D *h_E1devE7[4][NLAYER]; 
   TH1D *h_E7devE19[4][NLAYER];
