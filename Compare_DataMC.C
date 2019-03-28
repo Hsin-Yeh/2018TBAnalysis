@@ -28,8 +28,8 @@ void Compare_DataMC(){
   sprintf(title,"root_plot/Run436_20GeV_Ele_result.root");
   TFile f_Data(title);
   
-  TH1D *h_E1devE7[2][NLAYER]; 
-  TH1D *h_E7devE19[2][NLAYER];
+  //  TH1D *h_E1devE7[NLAYER]; 
+  //TH1D *h_E7devE19[NLAYER];
   TH1D *h_totalCEE[2];
 
   sprintf(title,"h_totalCEE");
@@ -40,7 +40,7 @@ void Compare_DataMC(){
   h_totalCEE[1]->SetLineColor(1);
   h_totalCEE[1]->SetLineWidth(2);
 
-  
+  /*
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
     h_E1devE7[0][iL] = (TH1D *)f_MC.Get(title);
@@ -92,5 +92,5 @@ void Compare_DataMC(){
     sprintf(title,"plots/layer%d_E7devE19.pdf",iL);
     c1->SaveAs(title);
   }
-  
+  */  
 }
