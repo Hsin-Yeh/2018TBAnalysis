@@ -60,15 +60,15 @@ void Compare_DataMC(){
     h_E7devE19[1][iL]->SetLineWidth(2);
 
   }
-
+  
   TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
 
-  sprintf(title,"Total Energy CEE, %GeV");
+  sprintf(title,"Total Energy CEE ");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
   h_totalCEE[0]->Draw("HIST");
   h_totalCEE[1]->Draw("Same");
   legend->AddEntry(h_totalCEE[0],"XTalk","L");
-  legend->AddEntry(h_totalCEE[3],"Data","LP");
+  legend->AddEntry(h_totalCEE[1],"Data","LP");
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
@@ -92,4 +92,5 @@ void Compare_DataMC(){
     sprintf(title,"plots/layer%d_E7devE19.pdf",iL);
     c1->SaveAs(title);
   }
+  
 }
