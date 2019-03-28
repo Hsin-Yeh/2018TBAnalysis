@@ -28,8 +28,10 @@ void Compare_DataMC(){
   sprintf(title,"root_plot/Run436_20GeV_Ele_result.root");
   TFile f_Data(title);
   
-  //  TH1D *h_E1devE7[NLAYER]; 
-  //TH1D *h_E7devE19[NLAYER];
+  TH1D *h_E1devE7_MC[NLAYER];
+  TH1D *h_E1devE7_Data[NLAYER];
+  TH1D *h_E7devE19_MC[NLAYER];
+  TH1D *h_E7devE19_Data[NLAYER];
   TH1D *h_totalCEE[2];
 
   sprintf(title,"h_totalCEE");
@@ -40,24 +42,24 @@ void Compare_DataMC(){
   h_totalCEE[1]->SetLineColor(1);
   h_totalCEE[1]->SetLineWidth(2);
 
-  /*
+  
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
-    h_E1devE7[0][iL] = (TH1D *)f_MC.Get(title);
-    h_E1devE7[0][iL]->SetLineColor(Color(0));
-    h_E1devE7[0][iL]->SetLineWidth(2.0);
-    h_E1devE7[1][iL] = (TH1D *)f_Data.Get(title);
-    h_E1devE7[1][iL]->SetLineColor(1);
-    h_E1devE7[1][iL]->SetLineWidth(2);
+    h_E1devE7_MC[iL] = (TH1D *)f_MC.Get(title);
+    h_E1devE7_MC[iL]->SetLineColor(Color(0));
+    h_E1devE7_MC[iL]->SetLineWidth(2.0);
+    h_E1devE7_Data[iL] = (TH1D *)f_Data.Get(title);
+    h_E1devE7_Data[iL]->SetLineColor(1);
+    h_E1devE7_Data[iL]->SetLineWidth(2);
 
   
     sprintf(title,"layer%i_E7devE19",iL);
-    h_E7devE19[0][iL] = (TH1D *)f_MC.Get(title);
-    h_E7devE19[0][iL]->SetLineColor(Color(0));
-    h_E7devE19[0][iL]->SetLineWidth(2.0);
-    h_E7devE19[1][iL] = (TH1D *)f_Data.Get(title);
-    h_E7devE19[1][iL]->SetLineColor(1);
-    h_E7devE19[1][iL]->SetLineWidth(2);
+    h_E7devE19_MC[iL] = (TH1D *)f_MC.Get(title);
+    h_E7devE19_MC[iL]->SetLineColor(Color(0));
+    h_E7devE19_MC[iL]->SetLineWidth(2.0);
+    h_E7devE19_Data[iL] = (TH1D *)f_Data.Get(title);
+    h_E7devE19_Data[iL]->SetLineColor(1);
+    h_E7devE19_Data[iL]->SetLineWidth(2);
 
   }
   
@@ -77,20 +79,20 @@ void Compare_DataMC(){
   c1->SaveAs(title);
 
   for(int iL = 0; iL < NLAYER ; ++iL){
-    h_E1devE7[0][iL]->Draw("HIST");
-    h_E1devE7[1][iL]->Draw("Same");
+    h_E1devE7_MC[iL]->Draw("HIST");
+    h_E1devE7_Data[iL]->Draw("Same");
     legend->Draw();
     c1->Update();
     //gPad->WaitPrimitive();
     sprintf(title,"plots/layer%d_E1devE7.pdf",iL);
     c1->SaveAs(title);
-    h_E7devE19[0][iL]->Draw("HIST");
-    h_E7devE19[1][iL]->Draw("Same");
+    h_E7devE19_MC[iL]->Draw("HIST");
+    h_E7devE19_Data[iL]->Draw("Same");
     legend->Draw();
     c1->Update();
     //    gPad->WaitPrimitive();
     sprintf(title,"plots/layer%d_E7devE19.pdf",iL);
     c1->SaveAs(title);
   }
-  */  
+  
 }
