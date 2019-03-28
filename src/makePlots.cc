@@ -179,13 +179,12 @@ void makePlots::Getinfo(int ihit,int &layer,double &x, double &y,double &z,doubl
 
 void makePlots::Loop(){
   
-  
     double X0_arr[EE_NLAYER];
     double *X0_layer = Set_X0(X0_arr);
 
     Init();
   
-    char title[300];
+    char title[100];
     int start = fname.find_last_of("/");
     int end = fname.find(".root");
     string f_substr = fname.substr(start+1,end-start-1);
@@ -262,10 +261,11 @@ void makePlots::Loop(){
 	scale = 1/h_E7devE19[iL]->Integral();
 	h_E7devE19[iL]->Scale(scale);
     }
-    outf.Write();
-    outf.Close();
-  
+    //outf.Write();
+    //outf.Close();
 }
+
+
 
 void makePlots::Event_Display(){
 
