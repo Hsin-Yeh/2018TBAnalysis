@@ -1,1 +1,1 @@
-output_root/Run436_20GeV_Ele.root
+root_plot/plot_sim_20GeV_30Th1_180Th2_1X1_0.7X2.root

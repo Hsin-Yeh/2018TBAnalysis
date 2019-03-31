@@ -9,7 +9,7 @@ int Color(int c)
   else{ return 0; }
 }
 
-void Compare(){
+void Compare(string f){
 
   int MAXMODULE = 94;
   int NCHIP = 4;
@@ -25,7 +25,7 @@ void Compare(){
   //  TProfile *tpr[MAXMODULE*NCHIP*NCHANNEL];
   gStyle->SetOptStat(0);
 
-  sprintf(title,"root_plot/ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM_result.root");
+  sprintf(title,"root_plot/%s");
   TFile f_MC(title);
   sprintf(title,"root_plot/sim_20GeV_30Th1_180Th2_1X1_0.7X2_result.root");
   TFile f_MC_CrossTalk(title);
@@ -33,7 +33,7 @@ void Compare(){
   TFile f_MC_CrossTalk_SameTotalE(title);
   sprintf(title,"root_plot/Run436_20GeV_Ele_result.root");
   TFile f_Data(title);
-  
+
   TH1D *h_E1devE7[4][NLAYER]; 
   TH1D *h_E7devE19[4][NLAYER];
   TH1D *h_totalCEE[4];

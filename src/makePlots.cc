@@ -19,11 +19,12 @@
 #include "TGraphErrors.h"
 #include <utility>
 
-//Constructor
+
+//makePlots
 makePlots::makePlots(){}
-makePlots::makePlots( TChain *c1,TChain *c2,TChain *c3,string filename ):T_Rechit(c1),T_DWC(c2),T_rechit_var(c3)
+makePlots::makePlots(TChain *c1, TChain *c2, TChain *c3, string filename):T_Rechit(c1),T_DWC(c2),T_rechit_var(c3)
 {
-    cout << "Constructor of makePlot ... \n\n" << endl;
+  cout << "Constructor of makePlot ... \n" << endl;
     fname = filename;
     // Set object pointer(Data)
     rechit_detid = 0;
@@ -108,7 +109,7 @@ void makePlots::Init(){
     T_Rechit->SetBranchAddress("rechit_TS2Low", &rechit_TS2Low);
     T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
     T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
-    
+
     T_Rechit->SetBranchAddress("rechit_Tot", &rechit_Tot);
     T_Rechit->SetBranchAddress("rechit_time", &rechit_time);
     T_Rechit->SetBranchAddress("rechit_timeMaxHG", &rechit_timeMaxHG);
@@ -125,7 +126,6 @@ void makePlots::Init(){
     T_DWC->SetBranchAddress("b_x", &b_x);
     T_DWC->SetBranchAddress("b_y", &b_y);
 
-  
 
     T_rechit_var->SetBranchAddress("hit_mip", &hit_mip);
     T_rechit_var->SetBranchAddress("hit_x", &hit_x);
@@ -139,7 +139,7 @@ void makePlots::Init(){
     T_rechit_var->SetBranchAddress("layerE7", layerE7);
     T_rechit_var->SetBranchAddress("layerE19", layerE19);
     T_rechit_var->SetBranchAddress("layerE37", layerE37);
-  
+
     Init_Runinfo();
 }
 void makePlots::Init_Runinfo(){
@@ -188,7 +188,7 @@ void makePlots::Loop(){
     int start = fname.find_last_of("/");
     int end = fname.find(".root");
     string f_substr = fname.substr(start+1,end-start-1);
-    sprintf(title,"root_plot/%s_result.root",f_substr.c_str());
+    sprintf(title,"root_plot/plot_%s.root",f_substr.c_str());
     cout << "output name : " << title << endl;
 
     TFile outf(title,"recreate");
@@ -206,7 +206,7 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_E7devE19",iL);
 	h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
     }
-  
+    
     for(int ev = 0; ev < nevents; ++ev){
 	if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
     
@@ -263,7 +263,7 @@ void makePlots::Loop(){
 	scale = 1/h_E7devE19[iL]->Integral();
 	h_E7devE19[iL]->Scale(scale);
     }
-     
+
     outf.Write();
     outf.Close();
 }

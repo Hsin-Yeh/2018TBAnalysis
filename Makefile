@@ -23,3 +23,4 @@ $(BUILDDIR)/%.o: $(SRCDIR)/%.$(SRCTXT) $(INCDIR)/%.h
 clean:
 	rm -f $(TARGET) $(BUILDDIR)/*.o include/*~ $(SRCDIR)/*~ ./*~
 
+

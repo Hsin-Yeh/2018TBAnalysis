@@ -1,5 +1,6 @@
 #include "ntupleMaker.h"
 #include "makePlots.h"
+#include "PlotSetting.h"
 #include <fstream>
 #include <iostream>
 
@@ -19,11 +20,13 @@ bool Is_Data = true;
 int main(int argc, char** argv){
     TApplication *app = new TApplication("app",0,0);
     app->Init();
+    PlotSetting *P;
+    P->root_logon();
 
     for(int i = 0 ; i < argc ; ++i){
 	arg_string = argv[i];
 	all_args.push_back(arg_string);
-    }
+    }    
     if(argc == 2){
 	if     (all_args[1] == "-n" || all_args[1] == "-N" ){   main_makeNtuple( Is_Data );	}
 	else if(all_args[1] == "-m" || all_args[1] == "-M" ){      main_makePlots();	        }
@@ -112,7 +115,6 @@ void main_makePlots(){
 		 << main_datainput << endl;}
     }
     infile.close();
-
 
     makePlots *M;
     M = new makePlots(chain,chain2,chain3,filename);
