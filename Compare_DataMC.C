@@ -120,6 +120,10 @@ void Compare_DataMC(){
   string filename;
   ifstream infile("data_input.txt");
   infile >> filename;
+
+  int start = filename.find_last_of("/");
+  int end = filename.find(".root");
+  string f_substr = filename.substr(start+1,end-start-1);
   
   sprintf(title,"%s",filename.c_str());
   TFile f_MC(title);
@@ -173,7 +177,7 @@ void Compare_DataMC(){
   legend->Draw();
   c1->Update();
   //gPad->WaitPrimitive();
-  sprintf(title,"plots/Total Energy CEE.pdf");
+  sprintf(title,"plots/%s/Total Energy CEE.pdf",f_substr.c_str());
   c1->SaveAs(title);
 
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -182,14 +186,14 @@ void Compare_DataMC(){
     legend->Draw();
     c1->Update();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/layer%d_E1devE7.pdf",iL);
+    sprintf(title,"plots/%s/layer%d_E1devE7.pdf", f_substr.c_str(), iL);
     c1->SaveAs(title);
     h_E7devE19_MC[iL]->Draw("HIST");
     h_E7devE19_Data[iL]->Draw("Same");
     legend->Draw();
     c1->Update();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/layer%d_E7devE19.pdf",iL);
+    sprintf(title,"plots/%s/layer%d_E7devE19.pdf", f_substr.c_str(), iL);
     c1->SaveAs(title);
   }
 
