@@ -71,7 +71,7 @@ class makePlots{
   Int_t           pdgID;
   Float_t         beamEnergy;
   Float_t         trueBeamEnergy;
-  Int_t           NRechits;
+  UInt_t           NRechits;
   vector<unsigned int> *rechit_detid;
   vector<unsigned int> *rechit_module;
   vector<unsigned int> *rechit_layer;
@@ -97,7 +97,6 @@ class makePlots{
   vector<float>   *rechit_TS3High;
   vector<float>   *rechit_TS3Low;
   vector<unsigned short>   *rechit_Tot;
-  vector<float>   *rechit_time;   
   vector<float>   *rechit_timeMaxHG;
   vector<float>   *rechit_timeMaxLG;
   vector<unsigned short>   *rechit_toaRise;

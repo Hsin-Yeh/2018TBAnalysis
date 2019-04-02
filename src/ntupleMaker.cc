@@ -50,7 +50,6 @@ ntupleMaker::ntupleMaker( TChain *c1,TChain *c2,TChain *c3,string filename ):T_R
   rechit_TS3High = 0;
   rechit_TS3Low = 0;
   rechit_Tot = 0;
-  rechit_time = 0;
   rechit_timeMaxHG = 0;
   rechit_timeMaxLG = 0;
   rechit_toaRise = 0;
@@ -86,7 +85,6 @@ ntupleMaker::ntupleMaker( TChain *c1,TChain *c2,string filename ):T_Rechit(c1),T
   rechit_TS3High = 0;
   rechit_TS3Low = 0;
   rechit_Tot = 0;
-  rechit_time = 0;
   rechit_timeMaxHG = 0;
   rechit_timeMaxLG = 0;
   rechit_toaRise = 0;
@@ -122,7 +120,6 @@ ntupleMaker::ntupleMaker( TChain *c1,string filename ):T_Rechit(c1){
   rechit_TS3High = 0;
   rechit_TS3Low = 0;
   rechit_Tot = 0;
-  rechit_time = 0;
   rechit_timeMaxHG = 0;
   rechit_timeMaxLG = 0;
   rechit_toaRise = 0;
@@ -168,7 +165,6 @@ void ntupleMaker::Init(){
   T_Rechit->SetBranchAddress("rechit_amplitudeLow", &rechit_amplitudeLow);
     
   T_Rechit->SetBranchAddress("rechit_Tot", &rechit_Tot);
-  T_Rechit->SetBranchAddress("rechit_time", &rechit_time);
   T_Rechit->SetBranchAddress("rechit_timeMaxHG", &rechit_timeMaxHG);
   T_Rechit->SetBranchAddress("rechit_timeMaxLG", &rechit_timeMaxLG);
   T_Rechit->SetBranchAddress("rechit_toaRise", &rechit_toaRise);
