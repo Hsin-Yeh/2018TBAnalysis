@@ -41,7 +41,7 @@ class makePlots{
   string fname;
   //TApplication *app;
   
-  int NLAYER = 40;
+  //static int NLAYER = 40;
   
   
   TFile        *Inputfile;
