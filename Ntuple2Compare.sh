@@ -5,7 +5,7 @@ ntuple_output=./output_root/
 root_plot=root_plot/plot_
 plot=./plots/
 file=$( cut -d / -f 3 <<< $1 )
-fileCutRoot=$( cut -d . -f 1-2 <<< $file )
+fileCutRoot=$( cut -d . -f 1 <<< $file )
 
 
 # Do the job 
