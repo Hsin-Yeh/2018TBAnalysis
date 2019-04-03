@@ -291,12 +291,15 @@ void ntupleMaker::NtupleMaker(){
   outT3->Branch("layerE37",E_37,"layerE37[40]/D");
 
   
+
+  // ------------------------------ Loop Over Events ------------------------------ //
   
   for(int ev = 0; ev < nevents; ++ev){
     if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
     GetData(ev);
     Nhits = NRechits;
-    
+
+    // Initialize
     for(int iL = 0; iL < NLAYER ; ++iL){
       hit_tmp[iL].clear();
       hit_x[iL].clear();
@@ -339,7 +342,6 @@ void ntupleMaker::NtupleMaker(){
  
     for(int iL = 0; iL < NLAYER ; ++iL){
 
-      
       //Find seed
       int maxID = -1;
       double Emax = -1;
@@ -385,11 +387,10 @@ void ntupleMaker::NtupleMaker(){
 	layerE[iL] += E_ch[iL][ich];
       }
     }
-      
     outT3->Fill();
   }
   outT1->Write();
-  //outT2->Write();
+  outT2->Write();
   outT3->Write();
   outf.Close();
 }

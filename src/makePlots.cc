@@ -214,7 +214,7 @@ void makePlots::Loop(){
 
     // Event Selection
     //if ( Nhits < 200 ) continue;
-    //if ( dwcReferenceType != 15) continue;
+    if ( dwcReferenceType != 15) continue;
     
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
       //Fill shower shape histogram
