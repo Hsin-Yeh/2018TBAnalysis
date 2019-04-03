@@ -249,12 +249,8 @@ void ntupleMaker::NtupleMaker(){
   cout << "output file: " << title << endl;
   TFile outf(title,"recreate");
   TTree *outT1,*outT2;
-  if(!TestRun && Is_Data){
-    outT1 = T_Rechit->CopyTree("");
-    outT2 = T_DWC->CopyTree("");}
-  else{
-    outT1 = T_Rechit->CopyTree("");
-  }
+  outT1 = T_Rechit->CopyTree("");
+  outT2 = T_DWC->CopyTree("");
   TTree *outT3 = new TTree("rechit_var","rechit_var");
   
   vector<vector<double> > hit_tmp(NLAYER);
@@ -390,9 +386,7 @@ void ntupleMaker::NtupleMaker(){
     outT3->Fill();
   }
   outT1->Write();
-  if(Is_Data){
-    outT2->Write();
-  }
+  outT2->Write(); 
   outT3->Write();
   outf.Close();
 }
