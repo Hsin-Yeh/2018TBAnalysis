@@ -18,6 +18,7 @@
 using namespace std;
 const int NLAYER = 28+12;
 const int EE_NLAYER = 28;
+const int NCHANNEL = 128;
 const int setup_config = 0; //0 For 28EE+ 12FH(7module*9layer + 1module*3layer)
 const double ENEPERMIP = 86.5e-06; //(GeV) Based on 150GeV muon for 300um Si
 

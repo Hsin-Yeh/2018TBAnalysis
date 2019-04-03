@@ -269,6 +269,10 @@ void ntupleMaker::NtupleMaker(){
   double E_7[NLAYER];
   double E_19[NLAYER];
   double E_37[NLAYER];
+  double E_ch[NLAYER][NCHANNEL];
+  double x_ch[NLAYER][NCHANNEL];
+  double y_ch[NLAYER][NCHANNEL];
+  double z_ch[NLAYER][NCHANNEL];
 
 
   outT3->Branch("hit_mip","std::vector< std::vector<double> >",&hit_tmp);
@@ -292,8 +296,6 @@ void ntupleMaker::NtupleMaker(){
     if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
     GetData(ev);
     Nhits = NRechits;
-    cout << Nhits << endl;
-    if ( Nhits > 127 ) { cout << " Nhits > 127 " << endl; }
     
     for(int iL = 0; iL < NLAYER ; ++iL){
       hit_tmp[iL].clear();
@@ -306,6 +308,9 @@ void ntupleMaker::NtupleMaker(){
       E_7[iL] = 0;
       E_19[iL] = 0;
       E_37[iL] = 0;
+      for(int ich = 0; ich < NCHANNEL; ++ich){
+	E_ch[iL][ich] = 0;
+      }
     }
     
     int layer, chip, channel;
@@ -326,13 +331,19 @@ void ntupleMaker::NtupleMaker(){
       hit_x[layer-1].push_back(posx);
       hit_y[layer-1].push_back(posy);
       hit_z[layer-1].push_back(posz);
+      E_ch[layer-1][ (chip*32) + (channel/2) ] += energy;
+      x_ch[layer-1][ (chip*32) + (channel/2) ] = posx;
+      y_ch[layer-1][ (chip*32) + (channel/2) ] = posy;
+      z_ch[layer-1][ (chip*32) + (channel/2) ] = posz;
     }
  
     for(int iL = 0; iL < NLAYER ; ++iL){
+
       
       //Find seed
       int maxID = -1;
       double Emax = -1;
+      /*
       for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
 	if( hit_tmp[iL].at(iH) > Emax ){
 	  Emax  = hit_tmp[iL].at(iH);
@@ -340,8 +351,18 @@ void ntupleMaker::NtupleMaker(){
 	  E_1[iL] = hit_tmp[iL].at(iH);
 	}
       }
-      
+      cout << "original method = " << E_1[iL] << endl;
+      */
+      for(int ich = 0; ich < NCHANNEL; ich++){
+	if( E_ch[iL][ich] > Emax){
+	  Emax = E_ch[iL][ich];
+	  maxID = ich;
+	  E_1[iL] = E_ch[iL][ich];
+	}
+      }
+            
       //Dist from seed
+      /*
       double dx,dy,dR;
       for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
 	dx = hit_x[iL].at(iH) - hit_x[iL].at(maxID);
@@ -350,8 +371,20 @@ void ntupleMaker::NtupleMaker(){
 	if( dR < 1.12455*1.2) E_7[iL] += hit_tmp[iL].at(iH);
 	if( dR < 1.12455*2*1.2) E_19[iL] += hit_tmp[iL].at(iH);
 	if( dR < 1.12455*3*1.2) E_37[iL] += hit_tmp[iL].at(iH);
-	layerE[iL] += hit_tmp[iL].at(iH);}      
+	layerE[iL] += hit_tmp[iL].at(iH);
+      } 
+      */
+      double dx,dy,dR;
+      for(int ich = 0; ich < NCHANNEL; ich++){
+	dx = x_ch[iL][ich] - x_ch[iL][maxID];
+	dy = y_ch[iL][ich] - y_ch[iL][maxID];
+	dR = sqrt(dx*dx + dy*dy);
+	if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
+	if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
+	if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
+      }
     }
+      
     outT3->Fill();
   }
   outT1->Write();

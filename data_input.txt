@@ -1,1 +1,1 @@
-ntuple/sim/ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM.root
+ntuple/data/ntuple_436.root
