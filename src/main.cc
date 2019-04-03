@@ -51,7 +51,7 @@ void main_makeNtuple(bool Is_Data){
 
     TChain *chain1 = new TChain("rechitntupler/hits");
     TChain *chain2 = new TChain("trackimpactntupler/impactPoints");
-    TChain *chain3 = new TChain("metadatantupler/meta");
+    TChain *chain3 = new TChain("XCETntupler/XCET");
   
     string filename;
     ifstream infile(main_datainput.c_str());
