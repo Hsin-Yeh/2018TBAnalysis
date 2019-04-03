@@ -87,9 +87,9 @@ void main_makeNtuple(bool Is_Data){
 
 
     ntupleMaker *N;
-    N->Is_Data = Is_Data ;
     if(Is_Data){   N = new ntupleMaker(chain1, chain2, chain3, filename); }
     else       {   N = new ntupleMaker(chain1, chain2, filename);         }
+    N->Is_Data = Is_Data ;
     N->NtupleMaker();
 }
 
