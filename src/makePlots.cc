@@ -196,7 +196,7 @@ void makePlots::Loop(){
   TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
   TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","",100,0,300);
   TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","",100,0,300);
-  TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",100,0,300);
+  TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
     
 
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
@@ -205,7 +205,7 @@ void makePlots::Loop(){
     sprintf(title,"layer%i_E7devE19",iL);
     h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
   }
-    
+
   for(int ev = 0; ev < nevents; ++ev){
     if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
     
@@ -214,7 +214,7 @@ void makePlots::Loop(){
 
     // Event Selection
     //if ( Nhits < 200 ) continue;
-    if ( dwcReferenceType != 15) continue;
+    //if ( dwcReferenceType != 15) continue;
     
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
       //Fill shower shape histogram
@@ -243,7 +243,8 @@ void makePlots::Loop(){
       ene = hit_mip->at(iL);
       for(int iH = 0; iH < layerNhit[iL] ; ++iH){
 	//cout << ene[iH] << endl;
-      }}
+      }
+    }
 
     // Calculate the shower depth
     double SHD_Elayer = 0;
