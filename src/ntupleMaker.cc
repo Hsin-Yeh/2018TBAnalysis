@@ -382,6 +382,7 @@ void ntupleMaker::NtupleMaker(){
 	if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
 	if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
 	if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
+	layerE[iL] += E_ch[iL][ich];
       }
     }
       

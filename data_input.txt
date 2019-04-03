@@ -1,1 +1,1 @@
-ntuple/data/ntuple_436.root
+output_root/Run436_20GeV_Ele.root
