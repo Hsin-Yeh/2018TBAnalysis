@@ -222,17 +222,19 @@ void makePlots::Loop(){
 	double E1devE7  = layerE1[iL]/layerE7[iL];
 	double E7devE19 = layerE7[iL]/layerE19[iL];
 	h_E1devE7 [iL]->Fill(E1devE7);
-	h_E7devE19[iL]->Fill(E7devE19);}
+	h_E7devE19[iL]->Fill(E7devE19);
+
+	if ( iL == 5 && E1devE7 == 1 ) {
+	  h_E1_no_XTalk->Fill(layerE1[iL]);
+	}
+	if ( iL == 5 && E7devE19 == 1 ) {
+	  h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
+	  h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
+	}
+      }
       h_totalE->Fill(totalE);
       h_totalCEE->Fill(totalE_CEE);
-      if ( iL == 5 && E1devE7 == 1 ) {
-	h_E1_no_XTalk->Fill(layerE1[iL]);
-      }
-      if ( iL == 5 && E7devE19 == 1 ) {
-	h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
-	h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
-      }
-
+	
       //If one wants to do sth with hits
       vector<double> x,y,z,ene;
       x   = hit_x->at(iL);
