@@ -390,7 +390,9 @@ void ntupleMaker::NtupleMaker(){
     outT3->Fill();
   }
   outT1->Write();
-  outT2->Write();
+  if(Is_Data){
+    outT2->Write();
+  }
   outT3->Write();
   outf.Close();
 }
