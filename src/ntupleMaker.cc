@@ -292,6 +292,8 @@ void ntupleMaker::NtupleMaker(){
     if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
     GetData(ev);
     Nhits = NRechits;
+    cout << Nhits << endl;
+    if ( Nhits > 127 ) { cout << " Nhits > 127 " << endl; }
     
     for(int iL = 0; iL < NLAYER ; ++iL){
       hit_tmp[iL].clear();
@@ -303,7 +305,8 @@ void ntupleMaker::NtupleMaker(){
       E_1[iL] = 0;
       E_7[iL] = 0;
       E_19[iL] = 0;
-      E_37[iL] = 0;}
+      E_37[iL] = 0;
+    }
     
     int layer, chip, channel;
     double posx, posy, posz, energy, TOT;
@@ -315,16 +318,15 @@ void ntupleMaker::NtupleMaker(){
       Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
       //Be careful here layerID start from 1
       totalE += energy;
-      if(layer <= 28)
-	totalE_CEE += energy;      
-      else
-	totalE_CEH += energy;
+      if(layer <= 28) {	totalE_CEE += energy;  }
+      else            {	totalE_CEH += energy;  }
       
       layerNhit[layer-1]++;
       hit_tmp[layer-1].push_back(energy);
       hit_x[layer-1].push_back(posx);
       hit_y[layer-1].push_back(posy);
-      hit_z[layer-1].push_back(posz);}
+      hit_z[layer-1].push_back(posz);
+    }
  
     for(int iL = 0; iL < NLAYER ; ++iL){
       
@@ -335,7 +337,9 @@ void ntupleMaker::NtupleMaker(){
 	if( hit_tmp[iL].at(iH) > Emax ){
 	  Emax  = hit_tmp[iL].at(iH);
 	  maxID = iH;
-	  E_1[iL] = hit_tmp[iL].at(iH);}}
+	  E_1[iL] = hit_tmp[iL].at(iH);
+	}
+      }
       
       //Dist from seed
       double dx,dy,dR;
