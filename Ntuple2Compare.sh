@@ -16,6 +16,6 @@ ls ${ntuple_output}${file} > data_input.txt
 ls ${root_plot}${file} > data_input.txt
 mkdir ${plot}"plot_"${fileCutRoot} 
 root -q -b ./Compare_DataMC.C
-rm $1 
+
 
 
