@@ -127,7 +127,7 @@ void Compare_DataMC(){
   
   sprintf(title,"%s",filename.c_str());
   TFile f_MC(title);
-  sprintf(title,"root_plot/Run436_20GeV_Ele_result.root");
+  sprintf(title,"root_plot/plot_Run436_20GeV_Ele_result.root");
   TFile f_Data(title);
   
   TH1D *h_E1devE7_MC[28];
