@@ -107,7 +107,7 @@ void Compare_DataMC(){
   int NCHANNEL = 64;
   int imodule = 79;
   int NLAYER = 28;
-  int Energy;
+  int Energy = 20;
   
   char title[200];
   char plot_title[200];
@@ -126,8 +126,10 @@ void Compare_DataMC(){
   int end = filename.find(".root");
   string f_substr = filename.substr(start+1,end-start-1);
 
-  infile >> Energy;
-  
+  start = filename.find("sim_");
+  end = filename.find("GeV");
+  Energy = std::stoi(filename.substr(start+4,end-start-4));
+
   sprintf(title,"%s",filename.c_str());
   TFile f_MC(title);
   sprintf(title,"root_plot/plot_Run436_%dGeV_Ele.root",Energy);
