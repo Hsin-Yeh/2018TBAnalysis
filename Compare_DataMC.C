@@ -202,7 +202,7 @@ void Compare_DataMC(){
     legend->Draw();
     c1->Update();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/%s/layer%d_E1devE7.png", f_substr.c_str(), iL);
+    sprintf(title,"plots/%s/E1devE7.png_layer%d", f_substr.c_str(), iL);
     img->FromPad(c1);
     img->WriteImage(title);
     h_E7devE19[0][iL]->Draw("HIST");
@@ -211,7 +211,7 @@ void Compare_DataMC(){
     legend->Draw();
     c1->Update();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/%s/layer%d_E7devE19.png", f_substr.c_str(), iL);
+    sprintf(title,"plots/%s/E7devE19_layer%d.png", f_substr.c_str(), iL);
     img->FromPad(c1);
     img->WriteImage(title);
     //c1->SaveAs(title);
