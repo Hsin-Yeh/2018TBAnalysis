@@ -129,39 +129,50 @@ void Compare_DataMC(){
   TFile f_MC(title);
   sprintf(title,"root_plot/plot_Run436_20GeV_Ele.root");
   TFile f_Data(title);
-  
-  TH1D *h_E1devE7_MC[28];
-  TH1D *h_E1devE7_Data[28];
-  TH1D *h_E7devE19_MC[28];
-  TH1D *h_E7devE19_Data[28];
-  TH1D *h_totalCEE[2];
+  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM.root");
+  TFile f_MC_original(title);
+
+  TH1D *h_E1devE7[3][28];
+  TH1D *h_E7devE19[3][28];
+  TH1D *h_totalCEE[3];
 
   sprintf(title,"h_totalCEE");
   h_totalCEE[0] = (TH1D *)f_MC.Get(title);
   h_totalCEE[0]->SetLineColor(Color(0));
   h_totalCEE[0]->SetLineWidth(2);
-  h_totalCEE[1] = (TH1D *)f_Data.Get(title);
-  h_totalCEE[1]->SetLineColor(1);
+  h_totalCEE[1] = (TH1D *)f_MC_original.Get(title);
+  h_totalCEE[1]->SetLineColor(4);
   h_totalCEE[1]->SetLineWidth(2);
+  h_totalCEE[2] = (TH1D *)f_Data.Get(title);
+  h_totalCEE[2]->SetLineColor(1);
+  h_totalCEE[2]->SetLineWidth(2);
+  
 
   
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
-    h_E1devE7_MC[iL] = (TH1D *)f_MC.Get(title);
-    h_E1devE7_MC[iL]->SetLineColor(Color(0));
-    h_E1devE7_MC[iL]->SetLineWidth(2.0);
-    h_E1devE7_Data[iL] = (TH1D *)f_Data.Get(title);
-    h_E1devE7_Data[iL]->SetLineColor(1);
-    h_E1devE7_Data[iL]->SetLineWidth(2);
+    h_E1devE7[0][iL] = (TH1D *)f_MC.Get(title);
+    h_E1devE7[0][iL]->SetLineColor(Color(0));
+    h_E1devE7[0][iL]->SetLineWidth(2.0);
+    h_E1devE7[1][iL] = (TH1D *)f_MC_original.Get(title);
+    h_E1devE7[1][iL]->SetLineColor(4);
+    h_E1devE7[1][iL]->SetLineWidth(2);
+    h_E1devE7[2][iL] = (TH1D *)f_Data.Get(title);
+    h_E1devE7[2][iL]->SetLineColor(1);
+    h_E1devE7[2][iL]->SetLineWidth(2);
+    
 
   
     sprintf(title,"layer%i_E7devE19",iL);
-    h_E7devE19_MC[iL] = (TH1D *)f_MC.Get(title);
-    h_E7devE19_MC[iL]->SetLineColor(Color(0));
-    h_E7devE19_MC[iL]->SetLineWidth(2.0);
-    h_E7devE19_Data[iL] = (TH1D *)f_Data.Get(title);
-    h_E7devE19_Data[iL]->SetLineColor(1);
-    h_E7devE19_Data[iL]->SetLineWidth(2);
+    h_E7devE19[0][iL] = (TH1D *)f_MC.Get(title);
+    h_E7devE19[0][iL]->SetLineColor(Color(0));
+    h_E7devE19[0][iL]->SetLineWidth(2.0);
+    h_E7devE19[1][iL] = (TH1D *)f_MC_original.Get(title);
+    h_E7devE19[1][iL]->SetLineColor(4);
+    h_E7devE19[1][iL]->SetLineWidth(2);
+    h_E7devE19[2][iL] = (TH1D *)f_Data.Get(title);
+    h_E7devE19[2][iL]->SetLineColor(1);
+    h_E7devE19[2][iL]->SetLineWidth(2);
 
   }
   
@@ -172,28 +183,31 @@ void Compare_DataMC(){
   h_totalCEE[0]->Draw("HIST");
   h_totalCEE[1]->Draw("Same");
   legend->AddEntry(h_totalCEE[0],"XTalk","L");
-  legend->AddEntry(h_totalCEE[1],"Data","LP");
+  legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
+  legend->AddEntry(h_totalCEE[2],"Data","LP");
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
-  //gPad->WaitPrimitive();
-  sprintf(title,"plots/%s/Total Energy CEE.pdf",f_substr.c_str());
+  gPad->WaitPrimitive();
+  sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
   c1->SaveAs(title);
 
   for(int iL = 0; iL < NLAYER ; ++iL){
-    h_E1devE7_MC[iL]->Draw("HIST");
-    h_E1devE7_Data[iL]->Draw("Same");
+    h_E1devE7[0][iL]->Draw("HIST");
+    h_E1devE7[1][iL]->Draw("HISTSame");
+    h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
-    //gPad->WaitPrimitive();
-    sprintf(title,"plots/%s/layer%d_E1devE7.pdf", f_substr.c_str(), iL);
+    gPad->WaitPrimitive();
+    sprintf(title,"plots/%s/layer%d_E1devE7.png", f_substr.c_str(), iL);
     c1->SaveAs(title);
-    h_E7devE19_MC[iL]->Draw("HIST");
-    h_E7devE19_Data[iL]->Draw("Same");
+    h_E7devE19[0][iL]->Draw("HIST");
+    h_E7devE19[1][iL]->Draw("HISTSame");
+    h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
-    //gPad->WaitPrimitive();
-    sprintf(title,"plots/%s/layer%d_E7devE19.pdf", f_substr.c_str(), iL);
+    gPad->WaitPrimitive();
+    sprintf(title,"plots/%s/layer%d_E7devE19.png", f_substr.c_str(), iL);
     c1->SaveAs(title);
   }
 

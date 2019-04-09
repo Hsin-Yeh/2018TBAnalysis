@@ -194,9 +194,12 @@ void makePlots::Loop(){
   TH1D *h_E7devE19[EE_NLAYER];
   TH1D *h_totalE = new TH1D("h_totalE","",100,0,3000);
   TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
-  TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","",100,0,300);
-  TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","",100,0,300);
+  TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
+  h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
+  TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);
+  h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
   TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
+  TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
     
 
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
@@ -227,7 +230,7 @@ void makePlots::Loop(){
 	if ( iL == 5 && E1devE7 == 1 ) {
 	  h_E1_no_XTalk->Fill(layerE1[iL]);
 	}
-	if ( iL == 5 && E7devE19 == 1 ) {
+	if ( iL == 5 && E7devE19 == 1) {
 	  h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
 	  h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
 	}
@@ -253,6 +256,7 @@ void makePlots::Loop(){
       SHD_Elayer += X0_layer[iL]*layerE[iL];
     }
     SHD_Elayer /= totalE;
+    h_SHD_Elayer->Fill(SHD_Elayer);
     // shower depth = SHD_Elayer (calculation done!)
   }
   
@@ -261,6 +265,9 @@ void makePlots::Loop(){
   h_totalE->Scale(scale);
   scale = 1/h_totalCEE->Integral();
   h_totalCEE->Scale(scale);
+  scale = 1/h_SHD_Elayer->Integral();
+  h_SHD_Elayer->Scale(scale);
+
   for (int iL = 0; iL < EE_NLAYER; ++iL){
     scale = 1/h_E1devE7 [iL]->Integral();
     h_E1devE7 [iL]->Scale(scale);
