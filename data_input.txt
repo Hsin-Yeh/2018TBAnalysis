@@ -1,1 +1,2 @@
 root_plot/plot_sim_20GeV_50TH1_300TH2_10X1_5X2.root
+20

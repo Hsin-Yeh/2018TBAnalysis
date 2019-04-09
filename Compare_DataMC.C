@@ -107,6 +107,7 @@ void Compare_DataMC(){
   int NCHANNEL = 64;
   int imodule = 79;
   int NLAYER = 28;
+  int Energy;
   
   char title[200];
   char plot_title[200];
@@ -121,16 +122,17 @@ void Compare_DataMC(){
   string filename;
   ifstream infile("data_input.txt");
   infile >> filename;
-
   int start = filename.find_last_of("/");
   int end = filename.find(".root");
   string f_substr = filename.substr(start+1,end-start-1);
+
+  infile >> Energy;
   
   sprintf(title,"%s",filename.c_str());
   TFile f_MC(title);
-  sprintf(title,"root_plot/plot_Run436_20GeV_Ele.root");
+  sprintf(title,"root_plot/plot_Run436_%dGeV_Ele.root",Energy);
   TFile f_Data(title);
-  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM.root");
+  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMM.root",Energy);
   TFile f_MC_original(title);
 
   TH1D *h_E1devE7[3][28];
