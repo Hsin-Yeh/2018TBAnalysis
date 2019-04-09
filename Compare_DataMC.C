@@ -114,6 +114,7 @@ void Compare_DataMC(){
   TCanvas* c1 = new TCanvas();
   gStyle->SetOptStat(0);
   //  gROOT->SetBatch(kTRUE);
+  TImage *img = TImage::Create();
   
   root_logon();
 
@@ -188,9 +189,11 @@ void Compare_DataMC(){
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
-  gPad->WaitPrimitive();
+  //gPad->WaitPrimitive();
   sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
-  c1->SaveAs(title);
+  //c1->SaveAs(title);
+  img->FromPad(c1);
+  img->WriteImage(title);
 
   for(int iL = 0; iL < NLAYER ; ++iL){
     h_E1devE7[0][iL]->Draw("HIST");
@@ -198,17 +201,20 @@ void Compare_DataMC(){
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
-    gPad->WaitPrimitive();
+    //gPad->WaitPrimitive();
     sprintf(title,"plots/%s/layer%d_E1devE7.png", f_substr.c_str(), iL);
-    c1->SaveAs(title);
+    img->FromPad(c1);
+    img->WriteImage(title);
     h_E7devE19[0][iL]->Draw("HIST");
     h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
-    gPad->WaitPrimitive();
+    //gPad->WaitPrimitive();
     sprintf(title,"plots/%s/layer%d_E7devE19.png", f_substr.c_str(), iL);
-    c1->SaveAs(title);
+    img->FromPad(c1);
+    img->WriteImage(title);
+    //c1->SaveAs(title);
   }
 
   delete c1;
