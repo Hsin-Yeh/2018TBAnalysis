@@ -132,7 +132,7 @@ void Compare_DataMC(){
 
   sprintf(title,"%s",filename.c_str());
   TFile f_MC(title);
-  sprintf(title,"root_plot/plot_Run436_%dGeV_Ele.root",Energy);
+  sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
   TFile f_Data(title);
   sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMM.root",Energy);
   TFile f_MC_original(title);

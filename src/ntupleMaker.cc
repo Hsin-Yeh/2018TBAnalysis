@@ -242,7 +242,7 @@ void ntupleMaker::NtupleMaker(){
   string f_substr = fname.substr(start+1,end-start-1);
 
   if(Is_Data)
-    sprintf(title,"output_root/Run%i_%iGeV_%s.root",runN,beamE,beam_str.c_str());
+    sprintf(title,"output_root/data_%iGeV_%s.root",beamE,beam_str.c_str());
   else
     sprintf(title,"output_root/%s.root",f_substr.c_str());
 
