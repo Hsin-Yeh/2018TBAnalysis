@@ -183,7 +183,7 @@ void Compare_DataMC(){
 
   }
   
-  TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
+  TLegend* legend = new TLegend(0.1,0.73,0.3,0.9);
   
   sprintf(title,"Total Energy CEE ");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
@@ -192,8 +192,8 @@ void Compare_DataMC(){
   legend->AddEntry(h_totalCEE[0],"XTalk","L");
   legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
-  sprintf(title,"%dGeV",Energy);
-  legend->SetHeader(title,"C");
+  sprintf(title,"beamE=%dGeV",Energy);
+  legend->SetHeader(title);
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
