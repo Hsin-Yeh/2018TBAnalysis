@@ -197,7 +197,7 @@ void Compare_DataMC(){
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
-  gPad->WaitPrimitive();
+  //  gPad->WaitPrimitive();
   sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
   //  c1->SaveAs(title);
   img->FromPad(c1);
@@ -212,7 +212,7 @@ void Compare_DataMC(){
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
-    gPad->WaitPrimitive();
+    //    gPad->WaitPrimitive();
     sprintf(title,"plots/%s/E1devE7_layer%02d.png", f_substr.c_str(), iL);
     img->FromPad(c1);
     img->WriteImage(title);
@@ -222,7 +222,7 @@ void Compare_DataMC(){
     legend->Draw();
     sprintf(title,"Beam Energy = %dGeV",Energy);
     c1->Update();
-    gPad->WaitPrimitive();
+    //gPad->WaitPrimitive();
     sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr.c_str(), iL);
     img->FromPad(c1);
     img->WriteImage(title);
