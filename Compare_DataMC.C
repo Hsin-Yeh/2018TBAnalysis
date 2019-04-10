@@ -107,13 +107,13 @@ void Compare_DataMC(){
   int NCHANNEL = 64;
   int imodule = 79;
   int NLAYER = 28;
-  int Energy = 20;
+  int Energy;
   
   char title[200];
   char plot_title[200];
 
   TCanvas* c1 = new TCanvas();
-  gStyle->SetOptStat(0);
+  //  gStyle->SetOptStat(0);
   //  gROOT->SetBatch(kTRUE);
   TImage *img = TImage::Create();
   
@@ -129,6 +129,8 @@ void Compare_DataMC(){
   start = filename.find("sim_");
   end = filename.find("GeV");
   Energy = std::stoi(filename.substr(start+4,end-start-4));
+
+  cout << "Energy = " << Energy << " GeV " << endl;
 
   sprintf(title,"%s",filename.c_str());
   TFile f_MC(title);
@@ -182,7 +184,7 @@ void Compare_DataMC(){
   }
   
   TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
-
+  
   sprintf(title,"Total Energy CEE ");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
   h_totalCEE[0]->Draw("HIST");
@@ -190,22 +192,27 @@ void Compare_DataMC(){
   legend->AddEntry(h_totalCEE[0],"XTalk","L");
   legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
+  sprintf(title,"%dGeV",Energy);
+  legend->SetHeader(title,"C");
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
-  //gPad->WaitPrimitive();
+  gPad->WaitPrimitive();
   sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
-  //c1->SaveAs(title);
+  //  c1->SaveAs(title);
   img->FromPad(c1);
   img->WriteImage(title);
 
+
+
   for(int iL = 0; iL < NLAYER ; ++iL){
+
     h_E1devE7[0][iL]->Draw("HIST");
     h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
-    //gPad->WaitPrimitive();
+    gPad->WaitPrimitive();
     sprintf(title,"plots/%s/E1devE7_layer%02d.png", f_substr.c_str(), iL);
     img->FromPad(c1);
     img->WriteImage(title);
@@ -213,8 +220,9 @@ void Compare_DataMC(){
     h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
+    sprintf(title,"Beam Energy = %dGeV",Energy);
     c1->Update();
-    //gPad->WaitPrimitive();
+    gPad->WaitPrimitive();
     sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr.c_str(), iL);
     img->FromPad(c1);
     img->WriteImage(title);
