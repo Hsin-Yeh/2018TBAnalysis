@@ -211,9 +211,9 @@ void Compare(){
     sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
     img->FromPad(c1);
     img->WriteImage(title);
-    h_E7devE19[2][iL]->Draw("HIST");
+    h_E7devE19[0][iL]->Draw("HIST");
     h_E7devE19[1][iL]->Draw("HISTSame");
-    h_E7devE19[0][iL]->Draw("HISTSame");
+    h_E7devE19[2][iL]->Draw("HISTSame");
     h_E7devE19[3][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
