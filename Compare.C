@@ -1,3 +1,94 @@
+void root_logon(){
+
+  cout << endl << "Welcome to the ATLAS rootlogon.C" << endl;
+
+  //
+  // based on a style file from BaBar
+  //
+
+  //..BABAR style from RooLogon.C in workdir
+  TStyle *atlasStyle= new TStyle("ATLAS","Atlas style");
+
+  // use plain black on white colors
+  Int_t icol=0;
+  atlasStyle->SetFrameBorderMode(icol);
+  atlasStyle->SetCanvasBorderMode(icol);
+  atlasStyle->SetPadBorderMode(icol);
+  atlasStyle->SetPadColor(icol);
+  atlasStyle->SetCanvasColor(icol);
+  atlasStyle->SetStatColor(icol);
+  //atlasStyle->SetFillColor(icol);
+
+  // set the paper & margin sizes
+  atlasStyle->SetPaperSize(20,26);
+  atlasStyle->SetPadTopMargin(0.05);
+  atlasStyle->SetPadTopMargin(0.11);
+  atlasStyle->SetPadRightMargin(0.13);
+  atlasStyle->SetPadBottomMargin(0.15);
+  atlasStyle->SetPadLeftMargin(0.12);
+
+  // use large fonts
+  //Int_t font=72;
+  Int_t font=42;
+  Double_t tsize=0.045;
+  atlasStyle->SetTextFont(font);
+
+
+
+  atlasStyle->SetTextSize(tsize);
+  atlasStyle->SetLabelFont(font,"x");
+  atlasStyle->SetTitleFont(font,"x");
+  atlasStyle->SetLabelFont(font,"y");
+  atlasStyle->SetTitleFont(font,"y");
+  atlasStyle->SetLabelFont(font,"z");
+  atlasStyle->SetTitleFont(font,"z");
+
+  atlasStyle->SetLabelSize(tsize,"x");
+  atlasStyle->SetTitleSize(tsize,"x");
+  atlasStyle->SetLabelSize(tsize,"y");
+  atlasStyle->SetTitleSize(tsize,"y");
+  atlasStyle->SetLabelSize(tsize,"z");
+  atlasStyle->SetTitleSize(tsize,"z");
+
+  atlasStyle->SetLabelOffset(tsize/4,"x");
+  atlasStyle->SetLabelOffset(tsize/4,"y");
+  
+
+
+  //use bold lines and markers
+  atlasStyle->SetMarkerStyle(20);
+  atlasStyle->SetMarkerSize(0.5);
+  atlasStyle->SetHistLineWidth(2.);
+  atlasStyle->SetLineStyleString(2,"[12 12]"); // postscript dashes
+
+  //
+  atlasStyle->SetLegendFillColor(0);
+  atlasStyle->SetLegendFont(62);
+  //atlasStyle->SetLegendTextSize(0.03);
+
+  //get rid of X error bars and y error bar caps
+  //atlasStyle->SetErrorX(0.001);
+
+  //do not display any of the standard histogram decorations
+  //  atlasStyle->SetOptTitle(0);
+  //atlasStyle->SetOptStat(1111);
+  atlasStyle->SetOptStat(0);
+  //atlasStyle->SetOptFit(1111);
+  atlasStyle->SetOptFit(0);
+
+  // put tick marks on top and RHS of plots
+  atlasStyle->SetPadTickX(1);
+  atlasStyle->SetPadTickY(1);
+
+  //  gROOT->SetStyle("Plain");
+
+  //gStyle->SetPadTickX(1);
+  //gStyle->SetPadTickY(1);
+
+  gROOT->SetStyle("ATLAS");
+  gROOT->ForceStyle();
+}
+
 int Color(int c)
 {
   if(c == 0){ return 633;}
@@ -9,29 +100,31 @@ int Color(int c)
   else{ return 0; }
 }
 
-void Compare(string f){
+
+void Compare(){
 
   int MAXMODULE = 94;
   int NCHIP = 4;
   int NCHANNEL = 64;
   int imodule = 79;
   int NLAYER = 28;
+  int Energy = 20;
   
   char title[200];
   char plot_title[200];
 
-  //TCanvas *c1 = new TCanvas();
   TCanvas* c1 = new TCanvas();
-  //  TProfile *tpr[MAXMODULE*NCHIP*NCHANNEL];
   gStyle->SetOptStat(0);
 
-  sprintf(title,"root_plot/%s");
-  TFile f_MC(title);
-  sprintf(title,"root_plot/sim_20GeV_30Th1_180Th2_1X1_0.7X2_result.root");
-  TFile f_MC_CrossTalk(title);
-  sprintf(title,"root_plot/ntuple_result.root");
-  TFile f_MC_CrossTalk_SameTotalE(title);
-  sprintf(title,"root_plot/Run436_20GeV_Ele_result.root");
+  root_logon();
+
+  sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_10X1_1X2.root");
+  TFile f_10(title);
+  sprintf(title,"root_plot/plot_sim_20GeV_50TH1_300TH2_100X1_1X2.root");
+  TFile f_100(title);
+  sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_1X1_1X2.root");
+  TFile f_1(title);
+  sprintf(title,"root_plot/plot_data_20GeV_Ele.root");
   TFile f_Data(title);
 
   TH1D *h_E1devE7[4][NLAYER]; 
@@ -39,14 +132,14 @@ void Compare(string f){
   TH1D *h_totalCEE[4];
 
   sprintf(title,"h_totalCEE");
-  h_totalCEE[0] = (TH1D *)f_MC.Get(title);
+  h_totalCEE[0] = (TH1D *)f_10.Get(title);
   h_totalCEE[0]->SetLineColor(Color(0));
   h_totalCEE[0]->SetLineWidth(2);
-  h_totalCEE[1] = (TH1D *)f_MC_CrossTalk.Get(title);
-  h_totalCEE[1]->SetLineColor(Color(1));
+  h_totalCEE[1] = (TH1D *)f_1.Get(title);
+  h_totalCEE[1]->SetLineColor(4);
   h_totalCEE[1]->SetLineWidth(2);
-  h_totalCEE[2] = (TH1D *)f_MC_CrossTalk_SameTotalE.Get(title);
-  h_totalCEE[2]->SetLineColor(Color(2));
+  h_totalCEE[2] = (TH1D *)f_100.Get(title);
+  h_totalCEE[2]->SetLineColor(5);
   h_totalCEE[2]->SetLineWidth(2);
   h_totalCEE[3] = (TH1D *)f_Data.Get(title);
   h_totalCEE[3]->SetLineColor(1);
@@ -59,10 +152,10 @@ void Compare(string f){
     h_E1devE7[0][iL]->SetLineColor(Color(0));
     h_E1devE7[0][iL]->SetLineWidth(2.0);
     h_E1devE7[1][iL] = (TH1D *)f_MC_CrossTalk.Get(title);
-    h_E1devE7[1][iL]->SetLineColor(Color(1));
+    h_E1devE7[1][iL]->SetLineColor(4);
     h_E1devE7[1][iL]->SetLineWidth(2.0);
     h_E1devE7[2][iL] = (TH1D *)f_MC_CrossTalk_SameTotalE.Get(title);
-    h_E1devE7[2][iL]->SetLineColor(Color(2));
+    h_E1devE7[2][iL]->SetLineColor(5);
     h_E1devE7[2][iL]->SetLineWidth(2);
     h_E1devE7[3][iL] = (TH1D *)f_Data.Get(title);
     h_E1devE7[3][iL]->SetLineColor(1);
@@ -74,10 +167,10 @@ void Compare(string f){
     h_E7devE19[0][iL]->SetLineColor(Color(0));
     h_E7devE19[0][iL]->SetLineWidth(2.0);
     h_E7devE19[1][iL] = (TH1D *)f_MC_CrossTalk.Get(title);
-    h_E7devE19[1][iL]->SetLineColor(Color(1));
+    h_E7devE19[1][iL]->SetLineColor(4);
     h_E7devE19[1][iL]->SetLineWidth(2.0);
     h_E7devE19[2][iL] = (TH1D *)f_MC_CrossTalk_SameTotalE.Get(title);
-    h_E7devE19[2][iL]->SetLineColor(Color(2));
+    h_E7devE19[2][iL]->SetLineColor(5);
     h_E7devE19[2][iL]->SetLineWidth(2);
     h_E7devE19[3][iL] = (TH1D *)f_Data.Get(title);
     h_E7devE19[3][iL]->SetLineColor(1);
@@ -92,49 +185,41 @@ void Compare(string f){
   h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("HISTSame");
   h_totalCEE[3]->Draw("Same");
-  legend->AddEntry(h_totalCEE[0],"No XTalk","L");
-  legend->AddEntry(h_totalCEE[1],"Bad","L");
-  legend->AddEntry(h_totalCEE[2],"Xtalk","L");
+  legend->AddEntry(h_totalCEE[0],"1%","L");
+  legend->AddEntry(h_totalCEE[1],"0.1%","L");
+  legend->AddEntry(h_totalCEE[2],"10%","L");
   legend->AddEntry(h_totalCEE[3],"Data","LP");
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
-  gPad->WaitPrimitive();
-  sprintf(title,"plots/Total Energy CEE.pdf");
-  c1->SaveAs(title);
-  //  delete legend;
+  //gPad->WaitPrimitive();
+  sprintf(title,"plots/%dGeV/Total Energy CEE.png",Energy);
+  img->FromPad(c1);
+  img->WriteImage(title);
 
+  
   for(int iL = 0; iL < NLAYER ; ++iL){
-    //    TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
+    
     h_E1devE7[0][iL]->Draw("HIST");
     h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("HISTSame");
     h_E1devE7[3][iL]->Draw("Same");
-    /*    legend->AddEntry(h_E1devE7[0][iL],"5% XTalk","L");
-    legend->AddEntry(h_E1devE7[1][iL],"1% XTalk","L");
-    legend->AddEntry(h_E1devE7[2][iL],"0.5% XTalk","L");
-    legend->AddEntry(h_E1devE7[3][iL],"Data","LP");
-    legend->SetTextSize(0.035);
-    */
     legend->Draw();
     c1->Update();
-    gPad->WaitPrimitive();
-    sprintf(title,"plots/layer%d_E1devE7.pdf",iL);
-    c1->SaveAs(title);
+    //gPad->WaitPrimitive();
+    sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
+    img->FromPad(c1);
+    img->WriteImage(title);
     h_E7devE19[2][iL]->Draw("HIST");
     h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[0][iL]->Draw("HISTSame");
     h_E7devE19[3][iL]->Draw("Same");
-    /*    legend->AddEntry(h_E7devE19[0][iL],"No XTalk","L");
-    legend->AddEntry(h_E7devE19[1][iL],"XTalk","L");
-    legend->AddEntry(h_E7devE19[2][iL],"XTalk,Th=1.73e-3","L");
-    legend->AddEntry(h_E7devE19[3][iL],"Data","LP");
-    legend->SetTextSize(0.035);*/
     legend->Draw();
     c1->Update();
-    gPad->WaitPrimitive();
-    sprintf(title,"plots/layer%d_E7devE19.pdf",iL);
-    c1->SaveAs(title);
+    //gPad->WaitPrimitive();
+    sprintf(title,"plots/%dGeV/E7devE19_layer%02d.png", Energy, iL+1);
+    img->FromPad(c1);
+    img->WriteImage(title);
   }
 }
 

@@ -188,7 +188,7 @@ void Compare_DataMC(){
   sprintf(title,"Total Energy CEE ");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
   h_totalCEE[0]->Draw("HIST");
-  h_totalCEE[1]->Draw("Same");
+  h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("Same");
   legend->AddEntry(h_totalCEE[0],"XTalk","L");
   legend->AddEntry(h_totalCEE[1],"Without XTalk","L");

@@ -123,6 +123,7 @@ void makePlots::Init(){
   T_DWC->SetBranchAddress("m_y", &m_y);
   T_DWC->SetBranchAddress("b_x", &b_x);
   T_DWC->SetBranchAddress("b_y", &b_y);
+  /*
   T_DWC->SetBranchAddress("impactX_HGCal_layer_1", &impactX_HGCal_layer_1);
   T_DWC->SetBranchAddress("impactY_HGCal_layer_1", &impactX_HGCal_layer_1);
   T_DWC->SetBranchAddress("impactX_HGCal_layer_2", &impactX_HGCal_layer_2);
@@ -143,7 +144,7 @@ void makePlots::Init(){
   T_DWC->SetBranchAddress("impactY_HGCal_layer_9", &impactX_HGCal_layer_9);
   T_DWC->SetBranchAddress("impactX_HGCal_layer_10", &impactX_HGCal_layer_10);
   T_DWC->SetBranchAddress("impactY_HGCal_layer_10", &impactX_HGCal_layer_10);
-
+  */
 
   T_rechit_var->SetBranchAddress("hit_mip", &hit_mip);
   T_rechit_var->SetBranchAddress("hit_x", &hit_x);
