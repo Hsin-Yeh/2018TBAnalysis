@@ -212,8 +212,8 @@ void makePlots::Loop(){
   TFile outf(title,"recreate");
   TH1D *h_E1devE7[EE_NLAYER]; 
   TH1D *h_E7devE19[EE_NLAYER];
-  TH1D *h_totalE = new TH1D("h_totalE","",100,0,3000);
-  TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,10000);
+  TH1D *h_totalE = new TH1D("h_totalE","",100,0,300);
+  TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
   TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
   h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
   TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);
