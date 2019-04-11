@@ -149,13 +149,13 @@ void Compare(){
   
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL);
-    h_E1devE7[0][iL] = (TH1D *)f_MC.Get(title);
+    h_E1devE7[0][iL] = (TH1D *)f_10.Get(title);
     h_E1devE7[0][iL]->SetLineColor(Color(0));
     h_E1devE7[0][iL]->SetLineWidth(2.0);
-    h_E1devE7[1][iL] = (TH1D *)f_MC_CrossTalk.Get(title);
+    h_E1devE7[1][iL] = (TH1D *)f_1.Get(title);
     h_E1devE7[1][iL]->SetLineColor(4);
     h_E1devE7[1][iL]->SetLineWidth(2.0);
-    h_E1devE7[2][iL] = (TH1D *)f_MC_CrossTalk_SameTotalE.Get(title);
+    h_E1devE7[2][iL] = (TH1D *)f_100.Get(title);
     h_E1devE7[2][iL]->SetLineColor(5);
     h_E1devE7[2][iL]->SetLineWidth(2);
     h_E1devE7[3][iL] = (TH1D *)f_Data.Get(title);
@@ -164,13 +164,13 @@ void Compare(){
 
   
     sprintf(title,"layer%i_E7devE19",iL);
-    h_E7devE19[0][iL] = (TH1D *)f_MC.Get(title);
+    h_E7devE19[0][iL] = (TH1D *)f_10.Get(title);
     h_E7devE19[0][iL]->SetLineColor(Color(0));
     h_E7devE19[0][iL]->SetLineWidth(2.0);
-    h_E7devE19[1][iL] = (TH1D *)f_MC_CrossTalk.Get(title);
+    h_E7devE19[1][iL] = (TH1D *)f_1.Get(title);
     h_E7devE19[1][iL]->SetLineColor(4);
     h_E7devE19[1][iL]->SetLineWidth(2.0);
-    h_E7devE19[2][iL] = (TH1D *)f_MC_CrossTalk_SameTotalE.Get(title);
+    h_E7devE19[2][iL] = (TH1D *)f_100.Get(title);
     h_E7devE19[2][iL]->SetLineColor(5);
     h_E7devE19[2][iL]->SetLineWidth(2);
     h_E7devE19[3][iL] = (TH1D *)f_Data.Get(title);
