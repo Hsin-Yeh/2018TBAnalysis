@@ -140,7 +140,7 @@ void Compare(){
   h_totalCEE[1]->SetLineColor(4);
   h_totalCEE[1]->SetLineWidth(2);
   h_totalCEE[2] = (TH1D *)f_100.Get(title);
-  h_totalCEE[2]->SetLineColor(5);
+  h_totalCEE[2]->SetLineColor(Color(3));
   h_totalCEE[2]->SetLineWidth(2);
   h_totalCEE[3] = (TH1D *)f_Data.Get(title);
   h_totalCEE[3]->SetLineColor(1);
@@ -156,7 +156,7 @@ void Compare(){
     h_E1devE7[1][iL]->SetLineColor(4);
     h_E1devE7[1][iL]->SetLineWidth(2.0);
     h_E1devE7[2][iL] = (TH1D *)f_100.Get(title);
-    h_E1devE7[2][iL]->SetLineColor(5);
+    h_E1devE7[2][iL]->SetLineColor(Color(3));
     h_E1devE7[2][iL]->SetLineWidth(2);
     h_E1devE7[3][iL] = (TH1D *)f_Data.Get(title);
     h_E1devE7[3][iL]->SetLineColor(1);
@@ -171,7 +171,7 @@ void Compare(){
     h_E7devE19[1][iL]->SetLineColor(4);
     h_E7devE19[1][iL]->SetLineWidth(2.0);
     h_E7devE19[2][iL] = (TH1D *)f_100.Get(title);
-    h_E7devE19[2][iL]->SetLineColor(5);
+    h_E7devE19[2][iL]->SetLineColor(Color(3));
     h_E7devE19[2][iL]->SetLineWidth(2);
     h_E7devE19[3][iL] = (TH1D *)f_Data.Get(title);
     h_E7devE19[3][iL]->SetLineColor(1);
