@@ -114,6 +114,7 @@ void Compare(){
   char plot_title[200];
 
   TCanvas* c1 = new TCanvas();
+  TImage* img = TImage::Create();
   gStyle->SetOptStat(0);
 
   root_logon();
