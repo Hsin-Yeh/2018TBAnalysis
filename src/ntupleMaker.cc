@@ -193,9 +193,28 @@ void ntupleMaker::Init(){
     T_DWC->SetBranchAddress("m_y", &m_y);
     T_DWC->SetBranchAddress("b_x", &b_x);
     T_DWC->SetBranchAddress("b_y", &b_y);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_1", &impactX_HGCal_layer_1);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_1", &impactX_HGCal_layer_1);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_2", &impactX_HGCal_layer_2);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_2", &impactX_HGCal_layer_2);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_3", &impactX_HGCal_layer_3);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_3", &impactX_HGCal_layer_3);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_4", &impactX_HGCal_layer_4);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_4", &impactX_HGCal_layer_4);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_5", &impactX_HGCal_layer_5);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_5", &impactX_HGCal_layer_5);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_6", &impactX_HGCal_layer_6);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_6", &impactX_HGCal_layer_6);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_7", &impactX_HGCal_layer_7);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_7", &impactX_HGCal_layer_7);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_8", &impactX_HGCal_layer_8);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_8", &impactX_HGCal_layer_8);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_9", &impactX_HGCal_layer_9);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_9", &impactX_HGCal_layer_9);
+    T_DWC->SetBranchAddress("impactX_HGCal_layer_10", &impactX_HGCal_layer_10);
+    T_DWC->SetBranchAddress("impactY_HGCal_layer_10", &impactX_HGCal_layer_10);
 
-
-  
+    /*
     if(Is_Data){
       T_Meta->SetBranchAddress("configuration", &configuration);
       T_Meta->SetBranchAddress("biasCurrentCh0", &biasCurrentCh0);
@@ -206,7 +225,8 @@ void ntupleMaker::Init(){
       T_Meta->SetBranchAddress("TCassette07", &TCassette07);
       T_Meta->SetBranchAddress("tablePositionY", &tablePositionY);
       T_Meta->SetBranchAddress("humidity_air", &humidity_air);
-      T_Meta->SetBranchAddress("temperature_air", &temperature_air);}
+      T_Meta->SetBranchAddress("temperature_air", &temperature_air);
+      }*/
   }
   Init_Runinfo();
 }
@@ -374,7 +394,7 @@ void ntupleMaker::NtupleMaker(){
       */
       double dx,dy,dR;
       for(int ich = 0; ich < NCHANNEL; ich++){
-	//if( E_ch[iL][ich] == 0 ) continue;
+	if( E_ch[iL][ich] == 0 ) continue;
 	dx = x_ch[iL][ich] - x_ch[iL][maxID];
 	dy = y_ch[iL][ich] - y_ch[iL][maxID];
 	dR = sqrt(dx*dx + dy*dy);
@@ -386,7 +406,7 @@ void ntupleMaker::NtupleMaker(){
     }
     outT3->Fill();
   }
-  outT1->Write();
+  //outT1->Write();
   outT2->Write(); 
   outT3->Write();
   outf.Close();

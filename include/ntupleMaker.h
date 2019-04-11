@@ -110,6 +110,27 @@ class ntupleMaker{
    // For ImpactPoints (from Delayed wire chamber)
    Int_t           ntracks;
    // ignore the layers currently
+   Double_t        impactX_HGCal_layer_1;
+   Double_t        impactY_HGCal_layer_1;
+   Double_t        impactX_HGCal_layer_2;
+   Double_t        impactY_HGCal_layer_2;
+   Double_t        impactX_HGCal_layer_3;
+   Double_t        impactY_HGCal_layer_3;
+   Double_t        impactX_HGCal_layer_4;
+   Double_t        impactY_HGCal_layer_4;
+   Double_t        impactX_HGCal_layer_5;
+   Double_t        impactY_HGCal_layer_5;
+   Double_t        impactX_HGCal_layer_6;
+   Double_t        impactY_HGCal_layer_6;
+   Double_t        impactX_HGCal_layer_7;
+   Double_t        impactY_HGCal_layer_7;
+   Double_t        impactX_HGCal_layer_8;
+   Double_t        impactY_HGCal_layer_8;
+   Double_t        impactX_HGCal_layer_9;
+   Double_t        impactY_HGCal_layer_9;
+   Double_t        impactX_HGCal_layer_10;
+   Double_t        impactY_HGCal_layer_10;
+   
    Float_t         trackChi2_X;
    Float_t         trackChi2_Y;
    Int_t           dwcReferenceType;

@@ -123,6 +123,26 @@ void makePlots::Init(){
   T_DWC->SetBranchAddress("m_y", &m_y);
   T_DWC->SetBranchAddress("b_x", &b_x);
   T_DWC->SetBranchAddress("b_y", &b_y);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_1", &impactX_HGCal_layer_1);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_1", &impactX_HGCal_layer_1);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_2", &impactX_HGCal_layer_2);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_2", &impactX_HGCal_layer_2);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_3", &impactX_HGCal_layer_3);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_3", &impactX_HGCal_layer_3);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_4", &impactX_HGCal_layer_4);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_4", &impactX_HGCal_layer_4);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_5", &impactX_HGCal_layer_5);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_5", &impactX_HGCal_layer_5);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_6", &impactX_HGCal_layer_6);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_6", &impactX_HGCal_layer_6);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_7", &impactX_HGCal_layer_7);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_7", &impactX_HGCal_layer_7);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_8", &impactX_HGCal_layer_8);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_8", &impactX_HGCal_layer_8);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_9", &impactX_HGCal_layer_9);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_9", &impactX_HGCal_layer_9);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_10", &impactX_HGCal_layer_10);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_10", &impactX_HGCal_layer_10);
 
 
   T_rechit_var->SetBranchAddress("hit_mip", &hit_mip);
@@ -193,7 +213,7 @@ void makePlots::Loop(){
   TH1D *h_E1devE7[EE_NLAYER]; 
   TH1D *h_E7devE19[EE_NLAYER];
   TH1D *h_totalE = new TH1D("h_totalE","",100,0,3000);
-  TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
+  TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,10000);
   TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
   h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
   TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);
