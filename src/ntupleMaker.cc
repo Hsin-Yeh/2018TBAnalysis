@@ -374,7 +374,7 @@ void ntupleMaker::NtupleMaker(){
       */
       double dx,dy,dR;
       for(int ich = 0; ich < NCHANNEL; ich++){
-	if( E_ch[iL][ich] == 0 ) continue;
+	//if( E_ch[iL][ich] == 0 ) continue;
 	dx = x_ch[iL][ich] - x_ch[iL][maxID];
 	dy = y_ch[iL][ich] - y_ch[iL][maxID];
 	dR = sqrt(dx*dx + dy*dy);
