@@ -121,7 +121,7 @@ void Compare(){
 
   sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_10X1_1X2.root");
   TFile f_10(title);
-  sprintf(title,"root_plot/plot_sim_20GeV_50TH1_300TH2_100X1_1X2.root");
+  sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_100X1_1X2.root");
   TFile f_100(title);
   sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_1X1_1X2.root");
   TFile f_1(title);
