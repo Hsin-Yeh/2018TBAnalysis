@@ -121,9 +121,9 @@ void Compare(){
 
   sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_10X1_1X2.root");
   TFile f_10(title);
-  sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_100X1_1X2.root");
+  sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_10X1_1X2_notSubtracting.root");
   TFile f_100(title);
-  sprintf(title,"root_plot/plot_sim_20GeV_30TH1_300TH2_1X1_1X2.root");
+  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM.root");
   TFile f_1(title);
   sprintf(title,"root_plot/plot_data_20GeV_Ele.root");
   TFile f_Data(title);
@@ -186,9 +186,9 @@ void Compare(){
   h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("HISTSame");
   h_totalCEE[3]->Draw("Same");
-  legend->AddEntry(h_totalCEE[0],"1%","L");
-  legend->AddEntry(h_totalCEE[1],"0.1%","L");
-  legend->AddEntry(h_totalCEE[2],"10%","L");
+  legend->AddEntry(h_totalCEE[0],"Subtract","L");
+  legend->AddEntry(h_totalCEE[1],"No Subtract","L");
+  legend->AddEntry(h_totalCEE[2],"No XTalk","L");
   legend->AddEntry(h_totalCEE[3],"Data","LP");
   legend->SetTextSize(0.035);
   legend->Draw();
