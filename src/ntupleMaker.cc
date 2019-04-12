@@ -54,11 +54,11 @@ ntupleMaker::ntupleMaker( TChain *c1,TChain *c2,TChain *c3,string filename ):T_R
   rechit_timeMaxLG = 0;
   rechit_toaRise = 0;
   rechit_toaFall = 0;
-  
+    
 }
 ntupleMaker::ntupleMaker( TChain *c1,TChain *c2,string filename ):T_Rechit(c1),T_DWC(c2){
   cout << "MC: Constructor of makePlot ... \n\n" << endl;
-    fname = filename;
+  fname = filename;
   // Set object pointer(Data)
   rechit_detid = 0;
   rechit_module = 0;
@@ -181,53 +181,111 @@ void ntupleMaker::Init(){
     T_Rechit->SetBranchAddress("rechit_TS2High", &rechit_TS2High);
     T_Rechit->SetBranchAddress("rechit_TS2Low", &rechit_TS2Low);
     T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
-    T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);}
-
-
-  if(!TestRun){
-    T_DWC ->SetBranchAddress("ntracks", &ntracks);
-    T_DWC->SetBranchAddress("trackChi2_X", &trackChi2_X);
-    T_DWC->SetBranchAddress("trackChi2_Y", &trackChi2_Y);
-    T_DWC->SetBranchAddress("dwcReferenceType", &dwcReferenceType);
-    T_DWC->SetBranchAddress("m_x", &m_x);
-    T_DWC->SetBranchAddress("m_y", &m_y);
-    T_DWC->SetBranchAddress("b_x", &b_x);
-    T_DWC->SetBranchAddress("b_y", &b_y);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_1", &impactX_HGCal_layer_1);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_1", &impactX_HGCal_layer_1);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_2", &impactX_HGCal_layer_2);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_2", &impactX_HGCal_layer_2);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_3", &impactX_HGCal_layer_3);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_3", &impactX_HGCal_layer_3);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_4", &impactX_HGCal_layer_4);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_4", &impactX_HGCal_layer_4);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_5", &impactX_HGCal_layer_5);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_5", &impactX_HGCal_layer_5);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_6", &impactX_HGCal_layer_6);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_6", &impactX_HGCal_layer_6);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_7", &impactX_HGCal_layer_7);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_7", &impactX_HGCal_layer_7);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_8", &impactX_HGCal_layer_8);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_8", &impactX_HGCal_layer_8);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_9", &impactX_HGCal_layer_9);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_9", &impactX_HGCal_layer_9);
-    T_DWC->SetBranchAddress("impactX_HGCal_layer_10", &impactX_HGCal_layer_10);
-    T_DWC->SetBranchAddress("impactY_HGCal_layer_10", &impactX_HGCal_layer_10);
-
-    /*
-    if(Is_Data){
-      T_Meta->SetBranchAddress("configuration", &configuration);
-      T_Meta->SetBranchAddress("biasCurrentCh0", &biasCurrentCh0);
-      T_Meta->SetBranchAddress("biasCurrentCh1", &biasCurrentCh1);
-      T_Meta->SetBranchAddress("biasCurrentCh2", &biasCurrentCh2);
-      T_Meta->SetBranchAddress("biasCurrentCh3", &biasCurrentCh3);
-      T_Meta->SetBranchAddress("humidity_RHDP4", &humidity_RHDP4);
-      T_Meta->SetBranchAddress("TCassette07", &TCassette07);
-      T_Meta->SetBranchAddress("tablePositionY", &tablePositionY);
-      T_Meta->SetBranchAddress("humidity_air", &humidity_air);
-      T_Meta->SetBranchAddress("temperature_air", &temperature_air);
-      }*/
+    T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
   }
+
+  T_DWC->SetBranchAddress("ntracks", &ntracks, &b_ntracks);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_1", &impactX_HGCal_layer_1, &b_impactX_HGCal_layer_1);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_1", &impactY_HGCal_layer_1, &b_impactY_HGCal_layer_1);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_2", &impactX_HGCal_layer_2, &b_impactX_HGCal_layer_2);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_2", &impactY_HGCal_layer_2, &b_impactY_HGCal_layer_2);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_3", &impactX_HGCal_layer_3, &b_impactX_HGCal_layer_3);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_3", &impactY_HGCal_layer_3, &b_impactY_HGCal_layer_3);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_4", &impactX_HGCal_layer_4, &b_impactX_HGCal_layer_4);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_4", &impactY_HGCal_layer_4, &b_impactY_HGCal_layer_4);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_5", &impactX_HGCal_layer_5, &b_impactX_HGCal_layer_5);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_5", &impactY_HGCal_layer_5, &b_impactY_HGCal_layer_5);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_6", &impactX_HGCal_layer_6, &b_impactX_HGCal_layer_6);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_6", &impactY_HGCal_layer_6, &b_impactY_HGCal_layer_6);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_7", &impactX_HGCal_layer_7, &b_impactX_HGCal_layer_7);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_7", &impactY_HGCal_layer_7, &b_impactY_HGCal_layer_7);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_8", &impactX_HGCal_layer_8, &b_impactX_HGCal_layer_8);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_8", &impactY_HGCal_layer_8, &b_impactY_HGCal_layer_8);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_9", &impactX_HGCal_layer_9, &b_impactX_HGCal_layer_9);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_9", &impactY_HGCal_layer_9, &b_impactY_HGCal_layer_9);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_10", &impactX_HGCal_layer_10, &b_impactX_HGCal_layer_10);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_10", &impactY_HGCal_layer_10, &b_impactY_HGCal_layer_10);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_11", &impactX_HGCal_layer_11, &b_impactX_HGCal_layer_11);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_11", &impactY_HGCal_layer_11, &b_impactY_HGCal_layer_11);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_12", &impactX_HGCal_layer_12, &b_impactX_HGCal_layer_12);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_12", &impactY_HGCal_layer_12, &b_impactY_HGCal_layer_12);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_13", &impactX_HGCal_layer_13, &b_impactX_HGCal_layer_13);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_13", &impactY_HGCal_layer_13, &b_impactY_HGCal_layer_13);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_14", &impactX_HGCal_layer_14, &b_impactX_HGCal_layer_14);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_14", &impactY_HGCal_layer_14, &b_impactY_HGCal_layer_14);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_15", &impactX_HGCal_layer_15, &b_impactX_HGCal_layer_15);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_15", &impactY_HGCal_layer_15, &b_impactY_HGCal_layer_15);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_16", &impactX_HGCal_layer_16, &b_impactX_HGCal_layer_16);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_16", &impactY_HGCal_layer_16, &b_impactY_HGCal_layer_16);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_17", &impactX_HGCal_layer_17, &b_impactX_HGCal_layer_17);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_17", &impactY_HGCal_layer_17, &b_impactY_HGCal_layer_17);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_18", &impactX_HGCal_layer_18, &b_impactX_HGCal_layer_18);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_18", &impactY_HGCal_layer_18, &b_impactY_HGCal_layer_18);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_19", &impactX_HGCal_layer_19, &b_impactX_HGCal_layer_19);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_19", &impactY_HGCal_layer_19, &b_impactY_HGCal_layer_19);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_20", &impactX_HGCal_layer_20, &b_impactX_HGCal_layer_20);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_20", &impactY_HGCal_layer_20, &b_impactY_HGCal_layer_20);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_21", &impactX_HGCal_layer_21, &b_impactX_HGCal_layer_21);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_21", &impactY_HGCal_layer_21, &b_impactY_HGCal_layer_21);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_22", &impactX_HGCal_layer_22, &b_impactX_HGCal_layer_22);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_22", &impactY_HGCal_layer_22, &b_impactY_HGCal_layer_22);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_23", &impactX_HGCal_layer_23, &b_impactX_HGCal_layer_23);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_23", &impactY_HGCal_layer_23, &b_impactY_HGCal_layer_23);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_24", &impactX_HGCal_layer_24, &b_impactX_HGCal_layer_24);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_24", &impactY_HGCal_layer_24, &b_impactY_HGCal_layer_24);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_25", &impactX_HGCal_layer_25, &b_impactX_HGCal_layer_25);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_25", &impactY_HGCal_layer_25, &b_impactY_HGCal_layer_25);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_26", &impactX_HGCal_layer_26, &b_impactX_HGCal_layer_26);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_26", &impactY_HGCal_layer_26, &b_impactY_HGCal_layer_26);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_27", &impactX_HGCal_layer_27, &b_impactX_HGCal_layer_27);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_27", &impactY_HGCal_layer_27, &b_impactY_HGCal_layer_27);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_28", &impactX_HGCal_layer_28, &b_impactX_HGCal_layer_28);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_28", &impactY_HGCal_layer_28, &b_impactY_HGCal_layer_28);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_29", &impactX_HGCal_layer_29, &b_impactX_HGCal_layer_29);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_29", &impactY_HGCal_layer_29, &b_impactY_HGCal_layer_29);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_30", &impactX_HGCal_layer_30, &b_impactX_HGCal_layer_30);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_30", &impactY_HGCal_layer_30, &b_impactY_HGCal_layer_30);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_31", &impactX_HGCal_layer_31, &b_impactX_HGCal_layer_31);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_31", &impactY_HGCal_layer_31, &b_impactY_HGCal_layer_31);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_32", &impactX_HGCal_layer_32, &b_impactX_HGCal_layer_32);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_32", &impactY_HGCal_layer_32, &b_impactY_HGCal_layer_32);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_33", &impactX_HGCal_layer_33, &b_impactX_HGCal_layer_33);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_33", &impactY_HGCal_layer_33, &b_impactY_HGCal_layer_33);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_34", &impactX_HGCal_layer_34, &b_impactX_HGCal_layer_34);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_34", &impactY_HGCal_layer_34, &b_impactY_HGCal_layer_34);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_35", &impactX_HGCal_layer_35, &b_impactX_HGCal_layer_35);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_35", &impactY_HGCal_layer_35, &b_impactY_HGCal_layer_35);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_36", &impactX_HGCal_layer_36, &b_impactX_HGCal_layer_36);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_36", &impactY_HGCal_layer_36, &b_impactY_HGCal_layer_36);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_37", &impactX_HGCal_layer_37, &b_impactX_HGCal_layer_37);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_37", &impactY_HGCal_layer_37, &b_impactY_HGCal_layer_37);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_38", &impactX_HGCal_layer_38, &b_impactX_HGCal_layer_38);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_38", &impactY_HGCal_layer_38, &b_impactY_HGCal_layer_38);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_39", &impactX_HGCal_layer_39, &b_impactX_HGCal_layer_39);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_39", &impactY_HGCal_layer_39, &b_impactY_HGCal_layer_39);
+  T_DWC->SetBranchAddress("impactX_HGCal_layer_40", &impactX_HGCal_layer_40, &b_impactX_HGCal_layer_40);
+  T_DWC->SetBranchAddress("impactY_HGCal_layer_40", &impactY_HGCal_layer_40, &b_impactY_HGCal_layer_40);
+  T_DWC->SetBranchAddress("trackChi2_X", &trackChi2_X, &b_trackChi2_X);
+  T_DWC->SetBranchAddress("trackChi2_Y", &trackChi2_Y, &b_trackChi2_Y);
+  T_DWC->SetBranchAddress("dwcReferenceType", &dwcReferenceType, &b_dwcReferenceType);
+  T_DWC->SetBranchAddress("m_x", &m_x, &b_m_x);
+  T_DWC->SetBranchAddress("m_y", &m_y, &b_m_y);
+  T_DWC->SetBranchAddress("b_x", &b_x, &b_b_x);
+  T_DWC->SetBranchAddress("b_y", &b_y, &b_b_y);
+
+  /*
+    if(Is_Data){
+    T_Meta->SetBranchAddress("configuration", &configuration);
+    T_Meta->SetBranchAddress("biasCurrentCh0", &biasCurrentCh0);
+    T_Meta->SetBranchAddress("biasCurrentCh1", &biasCurrentCh1);
+    T_Meta->SetBranchAddress("biasCurrentCh2", &biasCurrentCh2);
+    T_Meta->SetBranchAddress("biasCurrentCh3", &biasCurrentCh3);
+    T_Meta->SetBranchAddress("humidity_RHDP4", &humidity_RHDP4);
+    T_Meta->SetBranchAddress("TCassette07", &TCassette07);
+    T_Meta->SetBranchAddress("tablePositionY", &tablePositionY);
+    T_Meta->SetBranchAddress("humidity_air", &humidity_air);
+    T_Meta->SetBranchAddress("temperature_air", &temperature_air);
+    }*/
   Init_Runinfo();
 }
 void ntupleMaker::Init_Runinfo(){
@@ -272,7 +330,7 @@ void ntupleMaker::NtupleMaker(){
   outT1 = T_Rechit->CopyTree("");
   outT2 = T_DWC->CopyTree("");
   TTree *outT3 = new TTree("rechit_var","rechit_var");
-  
+ 
   vector<vector<double> > hit_tmp(NLAYER);
   vector<vector<double> > hit_x(NLAYER);
   vector<vector<double> > hit_y(NLAYER);
@@ -331,6 +389,7 @@ void ntupleMaker::NtupleMaker(){
 	E_ch[iL][ich] = 0;
       }
     }
+
     
     int layer, chip, channel;
     double posx, posy, posz, energy, TOT;
@@ -362,14 +421,14 @@ void ntupleMaker::NtupleMaker(){
       int maxID = -1;
       double Emax = -1;
       /*
-      for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
+	for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
 	if( hit_tmp[iL].at(iH) > Emax ){
-	  Emax  = hit_tmp[iL].at(iH);
-	  maxID = iH;
-	  E_1[iL] = hit_tmp[iL].at(iH);
+	Emax  = hit_tmp[iL].at(iH);
+	maxID = iH;
+	E_1[iL] = hit_tmp[iL].at(iH);
 	}
-      }
-      cout << "original method = " << E_1[iL] << endl;
+	}
+	cout << "original method = " << E_1[iL] << endl;
       */
       for(int ich = 0; ich < NCHANNEL; ich++){
 	if( E_ch[iL][ich] > Emax){
@@ -381,8 +440,8 @@ void ntupleMaker::NtupleMaker(){
             
       //Dist from seed
       /*
-      double dx,dy,dR;
-      for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
+	double dx,dy,dR;
+	for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
 	dx = hit_x[iL].at(iH) - hit_x[iL].at(maxID);
 	dy = hit_y[iL].at(iH) - hit_y[iL].at(maxID);
 	dR = sqrt(dx*dx + dy*dy);
@@ -390,7 +449,7 @@ void ntupleMaker::NtupleMaker(){
 	if( dR < 1.12455*2*1.2) E_19[iL] += hit_tmp[iL].at(iH);
 	if( dR < 1.12455*3*1.2) E_37[iL] += hit_tmp[iL].at(iH);
 	layerE[iL] += hit_tmp[iL].at(iH);
-      } 
+	} 
       */
       double dx,dy,dR;
       for(int ich = 0; ich < NCHANNEL; ich++){
@@ -429,14 +488,14 @@ void ntupleMaker::GetData(int evt){
 }
 
 void ntupleMaker::Getinfo(int ihit,int &layer,int &chip,int &channel,double &x, double &y, double &z, double &ene, double &TOT){
-    layer = rechit_layer->at(ihit);
-    chip = rechit_chip->at(ihit);
-    channel = rechit_channel->at(ihit);
-    x     = rechit_x    ->at(ihit);
-    y     = rechit_y    ->at(ihit);
-    z     = rechit_z    ->at(ihit);
-    ene   = rechit_energy->at(ihit);
-    TOT   = rechit_Tot->at(ihit);
+  layer = rechit_layer->at(ihit);
+  chip = rechit_chip->at(ihit);
+  channel = rechit_channel->at(ihit);
+  x     = rechit_x    ->at(ihit);
+  y     = rechit_y    ->at(ihit);
+  z     = rechit_z    ->at(ihit);
+  ene   = rechit_energy->at(ihit);
+  TOT   = rechit_Tot->at(ihit);
 }
 
 bool ntupleMaker::Mask_NoisyChannel(int layer, int chip, int channel, double posx, double posy){
