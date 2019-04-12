@@ -293,15 +293,21 @@ void makePlots::Loop(){
     h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
   }
 
+  double Passed_events = 0;
+  double efficiency;
   for(int ev = 0; ev < nevents; ++ev){
     if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
     
     GetData(ev);
     int Nhits = NRechits;
+    double impact_R;
 
     // Event Selection
     //if ( Nhits < 200 ) continue;
     if ( dwcReferenceType != 15) continue;
+    impact_R = sqrt( (impactX_HGCal_layer_1 * impactX_HGCal_layer_1) + ( impactY_HGCal_layer_1 * impactY_HGCal_layer_1 ) );
+    if ( impact_R > 1 ) continue;
+    Passed_events++;
     
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
       //Fill shower shape histogram
@@ -343,6 +349,10 @@ void makePlots::Loop(){
     h_SHD_Elayer->Fill(SHD_Elayer);
     // shower depth = SHD_Elayer (calculation done!)
   }
+
+  //Efficiency
+  efficiency = Passed_events / nevents;
+  cout << efficiency << endl;
   
   // Normalize Histograms
   Double_t scale = 1/h_totalE->Integral();
