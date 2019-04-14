@@ -347,7 +347,8 @@ void ntupleMaker::NtupleMaker(){
   double x_ch[NLAYER][NCHANNEL];
   double y_ch[NLAYER][NCHANNEL];
   double z_ch[NLAYER][NCHANNEL];
-
+  double impactX[NLAYER];
+  double impactY[NLAYER];
 
   outT3->Branch("hit_mip","std::vector< std::vector<double> >",&hit_tmp);
   outT3->Branch("hit_x","std::vector< std::vector<double> >",&hit_x);
@@ -363,6 +364,8 @@ void ntupleMaker::NtupleMaker(){
   outT3->Branch("layerE7",E_7,"layerE7[40]/D");
   outT3->Branch("layerE19",E_19,"layerE19[40]/D");
   outT3->Branch("layerE37",E_37,"layerE37[40]/D");
+  outT3->Branch("impactX",impactX,"impactX[40]/D");
+  outT3->Branch("impactY",impactY,"impactY[40]/D");
 
   
 
@@ -390,12 +393,77 @@ void ntupleMaker::NtupleMaker(){
       }
     }
 
-    
+    impactX[0] = impactX_HGCal_layer_1;
+    impactX[1] = impactX_HGCal_layer_2;
+    impactX[2] = impactX_HGCal_layer_3;
+    impactX[3] = impactX_HGCal_layer_4;
+    impactX[4] = impactX_HGCal_layer_5;
+    impactX[5] = impactX_HGCal_layer_6;
+    impactX[6] = impactX_HGCal_layer_7;
+    impactX[7] = impactX_HGCal_layer_8;
+    impactX[8] = impactX_HGCal_layer_9;
+    impactX[9] = impactX_HGCal_layer_10;
+    impactX[10] = impactX_HGCal_layer_11;
+    impactX[11] = impactX_HGCal_layer_12;
+    impactX[12] = impactX_HGCal_layer_13;
+    impactX[13] = impactX_HGCal_layer_14;
+    impactX[14] = impactX_HGCal_layer_15;
+    impactX[15] = impactX_HGCal_layer_16;
+    impactX[16] = impactX_HGCal_layer_17;
+    impactX[17] = impactX_HGCal_layer_18;
+    impactX[18] = impactX_HGCal_layer_19;
+    impactX[19] = impactX_HGCal_layer_20;
+    impactX[20] = impactX_HGCal_layer_21;
+    impactX[21] = impactX_HGCal_layer_22;
+    impactX[22] = impactX_HGCal_layer_23;
+    impactX[23] = impactX_HGCal_layer_24;
+    impactX[24] = impactX_HGCal_layer_25;
+    impactX[25] = impactX_HGCal_layer_26;
+    impactX[26] = impactX_HGCal_layer_27;
+    impactX[27] = impactX_HGCal_layer_28;
+    impactY[0] = impactY_HGCal_layer_1;
+    impactY[1] = impactY_HGCal_layer_2;
+    impactY[2] = impactY_HGCal_layer_3;
+    impactY[3] = impactY_HGCal_layer_4;
+    impactY[4] = impactY_HGCal_layer_5;
+    impactY[5] = impactY_HGCal_layer_6;
+    impactY[6] = impactY_HGCal_layer_7;
+    impactY[7] = impactY_HGCal_layer_8;
+    impactY[8] = impactY_HGCal_layer_9;
+    impactY[9] = impactY_HGCal_layer_10;
+    impactY[10] = impactY_HGCal_layer_11;
+    impactY[11] = impactY_HGCal_layer_12;
+    impactY[12] = impactY_HGCal_layer_13;
+    impactY[13] = impactY_HGCal_layer_14;
+    impactY[14] = impactY_HGCal_layer_15;
+    impactY[15] = impactY_HGCal_layer_16;
+    impactY[16] = impactY_HGCal_layer_17;
+    impactY[17] = impactY_HGCal_layer_18;
+    impactY[18] = impactY_HGCal_layer_19;
+    impactY[19] = impactY_HGCal_layer_20;
+    impactY[20] = impactY_HGCal_layer_21;
+    impactY[21] = impactY_HGCal_layer_22;
+    impactY[22] = impactY_HGCal_layer_23;
+    impactY[23] = impactY_HGCal_layer_24;
+    impactY[24] = impactY_HGCal_layer_25;
+    impactY[25] = impactY_HGCal_layer_26;
+    impactY[26] = impactY_HGCal_layer_27;
+    impactY[27] = impactY_HGCal_layer_28;
+	/*
+	for ( int i = 0; i < 28; i++){
+	  cout << impactX[i] << endl;
+	}
+	*/
+	double dR = sqrt( impactX[0]*impactX[0] + impactY[0]*impactY[0]);
+	cout << dR << endl;
+
+
     int layer, chip, channel;
     double posx, posy, posz, energy, TOT;
     totalE = 0;
     totalE_CEE = 0;
     totalE_CEH = 0;
+
     for(int h = 0; h < Nhits ; ++h){
       
       Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
@@ -416,20 +484,9 @@ void ntupleMaker::NtupleMaker(){
     }
  
     for(int iL = 0; iL < NLAYER ; ++iL){
-
       //Find seed
       int maxID = -1;
       double Emax = -1;
-      /*
-	for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
-	if( hit_tmp[iL].at(iH) > Emax ){
-	Emax  = hit_tmp[iL].at(iH);
-	maxID = iH;
-	E_1[iL] = hit_tmp[iL].at(iH);
-	}
-	}
-	cout << "original method = " << E_1[iL] << endl;
-      */
       for(int ich = 0; ich < NCHANNEL; ich++){
 	if( E_ch[iL][ich] > Emax){
 	  Emax = E_ch[iL][ich];
@@ -438,19 +495,6 @@ void ntupleMaker::NtupleMaker(){
 	}
       }
             
-      //Dist from seed
-      /*
-	double dx,dy,dR;
-	for(int iH = 0 ; iH < (int)hit_tmp[iL].size(); ++iH){
-	dx = hit_x[iL].at(iH) - hit_x[iL].at(maxID);
-	dy = hit_y[iL].at(iH) - hit_y[iL].at(maxID);
-	dR = sqrt(dx*dx + dy*dy);
-	if( dR < 1.12455*1.2) E_7[iL] += hit_tmp[iL].at(iH);
-	if( dR < 1.12455*2*1.2) E_19[iL] += hit_tmp[iL].at(iH);
-	if( dR < 1.12455*3*1.2) E_37[iL] += hit_tmp[iL].at(iH);
-	layerE[iL] += hit_tmp[iL].at(iH);
-	} 
-      */
       double dx,dy,dR;
       for(int ich = 0; ich < NCHANNEL; ich++){
 	if( E_ch[iL][ich] == 0 ) continue;
@@ -465,7 +509,7 @@ void ntupleMaker::NtupleMaker(){
     }
     outT3->Fill();
   }
-  //outT1->Write();
+  outT1->Write();
   outT2->Write(); 
   outT3->Write();
   outf.Close();
@@ -473,18 +517,8 @@ void ntupleMaker::NtupleMaker(){
 
 
 void ntupleMaker::GetData(int evt){
-  if(TestRun){
-    T_Rechit-> GetEntry(evt);
-  }
-  if(!TestRun){
-    if(Is_Data){
-      T_Rechit-> GetEntry(evt);
-      T_DWC   -> GetEntry(evt);
-      T_Meta  -> GetEntry(evt);}
-    else{
-      T_Rechit-> GetEntry(evt);
-      T_DWC   -> GetEntry(evt);}
-  }
+  T_Rechit-> GetEntry(evt);
+  T_DWC   -> GetEntry(evt);
 }
 
 void ntupleMaker::Getinfo(int ihit,int &layer,int &chip,int &channel,double &x, double &y, double &z, double &ene, double &TOT){

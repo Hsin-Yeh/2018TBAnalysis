@@ -95,9 +95,9 @@ void main_makeNtuple(bool Is_Data){
 
 void main_makePlots(){
       
-    TChain *chain = new TChain("hits");
-    TChain *chain2 = new TChain("impactPoints");
-    TChain *chain3 = new TChain("rechit_var");
+    TChain *chain1 = new TChain("hits");
+	TChain *chain2 = new TChain("impactPoints");
+	TChain *chain3 = new TChain("rechit_var");
   
     string filename;
     ifstream infile(main_datainput.c_str());
@@ -107,9 +107,9 @@ void main_makePlots(){
 	if(infile.eof()) break;
 	if( filename.length() > 2){
 	    cout << "input file: " << filename << endl;
-	    chain->Add(filename.c_str());
-	    chain2->Add(filename.c_str());
-	    chain3->Add(filename.c_str());
+	    chain1->Add(filename.c_str());
+		chain2->Add(filename.c_str());
+		chain3->Add(filename.c_str());
 	}
 	else{
 	    cout << filename << " is not available, please check "
@@ -118,7 +118,7 @@ void main_makePlots(){
     infile.close();
 
     makePlots *M;
-    M = new makePlots(chain,chain2,chain3,filename);
+    M = new makePlots(chain1,chain2,chain3,filename);
 
     //M->Event_Display();
     M->Loop();
