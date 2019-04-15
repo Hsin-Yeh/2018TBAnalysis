@@ -455,7 +455,6 @@ void ntupleMaker::NtupleMaker(){
 	}
 	*/
 	double dR = sqrt( impactX[0]*impactX[0] + impactY[0]*impactY[0]);
-	cout << dR << endl;
 
 
     int layer, chip, channel;

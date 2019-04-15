@@ -35,6 +35,8 @@ class makePlots{
   int  beamE;
   int  PID; // 0 for electron, 1 for pion, 2 for muon
   string beam_str; // "Ele","Pi","Mu"
+  
+  PlotSetting *P = nullptr;
 
  private:
   // Members
