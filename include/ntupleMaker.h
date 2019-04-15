@@ -12,6 +12,7 @@
 #include "TH2Poly.h"
 #include "TApplication.h"
 #include "TChain.h"
+#include "PlotSetting.h"
 #include <string>
 #include <vector>
 

@@ -389,7 +389,7 @@ void ntupleMaker::NtupleMaker(){
       E_19[iL] = 0;
       E_37[iL] = 0;
       for(int ich = 0; ich < NCHANNEL; ++ich){
-	E_ch[iL][ich] = 0;
+		E_ch[iL][ich] = 0;
       }
     }
 
@@ -450,9 +450,9 @@ void ntupleMaker::NtupleMaker(){
     impactY[26] = impactY_HGCal_layer_27;
     impactY[27] = impactY_HGCal_layer_28;
 	/*
-	for ( int i = 0; i < 28; i++){
+	  for ( int i = 0; i < 28; i++){
 	  cout << impactX[i] << endl;
-	}
+	  }
 	*/
 	double dR = sqrt( impactX[0]*impactX[0] + impactY[0]*impactY[0]);
 
@@ -487,23 +487,23 @@ void ntupleMaker::NtupleMaker(){
       int maxID = -1;
       double Emax = -1;
       for(int ich = 0; ich < NCHANNEL; ich++){
-	if( E_ch[iL][ich] > Emax){
-	  Emax = E_ch[iL][ich];
-	  maxID = ich;
-	  E_1[iL] = E_ch[iL][ich];
-	}
+		if( E_ch[iL][ich] > Emax){
+		  Emax = E_ch[iL][ich];
+		  maxID = ich;
+		  E_1[iL] = E_ch[iL][ich];
+		}
       }
             
       double dx,dy,dR;
       for(int ich = 0; ich < NCHANNEL; ich++){
-	if( E_ch[iL][ich] == 0 ) continue;
-	dx = x_ch[iL][ich] - x_ch[iL][maxID];
-	dy = y_ch[iL][ich] - y_ch[iL][maxID];
-	dR = sqrt(dx*dx + dy*dy);
-	if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
-	if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
-	if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
-	layerE[iL] += E_ch[iL][ich];
+		if( E_ch[iL][ich] == 0 ) continue;
+		dx = x_ch[iL][ich] - x_ch[iL][maxID];
+		dy = y_ch[iL][ich] - y_ch[iL][maxID];
+		dR = sqrt(dx*dx + dy*dy);
+		if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
+		if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
+		if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
+		layerE[iL] += E_ch[iL][ich];
       }
     }
     outT3->Fill();
