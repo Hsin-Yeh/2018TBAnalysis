@@ -139,6 +139,9 @@ void Compare_DataMC(){
   sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMM.root",Energy);
   TFile f_MC_original(title);
 
+  sprintf(title,"output.root");
+  TFile f_output(title,"recreate");
+
   TH1D *h_E1devE7[3][28];
   TH1D *h_E7devE19[3][28];
   TH1D *h_totalCEE[3];
@@ -153,7 +156,6 @@ void Compare_DataMC(){
   h_totalCEE[2] = (TH1D *)f_Data.Get(title);
   h_totalCEE[2]->SetLineColor(1);
   h_totalCEE[2]->SetLineWidth(2);
-  
 
   
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -193,12 +195,12 @@ void Compare_DataMC(){
   legend->AddEntry(h_totalCEE[0],"XTalk","L");
   legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
-  sprintf(title,"beamE=%dGeV",Energy);
-  legend->SetHeader(title);
+  //  sprintf(title,"beamE=%dGeV",Energy);
+  //  legend->SetHeader(title);
   legend->SetTextSize(0.035);
   legend->Draw();
   c1->Update();
-  //  gPad->WaitPrimitive();
+  //gPad->WaitPrimitive();
   sprintf(title,"plots/%dGeV/Total Energy CEE.png",Energy);
   //  c1->SaveAs(title);
   img->FromPad(c1);
@@ -208,21 +210,28 @@ void Compare_DataMC(){
 
   for(int iL = 0; iL < NLAYER ; ++iL){
 
+	sprintf(title,"E1devE7_layer%02d_%dGeV", iL+1, Energy);
+	h_E1devE7[0][iL]->SetTitle(title);
     h_E1devE7[0][iL]->Draw("HIST");
     h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
     c1->Update();
-    //    gPad->WaitPrimitive();
+	c1->Write();
+	//gPad->WaitPrimitive();
     sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
     img->FromPad(c1);
     img->WriteImage(title);
+
+	sprintf(title,"E7devE19_layer%02d_%dGeV", iL+1, Energy);
+	h_E7devE19[0][iL]->SetTitle(title);
     h_E7devE19[0][iL]->Draw("HIST");
     h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     sprintf(title,"Beam Energy = %dGeV",Energy);
     c1->Update();
+	c1->Write();
     //gPad->WaitPrimitive();
     sprintf(title,"plots/%dGeV/E7devE19_layer%02d.png", Energy, iL+1);
     img->FromPad(c1);
@@ -230,6 +239,9 @@ void Compare_DataMC(){
     //c1->SaveAs(title);
   }
 
+  f_output.Write();
+  f_output.Close();
+  
   delete c1;
 
 }

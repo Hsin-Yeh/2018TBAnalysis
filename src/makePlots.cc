@@ -297,7 +297,7 @@ void makePlots::Loop(){
 		}
 		SHD_Elayer /= totalE;
 		h_SHD_Elayer -> Fill( SHD_Elayer );
-		h_SHD_impactR -> Fill( SHD_Elayer, impact_R );
+		//h_SHD_impactR -> Fill( SHD_Elayer, impact_R );
 	}
 
 	//Efficiency
@@ -323,7 +323,7 @@ void makePlots::Loop(){
 	
 	for ( int iL = 0; iL < EE_NLAYER; iL++){
 	  //c1->cd(iL+1);
-   		//		P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
+		//		P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
 	  //	latShower_energy[iL] -> Draw("colz");
 	}
 	//	c1->Update();
