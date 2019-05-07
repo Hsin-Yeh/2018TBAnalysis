@@ -113,6 +113,10 @@ void Compare_DataMC(){
   char plot_title[200];
 
   TCanvas* c1 = new TCanvas();
+  TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
+  TCanvas *c3 = new TCanvas("c3","c3",6400,3600);
+  c2->Divide(7,4);
+  c3->Divide(7,4);
   //  gStyle->SetOptStat(0);
   //  gROOT->SetBatch(kTRUE);
   TImage *img = TImage::Create();
@@ -210,19 +214,21 @@ void Compare_DataMC(){
 
   for(int iL = 0; iL < NLAYER ; ++iL){
 
+	c2->cd(iL);
 	sprintf(title,"E1devE7_layer%02d_%dGeV", iL+1, Energy);
 	h_E1devE7[0][iL]->SetTitle(title);
     h_E1devE7[0][iL]->Draw("HIST");
     h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
-    legend->Draw();
-    c1->Update();
-	c1->Write();
+    //legend->Draw();
+    c2->Update();
+	//c2->Write();
 	//gPad->WaitPrimitive();
-    sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
-    img->FromPad(c1);
-    img->WriteImage(title);
+    //sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
+    //img->FromPad(c1);
+    //img->WriteImage(title);
 
+	c3->cd(iL);
 	sprintf(title,"E7devE19_layer%02d_%dGeV", iL+1, Energy);
 	h_E7devE19[0][iL]->SetTitle(title);
     h_E7devE19[0][iL]->Draw("HIST");
@@ -230,14 +236,16 @@ void Compare_DataMC(){
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     sprintf(title,"Beam Energy = %dGeV",Energy);
-    c1->Update();
-	c1->Write();
+    c2->Update();
+	//c1->Write();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/%dGeV/E7devE19_layer%02d.png", Energy, iL+1);
-    img->FromPad(c1);
-    img->WriteImage(title);
+    //sprintf(title,"plots/%dGeV/E7devE19_layer%02d.png", Energy, iL+1);
+    //img->FromPad(c1);
+    //img->WriteImage(title);
     //c1->SaveAs(title);
   }
+  c2->Write();
+  c3->Write();
 
   f_output.Write();
   f_output.Close();

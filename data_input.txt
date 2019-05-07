@@ -1,1 +1,1 @@
-root_plot/plot_sim_80GeV_30TH1_300TH2_10X1_1X2.root
+output_root/ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM.root

@@ -212,6 +212,8 @@ void makePlots::Loop(){
 	TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
 	TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
 
+	TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
+
 	//	TProfile *t_impacX_posx = new TProfile("h_impacX_posx","",50,-6,6,-6,6);
 	//TProfile *t_impacY_posy = new TProfile("h_impacY_posy","",50,-6,6,-6,6);
     
@@ -269,6 +271,13 @@ void makePlots::Loop(){
 			}
 		}
 
+		double Energy_cell[NCHANNEL];
+		for ( int icell = 0; icell < NCHANNEL; icell++){
+		  Energy_cell[icell] = 0;
+		}
+		
+
+
 		// Fill PolyHistograms
 		for(int ihit = 0; ihit < NRechits ; ++ihit){
 			Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
@@ -277,16 +286,27 @@ void makePlots::Loop(){
 			//if ( channel != 34 ) continue;
 			latShower_energy[layer-1] -> Fill( impactX[layer-1], impactY[layer-1], 1);
 
-			if ( layer > 1 ) continue;
+			if ( layer != 5 ) continue;
 			h_impactX_posx -> Fill( impactX[0], posx );
 			h_impactY_posy -> Fill( impactY[0], posy );
+
+			Energy_cell [ chip*32 + channel/2 ] += energy;
 			
 			
 			//latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
 			//cout << "Layer = " << layer << ", Chip = " << chip << ", channel = " << channel << ", posx = " << posx << ", posy = " << posy << ", energy = " << energy << endl;
 		}
 
-		
+		double TwoPointCorrelation;
+		for ( int icell = 0; icell < NCHANNEL; icell++){
+		  if ( Energy_cell[icell] == 0 ) continue;
+		  for ( int jcell = 0; jcell < NCHANNEL; jcell++){
+			if ( Energy_cell[jcell] == 0 ) continue;
+			TwoPointCorrelation = Energy_cell[jcell] / Energy_cell[icell];
+			h_TwoPointCorrelation -> Fill ( TwoPointCorrelation );
+			//			cout << TwoPointCorrelation << endl;
+		  }
+		}
 
 
 		// Calculate the shower depth
