@@ -23,8 +23,8 @@ void root_logon(){
   atlasStyle->SetPaperSize(20,26);
   atlasStyle->SetPadTopMargin(0.05);
   atlasStyle->SetPadTopMargin(0.11);
-  atlasStyle->SetPadRightMargin(0.13);
-  atlasStyle->SetPadBottomMargin(0.15);
+  atlasStyle->SetPadRightMargin(0.05);
+  atlasStyle->SetPadBottomMargin(0.1);
   atlasStyle->SetPadLeftMargin(0.12);
 
   // use large fonts
@@ -189,15 +189,16 @@ void Compare_DataMC(){
 
   }
   
-  TLegend* legend = new TLegend(0.1,0.73,0.3,0.9);
+  TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
+  c1->cd();
   
   sprintf(title,"Total Energy CEE ");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
   h_totalCEE[0]->Draw("HIST");
   h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("Same");
-  legend->AddEntry(h_totalCEE[0],"XTalk","L");
-  legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
+  legend->AddEntry(h_totalCEE[0],"Simulation","L");
+  //legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
   //  sprintf(title,"beamE=%dGeV",Energy);
   //  legend->SetHeader(title);
@@ -214,38 +215,47 @@ void Compare_DataMC(){
 
   for(int iL = 0; iL < NLAYER ; ++iL){
 
-	c2->cd(iL);
+	//c2->cd(iL+1);
 	sprintf(title,"E1devE7_layer%02d_%dGeV", iL+1, Energy);
+	//h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	//h_E1devE7[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	//h_E1devE7[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7[0][iL]->SetTitle(title);
     h_E1devE7[0][iL]->Draw("HIST");
-    h_E1devE7[1][iL]->Draw("HISTSame");
+    //h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
-    //legend->Draw();
-    c2->Update();
+    legend->Draw();
+	c1->Update();
+    //c2->Update();
 	//c2->Write();
 	//gPad->WaitPrimitive();
-    //sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
+    sprintf(title,"plots/%dGeV/E1devE7_layer%02d.pdf", Energy, iL+1);
     //img->FromPad(c1);
     //img->WriteImage(title);
+	c1->SaveAs(title);
 
-	c3->cd(iL);
+	//c3->cd(iL+1);
 	sprintf(title,"E7devE19_layer%02d_%dGeV", iL+1, Energy);
 	h_E7devE19[0][iL]->SetTitle(title);
+	//h_E7devE19[0][iL]->GetYaxis()->SetRangeUser(0,0.09);
+	//h_E7devE19[1][iL]->GetYaxis()->SetRangeUser(0,0.09);
+	//h_E7devE19[2][iL]->GetYaxis()->SetRangeUser(0,0.09);
     h_E7devE19[0][iL]->Draw("HIST");
-    h_E7devE19[1][iL]->Draw("HISTSame");
+    //h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     sprintf(title,"Beam Energy = %dGeV",Energy);
-    c2->Update();
+	c1->Update();
+    //c3->Update();
 	//c1->Write();
     //gPad->WaitPrimitive();
-    //sprintf(title,"plots/%dGeV/E7devE19_layer%02d.png", Energy, iL+1);
+    sprintf(title,"plots/%dGeV/E7devE19_layer%02d.pdf", Energy, iL+1);
     //img->FromPad(c1);
     //img->WriteImage(title);
-    //c1->SaveAs(title);
+    c1->SaveAs(title);
   }
-  c2->Write();
-  c3->Write();
+  //c2->Write();
+  //c3->Write();
 
   f_output.Write();
   f_output.Close();
