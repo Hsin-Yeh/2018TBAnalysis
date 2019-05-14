@@ -396,29 +396,31 @@ void makePlots::Event_Display(){
 			Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
 			totalE += energy/ENEPERMIP;
 		}
-		if(totalE >= 140000 && ev < 10000){
+		//if(totalE >= 140000 && ev < 10000){
 			counts++;
 			for(int ihit = 0; ihit < Nhits ; ++ihit){
 				Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
+				if ( layer > 28 ) continue;
 				//cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
 				latShower_energy[layer-1]->Fill(posx,posy,energy/ENEPERMIP);
-				if(layer == 1)
-					firstL->Fill(posx,posy,energy/ENEPERMIP);
-
+				if(layer == 1) { firstL->Fill(posx,posy,energy/ENEPERMIP); }
 			}
-		}
+			//}
 	}
+	cout << "end of loop" << endl;
+	
+	
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){
-		c1->cd(iL);
-		latShower_energy[iL]->Draw("col");
+	  c1->cd(iL+1);
+	  latShower_energy[iL]->Draw("col");
 	}
-	//c1->Update();
-	sprintf(title,"plots/evt_dis/evt_display_%ievts_avg.png",counts);
+	c1->Update();
+	//gPad->WaitPrimitive();
+	sprintf(title,"plots/evt_dis/Occupancy_%iGeV_%ievts.pdf", beamE  ,counts);
 	//getchar();
 	//c1->Update();
 
 	c1->SaveAs(title);
-  
 	TCanvas *c2 = new TCanvas();
 	firstL->Draw("samecolz");
 	c2->Update();
