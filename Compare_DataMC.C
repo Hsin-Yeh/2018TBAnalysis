@@ -229,10 +229,10 @@ void Compare_DataMC(){
     //c2->Update();
 	//c2->Write();
 	//gPad->WaitPrimitive();
-    sprintf(title,"plots/%dGeV/E1devE7_layer%02d.pdf", Energy, iL+1);
-    //img->FromPad(c1);
-    //img->WriteImage(title);
-	c1->SaveAs(title);
+    sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
+    img->FromPad(c1);
+    img->WriteImage(title);
+	//c1->SaveAs(title);
 
 	//c3->cd(iL+1);
 	sprintf(title,"E7devE19_layer%02d_%dGeV", iL+1, Energy);
@@ -249,10 +249,10 @@ void Compare_DataMC(){
     //c3->Update();
 	//c1->Write();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/%dGeV/E7devE19_layer%02d.pdf", Energy, iL+1);
-    //img->FromPad(c1);
-    //img->WriteImage(title);
-    c1->SaveAs(title);
+    sprintf(title,"plots/%dGeV/E7devE19_layer%02d.png", Energy, iL+1);
+    img->FromPad(c1);
+    img->WriteImage(title);
+    //c1->SaveAs(title);
   }
   //c2->Write();
   //c3->Write();
