@@ -229,7 +229,7 @@ void Compare_DataMC(){
     //c2->Update();
 	//c2->Write();
 	//gPad->WaitPrimitive();
-    sprintf(title,"plots/%dGeV/E1devE7_layer%02d.png", Energy, iL+1);
+    sprintf(title,"plots/%s/E1devE7_layer%02d.png", f_substr, Energy, iL+1);
     img->FromPad(c1);
     img->WriteImage(title);
 	//c1->SaveAs(title);
@@ -249,7 +249,7 @@ void Compare_DataMC(){
     //c3->Update();
 	//c1->Write();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/%dGeV/E7devE19_layer%02d.png", Energy, iL+1);
+    sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr, Energy, iL+1);
     img->FromPad(c1);
     img->WriteImage(title);
     //c1->SaveAs(title);
