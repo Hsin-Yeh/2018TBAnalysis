@@ -195,10 +195,10 @@ void Compare_DataMC(){
   sprintf(title,"Total Energy CEE ");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
   h_totalCEE[0]->Draw("HIST");
-  h_totalCEE[1]->Draw("HISTSame");
+  //h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("Same");
   legend->AddEntry(h_totalCEE[0],"Simulation","L");
-  legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
+  //legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
   //  sprintf(title,"beamE=%dGeV",Energy);
   //  legend->SetHeader(title);
@@ -222,7 +222,7 @@ void Compare_DataMC(){
 	//h_E1devE7[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7[0][iL]->SetTitle(title);
     h_E1devE7[0][iL]->Draw("HIST");
-    h_E1devE7[1][iL]->Draw("HISTSame");
+    //h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
 	c1->Update();
@@ -241,7 +241,7 @@ void Compare_DataMC(){
 	//h_E7devE19[1][iL]->GetYaxis()->SetRangeUser(0,0.09);
 	//h_E7devE19[2][iL]->GetYaxis()->SetRangeUser(0,0.09);
     h_E7devE19[0][iL]->Draw("HIST");
-    h_E7devE19[1][iL]->Draw("HISTSame");
+    //h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     sprintf(title,"Beam Energy = %dGeV",Energy);
