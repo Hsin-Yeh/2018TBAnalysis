@@ -198,7 +198,7 @@ void Compare_DataMC(){
   h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("Same");
   legend->AddEntry(h_totalCEE[0],"Simulation","L");
-  //legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
+  legend->AddEntry(h_totalCEE[1],"Without XTalk","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
   //  sprintf(title,"beamE=%dGeV",Energy);
   //  legend->SetHeader(title);
