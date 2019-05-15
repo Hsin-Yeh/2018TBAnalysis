@@ -255,6 +255,8 @@ void makePlots::Loop(){
 	//if ( impact_R > 1.5 ) continue;
 	int Nhits = NRechits;
 	//if ( Nhits < 200 ) continue;
+	if ( maxID[0] < 50 )  continue;
+	if ( maxID[0] > 70 ) continue;
 	Passed_events++;
 
 	h_totalE->Fill(totalE);
@@ -263,7 +265,7 @@ void makePlots::Loop(){
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	  //Fill shower shape histogram
 	  if( layerE1[iL] == 0) continue;
-
+	  /*
 	  if ( (iL+1) % 2 != 0 ) {
 		if ( maxID [ iL+1 ] < 50 )  continue;
 		if ( maxID [ iL+1 ] > 100 ) continue;
@@ -272,7 +274,7 @@ void makePlots::Loop(){
 		if ( maxID [ iL+1 ] < 70 )  continue;
 		if ( maxID [ iL+1 ] > 100 ) continue;
 	  }
-	  
+	  */
 	  double E1devE7  = layerE1[iL]/layerE7[iL];
 	  double E7devE19 = layerE7[iL]/layerE19[iL];
 	  h_E1devE7 [iL]->Fill(E1devE7);
