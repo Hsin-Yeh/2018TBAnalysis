@@ -163,7 +163,7 @@ void Compare_DataMC(){
 
   
   for(int iL = 0; iL < NLAYER ; ++iL){
-    sprintf(title,"layer%i_E1devE7",iL);
+    sprintf(title,"layer%i_E1devE7",iL+1);
     h_E1devE7[0][iL] = (TH1D *)f_MC.Get(title);
     h_E1devE7[0][iL]->SetLineColor(Color(0));
     h_E1devE7[0][iL]->SetLineWidth(2.0);
@@ -176,7 +176,7 @@ void Compare_DataMC(){
     
 
   
-    sprintf(title,"layer%i_E7devE19",iL);
+    sprintf(title,"layer%i_E7devE19",iL+1);
     h_E7devE19[0][iL] = (TH1D *)f_MC.Get(title);
     h_E7devE19[0][iL]->SetLineColor(Color(0));
     h_E7devE19[0][iL]->SetLineWidth(2.0);
