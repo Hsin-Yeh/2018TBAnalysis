@@ -222,11 +222,11 @@ void makePlots::Loop(){
   //TProfile *t_impacY_posy = new TProfile("h_impacY_posy","",50,-6,6,-6,6);
     
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
-	sprintf(title,"layer%i_E1devE7",iL);
+	sprintf(title,"layer%i_E1devE7",iL+1);
 	h_E1devE7[iL] = new TH1D(title,title,101,0,1.01);
-	sprintf(title,"layer%i_E7devE19",iL);
+	sprintf(title,"layer%i_E7devE19",iL+1);
 	h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
-	sprintf(title,"layer%i_maxID",iL);
+	sprintf(title,"layer%i_maxID",iL+1);
 	h_maxID[iL] = new TH1F( title, title, 128, 0, 256);
   }
 
@@ -263,7 +263,16 @@ void makePlots::Loop(){
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	  //Fill shower shape histogram
 	  if( layerE1[iL] == 0) continue;
-	  if ( maxID [ layer-1 ] < 50 ) continue;
+
+	  if ( (iL+1) % 2 != 0 ) {
+		if ( maxID [ iL+1 ] < 50 )  continue;
+		if ( maxID [ iL+1 ] > 100 ) continue;
+	  }
+	  else if ( (iL+1) % 2 == 0 ) {
+		if ( maxID [ iL+1 ] < 70 )  continue;
+		if ( maxID [ iL+1 ] > 100 ) continue;
+	  }
+	  
 	  double E1devE7  = layerE1[iL]/layerE7[iL];
 	  double E7devE19 = layerE7[iL]/layerE19[iL];
 	  h_E1devE7 [iL]->Fill(E1devE7);
