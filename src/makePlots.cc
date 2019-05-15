@@ -421,8 +421,8 @@ void makePlots::Event_Display(){
 	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
 	  if ( layer > 28 ) continue;
 	  //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
-	  latShower_energy[layer-1]->Fill(posx,posy,energy/ENEPERMIP);
-	  if(layer == 1) { firstL->Fill(posx,posy,energy/ENEPERMIP); }
+	  latShower_energy[layer-1]->Fill( posx, posy, energy/totalE_CEE );
+	  if(layer == 1) { firstL->Fill( posx, posy, energy/totalE_CEE ); }
 	}
 	//}
   }
