@@ -227,7 +227,7 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_E7devE19",iL+1);
 	h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
 	sprintf(title,"layer%i_maxID",iL+1);
-	h_maxID[iL] = new TH1F( title, title, 128, 0, 256);
+	h_maxID[iL] = new TH1F( title, title, 128, 0, 128);
   }
 
   TH2Poly *poly = new TH2Poly();
