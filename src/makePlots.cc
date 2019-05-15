@@ -255,8 +255,8 @@ void makePlots::Loop(){
 	//if ( impact_R > 1.5 ) continue;
 	int Nhits = NRechits;
 	//if ( Nhits < 200 ) continue;
-	if ( maxID[0] < 50 )  continue;
-	if ( maxID[0] > 70 ) continue;
+	//if ( maxID[0] < 50 )  continue;
+	//if ( maxID[0] > 70 ) continue;
 	Passed_events++;
 
 	h_totalE->Fill(totalE);
