@@ -179,6 +179,8 @@ void makePlots::Loop(){
   double efficiency;
   int layer, chip, channel;
   double posx, posy, posz, energy;
+  int layerID[EE_NLAYER];
+  int layerNhit_avg[EE_NLAYER];
 
   // Declare Draw Options
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
@@ -240,6 +242,8 @@ void makePlots::Loop(){
 	sprintf(title,"Layer_%i",iL+1);
 	latShower_energy[iL]->SetTitle(title);
 	latShower_energy[iL]->SetName(title);
+	layerID[iL] = iL + 1;
+	layerNhit_avg[iL] = 0;
   }
 	
 
@@ -287,7 +291,6 @@ void makePlots::Loop(){
 		h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
 		h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
 	  }
-	  
 	}
 
 	double Energy_cell[NCHANNEL];
@@ -337,6 +340,11 @@ void makePlots::Loop(){
 	SHD_Elayer /= totalE;
 	h_SHD_Elayer -> Fill( SHD_Elayer );
 	//h_SHD_impactR -> Fill( SHD_Elayer, impact_R );
+
+	// Average Nhits_Layer
+	for( int iL = 0; iL < EE_NLAYER; iL++){
+	  layerNhit_avg [ iL ] += layerNhit[iL];
+	}
   }
 
   //Efficiency
@@ -358,6 +366,8 @@ void makePlots::Loop(){
 	h_E1devE7 [iL]->Scale(scale);
 	scale = 1/h_E7devE19[iL]->Integral();
 	h_E7devE19[iL]->Scale(scale);
+
+	layerNhit_avg [ iL ] /= Passed_events;
   }
 	
   for ( int iL = 0; iL < EE_NLAYER; iL++){
@@ -365,6 +375,10 @@ void makePlots::Loop(){
 	//		P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
 	//	latShower_energy[iL] -> Draw("colz");
   }
+  TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
+  g_layerNhit_avg->Write();
+
+
   //	c1->Update();
   //gPad->WaitPrimitive();
   //c1->Write();

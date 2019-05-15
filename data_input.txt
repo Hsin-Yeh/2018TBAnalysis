@@ -1,1 +1,1 @@
-output_root/sim_20GeV_50TH1_300TH2_10X1_5X2.root
+output_root/ntuple_sim_config22_pdgID11_beamMomentum20_listFTFP_BERT_EMM.root
