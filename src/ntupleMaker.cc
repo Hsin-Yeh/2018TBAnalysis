@@ -349,6 +349,7 @@ void ntupleMaker::NtupleMaker(){
   double z_ch[NLAYER][NCHANNEL];
   double impactX[NLAYER];
   double impactY[NLAYER];
+  int maxID[NLAYER];
 
   outT3->Branch("hit_mip","std::vector< std::vector<double> >",&hit_tmp);
   outT3->Branch("hit_x","std::vector< std::vector<double> >",&hit_x);
@@ -366,6 +367,7 @@ void ntupleMaker::NtupleMaker(){
   outT3->Branch("layerE37",E_37,"layerE37[40]/D");
   outT3->Branch("impactX",impactX,"impactX[40]/D");
   outT3->Branch("impactY",impactY,"impactY[40]/D");
+  outT3->Branch("maxID",maxID,"maxID[40]/I");
 
   
 
@@ -388,6 +390,7 @@ void ntupleMaker::NtupleMaker(){
       E_7[iL] = 0;
       E_19[iL] = 0;
       E_37[iL] = 0;
+	  maxID[iL] = -1;
       for(int ich = 0; ich < NCHANNEL; ++ich){
 		E_ch[iL][ich] = 0;
       }
@@ -484,12 +487,11 @@ void ntupleMaker::NtupleMaker(){
  
     for(int iL = 0; iL < NLAYER ; ++iL){
       //Find seed
-      int maxID = -1;
       double Emax = -1;
       for(int ich = 0; ich < NCHANNEL; ich++){
 		if( E_ch[iL][ich] > Emax){
 		  Emax = E_ch[iL][ich];
-		  maxID = ich;
+		  maxID[iL] = ich;
 		  E_1[iL] = E_ch[iL][ich];
 		}
       }
@@ -497,8 +499,8 @@ void ntupleMaker::NtupleMaker(){
       double dx,dy,dR;
       for(int ich = 0; ich < NCHANNEL; ich++){
 		if( E_ch[iL][ich] == 0 ) continue;
-		dx = x_ch[iL][ich] - x_ch[iL][maxID];
-		dy = y_ch[iL][ich] - y_ch[iL][maxID];
+		dx = x_ch[iL][ich] - x_ch [iL] [ maxID[iL] ];
+		dy = y_ch[iL][ich] - y_ch [iL] [ maxID[iL] ];
 		dR = sqrt(dx*dx + dy*dy);
 		if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];

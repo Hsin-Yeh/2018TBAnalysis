@@ -303,6 +303,7 @@ class makePlots{
   Double_t        layerE37[40];
   Double_t        impactX[40];
   Double_t        impactY[40];
+  Int_t           maxID[40];
 
   // List of branches
   TBranch        *b_hit_mip;   //!
@@ -320,6 +321,7 @@ class makePlots{
   TBranch        *b_layerE37;   //!
   TBranch        *b_impactX;   //!
   TBranch        *b_impactY;   //!
+  TBranch        *b_maxID;
   
 };
 
