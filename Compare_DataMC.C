@@ -215,7 +215,7 @@ void Compare_DataMC(){
 
   for(int iL = 0; iL < NLAYER ; ++iL){
 
-	//c2->cd(iL+1);
+	c2->cd(iL+1);
 	sprintf(title,"E1devE7_layer%02d_%dGeV", iL+1, Energy);
 	//h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	//h_E1devE7[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
@@ -225,16 +225,16 @@ void Compare_DataMC(){
     //h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
-	c1->Update();
-    //c2->Update();
+	//c1->Update();
+    c2->Update();
 	//c2->Write();
 	//gPad->WaitPrimitive();
-    sprintf(title,"plots/%s/E1devE7_layer%02d.png", f_substr.c_str(), iL+1);
-    img->FromPad(c1);
-    img->WriteImage(title);
+    //sprintf(title,"plots/%s/E1devE7_layer%02d.png", f_substr.c_str(), iL+1);
+    //img->FromPad(c1);
+    //img->WriteImage(title);
 	//c1->SaveAs(title);
 
-	//c3->cd(iL+1);
+	c3->cd(iL+1);
 	sprintf(title,"E7devE19_layer%02d_%dGeV", iL+1, Energy);
 	h_E7devE19[0][iL]->SetTitle(title);
 	//h_E7devE19[0][iL]->GetYaxis()->SetRangeUser(0,0.09);
@@ -245,17 +245,19 @@ void Compare_DataMC(){
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     sprintf(title,"Beam Energy = %dGeV",Energy);
-	c1->Update();
-    //c3->Update();
+	//c1->Update();
+    c3->Update();
 	//c1->Write();
     //gPad->WaitPrimitive();
-    sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr.c_str(), iL+1);
-    img->FromPad(c1);
-    img->WriteImage(title);
+    //sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr.c_str(), iL+1);
+    //img->FromPad(c1);
+    //img->WriteImage(title);
     //c1->SaveAs(title);
   }
-  //c2->Write();
-  //c3->Write();
+  sprintf(title,"plots/%s/E1devE7.pdf", f_substr.c_str());
+  c2->SaveAs(title);
+  sprintf(title,"plots/%s/E7devE19.pdf", f_substr.c_str());
+  c3->SaveAs(title);
 
   f_output.Write();
   f_output.Close();
