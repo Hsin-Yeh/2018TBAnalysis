@@ -431,6 +431,7 @@ void makePlots::Event_Display(){
 	
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	c1->cd(iL+1);
+	//latShower_energy[iL]->SetMaximum(100);
 	latShower_energy[iL]->Draw("col");
   }
   c1->Update();
