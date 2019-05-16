@@ -132,7 +132,7 @@ void Compare_DataMC(){
 
   start = filename.find("sim_");
   end = filename.find("GeV");
-  Energy = std::stoi(filename.substr(start+4,end-start-4));
+  Energy = stringstream(filename.substr(start+4,end-start-4));
 
   cout << "Energy = " << Energy << " GeV " << endl;
 
