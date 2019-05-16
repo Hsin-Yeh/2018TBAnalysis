@@ -217,9 +217,9 @@ void Compare_DataMC(){
 
 	c2->cd(iL+1);
 	sprintf(title,"E1devE7_layer%02d_%sGeV", iL+1, Energy.c_str());
-	//h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	//h_E1devE7[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	//h_E1devE7[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7[0][iL]->SetTitle(title);
     h_E1devE7[0][iL]->Draw("HIST");
     //h_E1devE7[1][iL]->Draw("HISTSame");
@@ -258,7 +258,7 @@ void Compare_DataMC(){
   img->FromPad(c2);
   img->WriteImage(title);
   sprintf(title,"plots/%s/E7devE19.png", f_substr.c_str());
-  img->FromPad(c2);
+  img->FromPad(c3);
   img->WriteImage(title);
 
   f_output.Write();
