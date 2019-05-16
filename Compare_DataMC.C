@@ -254,10 +254,12 @@ void Compare_DataMC(){
     //img->WriteImage(title);
     //c1->SaveAs(title);
   }
-  sprintf(title,"plots/%s/E1devE7.pdf", f_substr.c_str());
-  c2->SaveAs(title);
-  sprintf(title,"plots/%s/E7devE19.pdf", f_substr.c_str());
-  c3->SaveAs(title);
+  sprintf(title,"plots/%s/E1devE7.png", f_substr.c_str());
+  img->FromPad(c2);
+  img->WriteImage(title);
+  sprintf(title,"plots/%s/E7devE19.png", f_substr.c_str());
+  img->FromPad(c2);
+  img->WriteImage(title);
 
   f_output.Write();
   f_output.Close();

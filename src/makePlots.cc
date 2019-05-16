@@ -343,7 +343,8 @@ void makePlots::Loop(){
 
 	// Average Nhits_Layer
 	for( int iL = 0; iL < EE_NLAYER; iL++){
-	  layerNhit_avg [ iL ] += layerNhit[iL];
+	  layerNhit_avg [ iL ] += layerNhit[ iL ];
+	  cout << " layer: " << iL+1 << " #hits: " << layerNhit[ iL ] << endl;
 	}
   }
 
