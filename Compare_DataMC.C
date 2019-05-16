@@ -206,7 +206,7 @@ void Compare_DataMC(){
   legend->Draw();
   c1->Update();
   //gPad->WaitPrimitive();
-  sprintf(title,"plots/%sGeV/Total Energy CEE.png",Energy.c_str());
+  sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
   //  c1->SaveAs(title);
   img->FromPad(c1);
   img->WriteImage(title);
