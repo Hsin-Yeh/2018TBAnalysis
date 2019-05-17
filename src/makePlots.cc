@@ -179,8 +179,8 @@ void makePlots::Loop(){
   double efficiency;
   int layer, chip, channel;
   double posx, posy, posz, energy;
-  int layerID[EE_NLAYER];
-  int layerNhit_avg[EE_NLAYER];
+  float layerID[EE_NLAYER];
+  float layerNhit_avg[EE_NLAYER];
 
   // Declare Draw Options
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
