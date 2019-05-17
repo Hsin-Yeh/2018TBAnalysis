@@ -474,7 +474,7 @@ void ntupleMaker::NtupleMaker(){
       if(layer <= 28) {	totalE_CEE += energy;  }
       else            {	totalE_CEH += energy;  }
       
-      layerNhit[layer-1]++;
+      if (energy > 0.5 ) layerNhit[layer-1]++;
       hit_tmp[layer-1].push_back(energy);
       hit_x[layer-1].push_back(posx);
       hit_y[layer-1].push_back(posy);
@@ -483,7 +483,13 @@ void ntupleMaker::NtupleMaker(){
       x_ch[layer-1][ (chip*32) + (channel/2) ] = posx;
       y_ch[layer-1][ (chip*32) + (channel/2) ] = posy;
       z_ch[layer-1][ (chip*32) + (channel/2) ] = posz;
+	  //	  if ( layer == 5 ) 
+	  //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
     }
+
+	for ( int iL = 0; iL < EE_NLAYER; iL++) {
+	    cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << iL +1 << " layerNhit: " << layerNhit [ iL ] << endl;
+	}
  
     for(int iL = 0; iL < NLAYER ; ++iL){
       //Find seed
