@@ -474,7 +474,8 @@ void ntupleMaker::NtupleMaker(){
       if(layer <= 28) {	totalE_CEE += energy;  }
       else            {	totalE_CEH += energy;  }
       
-      if (energy > 0.5 ) layerNhit[layer-1]++;
+      //if (energy > 0.5 )
+		layerNhit[layer-1]++;
       hit_tmp[layer-1].push_back(energy);
       hit_x[layer-1].push_back(posx);
       hit_y[layer-1].push_back(posy);
