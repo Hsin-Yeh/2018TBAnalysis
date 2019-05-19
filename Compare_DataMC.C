@@ -250,7 +250,7 @@ void Compare_DataMC(){
   legend_Nhits->AddEntry(g_Average_Nhits[2],"Data","LP");
   legend_Nhits->Draw();
   c1->Update();
-  sprintf(title,"plots/%s/Average_Nhits.png",f_substr.c_str());
+  sprintf(title,"plots/%s/Average_Nhits_%sGeV.png",f_substr.c_str(), Energy.c_str());
   //  c1->SaveAs(title);
   img->FromPad(c1);
   img->WriteImage(title);
@@ -289,7 +289,6 @@ void Compare_DataMC(){
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
 	c2->Update();
-
 
 	c1->cd();
 	sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
