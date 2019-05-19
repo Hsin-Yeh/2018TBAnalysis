@@ -172,6 +172,7 @@ void makePlots::Getinfo(int ihit,int &layer, int &chip, int &channel, double &x,
 void makePlots::Loop(){
 
   Init();
+  gROOT->SetBatch(kTRUE);
   
   double X0_arr[EE_NLAYER];
   double *X0_layer = Set_X0(X0_arr);
@@ -204,6 +205,8 @@ void makePlots::Loop(){
   TH1D *h_E1devE7[EE_NLAYER]; 
   TH1D *h_E7devE19[EE_NLAYER];
   TH1F *h_maxID[EE_NLAYER];
+  TH1D *h_E1devE7_differentMaxID_1 = new TH1D("h_E1deve7_differentMaxID_1","",101,0,1.01);
+  TH1D *h_E1devE7_differentMaxID_2 = new TH1D("h_E1deve7_differentMaxID_2","",101,0,1.01);
   TH1D *h_totalE = new TH1D("h_totalE","",100,0,300);
   TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
   TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
@@ -212,6 +215,8 @@ void makePlots::Loop(){
   h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
   TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
   TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
+
+
 
 
   TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
@@ -269,16 +274,7 @@ void makePlots::Loop(){
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	  //Fill shower shape histogram
 	  if( layerE1[iL] == 0) continue;
-	  /*
-	  if ( (iL+1) % 2 != 0 ) {
-		if ( maxID [ iL+1 ] < 50 )  continue;
-		if ( maxID [ iL+1 ] > 100 ) continue;
-	  }
-	  else if ( (iL+1) % 2 == 0 ) {
-		if ( maxID [ iL+1 ] < 70 )  continue;
-		if ( maxID [ iL+1 ] > 100 ) continue;
-	  }
-	  */
+
 	  double E1devE7  = layerE1[iL]/layerE7[iL];
 	  double E7devE19 = layerE7[iL]/layerE19[iL];
 	  h_E1devE7 [iL]->Fill(E1devE7);
@@ -291,14 +287,20 @@ void makePlots::Loop(){
 		h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
 		h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
 	  }
+
+	  if ( iL != 4 ) continue;
+	  if ( maxID[ iL ] > 50 && maxID[ iL ] < 70 ) 
+		h_E1devE7_differentMaxID_1->Fill( E1devE7 );
+	  if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
+		h_E1devE7_differentMaxID_2->Fill( E1devE7 );
 	}
+		   
 
 	double Energy_cell[NCHANNEL];
 	for ( int icell = 0; icell < NCHANNEL; icell++){
 	  Energy_cell[icell] = 0;
 	}
 		
-
 
 	// Fill PolyHistograms
 	for(int ihit = 0; ihit < NRechits ; ++ihit){
@@ -314,9 +316,8 @@ void makePlots::Loop(){
 
 	  Energy_cell [ chip*32 + channel/2 ] += energy;
 			
-			
 	  //latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
-	  //cout << "Layer = " << layer << ", Chip = " << chip << ", channel = " << channel << ", posx = " << posx << ", posy = " << posy << ", energy = " << energy << endl;
+	  cout << " Event = " << event << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
 	}
 
 	double TwoPointCorrelation;
@@ -366,7 +367,6 @@ void makePlots::Loop(){
 	h_E1devE7 [iL]->Scale(scale);
 	scale = 1/h_E7devE19[iL]->Integral();
 	h_E7devE19[iL]->Scale(scale);
-
 	layerNhit_avg [ iL ] /= Passed_events;
   }
 	
