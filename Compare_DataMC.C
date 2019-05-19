@@ -140,7 +140,8 @@ void Compare_DataMC(){
   TFile f_MC(title);
   sprintf(title,"root_plot/plot_data_%sGeV_Ele.root",Energy.c_str());
   TFile f_Data(title);
-  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%s_listFTFP_BERT_EMM.root",Energy.c_str());
+  //  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%s_listFTFP_BERT_EMM.root",Energy.c_str());
+  sprintf(title,"./root_plot/plot_sim_%sGeV_30TH1_300TH2_10X1_1X2.root",Energy.c_str());
   TFile f_MC_original(title);
 
   sprintf(title,"output.root");
@@ -219,8 +220,10 @@ void Compare_DataMC(){
   c1->Update();
   */
   
-  legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
-  legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+  //legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
+  //legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+  legend->AddEntry(h_totalCEE[0],"new method","L");
+  legend->AddEntry(h_totalCEE[1],"old method","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
   //  sprintf(title,"beamE=%dGeV",Energy);
   //  legend->SetHeader(title);
@@ -245,8 +248,10 @@ void Compare_DataMC(){
   g_Average_Nhits[0]->Draw("APL");
   g_Average_Nhits[1]->Draw("PLSame");
   g_Average_Nhits[2]->Draw("PLSame");
-  legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
-  legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+  //legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
+  //legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+  legend_Nhits->AddEntry(g_Average_Nhits[0],"new method","L");
+  legend_Nhits->AddEntry(h_totalCEE[1],"old method","L");
   legend_Nhits->AddEntry(g_Average_Nhits[2],"Data","LP");
   legend_Nhits->Draw();
   c1->Update();
