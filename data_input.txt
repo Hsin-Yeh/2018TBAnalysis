@@ -1,1 +1,1 @@
-output_root/data_20GeV_Ele.root
+root_plot/plot_sim_20GeV_newMethod_0X2.root

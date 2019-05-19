@@ -149,6 +149,8 @@ void Compare_DataMC(){
   TH1D *h_E1devE7[3][28];
   TH1D *h_E7devE19[3][28];
   TH1D *h_totalCEE[3];
+  TGraph *g_Average_Nhits[3];
+  TH1D *h_subtract;
 
   sprintf(title,"h_totalCEE");
   h_totalCEE[0] = (TH1D *)f_MC.Get(title);
@@ -160,6 +162,19 @@ void Compare_DataMC(){
   h_totalCEE[2] = (TH1D *)f_Data.Get(title);
   h_totalCEE[2]->SetLineColor(1);
   h_totalCEE[2]->SetLineWidth(2);
+  
+  sprintf(title,"Graph");
+  g_Average_Nhits[0] = (TGraph *)f_MC.Get(title);
+  g_Average_Nhits[0]->SetLineColor(Color(0));
+  g_Average_Nhits[0]->SetMarkerColor(Color(0));
+  g_Average_Nhits[0]->SetLineWidth(2);
+  g_Average_Nhits[1] = (TGraph *)f_MC_original.Get(title);
+  g_Average_Nhits[1]->SetLineColor(4);
+  g_Average_Nhits[1]->SetLineWidth(2);
+  g_Average_Nhits[2] = (TGraph *)f_Data.Get(title);
+  g_Average_Nhits[2]->SetLineColor(1);
+  g_Average_Nhits[2]->SetLineWidth(2);
+
 
   
   for(int iL = 0; iL < NLAYER ; ++iL){
@@ -190,12 +205,19 @@ void Compare_DataMC(){
   
   TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
   c1->cd();
-  
   sprintf(title,"Total Energy CEE ");
   h_totalCEE[0]->SetTitle("Total Energy CEE");
   h_totalCEE[0]->Draw("HIST");
   //  h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("Same");
+  /*
+  h_subtract = new TH1D(*h_totalCEE[0]);
+  //  h_subtract->Add(h_totalCEE[0], -1.0);
+  h_subtract->Divide(h_totalCEE[2]);
+  h_subtract->Draw("P");
+  c1->Update();
+  */
+  
   legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
   //legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
@@ -211,9 +233,33 @@ void Compare_DataMC(){
   img->WriteImage(title);
 
 
+  // Compare Average_Nhits
+  c1->SetGrid();
+  TLegend* legend_Nhits = new TLegend(0.7,0.75,0.9,0.9);
+  sprintf(title,"Total Energy CEE ");
+  g_Average_Nhits[0]->SetTitle("Average_Nhits");
+  g_Average_Nhits[0]->GetYaxis()->SetNdivisions(20);
+  g_Average_Nhits[0]->GetYaxis()->SetTitle("Average #hits");
+  g_Average_Nhits[0]->GetXaxis()->SetTitle("LayerID");
+  g_Average_Nhits[0]->Draw("APL");
+  //  h_Average_Nhits[1]->Draw("HISTSame");
+  g_Average_Nhits[2]->Draw("PLSame");
+  legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
+  //legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+  legend_Nhits->AddEntry(g_Average_Nhits[2],"Data","LP");
+  legend_Nhits->Draw();
+  c1->Update();
+  sprintf(title,"plots/%s/Average_Nhits.png",f_substr.c_str());
+  //  c1->SaveAs(title);
+  img->FromPad(c1);
+  img->WriteImage(title);
+
+  
 
   for(int iL = 0; iL < NLAYER ; ++iL){
 
+	
+	c1->cd();
 	sprintf(title,"E1devE7_layer%02d_%sGeV", iL+1, Energy.c_str());
 	h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
@@ -229,6 +275,14 @@ void Compare_DataMC(){
     img->WriteImage(title);
 	//c1->SaveAs(title);
 
+	/*
+	h_subtract = new TH1D(*h_E1devE7[0][iL]);
+	h_subtract->Divide(h_E1devE7[2][iL]);
+	h_subtract->Draw("P");
+	c1->Update();
+	gPad->WaitPrimitive();
+	*/
+	
 	c2->cd(iL+1);
 	h_E1devE7[0][iL]->Draw("HIST");
 	// h_E1devE7[1][iL]->Draw("HISTSame");
@@ -236,8 +290,8 @@ void Compare_DataMC(){
     legend->Draw();
 	c2->Update();
 
-	
-	
+
+	c1->cd();
 	sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
 	h_E7devE19[0][iL]->SetTitle(title);
 	//h_E7devE19[0][iL]->GetYaxis()->SetRangeUser(0,0.09);
