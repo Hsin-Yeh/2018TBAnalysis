@@ -137,7 +137,7 @@ void Compare_DataMC(){
   cout << "Energy = " << Energy << " GeV " << endl;
 
   //sprintf(title,"%s",filename.c_str());
-  sprintf(title,"root_plot/plot_sim_%sGeV_newMethod_0X2.root");
+  sprintf(title,"root_plot/plot_sim_%sGeV_newMethod_0X2.root",Energy.c_str());
   TFile f_MC(title);
   sprintf(title,"root_plot/plot_data_%sGeV_Ele.root",Energy.c_str());
   TFile f_Data(title);
