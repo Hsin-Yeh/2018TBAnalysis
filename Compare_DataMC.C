@@ -243,7 +243,7 @@ void Compare_DataMC(){
   g_Average_Nhits[0]->GetYaxis()->SetTitle("Average #hits");
   g_Average_Nhits[0]->GetXaxis()->SetTitle("LayerID");
   g_Average_Nhits[0]->Draw("APL");
-  h_Average_Nhits[1]->Draw("HISTSame");
+  g_Average_Nhits[1]->Draw("PLSame");
   g_Average_Nhits[2]->Draw("PLSame");
   legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
   legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
