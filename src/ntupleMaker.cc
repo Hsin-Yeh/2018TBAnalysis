@@ -469,14 +469,13 @@ void ntupleMaker::NtupleMaker(){
     for(int h = 0; h < Nhits ; ++h){
 
       Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
-	  cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+	  //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
 	  if ( energy < 0.5 ) continue;
 	  if ( layer == 1 && chip == 0 ) continue;
       //Be careful here layerID start from 1
       totalE += energy;
       if(layer <= 28) {	totalE_CEE += energy;  }
       else            {	totalE_CEH += energy;  }
-
 	  layerNhit[layer-1]++;
       hit_tmp[layer-1].push_back(energy);
       hit_x[layer-1].push_back(posx);

@@ -302,7 +302,7 @@ void makePlots::Loop(){
 	// Fill PolyHistograms
 	for(int ihit = 0; ihit < NRechits ; ++ihit){
 	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
-	  cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
+	  //cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
 	  if ( layer > EE_NLAYER ) continue;
 	  //if ( chip != 1 ) continue;
 	  //if ( channel != 34 ) continue;
