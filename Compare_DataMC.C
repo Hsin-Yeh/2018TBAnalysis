@@ -235,10 +235,10 @@ void Compare_DataMC(){
   h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("Same");
   
-  //legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
-  //legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
-  legend->AddEntry(h_totalCEE[0],"w/ smearing","L");
-  legend->AddEntry(h_totalCEE[1],"w/o smearing","L");
+  legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
+  legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+  //legend->AddEntry(h_totalCEE[0],"w/ smearing","L");
+  //legend->AddEntry(h_totalCEE[1],"w/o smearing","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
   //  sprintf(title,"beamE=%dGeV",Energy);
   //  legend->SetHeader(title);
@@ -263,10 +263,10 @@ void Compare_DataMC(){
   g_Average_Nhits[1]->Draw("APL");
   g_Average_Nhits[2]->Draw("PLSame");
   g_Average_Nhits[0]->Draw("PLSame");
-  //legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
-  //legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
-  legend_Nhits->AddEntry(g_Average_Nhits[0],"new method","L");
-  legend_Nhits->AddEntry(h_totalCEE[1],"old method","L");
+  legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
+  legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+  //legend_Nhits->AddEntry(g_Average_Nhits[0],"new method","L");
+  //legend_Nhits->AddEntry(h_totalCEE[1],"old method","L");
   legend_Nhits->AddEntry(g_Average_Nhits[2],"Data","LP");
   legend_Nhits->Draw();
   c1->Update();
