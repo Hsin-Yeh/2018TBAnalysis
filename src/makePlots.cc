@@ -205,8 +205,8 @@ void makePlots::Loop(){
   TH1D *h_E1devE7[EE_NLAYER]; 
   TH1D *h_E7devE19[EE_NLAYER];
   TH1F *h_maxID[EE_NLAYER];
-  TH1D *h_E1devE7_differentMaxID_1 = new TH1D("h_E1deve7_differentMaxID_1","",101,0,1.01);
-  TH1D *h_E1devE7_differentMaxID_2 = new TH1D("h_E1deve7_differentMaxID_2","",101,0,1.01);
+  TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
+  TH1D *h_E1devE7_differentMaxID_2[EE_NLAYER];
   TH1D *h_totalE = new TH1D("h_totalE","",100,0,300);
   TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
   TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
@@ -215,9 +215,6 @@ void makePlots::Loop(){
   h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
   TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
   TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
-
-
-
 
   TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
@@ -235,6 +232,10 @@ void makePlots::Loop(){
 	h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
 	sprintf(title,"layer%i_maxID",iL+1);
 	h_maxID[iL] = new TH1F( title, title, 128, 0, 128);
+	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
+	h_E1devE7_differentMaxID_1[iL] = new TH1D(title, title, 101, 0, 1.01);
+	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
+	h_E1devE7_differentMaxID_2[iL] = new TH1D(title, title, 101, 0, 1.01);
   }
 
   TH2Poly *poly = new TH2Poly();
@@ -250,7 +251,6 @@ void makePlots::Loop(){
 	layerID[iL] = iL + 1;
 	layerNhit_avg[iL] = 0;
   }
-	
 
   // -------------------- Loop Over Events -------------------- //
   for(int ev = 0; ev < nevents; ++ev){
@@ -271,15 +271,13 @@ void makePlots::Loop(){
 	h_totalE->Fill(totalE);
 	h_totalCEE->Fill(totalE_CEE);
 		
-	for(int iL = 0; iL < EE_NLAYER ; ++iL){
-	  //Fill shower shape histogram
-	  if( layerE1[iL] == 0) continue;
+	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
+	  if( layerE1[iL] == 0) continue;
 	  double E1devE7  = layerE1[iL]/layerE7[iL];
 	  double E7devE19 = layerE7[iL]/layerE19[iL];
 	  h_E1devE7 [iL]->Fill(E1devE7);
 	  h_E7devE19[iL]->Fill(E7devE19);
-
 	  h_maxID[iL]->Fill( maxID[iL] );
 
 	  if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
@@ -288,11 +286,10 @@ void makePlots::Loop(){
 		h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
 	  }
 
-	  if ( iL != 4 ) continue;
 	  if ( maxID[ iL ] > 50 && maxID[ iL ] < 70 ) 
-		h_E1devE7_differentMaxID_1->Fill( E1devE7 );
+		h_E1devE7_differentMaxID_1[ iL ] -> Fill( E1devE7 );
 	  if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
-		h_E1devE7_differentMaxID_2->Fill( E1devE7 );
+		h_E1devE7_differentMaxID_2[ iL ] -> Fill( E1devE7 );
 	}
 		   
 
@@ -327,14 +324,12 @@ void makePlots::Loop(){
 		if ( Energy_cell[jcell] == 0 ) continue;
 		TwoPointCorrelation = Energy_cell[jcell] / Energy_cell[icell];
 		h_TwoPointCorrelation -> Fill ( TwoPointCorrelation );
-		//			cout << TwoPointCorrelation << endl;
 	  }
 	}
 
 
 	// Calculate the shower depth
 	double SHD_Elayer = 0;
-    
 	for(int iL = 0 ; iL < EE_NLAYER ; ++iL){
 	  SHD_Elayer += X0_layer[iL]*layerE[iL];
 	}
@@ -367,19 +362,21 @@ void makePlots::Loop(){
 	h_E1devE7 [iL]->Scale(scale);
 	scale = 1/h_E7devE19[iL]->Integral();
 	h_E7devE19[iL]->Scale(scale);
+	scale = 1/h_E1devE7_differentMaxID_1[iL]->Integral();
+	h_E1devE7_differentMaxID_1[iL]->Scale(scale);
+	scale = 1/h_E1devE7_differentMaxID_2[iL]->Integral();
+	h_E1devE7_differentMaxID_2[iL]->Scale(scale);
 	layerNhit_avg [ iL ] /= Passed_events;
   }
 	
   for ( int iL = 0; iL < EE_NLAYER; iL++){
 	//c1->cd(iL+1);
-	//		P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
-	//	latShower_energy[iL] -> Draw("colz");
+	//P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
+	//latShower_energy[iL] -> Draw("colz");
   }
   TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
   g_layerNhit_avg->Write();
-
-
-  //	c1->Update();
+  //c1->Update();
   //gPad->WaitPrimitive();
   //c1->Write();
   delete c1;
