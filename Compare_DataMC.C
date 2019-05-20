@@ -321,14 +321,14 @@ void Compare_DataMC(){
     sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV_maxID75_100.png", f_substr.c_str(), iL+1, Energy.c_str());
     img->FromPad(c1);
     img->WriteImage(title);
-	
+	/*
 	c2->cd(iL+1);
 	h_E1devE7[0][iL]->Draw("HIST");
 	h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
 	c2->Update();
-
+	*/
 	c1->cd();
 	sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
 	h_E7devE19[0][iL]->SetTitle(title);
@@ -341,22 +341,23 @@ void Compare_DataMC(){
     sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr.c_str(), iL+1);
     img->FromPad(c1);
     img->WriteImage(title);
-
+	/*
 	c3->cd(iL+1);
 	h_E7devE19[0][iL]->Draw("HIST");
     h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
 	c3->Update();
+	*/
   }
-
+  /*
   sprintf(title,"plots/%s/E1devE7.png", f_substr.c_str());
   img->FromPad(c2);
   img->WriteImage(title);
   sprintf(title,"plots/%s/E7devE19.png", f_substr.c_str());
   img->FromPad(c3);
   img->WriteImage(title);
-
+  */
   f_output.Write();
   f_output.Close();
   
