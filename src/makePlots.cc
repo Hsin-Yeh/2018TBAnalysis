@@ -314,7 +314,7 @@ void makePlots::Loop(){
 	  Energy_cell [ chip*32 + channel/2 ] += energy;
 			
 	  //latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
-	  cout << " Event = " << event << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
+	  cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
 	}
 
 	double TwoPointCorrelation;

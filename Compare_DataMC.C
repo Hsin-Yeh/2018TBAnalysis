@@ -205,26 +205,26 @@ void Compare_DataMC(){
     h_E7devE19[2][iL]->SetLineWidth(2);
 
 	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
-    h_E1devE7_differentMaxID_1[0][iL] = (TH1D *)f_MC.Get(title);
-    h_E1devE7_differentMaxID_1[0][iL]->SetLineColor(Color(0));
-    h_E1devE7_differentMaxID_1[0][iL]->SetLineWidth(2.0);
-    h_E1devE7_differentMaxID_1[1][iL] = (TH1D *)f_MC_original.Get(title);
-    h_E1devE7_differentMaxID_1[1][iL]->SetLineColor(4);
-    h_E1devE7_differentMaxID_1[1][iL]->SetLineWidth(2);
-    h_E1devE7_differentMaxID_1[2][iL] = (TH1D *)f_Data.Get(title);
-    h_E1devE7_differentMaxID_1[2][iL]->SetLineColor(1);
-    h_E1devE7_differentMaxID_1[2][iL]->SetLineWidth(2);
+    h_E1devE7_differentMaxID_1[iL] = (TH1D *)f_MC.Get(title);
+    h_E1devE7_differentMaxID_1[iL]->SetLineColor(Color(0));
+    h_E1devE7_differentMaxID_1[iL]->SetLineWidth(2.0);
+    h_E1devE7_differentMaxID_1[iL] = (TH1D *)f_MC_original.Get(title);
+    h_E1devE7_differentMaxID_1[iL]->SetLineColor(4);
+    h_E1devE7_differentMaxID_1[iL]->SetLineWidth(2);
+    h_E1devE7_differentMaxID_1[iL] = (TH1D *)f_Data.Get(title);
+    h_E1devE7_differentMaxID_1[iL]->SetLineColor(1);
+    h_E1devE7_differentMaxID_1[iL]->SetLineWidth(2);
 
 	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
-    h_E1devE7_differentMaxID_2[0][iL] = (TH1D *)f_MC.Get(title);
-    h_E1devE7_differentMaxID_2[0][iL]->SetLineColor(Color(0));
-    h_E1devE7_differentMaxID_2[0][iL]->SetLineWidth(2.0);
-    h_E1devE7_differentMaxID_2[1][iL] = (TH1D *)f_MC_original.Get(title);
-    h_E1devE7_differentMaxID_2[1][iL]->SetLineColor(4);
-    h_E1devE7_differentMaxID_2[1][iL]->SetLineWidth(2);
-    h_E1devE7_differentMaxID_2[2][iL] = (TH1D *)f_Data.Get(title);
-    h_E1devE7_differentMaxID_2[2][iL]->SetLineColor(1);
-    h_E1devE7_differentMaxID_2[2][iL]->SetLineWidth(2);
+    h_E1devE7_differentMaxID_2[iL] = (TH1D *)f_MC.Get(title);
+    h_E1devE7_differentMaxID_2[iL]->SetLineColor(Color(0));
+    h_E1devE7_differentMaxID_2[iL]->SetLineWidth(2.0);
+    h_E1devE7_differentMaxID_2[iL] = (TH1D *)f_MC_original.Get(title);
+    h_E1devE7_differentMaxID_2[iL]->SetLineColor(4);
+    h_E1devE7_differentMaxID_2[iL]->SetLineWidth(2);
+    h_E1devE7_differentMaxID_2[iL] = (TH1D *)f_Data.Get(title);
+    h_E1devE7_differentMaxID_2[iL]->SetLineColor(1);
+    h_E1devE7_differentMaxID_2[iL]->SetLineWidth(2);
   }
   
   TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
@@ -295,13 +295,13 @@ void Compare_DataMC(){
     img->WriteImage(title);
 
 	sprintf(title,"E1devE7_layer%02d_%sGeV_maxID50_70", iL+1, Energy.c_str());
-	h_E1devE7_differentMaxID_1[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	h_E1devE7_differentMaxID_1[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	h_E1devE7_differentMaxID_1[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	h_E1devE7_differentMaxID_1[0][iL]->SetTitle(title);
-    h_E1devE7_differentMaxID_1[0][iL]->Draw("HIST");
-	h_E1devE7_differentMaxID_1[1][iL]->Draw("HISTSame");
-    h_E1devE7_differentMaxID_1[2][iL]->Draw("Same");
+	h_E1devE7_differentMaxID_1[iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_1[iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_1[iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_1[iL]->SetTitle(title);
+    h_E1devE7_differentMaxID_1[iL]->Draw("HIST");
+	h_E1devE7_differentMaxID_1[iL]->Draw("HISTSame");
+    h_E1devE7_differentMaxID_1[iL]->Draw("Same");
     legend->Draw();
 	c1->Update();
     sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV_maxID50_70.png", f_substr.c_str(), iL+1, Energy.c_str());
@@ -309,13 +309,13 @@ void Compare_DataMC(){
     img->WriteImage(title);
 
 	sprintf(title,"E1devE7_layer%02d_%sGeV_maxID75_100", iL+1, Energy.c_str());
-	h_E1devE7_differentMaxID_2[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	h_E1devE7_differentMaxID_2[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	h_E1devE7_differentMaxID_2[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	h_E1devE7_differentMaxID_2[0][iL]->SetTitle(title);
-    h_E1devE7_differentMaxID_2[0][iL]->Draw("HIST");
-	h_E1devE7_differentMaxID_2[1][iL]->Draw("HISTSame");
-    h_E1devE7_differentMaxID_2[2][iL]->Draw("Same");
+	h_E1devE7_differentMaxID_2[iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_2[iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_2[iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_2[iL]->SetTitle(title);
+    h_E1devE7_differentMaxID_2[iL]->Draw("HIST");
+	h_E1devE7_differentMaxID_2[iL]->Draw("HISTSame");
+    h_E1devE7_differentMaxID_2[iL]->Draw("Same");
     legend->Draw();
 	c1->Update();
     sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV_maxID75_100.png", f_substr.c_str(), iL+1, Energy.c_str());
