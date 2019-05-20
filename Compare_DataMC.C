@@ -137,12 +137,13 @@ void Compare_DataMC(){
   cout << "Energy = " << Energy << " GeV " << endl;
 
   //sprintf(title,"%s",filename.c_str());
-  sprintf(title,"root_plot/plot_sim_%sGeV_newMethod_0X2.root",Energy.c_str());
+  sprintf(title,"root_plot/%s.root",f_substr.c_str());
   TFile f_MC(title);
   sprintf(title,"root_plot/plot_data_%sGeV_Ele.root",Energy.c_str());
   TFile f_Data(title);
-  //  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%s_listFTFP_BERT_EMM.root",Energy.c_str());
-  sprintf(title,"root_plot/plot_sim_%sGeV_30TH1_300TH2_10X1_1X2.root",Energy.c_str());
+  //sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%s_listFTFP_BERT_EMM.root",Energy.c_str());
+  //sprintf(title,"root_plot/plot_sim_%sGeV_30TH1_300TH2_10X1_1X2.root",Energy.c_str());
+  sprintf(title,"root_plot/%s_noSmearingSamples",f_substr.c_str());
   TFile f_MC_original(title);
 
   sprintf(title,"output.root");
@@ -151,6 +152,8 @@ void Compare_DataMC(){
   TH1D *h_E1devE7[3][28];
   TH1D *h_E7devE19[3][28];
   TH1D *h_totalCEE[3];
+  TH1D *h_E1devE7_differentMaxID_1[28];
+  TH1D *h_E1devE7_differentMaxID_2[28];
   TGraph *g_Average_Nhits[3];
   TH1D *h_subtract;
 
@@ -177,8 +180,6 @@ void Compare_DataMC(){
   g_Average_Nhits[2] = (TGraph *)f_Data.Get(title);
   g_Average_Nhits[2]->SetLineColor(1);
   g_Average_Nhits[2]->SetLineWidth(2);
-
-
   
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"layer%i_E1devE7",iL+1);
@@ -191,7 +192,6 @@ void Compare_DataMC(){
     h_E1devE7[2][iL] = (TH1D *)f_Data.Get(title);
     h_E1devE7[2][iL]->SetLineColor(1);
     h_E1devE7[2][iL]->SetLineWidth(2);
-    
   
     sprintf(title,"layer%i_E7devE19",iL+1);
     h_E7devE19[0][iL] = (TH1D *)f_MC.Get(title);
@@ -204,6 +204,27 @@ void Compare_DataMC(){
     h_E7devE19[2][iL]->SetLineColor(1);
     h_E7devE19[2][iL]->SetLineWidth(2);
 
+	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
+    h_E1devE7_differentMaxID_1[0][iL] = (TH1D *)f_MC.Get(title);
+    h_E1devE7_differentMaxID_1[0][iL]->SetLineColor(Color(0));
+    h_E1devE7_differentMaxID_1[0][iL]->SetLineWidth(2.0);
+    h_E1devE7_differentMaxID_1[1][iL] = (TH1D *)f_MC_original.Get(title);
+    h_E1devE7_differentMaxID_1[1][iL]->SetLineColor(4);
+    h_E1devE7_differentMaxID_1[1][iL]->SetLineWidth(2);
+    h_E1devE7_differentMaxID_1[2][iL] = (TH1D *)f_Data.Get(title);
+    h_E1devE7_differentMaxID_1[2][iL]->SetLineColor(1);
+    h_E1devE7_differentMaxID_1[2][iL]->SetLineWidth(2);
+
+	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
+    h_E1devE7_differentMaxID_2[0][iL] = (TH1D *)f_MC.Get(title);
+    h_E1devE7_differentMaxID_2[0][iL]->SetLineColor(Color(0));
+    h_E1devE7_differentMaxID_2[0][iL]->SetLineWidth(2.0);
+    h_E1devE7_differentMaxID_2[1][iL] = (TH1D *)f_MC_original.Get(title);
+    h_E1devE7_differentMaxID_2[1][iL]->SetLineColor(4);
+    h_E1devE7_differentMaxID_2[1][iL]->SetLineWidth(2);
+    h_E1devE7_differentMaxID_2[2][iL] = (TH1D *)f_Data.Get(title);
+    h_E1devE7_differentMaxID_2[2][iL]->SetLineColor(1);
+    h_E1devE7_differentMaxID_2[2][iL]->SetLineWidth(2);
   }
   
   TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
@@ -213,13 +234,6 @@ void Compare_DataMC(){
   h_totalCEE[0]->Draw("HIST");
   h_totalCEE[1]->Draw("HISTSame");
   h_totalCEE[2]->Draw("Same");
-  /*
-  h_subtract = new TH1D(*h_totalCEE[0]);
-  //  h_subtract->Add(h_totalCEE[0], -1.0);
-  h_subtract->Divide(h_totalCEE[2]);
-  h_subtract->Draw("P");
-  c1->Update();
-  */
   
   //legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
   //legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
@@ -276,18 +290,37 @@ void Compare_DataMC(){
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
 	c1->Update();
-    sprintf(title,"plots/%s/E1devE7_layer%02d.png", f_substr.c_str(), iL+1);
+    sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV.png", f_substr.c_str(), iL+1, Energy.c_str());
     img->FromPad(c1);
     img->WriteImage(title);
-	//c1->SaveAs(title);
 
-	/*
-	h_subtract = new TH1D(*h_E1devE7[0][iL]);
-	h_subtract->Divide(h_E1devE7[2][iL]);
-	h_subtract->Draw("P");
+	sprintf(title,"E1devE7_layer%02d_%sGeV_maxID50_70", iL+1, Energy.c_str());
+	h_E1devE7_differentMaxID_1[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_1[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_1[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_1[0][iL]->SetTitle(title);
+    h_E1devE7_differentMaxID_1[0][iL]->Draw("HIST");
+	h_E1devE7_differentMaxID_1[1][iL]->Draw("HISTSame");
+    h_E1devE7_differentMaxID_1[2][iL]->Draw("Same");
+    legend->Draw();
 	c1->Update();
-	gPad->WaitPrimitive();
-	*/
+    sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV_maxID50_70.png", f_substr.c_str(), iL+1, Energy.c_str());
+    img->FromPad(c1);
+    img->WriteImage(title);
+
+	sprintf(title,"E1devE7_layer%02d_%sGeV_maxID75_100", iL+1, Energy.c_str());
+	h_E1devE7_differentMaxID_2[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_2[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_2[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7_differentMaxID_2[0][iL]->SetTitle(title);
+    h_E1devE7_differentMaxID_2[0][iL]->Draw("HIST");
+	h_E1devE7_differentMaxID_2[1][iL]->Draw("HISTSame");
+    h_E1devE7_differentMaxID_2[2][iL]->Draw("Same");
+    legend->Draw();
+	c1->Update();
+    sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV_maxID75_100.png", f_substr.c_str(), iL+1, Energy.c_str());
+    img->FromPad(c1);
+    img->WriteImage(title);
 	
 	c2->cd(iL+1);
 	h_E1devE7[0][iL]->Draw("HIST");
@@ -299,9 +332,6 @@ void Compare_DataMC(){
 	c1->cd();
 	sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
 	h_E7devE19[0][iL]->SetTitle(title);
-	//h_E7devE19[0][iL]->GetYaxis()->SetRangeUser(0,0.095);
-	//h_E7devE19[1][iL]->GetYaxis()->SetRangeUser(0,0.095);
-	//h_E7devE19[2][iL]->GetYaxis()->SetRangeUser(0,0.095);
     h_E7devE19[0][iL]->Draw("HIST");
     h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
@@ -311,7 +341,6 @@ void Compare_DataMC(){
     sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr.c_str(), iL+1);
     img->FromPad(c1);
     img->WriteImage(title);
-    //c1->SaveAs(title);
 
 	c3->cd(iL+1);
 	h_E7devE19[0][iL]->Draw("HIST");
