@@ -258,7 +258,7 @@ void makePlots::Loop(){
 	GetData(ev);
 
 	// Event Selection
-	if ( dwcReferenceType < 15) continue;
+	if ( dwcReferenceType < 13) continue;
 	double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
 	//if ( impact_R < 1 ) continue;
 	//if ( impact_R > 1.5 ) continue;
