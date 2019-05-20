@@ -459,7 +459,6 @@ void ntupleMaker::NtupleMaker(){
 	*/
 	double dR = sqrt( impactX[0]*impactX[0] + impactY[0]*impactY[0]);
 
-
     int layer, chip, channel;
     double posx, posy, posz, energy, TOT;
     totalE = 0;
@@ -471,8 +470,10 @@ void ntupleMaker::NtupleMaker(){
       Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
 	  //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
 	  if ( energy < 0.5 ) continue;
-	  if ( layer == 1 && chip == 0 ) continue;
+	  if ( layer == 1  )
+		if ( chip == 0 ) continue;
       //Be careful here layerID start from 1
+	  cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
       totalE += energy;
       if(layer <= 28) {	totalE_CEE += energy;  }
       else            {	totalE_CEH += energy;  }
