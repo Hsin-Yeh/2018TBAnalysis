@@ -237,8 +237,8 @@ void Compare_DataMC(){
   
   //legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
   //legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
-  legend->AddEntry(h_totalCEE[0],"new method","L");
-  legend->AddEntry(h_totalCEE[1],"old method","L");
+  legend->AddEntry(h_totalCEE[0],"w/ smearing","L");
+  legend->AddEntry(h_totalCEE[1],"w/o smearing","L");
   legend->AddEntry(h_totalCEE[2],"Data","LP");
   //  sprintf(title,"beamE=%dGeV",Energy);
   //  legend->SetHeader(title);
