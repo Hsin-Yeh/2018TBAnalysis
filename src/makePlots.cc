@@ -312,6 +312,7 @@ void makePlots::Loop(){
 	  h_impactX_posx -> Fill( impactX[0], posx );
 	  h_impactY_posy -> Fill( impactY[0], posy );
 	  h_impactX_impactY -> Fill( impactX[0], impactY[0] );
+	  cout << impactX[0] << " " << impactY[0] << endl;
 	  //Energy_cell [ chip*32 + channel/2 ] += energy;
 	  //latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
 	}
