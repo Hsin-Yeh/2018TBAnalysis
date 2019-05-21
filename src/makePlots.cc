@@ -218,7 +218,7 @@ void makePlots::Loop(){
 
   TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
-  TH2D *h_impactX_impactY = new TH2D("h_impactX_impactY","",100,-60,60,100,-60,60);
+  TH2D *h_impactX_impactY = new TH2D("h_impactX_impactY","",120,-60,60,120,-60,60);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
 
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
@@ -312,7 +312,7 @@ void makePlots::Loop(){
 	  h_impactX_posx -> Fill( impactX[0], posx );
 	  h_impactY_posy -> Fill( impactY[0], posy );
 	  h_impactX_impactY -> Fill( impactX[0], impactY[0] );
-	  cout << impactX[0] << " " << impactY[0] << endl;
+	  
 	  //Energy_cell [ chip*32 + channel/2 ] += energy;
 	  //latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
 	}
