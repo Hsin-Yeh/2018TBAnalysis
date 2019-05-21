@@ -218,6 +218,7 @@ void makePlots::Loop(){
 
   TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
+  TH2D *h_impactX_impactY = new TH2D("h_impactX_impactY","",50,-6,6,50,-6,6);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
 
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
@@ -303,19 +304,16 @@ void makePlots::Loop(){
 	for(int ihit = 0; ihit < NRechits ; ++ihit){
 	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
 	  //cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
-	  if ( layer > EE_NLAYER ) continue;
-	  //if ( chip != 1 ) continue;
-	  //if ( channel != 34 ) continue;
+	  //if ( layer > EE_NLAYER ) continue;
+	  if ( layer > 1 ) continue;
 	  latShower_energy[layer-1] -> Fill( impactX[layer-1], impactY[layer-1], 1);
-
-	  if ( layer != 5 ) continue;
+	  
+	  if ( layer != 1 ) continue;
 	  h_impactX_posx -> Fill( impactX[0], posx );
 	  h_impactY_posy -> Fill( impactY[0], posy );
-
-	  Energy_cell [ chip*32 + channel/2 ] += energy;
-			
+	  h_impactX_impactY = > Fill( impactX[0], impactY[0] );
+	  //Energy_cell [ chip*32 + channel/2 ] += energy;
 	  //latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
-
 	}
 
 	double TwoPointCorrelation;
