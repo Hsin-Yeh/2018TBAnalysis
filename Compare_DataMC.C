@@ -286,7 +286,7 @@ void Compare_DataMC(){
 	h_E1devE7[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7[0][iL]->SetTitle(title);
     h_E1devE7[0][iL]->Draw("HIST");
-	h_E1devE7[1][iL]->Draw("HISTSame");
+	//h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
 	c1->Update();
@@ -300,7 +300,7 @@ void Compare_DataMC(){
 	h_E1devE7_differentMaxID_1[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7_differentMaxID_1[0][iL]->SetTitle(title);
     h_E1devE7_differentMaxID_1[0][iL]->Draw("HIST");
-	h_E1devE7_differentMaxID_1[1][iL]->Draw("HISTSame");
+	//h_E1devE7_differentMaxID_1[1][iL]->Draw("HISTSame");
     h_E1devE7_differentMaxID_1[2][iL]->Draw("Same");
     legend->Draw();
 	c1->Update();
@@ -314,7 +314,7 @@ void Compare_DataMC(){
 	h_E1devE7_differentMaxID_2[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7_differentMaxID_2[0][iL]->SetTitle(title);
     h_E1devE7_differentMaxID_2[0][iL]->Draw("HIST");
-	h_E1devE7_differentMaxID_2[1][iL]->Draw("HISTSame");
+	//h_E1devE7_differentMaxID_2[1][iL]->Draw("HISTSame");
     h_E1devE7_differentMaxID_2[2][iL]->Draw("Same");
     legend->Draw();
 	c1->Update();
@@ -324,7 +324,7 @@ void Compare_DataMC(){
 	
 	c2->cd(iL+1);
 	h_E1devE7[0][iL]->Draw("HIST");
-	h_E1devE7[1][iL]->Draw("HISTSame");
+	//h_E1devE7[1][iL]->Draw("HISTSame");
     h_E1devE7[2][iL]->Draw("Same");
     legend->Draw();
 	c2->Update();
@@ -333,7 +333,7 @@ void Compare_DataMC(){
 	sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
 	h_E7devE19[0][iL]->SetTitle(title);
     h_E7devE19[0][iL]->Draw("HIST");
-    h_E7devE19[1][iL]->Draw("HISTSame");
+    //h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
     sprintf(title,"Beam Energy = %sGeV",Energy.c_str());
@@ -344,7 +344,7 @@ void Compare_DataMC(){
 	
 	c3->cd(iL+1);
 	h_E7devE19[0][iL]->Draw("HIST");
-    h_E7devE19[1][iL]->Draw("HISTSame");
+    //h_E7devE19[1][iL]->Draw("HISTSame");
     h_E7devE19[2][iL]->Draw("Same");
     legend->Draw();
 	c3->Update();
