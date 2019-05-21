@@ -392,6 +392,7 @@ void ntupleMaker::NtupleMaker(){
       E_7[iL] = 0;
       E_19[iL] = 0;
       E_37[iL] = 0;
+	  E_61[iL] = 0;
 	  maxID[iL] = -1;
       for(int ich = 0; ich < NCHANNEL; ++ich){
 		E_ch[iL][ich] = 0;

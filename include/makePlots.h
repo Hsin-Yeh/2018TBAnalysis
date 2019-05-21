@@ -301,6 +301,7 @@ class makePlots{
   Double_t        layerE7[40];
   Double_t        layerE19[40];
   Double_t        layerE37[40];
+  Double_t        layerE61[40];
   Double_t        impactX[40];
   Double_t        impactY[40];
   Int_t           maxID[40];
@@ -319,6 +320,7 @@ class makePlots{
   TBranch        *b_layerE7;   //!
   TBranch        *b_layerE19;   //!
   TBranch        *b_layerE37;   //!
+  TBranch        *b_layerE61;   //!
   TBranch        *b_impactX;   //!
   TBranch        *b_impactY;   //!
   TBranch        *b_maxID;

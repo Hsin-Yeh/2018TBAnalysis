@@ -123,6 +123,7 @@ void makePlots::Init(){
   T_rechit_var->SetBranchAddress("layerE7", layerE7, &b_layerE7);
   T_rechit_var->SetBranchAddress("layerE19", layerE19, &b_layerE19);
   T_rechit_var->SetBranchAddress("layerE37", layerE37, &b_layerE37);
+  T_rechit_var->SetBranchAddress("layerE61", layerE61, &b_layerE61);
   T_rechit_var->SetBranchAddress("impactX", impactX, &b_impactX);
   T_rechit_var->SetBranchAddress("impactY", impactY, &b_impactY);
   T_rechit_var->SetBranchAddress("maxID", maxID, &b_maxID);
@@ -180,11 +181,12 @@ void makePlots::Loop(){
   double efficiency;
   int layer, chip, channel;
   double posx, posy, posz, energy;
-  float layerID[EE_NLAYER];
-  float layerNhit_avg[EE_NLAYER];
-  double E_moliere[EE_NLAYER][4];
+  double layerID[EE_NLAYER];
+  double layerNhit_avg[EE_NLAYER];
+  int N_moliere_ring = 5;
+  double E_moliere[EE_NLAYER][N_moliere_ring];
   double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626 
-  double R_moliere[4];
+  double R_moliere[N_moliere_ring];
   double R_M[EE_NLAYER];
 
   // Declare Draw Options
@@ -250,7 +252,7 @@ void makePlots::Loop(){
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
   }
 
-  for(int r = 0; r < 4; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
+  for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
 
   TH2Poly *poly = new TH2Poly();
   InitTH2Poly(*poly);
@@ -304,6 +306,8 @@ void makePlots::Loop(){
 	  E_moliere[iL][1] += layerE7[iL]/layerE[iL];
 	  E_moliere[iL][2] += layerE19[iL]/layerE[iL];
 	  E_moliere[iL][3] += layerE37[iL]/layerE[iL];
+	  E_moliere[iL][4] += layerE61[iL]/layerE[iL];
+	  cout << layerE61[iL] << endl;
 
 	  if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
 	  if ( iL == 5 && E7devE19 == 1) {
@@ -392,7 +396,7 @@ void makePlots::Loop(){
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits
 	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
 
-	for ( int r = 0; r < 4; r++ ) {                  // Calculate average E(r)/Etot for moliere radius
+	for ( int r = 0; r < N_moliere_ring; r++ ) {                  // Calculate average E(r)/Etot for moliere radius
 	  E_moliere [iL] [r] /= nevents;
 	}
   }
@@ -401,8 +405,8 @@ void makePlots::Loop(){
 	//c1->cd(iL+1);
 	//P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
 	//latShower_energy[iL] -> Draw("colz");
-	TGraph* g_layer_moliere = new TGraph ( 4, R_moliere, E_moliere[iL] );
-	TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 5);
+	TGraph* g_layer_moliere = new TGraph ( N_moliere_ring, R_moliere, E_moliere[iL] );
+	TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 10);
 	fit_layer_moliere->SetParameter(0, -0.2);
 	fit_layer_moliere->SetParameter(1, -0.6);
 	fit_layer_moliere->SetLineColor(2);
@@ -413,15 +417,17 @@ void makePlots::Loop(){
 	g_layer_moliere->Write();
 
 	R_M[iL] = fit_layer_moliere->GetX ( 0.9 , 0, 5 );
-
-	
 	delete g_layer_moliere;
 	delete fit_layer_moliere;
   }
-
-  for ( int iL = 0; iL < EE_NLAYER; iL++) 	cout << R_M[iL] << endl;
   TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
   g_layerNhit_avg->Write();
+  TGraph* g_layer_Moliere_Radius = new TGraph ( EE_NLAYER, layerID, R_M);
+  sprintf(title, "layer_Moliere_Radius");
+  g_layer_Moliere_Radius->SetName(title);
+  g_layer_Moliere_Radius->SetTitle(title);
+  g_layer_Moliere_Radius->Write();
+
   //c1->Update();
   //gPad->WaitPrimitive();
   //c1->Write();
