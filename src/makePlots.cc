@@ -221,7 +221,6 @@ void makePlots::Loop(){
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
-
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
 
   //	TProfile *t_impacX_posx = new TProfile("h_impacX_posx","",50,-6,6,-6,6);
@@ -373,6 +372,7 @@ void makePlots::Loop(){
 	scale = 1/h_E1devE7_differentMaxID_2[iL]->Integral();
 	h_E1devE7_differentMaxID_2[iL]->Scale(scale);
 	layerNhit_avg [ iL ] /= Passed_events;
+	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );
   }
 	
   for ( int iL = 0; iL < EE_NLAYER; iL++){
