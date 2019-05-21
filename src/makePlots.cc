@@ -218,8 +218,9 @@ void makePlots::Loop(){
 
   TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
-  TH2D *h_impactX_impactY = new TH2D("h_impactX_impactY","",120,-60,60,120,-60,60);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
+  TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
+  TH2D *h_impactX_impactY[EE_NLAYER];
 
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
 
@@ -237,6 +238,10 @@ void makePlots::Loop(){
 	h_E1devE7_differentMaxID_1[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
 	h_E1devE7_differentMaxID_2[iL] = new TH1D(title, title, 101, 0, 1.01);
+	sprintf(title,"layer%i_impactX_impactY_E1devE7",iL+1);
+	h_impactX_impactY_E1devE7[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
+	sprintf(title,"layer%i_impactX_impactY",iL+1);
+	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
   }
 
   TH2Poly *poly = new TH2Poly();
@@ -277,9 +282,11 @@ void makePlots::Loop(){
 	  if( layerE1[iL] == 0) continue;
 	  double E1devE7  = layerE1[iL]/layerE7[iL];
 	  double E7devE19 = layerE7[iL]/layerE19[iL];
-	  h_E1devE7 [iL]->Fill(E1devE7);
-	  h_E7devE19[iL]->Fill(E7devE19);
-	  h_maxID[iL]->Fill( maxID[iL] );
+	  h_E1devE7 [iL] -> Fill(E1devE7);
+	  h_E7devE19 [iL] -> Fill(E7devE19);
+	  h_maxID [iL] -> Fill( maxID[iL] );
+	  h_impactX_impactY_E1devE7 [iL] -> Fill( impactX[iL], impactY[iL], E1devE7 );
+	  h_impactX_impactY [iL] -> Fill( impactX[0], impactY[0] );
 
 	  if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
 	  if ( iL == 5 && E7devE19 == 1) {
@@ -311,8 +318,7 @@ void makePlots::Loop(){
 	  if ( layer != 1 ) continue;
 	  h_impactX_posx -> Fill( impactX[0], posx );
 	  h_impactY_posy -> Fill( impactY[0], posy );
-	  h_impactX_impactY -> Fill( impactX[0], impactY[0] );
-	  
+
 	  //Energy_cell [ chip*32 + channel/2 ] += energy;
 	  //latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
 	}
