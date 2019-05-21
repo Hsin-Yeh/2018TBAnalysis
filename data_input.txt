@@ -1,1 +1,1 @@
-ntuple/data/ntuple_437.root
+output_root/sim_20GeV_30TH1_120TH2_20X1_10X2.root

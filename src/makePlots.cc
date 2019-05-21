@@ -182,6 +182,9 @@ void makePlots::Loop(){
   double posx, posy, posz, energy;
   float layerID[EE_NLAYER];
   float layerNhit_avg[EE_NLAYER];
+  double E_moliere[EE_NLAYER][4];
+  double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626 
+  double R_moliere[4];
 
   // Declare Draw Options
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
@@ -220,12 +223,13 @@ void makePlots::Loop(){
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_bx_by = new TH2D("h_bx_by","",100,-10,10,100,-10,10);
+  TH2D *h_mx_my = new TH2D("h_mx_my","",100,-10,10,100,-10,10);
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
   
 
-  //	TProfile *t_impacX_posx = new TProfile("h_impacX_posx","",50,-6,6,-6,6);
+  //TProfile *t_impacX_posx = new TProfile("h_impacX_posx","",50,-6,6,-6,6);
   //TProfile *t_impacY_posy = new TProfile("h_impacY_posy","",50,-6,6,-6,6);
     
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
@@ -244,6 +248,8 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_impactX_impactY",iL+1);
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
   }
+
+  for(int r = 0; r < 4; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
 
   TH2Poly *poly = new TH2Poly();
   InitTH2Poly(*poly);
@@ -278,17 +284,25 @@ void makePlots::Loop(){
 	h_totalE   -> Fill ( totalE );
 	h_totalCEE -> Fill ( totalE_CEE );
 	h_bx_by    -> Fill ( b_x, b_y );
+	h_mx_my    -> Fill ( m_x, m_y ); 
 		
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
 	  if( layerE1[iL] == 0) continue;
 	  double E1devE7  = layerE1[iL]/layerE7[iL];
 	  double E7devE19 = layerE7[iL]/layerE19[iL];
+	  double E19devE37 = layerE19[iL]/layerE37[iL];
 	  h_E1devE7 [iL] -> Fill(E1devE7);
 	  h_E7devE19 [iL] -> Fill(E7devE19);
 	  h_maxID [iL] -> Fill( maxID[iL] );
 	  h_impactX_impactY_E1devE7 [iL] -> Fill( impactX[iL], impactY[iL], E1devE7 );
 	  h_impactX_impactY [iL] -> Fill( impactX[0], impactY[0] );
+
+	  // Molie raius calculation
+	  E_moliere[iL][0] += layerE1[iL]/layerE[iL];
+	  E_moliere[iL][1] += layerE7[iL]/layerE[iL];
+	  E_moliere[iL][2] += layerE19[iL]/layerE[iL];
+	  E_moliere[iL][3] += layerE37[iL]/layerE[iL];
 
 	  if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
 	  if ( iL == 5 && E7devE19 == 1) {
@@ -374,14 +388,29 @@ void makePlots::Loop(){
 	h_E1devE7_differentMaxID_1[iL]->Scale(scale);
 	scale = 1/h_E1devE7_differentMaxID_2[iL]->Integral();
 	h_E1devE7_differentMaxID_2[iL]->Scale(scale);
-	layerNhit_avg [ iL ] /= Passed_events;
-	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );
+	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits
+	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
+
+	for ( int r = 0; r < 4; r++ ) {                  // Calculate average E(r)/Etot for moliere radius
+	  E_moliere [iL] [r] /= nevents;
+	}
   }
-	
+
   for ( int iL = 0; iL < EE_NLAYER; iL++){
 	//c1->cd(iL+1);
 	//P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
 	//latShower_energy[iL] -> Draw("colz");
+	TGraph* g_layer_moliere = new TGraph ( 4, R_moliere, E_moliere[iL] );
+	TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 5);
+	fit_layer_moliere->SetParameter(0, -0.2);
+	fit_layer_moliere->SetParameter(1, -0.6);
+	fit_layer_moliere->SetLineColor(2);
+	sprintf(title, " layer%i_moliere ", iL+1);
+	g_layer_moliere->SetTitle(title);
+	g_layer_moliere->SetName(title);
+	g_layer_moliere->Fit("fit_layer_moliere");
+	g_layer_moliere->Write();
+	delete g_layer_moliere;
   }
   TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
   g_layerNhit_avg->Write();
