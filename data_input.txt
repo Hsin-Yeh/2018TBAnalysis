@@ -1,3 +1,1 @@
-
-Attaching file root_plot/plot_sim_20GeV_50TH1_300TH2_10X1_5X2.root as _file0...
-(TFile *) 0x7f8a8943ac50
+output_root/sim_20GeV_50TH1_300TH2_10X1_5X2.root
