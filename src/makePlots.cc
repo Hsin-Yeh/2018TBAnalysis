@@ -185,6 +185,7 @@ void makePlots::Loop(){
   double E_moliere[EE_NLAYER][4];
   double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626 
   double R_moliere[4];
+  double R_M[EE_NLAYER];
 
   // Declare Draw Options
   TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
@@ -410,8 +411,15 @@ void makePlots::Loop(){
 	g_layer_moliere->SetName(title);
 	g_layer_moliere->Fit("fit_layer_moliere");
 	g_layer_moliere->Write();
+
+	R_M[iL] = fit_layer_moliere->GetX ( 0.9 , 0, 5 );
+
+	
 	delete g_layer_moliere;
+	delete fit_layer_moliere;
   }
+
+  for ( int iL = 0; iL < EE_NLAYER; iL++) 	cout << R_M[iL] << endl;
   TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
   g_layerNhit_avg->Write();
   //c1->Update();

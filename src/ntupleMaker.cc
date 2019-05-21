@@ -343,6 +343,7 @@ void ntupleMaker::NtupleMaker(){
   double E_7[NLAYER];
   double E_19[NLAYER];
   double E_37[NLAYER];
+  double E_61[NLAYER];
   double E_ch[NLAYER][NCHANNEL];
   double x_ch[NLAYER][NCHANNEL];
   double y_ch[NLAYER][NCHANNEL];
@@ -365,6 +366,7 @@ void ntupleMaker::NtupleMaker(){
   outT3->Branch("layerE7",E_7,"layerE7[40]/D");
   outT3->Branch("layerE19",E_19,"layerE19[40]/D");
   outT3->Branch("layerE37",E_37,"layerE37[40]/D");
+  outT3->Branch("layerE61",E_61,"layerE61[40]/D");
   outT3->Branch("impactX",impactX,"impactX[40]/D");
   outT3->Branch("impactY",impactY,"impactY[40]/D");
   outT3->Branch("maxID",maxID,"maxID[40]/I");
@@ -508,6 +510,7 @@ void ntupleMaker::NtupleMaker(){
 		if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
+		if( dR < 1.12455*4*1.2) E_61[iL] += E_ch[iL][ich];
 		layerE[iL] += E_ch[iL][ich];
       }
     }
