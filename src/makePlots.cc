@@ -307,7 +307,6 @@ void makePlots::Loop(){
 	  E_moliere[iL][2] += layerE19[iL]/layerE[iL];
 	  E_moliere[iL][3] += layerE37[iL]/layerE[iL];
 	  E_moliere[iL][4] += layerE61[iL]/layerE[iL];
-	  cout << layerE61[iL] << endl;
 
 	  if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
 	  if ( iL == 5 && E7devE19 == 1) {
