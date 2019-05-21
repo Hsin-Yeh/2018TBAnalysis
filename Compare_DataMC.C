@@ -141,7 +141,7 @@ void Compare_DataMC(){
   TFile f_MC(title);
   sprintf(title,"root_plot/plot_data_%sGeV_Ele.root",Energy.c_str());
   TFile f_Data(title);
-  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%s_listFTFP_BERT_EMM_noAngle.root",Energy.c_str());
+  sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%s_listFTFP_BERT_EMM.root",Energy.c_str());
   //sprintf(title,"root_plot/plot_sim_%sGeV_30TH1_300TH2_10X1_1X2.root",Energy.c_str());
   //sprintf(title,"root_plot/%s_noSmearingSamples.root",f_substr.c_str());
   TFile f_MC_original(title);
