@@ -219,9 +219,11 @@ void makePlots::Loop(){
   TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
+  TH2D *h_bx_by = new TH2D("h_bx_by","",100,-10,10,100,-10,10);
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
+  
 
   //	TProfile *t_impacX_posx = new TProfile("h_impacX_posx","",50,-6,6,-6,6);
   //TProfile *t_impacY_posy = new TProfile("h_impacY_posy","",50,-6,6,-6,6);
@@ -273,8 +275,9 @@ void makePlots::Loop(){
 	//if ( maxID[0] > 70 ) continue;
 	Passed_events++;
 
-	h_totalE->Fill(totalE);
-	h_totalCEE->Fill(totalE_CEE);
+	h_totalE   -> Fill ( totalE );
+	h_totalCEE -> Fill ( totalE_CEE );
+	h_bx_by    -> Fill ( b_x, b_y );
 		
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
