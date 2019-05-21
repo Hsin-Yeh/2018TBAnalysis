@@ -351,10 +351,10 @@ void Compare_DataMC(){
 	
   }
   
-  sprintf(title,"plots/%s/E1devE7.png", f_substr.c_str());
+  sprintf(title,"plots/%s/E1devE7_%sGeV.png", f_substr.c_str(), Energy.c_str());
   img->FromPad(c2);
   img->WriteImage(title);
-  sprintf(title,"plots/%s/E7devE19.png", f_substr.c_str());
+  sprintf(title,"plots/%s/E7devE19_%sGeV.png", f_substr.c_str(), Energy.c_str());
   img->FromPad(c3);
   img->WriteImage(title);
   
