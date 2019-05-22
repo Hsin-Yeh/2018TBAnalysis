@@ -226,7 +226,7 @@ void makePlots::Loop(){
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
-  TH2D *h_mx_my = new TH2D("h_mx_my","",500,-60,60,500,-60,60);
+  TH2D *h_mx_my = new TH2D("h_mx_my","",100,-1,1,100,-1,1);
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
