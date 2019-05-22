@@ -339,7 +339,7 @@ void makePlots::Loop(){
 	  if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
 		h_E1devE7_differentMaxID_2[ iL ] -> Fill( E1devE7 );
 
-	  if ( m_x < -0.0002 && m_x > -0.0005 && m_y > 0.0003 && m_y < 0.0006 ) {
+	  if ( m_x < -0.00025 && m_x > -0.00045 && m_y > 0.0004 && m_y < 0.0006 ) {
 		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
 	  }
@@ -408,17 +408,17 @@ void makePlots::Loop(){
 
   for (int iL = 0; iL < EE_NLAYER; ++iL){
 	scale = 1 / h_E1devE7 [iL]->Integral();
-	h_E1devE7 [iL]->Scale(scale);
+	h_E1devE7 [iL] -> Scale(scale);
 	scale = 1 / h_E7devE19[iL]->Integral();
-	h_E7devE19[iL]->Scale(scale);
+	h_E7devE19[iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_differentMaxID_1[iL]->Integral();
-	h_E1devE7_differentMaxID_1[iL]->Scale(scale);
+	h_E1devE7_differentMaxID_1[iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_differentMaxID_2[iL]->Integral();
-	h_E1devE7_differentMaxID_2[iL]->Scale(scale);
+	h_E1devE7_differentMaxID_2[iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_smallAngle [iL]->Integral();
-	h_E1devE7_smallAngle [iL]->Scale(scale);
+	h_E1devE7_smallAngle [iL] -> Scale(scale);
 	scale = 1 / h_E7devE19_smallAngle [iL]->Integral();
-	h_E7devE19_smallAngle[iL]->Scale(scale);
+	h_E7devE19_smallAngle[iL] -> Scale(scale);
 
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
 	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
