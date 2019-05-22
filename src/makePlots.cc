@@ -282,6 +282,7 @@ void makePlots::Loop(){
 	double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
 	//if ( impact_R < 1 ) continue;
 	//if ( impact_R > 1.5 ) continue;
+	
 	int Nhits = NRechits;
 	//if ( Nhits < 200 ) continue;
 	//if ( maxID[0] < 50 )  continue;
@@ -292,8 +293,7 @@ void makePlots::Loop(){
 	h_totalCEE -> Fill ( totalE_CEE );
 	h_bx_by    -> Fill ( b_x, b_y );
 	h_mx_my    -> Fill ( m_x, m_y );
-	cout << m_x << " " << m_y << endl;
-		
+			
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
 	  if( layerE1[iL] == 0) continue;
