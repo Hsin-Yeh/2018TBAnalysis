@@ -425,7 +425,7 @@ void makePlots::Loop(){
 	g_layer_moliere->Fit("fit_layer_moliere");
 	g_layer_moliere->Write();
 
-	R_M[iL] = fit_layer_moliere->GetX ( 0.9 , 0, 5 );
+	R_M[iL] = fit_layer_moliere->GetX ( 0.9 , 0, 10 );
 	delete g_layer_moliere;
 	delete fit_layer_moliere;
   }
