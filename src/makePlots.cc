@@ -252,7 +252,7 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_impactX_impactY",iL+1);
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
 	sprintf(title,"layer%i_mx_my_E1devE7",iL+1);
-	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-1,1,100,-1,1);
+	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-0.04,0.04,100,-0.04,0.04);
   }
 
   for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
