@@ -227,6 +227,7 @@ void makePlots::Loop(){
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
   TH2D *h_mx_my = new TH2D("h_mx_my","",100,-1,1,100,-1,1);
+  TH2D *h_mx_my_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
@@ -250,6 +251,8 @@ void makePlots::Loop(){
 	h_impactX_impactY_E1devE7[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
 	sprintf(title,"layer%i_impactX_impactY",iL+1);
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
+	sprintf(title,"layer%i_mx_my_E1devE7",iL+1);
+	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-1,1,100,-1,1);
   }
 
   for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -270,6 +273,7 @@ void makePlots::Loop(){
 
   // -------------------- Loop Over Events -------------------- //
   for(int ev = 0; ev < nevents; ++ev){
+
 	if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
 	GetData(ev);
 
@@ -292,14 +296,15 @@ void makePlots::Loop(){
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
 	  if( layerE1[iL] == 0) continue;
-	  double E1devE7  = layerE1[iL]/layerE7[iL];
-	  double E7devE19 = layerE7[iL]/layerE19[iL];
+	  double E1devE7   = layerE1[iL]/layerE7[iL];
+	  double E7devE19  = layerE7[iL]/layerE19[iL];
 	  double E19devE37 = layerE19[iL]/layerE37[iL];
-	  h_E1devE7 [iL] -> Fill(E1devE7);
-	  h_E7devE19 [iL] -> Fill(E7devE19);
-	  h_maxID [iL] -> Fill( maxID[iL] );
-	  h_impactX_impactY_E1devE7 [iL] -> Fill( impactX[iL], impactY[iL], E1devE7 );
-	  h_impactX_impactY [iL] -> Fill( impactX[0], impactY[0] );
+	  h_E1devE7 [iL]                 -> Fill ( E1devE7 );
+	  h_E7devE19 [iL]                -> Fill ( E7devE19 );
+	  h_maxID [iL]                   -> Fill ( maxID[iL] );
+	  h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
+	  h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
+	  h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
 
 	  // Molie raius calculation
 	  E_moliere[iL][0] += layerE1[iL]/layerE[iL];
@@ -394,7 +399,7 @@ void makePlots::Loop(){
 	h_E1devE7_differentMaxID_2[iL]->Scale(scale);
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits
 	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
-
+	h_mx_my_E1devE7 [ iL ] -> Divide ( h_mx_my ); 
 	for ( int r = 0; r < N_moliere_ring; r++ ) {                  // Calculate average E(r)/Etot for moliere radius
 	  E_moliere [iL] [r] /= nevents;
 	}
