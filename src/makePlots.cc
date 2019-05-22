@@ -339,7 +339,7 @@ void makePlots::Loop(){
 	  if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
 		h_E1devE7_differentMaxID_2[ iL ] -> Fill( E1devE7 );
 
-	  if ( m_x < -0.00025 && m_x > -0.00045 && m_y > 0.0004 && m_y < 0.0006 ) {
+	  if ( m_x < -0.00032 && m_x > -0.0004 && m_y > 0.0004 && m_y < 0.00056 ) {
 		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
 	  }
