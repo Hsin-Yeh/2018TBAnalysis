@@ -260,13 +260,19 @@ void makePlots::Loop(){
   TH2Poly *poly = new TH2Poly();
   InitTH2Poly(*poly);
 
-  TH2Poly *latShower_energy[EE_NLAYER];
+  TH2Poly *latShower_hits[EE_NLAYER];
+  TH2Poly *latShower_bx_by [EE_NLAYER];
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
-	latShower_energy[iL] = new TH2Poly();
-	InitTH2Poly(*latShower_energy[iL]);
-	sprintf(title,"Layer_%i",iL+1);
-	latShower_energy[iL]->SetTitle(title);
-	latShower_energy[iL]->SetName(title);
+	latShower_hits[iL] = new TH2Poly();
+	InitTH2Poly(*latShower_hits[iL]);
+	sprintf(title,"Layer_%i_hits",iL+1);
+	latShower_hits[iL]->SetTitle(title);
+	latShower_hits[iL]->SetName(title);
+	latShower_bx_by[iL] = new TH2Poly();
+	InitTH2Poly(*latShower_bx_by[iL]);
+	sprintf(title,"Layer_%i_bx_by",iL+1);
+	latShower_bx_by[iL]->SetTitle(title);
+	latShower_bx_by[iL]->SetName(title);
 	layerID[iL] = iL + 1;
 	layerNhit_avg[iL] = 0;
   }
@@ -336,21 +342,20 @@ void makePlots::Loop(){
 	  Energy_cell[icell] = 0;
 	}
 		
-
 	// Fill PolyHistograms
 	for(int ihit = 0; ihit < NRechits ; ++ihit){
 	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
 	  //cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
-	  //if ( layer > EE_NLAYER ) continue;
-	  if ( layer > 1 ) continue;
-	  latShower_energy[layer-1] -> Fill( impactX[layer-1], impactY[layer-1], 1);
-	  
+	  if ( layer > EE_NLAYER ) continue;
+	  latShower_hits[layer-1] -> Fill ( posx, posy, 1);
+	  latShower_bx_by [layer-1] -> Fill ( b_x, b_y, 1 );
+
 	  if ( layer != 1 ) continue;
 	  h_impactX_posx -> Fill( impactX[0], posx );
 	  h_impactY_posy -> Fill( impactY[0], posy );
-
+	  
 	  //Energy_cell [ chip*32 + channel/2 ] += energy;
-	  //latShower_energy [ layer - 1 ] -> Fill( posx, posy, energy );
+	  //latShower_hits [ layer - 1 ] -> Fill( posx, posy, energy );
 	}
 
 	double TwoPointCorrelation;
@@ -362,7 +367,6 @@ void makePlots::Loop(){
 		h_TwoPointCorrelation -> Fill ( TwoPointCorrelation );
 	  }
 	}
-
 
 	// Calculate the shower depth
 	double SHD_Elayer = 0;
@@ -412,8 +416,8 @@ void makePlots::Loop(){
 
   for ( int iL = 0; iL < EE_NLAYER; iL++){
 	//c1->cd(iL+1);
-	//P->Poly(*latShower_energy[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
-	//latShower_energy[iL] -> Draw("colz");
+	//P->Poly(*latShower_hits[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
+	//latShower_hits[iL] -> Draw("colz");
 	TGraph* g_layer_moliere = new TGraph ( N_moliere_ring, R_moliere, E_moliere[iL] );
 	TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 10);
 	fit_layer_moliere->SetParameter(0, -0.2);
@@ -459,13 +463,13 @@ void makePlots::Event_Display(){
   char title[50];
 
   int Nlayer = 28;
-  TH2Poly *latShower_energy[Nlayer];
+  TH2Poly *latShower_hits[Nlayer];
 
   for(int iL = 0; iL < Nlayer ; ++iL){
-	latShower_energy[iL] = new TH2Poly();
-	InitTH2Poly(*latShower_energy[iL]);
+	latShower_hits[iL] = new TH2Poly();
+	InitTH2Poly(*latShower_hits[iL]);
 	sprintf(title,"Layer_%i",iL+1);
-	latShower_energy[iL]->SetTitle(title);
+	latShower_hits[iL]->SetTitle(title);
   }
 
   TH2Poly *firstL = new TH2Poly();
@@ -493,7 +497,7 @@ void makePlots::Event_Display(){
 	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
 	  if ( layer > 28 ) continue;
 	  //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
-	  latShower_energy[layer-1]->Fill( posx, posy, energy/totalE_CEE );
+	  latShower_hits[layer-1]->Fill( posx, posy, energy/totalE_CEE );
 	  if(layer == 1) { firstL->Fill( posx, posy, energy/totalE_CEE ); }
 	}
 	//}
@@ -503,8 +507,8 @@ void makePlots::Event_Display(){
 	
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	c1->cd(iL+1);
-	//latShower_energy[iL]->SetMaximum(100);
-	latShower_energy[iL]->Draw("col");
+	//latShower_hits[iL]->SetMaximum(100);
+	latShower_hits[iL]->Draw("col");
   }
   c1->Update();
   //gPad->WaitPrimitive();
@@ -549,18 +553,18 @@ void makePlots::Event_Display(){
   TCanvas* c5 = new TCanvas();
 
 
-  TH2Poly *latShower_energy[NLAYER];
+  TH2Poly *latShower_hits[NLAYER];
   for(int iL = 0; iL < NLAYER ; ++iL){
-  latShower_energy[iL] = new TH2Poly();
+  latShower_hits[iL] = new TH2Poly();
   if(setup_config == 0){
   if(iL < EE_NLAYER)
-  InitTH2Poly(*latShower_energy[iL]);
+  InitTH2Poly(*latShower_hits[iL]);
   else
-  //	InitTH2Poly_flower(*latShower_energy[iL]);
-  InitTH2Poly(*latShower_energy[iL]);
+  //	InitTH2Poly_flower(*latShower_hits[iL]);
+  InitTH2Poly(*latShower_hits[iL]);
   }
   sprintf(title,"Layer_%i",iL+1);
-  latShower_energy[iL]->SetTitle(title);
+  latShower_hits[iL]->SetTitle(title);
   }
 
 
@@ -681,10 +685,10 @@ void makePlots::Event_Display(){
   //Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT, E_HG, E_LG);
   if( !Mask_NoisyChannel(rechit_layer->at(ihit), rechit_chip->at(ihit), rechit_channel->at(ihit), rechit_x->at(ihit), rechit_y->at(ihit)) ) {
   if( hitmap ) {
-  latShower_energy[rechit_layer->at(ihit) - 1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), 1);
+  latShower_hits[rechit_layer->at(ihit) - 1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), 1);
   }
   else {
-  latShower_energy[ rechit_layer->at(ihit)-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
+  latShower_hits[ rechit_layer->at(ihit)-1]->Fill(rechit_x->at(ihit), rechit_y->at(ihit), rechit_energy->at(ihit));}	
   }
   }
   }
@@ -733,17 +737,17 @@ void makePlots::Event_Display(){
   //Energy_display
 
   for(int iL = 0; iL < NLAYER ; ++iL){
-  //    latShower_energy[iL]->SetMaximum(10000000);
+  //    latShower_hits[iL]->SetMaximum(10000000);
   if(!ignore_EE){
   c1->cd(iL+1);
-  latShower_energy[iL]->Draw("colz");
+  latShower_hits[iL]->Draw("colz");
   }
 
   else{
   int tmpL = iL+1 - 28 ;
   if(tmpL > 0){
   c1->cd(tmpL);
-  latShower_energy[iL]->Draw("colz");
+  latShower_hits[iL]->Draw("colz");
   }
   }
   }
