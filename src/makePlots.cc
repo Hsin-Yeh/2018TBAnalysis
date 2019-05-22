@@ -226,7 +226,7 @@ void makePlots::Loop(){
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
-  TH2D *h_mx_my = new TH2D("h_mx_my","",100,-0.04,0.04,100,-0.04,0.04);
+  TH2D *h_mx_my = new TH2D("h_mx_my","",100,-0.01,0.01,100,-0.01,0.01);
   TH2D *h_mx_my_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
@@ -252,7 +252,7 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_impactX_impactY",iL+1);
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
 	sprintf(title,"layer%i_mx_my_E1devE7",iL+1);
-	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-0.04,0.04,100,-0.04,0.04);
+	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-0.01,0.01,100,-0.01,0.01);
   }
 
   for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -305,6 +305,7 @@ void makePlots::Loop(){
 	  h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	  h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
 	  h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
+	  
 
 	  if ( E1devE7 > 1 ) { cout << " event: " << ev << " layer: " << iL+1 << " E1/E7: " << E1devE7 << endl; }
 		
