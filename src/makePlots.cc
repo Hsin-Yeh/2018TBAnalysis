@@ -190,8 +190,9 @@ void makePlots::Loop(){
   double R_M[EE_NLAYER];
 
   // Declare Draw Options
-  TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
-  c1->Divide(7,4);
+  //TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
+  //c1->Divide(7,4);
+  TCanvas *c1 = new TCanvas();
   //gROOT->SetBatch(kTRUE);
   char pltTit[200], leg[50], img_title[50];
   string Xtit, Ytit, Opt;
@@ -415,9 +416,10 @@ void makePlots::Loop(){
   }
 
   for ( int iL = 0; iL < EE_NLAYER; iL++){
-	//c1->cd(iL+1);
-	//P->Poly(*latShower_hits[iL], pltTit, Xtit = "X[cm]", Ytit = "Y[cm]", Opt = "colz", Stat = 0, Wait = 0, SavePlot = 0);
-	//latShower_hits[iL] -> Draw("colz");
+	
+	latShower_hits [iL] -> Write();
+	latShower_bx_by[iL] -> Write();
+					   
 	TGraph* g_layer_moliere = new TGraph ( N_moliere_ring, R_moliere, E_moliere[iL] );
 	TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 10);
 	fit_layer_moliere->SetParameter(0, -0.2);
