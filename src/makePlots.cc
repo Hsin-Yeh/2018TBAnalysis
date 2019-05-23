@@ -233,11 +233,9 @@ void makePlots::Loop(){
   TH2D *h_mx_my_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
+  TH2D *h_E1devE7_E1[EE_NLAYER];
+  TH2D *h_E7devE19_E1[EE_NLAYER];
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
-  
-
-  //TProfile *t_impacX_posx = new TProfile("h_impacX_posx","",50,-6,6,-6,6);
-  //TProfile *t_impacY_posy = new TProfile("h_impacY_posy","",50,-6,6,-6,6);
     
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	sprintf(title,"layer%i_E1devE7",iL+1);
@@ -260,7 +258,10 @@ void makePlots::Loop(){
 	h_E1devE7_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
 	sprintf(title,"layer%i_E7devE19_smallAngle",iL+1);
 	h_E7devE19_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
-
+	sprintf(title,"layer%i_E1devE7_E1",iL+1);
+	h_E1devE7_E1[iL] = new TH1D(title, title, 101, 0, 1.01, 100, 0, 300);
+	sprintf(title,"layer%i_E7devE19_E1",iL+1);
+	h_E7devE19_E1[iL] = new TH1D(title, title, 101, 0, 1.01, 100, 0, 300);
   }
 
   for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -320,6 +321,9 @@ void makePlots::Loop(){
 	  h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	  h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
 	  h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
+	  h_E1devE7_E1  [iL]             -> Fill ( E1devE7, E1 );
+	  h_E7devE19_E1 [iL]             -> Fill ( E7devE19, E1 );
+
 	  
 	  // Molie raius calculation
 	  E_moliere[iL][0] += layerE1[iL]/layerE[iL];
@@ -344,7 +348,6 @@ void makePlots::Loop(){
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
 	  }
 	}
-		   
 
 	double Energy_cell[NCHANNEL];
 	for ( int icell = 0; icell < NCHANNEL; icell++){
