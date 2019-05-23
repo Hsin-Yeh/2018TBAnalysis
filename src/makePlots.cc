@@ -213,6 +213,8 @@ void makePlots::Loop(){
   TH1D *h_E7devE19[EE_NLAYER];
   TH1D *h_E1devE7_smallAngle[EE_NLAYER];
   TH1D *h_E7devE19_smallAngle[EE_NLAYER];
+  TH1D *h_E1devE7_lessBins[EE_NLAYER];
+  TH1D *h_E7devE19_lessBins[EE_NLAYER];
   TH1F *h_maxID[EE_NLAYER];
   TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
   TH1D *h_E1devE7_differentMaxID_2[EE_NLAYER];
@@ -262,6 +264,10 @@ void makePlots::Loop(){
 	h_E1devE7_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
 	sprintf(title,"layer%i_E7devE19_E1",iL+1);
 	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+	sprintf(title,"layer%i_E1devE7_lessBins",iL+1);
+	h_E1devE7[iL] = new TH1D(title, title, 81, 0, 1.0125);
+	sprintf(title,"layer%i_E7devE19_lessBins",iL+1);
+	h_E7devE19[iL] = new TH1D(title, title, 81, 0, 1.0125);
   }
 
   for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -323,6 +329,9 @@ void makePlots::Loop(){
 	  h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
 	  h_E1devE7_E1  [iL]             -> Fill ( E1devE7, layerE1[iL] );
 	  h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
+	  h_E1devE7_lessBins [iL]        -> Fill ( E1devE7 );
+	  h_E7devE19_lessBins [iL]       -> Fill ( E7devE19 );
+
 
 	  
 	  // Molie raius calculation
@@ -422,6 +431,10 @@ void makePlots::Loop(){
 	h_E1devE7_smallAngle [iL] -> Scale(scale);
 	scale = 1 / h_E7devE19_smallAngle [iL]->Integral();
 	h_E7devE19_smallAngle[iL] -> Scale(scale);
+	scale = 1 / h_E1devE7_lessBins [iL]->Integral();
+	h_E1devE7_lessBins [iL] -> Scale(scale);
+	scale = 1 / h_E7devE19_lessBins[iL]->Integral();
+	h_E7devE19_lessBins[iL] -> Scale(scale);
 
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
 	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
