@@ -217,6 +217,7 @@ void makePlots::Loop(){
   TH1D *h_E7devE19_lessBins[EE_NLAYER];
   TH1D *h_E1devE7_smallAngle_lessBins[EE_NLAYER];
   TH1D *h_E7devE19_smallAngle_lessBins[EE_NLAYER];
+  TH1D *h_E1[EE_NLAYER];
   TH1F *h_maxID[EE_NLAYER];
   TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
   TH1D *h_E1devE7_differentMaxID_2[EE_NLAYER];
@@ -274,6 +275,8 @@ void makePlots::Loop(){
 	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+	sprintf(title,"layer%i_E1",iL+1);
+	h_E1[iL] = new TH1D(title, title, 100, 0, 300);
   }
 
   for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -337,6 +340,7 @@ void makePlots::Loop(){
 	  h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
 	  h_E1devE7_lessBins [iL]        -> Fill ( E1devE7 );
 	  h_E7devE19_lessBins [iL]       -> Fill ( E7devE19 );
+	  h_E1 [iL]                      -> Fill ( layerE1[iL] );
 	  
 	  // Molie raius calculation
 	  E_moliere[iL][0] += layerE1[iL]/layerE[iL];
