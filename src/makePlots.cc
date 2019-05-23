@@ -259,9 +259,9 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_E7devE19_smallAngle",iL+1);
 	h_E7devE19_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
 	sprintf(title,"layer%i_E1devE7_E1",iL+1);
-	h_E1devE7_E1[iL] = new TH1D(title, title, 101, 0, 1.01, 100, 0, 300);
+	h_E1devE7_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
 	sprintf(title,"layer%i_E7devE19_E1",iL+1);
-	h_E7devE19_E1[iL] = new TH1D(title, title, 101, 0, 1.01, 100, 0, 300);
+	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
   }
 
   for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -321,8 +321,8 @@ void makePlots::Loop(){
 	  h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	  h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
 	  h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
-	  h_E1devE7_E1  [iL]             -> Fill ( E1devE7, E1 );
-	  h_E7devE19_E1 [iL]             -> Fill ( E7devE19, E1 );
+	  h_E1devE7_E1  [iL]             -> Fill ( E1devE7, layerE1[iL] );
+	  h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
 
 	  
 	  // Molie raius calculation
