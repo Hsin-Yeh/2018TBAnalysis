@@ -492,7 +492,9 @@ void makePlots::Loop(){
 
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
 	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
-	h_mx_my_E1devE7 [ iL ] -> Divide ( h_mx_my ); 
+	h_mx_my_E1devE7 [ iL ] -> Divide ( h_mx_my );
+	h_bx_by_E1 [ iL ] -> Divide ( h_bx_by );
+	h_mx_my_E1 [ iL ] -> Divide ( h_mx_my ); 
 	for ( int r = 0; r < N_moliere_ring; r++ ) {                  // Calculate average E(r)/Etot for moliere radius
 	  E_moliere [iL] [r] /= nevents;
 	}
