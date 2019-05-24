@@ -174,6 +174,7 @@ void makePlots::Loop(){
 
   Init();
   gROOT->SetBatch(kTRUE);
+  gStyle->SetOptStat(1111);
   
   double X0_arr[EE_NLAYER];
   double *X0_layer = Set_X0(X0_arr);
@@ -241,7 +242,12 @@ void makePlots::Loop(){
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
   TH2D *h_mx_my = new TH2D("h_mx_my","",100,-0.004,0.004,100,-0.004,0.004);
+  TH2D *h_bx_mx = new TH2D("h_bx_mx","",500,-60,60,100,-0.004,0.004);
+  TH2D *h_by_my = new TH2D("h_by_my","",500,-60,60,100,-0.004,0.004);
   TH2D *h_mx_my_E1devE7[EE_NLAYER];
+  TH2D *h_bx_by_E1devE7[EE_NLAYER];
+  TH2D *h_mx_my_E1[EE_NLAYER];
+  TH2D *h_bx_by_E1[EE_NLAYER];
   TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
   TH2D *h_impactX_impactY[EE_NLAYER];
   TH2D *h_E1devE7_E1[EE_NLAYER];
@@ -268,6 +274,12 @@ void makePlots::Loop(){
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
 	sprintf(title,"layer%i_mx_my_E1devE7",iL+1);
 	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
+	sprintf(title,"layer%i_mx_my_E1",iL+1);
+	h_mx_my_E1[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
+	sprintf(title,"layer%i_bx_by_E1devE7",iL+1);
+	h_bx_by_E1devE7[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
+	sprintf(title,"layer%i_bx_by_E1",iL+1);
+	h_bx_by_E1[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
 	sprintf(title,"layer%i_E1devE7_smallAngle",iL+1);
 	h_E1devE7_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
 	sprintf(title,"layer%i_E7devE19_smallAngle",iL+1);
@@ -277,9 +289,9 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_E7devE19_E1",iL+1);
 	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
 	sprintf(title,"layer%i_E1devE7_lessBins",iL+1);
-	h_E1devE7_lessBins[iL] = new TH1D(title, title, 81, 0, 1.02);
+	h_E1devE7_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E7devE19_lessBins",iL+1);
-	h_E7devE19_lessBins[iL] = new TH1D(title, title, 81, 0, 1.02);
+	h_E7devE19_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E1devE7_smallAngle_lessBins",iL+1);
 	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
@@ -332,6 +344,8 @@ void makePlots::Loop(){
 	h_totalCEE -> Fill ( totalE_CEE );
 	h_bx_by    -> Fill ( b_x, b_y );
 	h_mx_my    -> Fill ( m_x, m_y );
+	h_bx_mx    -> Fill ( b_x, m_x );
+	h_by_my    -> Fill ( b_y, m_y );
 			
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
@@ -345,6 +359,9 @@ void makePlots::Loop(){
 	  h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	  h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
 	  h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
+	  h_mx_my_E1 [iL]                -> Fill ( m_x, m_y, layerE1[iL] );
+	  h_bx_by_E1devE7 [iL]           -> Fill ( b_x, b_y, E1devE7 );
+	  h_bx_by_E1 [iL]                -> Fill ( b_x, b_y, layerE1[iL] );
 	  h_E1devE7_E1  [iL]             -> Fill ( E1devE7, layerE1[iL] );
 	  h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
 	  h_E1devE7_lessBins [iL]        -> Fill ( E1devE7 );
@@ -369,7 +386,7 @@ void makePlots::Loop(){
 	  if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
 		h_E1devE7_differentMaxID_2[ iL ] -> Fill( E1devE7 );
 
-	  if ( m_x < -0.0003 && m_x > -0.0004 && m_y > 0.0004 && m_y < 0.00048 ) {
+	  if ( beamEnergy == 50 && m_x < -0.0003 && m_x > -0.0004 && m_y > 0.0004 && m_y < 0.00048 ) {
 		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
 		h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
