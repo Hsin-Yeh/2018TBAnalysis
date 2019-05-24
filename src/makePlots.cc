@@ -206,9 +206,15 @@ void makePlots::Loop(){
   string f_substr = fname.substr(start+1,end-start-1);
   sprintf(title,"root_plot/plot_%s.root",f_substr.c_str());
   cout << "output name : " << title << endl;
-  TFile outf(title,"recreate");
+  TFile *outf = new TFile(title,"recreate");
+  
+  // Declare directories
+  TDirectory *cdhisto = outf->mkdir("histo");
+  TDirectory *cdgraph = outf->mkdir("graph");
+  TDirectory *cdlayer[EE_NLAYER];
 
   // Declare histograms
+  cdhisto->cd();
   TH1D *h_E1devE7[EE_NLAYER]; 
   TH1D *h_E7devE19[EE_NLAYER];
   TH1D *h_E1devE7_smallAngle[EE_NLAYER];
@@ -243,10 +249,13 @@ void makePlots::Loop(){
   TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
     
   for(int iL = 0; iL < EE_NLAYER ; ++iL){
+	sprintf(title,"layer%i",iL+1);
+	cdlayer[iL] = cdhisto->mkdir(title);
+	cdlayer[iL]->cd();
 	sprintf(title,"layer%i_E1devE7",iL+1);
-	h_E1devE7[iL] = new TH1D(title,title,101,0,1.01);
+	h_E1devE7[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_E7devE19",iL+1);
-	h_E7devE19[iL] = new TH1D(title,title,101,0,1.01);
+	h_E7devE19[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_maxID",iL+1);
 	h_maxID[iL] = new TH1F( title, title, 128, 0, 128);
 	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
@@ -459,7 +468,7 @@ void makePlots::Loop(){
   }
 
   for ( int iL = 0; iL < EE_NLAYER; iL++){
-	
+	cdgraph->cd();
 	latShower_hits [iL] -> Write();
 	latShower_bx_by[iL] -> Write();
 					   
@@ -490,8 +499,8 @@ void makePlots::Loop(){
   //gPad->WaitPrimitive();
   //c1->Write();
   delete c1;
-  outf.Write();
-  outf.Close();
+  outf->Write();
+  outf->Close();
 }
 
 
