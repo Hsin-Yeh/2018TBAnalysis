@@ -346,7 +346,7 @@ void makePlots::Loop(){
 	h_mx_my    -> Fill ( m_x, m_y );
 	h_bx_mx    -> Fill ( b_x, m_x );
 	h_by_my    -> Fill ( b_y, m_y );
-	cout << mx << " " << my << endl;
+	cout << m_x << " " << m_y << endl;
 			
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
