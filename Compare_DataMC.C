@@ -142,8 +142,8 @@ void Compare_DataMC(){
   sprintf(title,"root_plot/plot_data_%sGeV_Ele.root",Energy.c_str());
   TFile f_Data(title);
   //sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%s_listFTFP_BERT_EMM.root",Energy.c_str());
-  sprintf(title,"root_plot/plot_sim_%sGeV_30TH1_300TH2_10X1_1X2.root",Energy.c_str());
-  //sprintf(title,"root_plot/%s_noSmearingSamples.root",f_substr.c_str());
+  //sprintf(title,"root_plot/plot_sim_%sGeV_30TH1_300TH2_10X1_1X2.root",Energy.c_str());
+  sprintf(title,"root_plot/%s_noSmearingSamples.root",f_substr.c_str());
   TFile f_MC_original(title);
 
   sprintf(title,"output.root");
@@ -156,8 +156,13 @@ void Compare_DataMC(){
   TH1D *h_E1devE7_differentMaxID_2[3][28];
   TGraph *g_Average_Nhits[3];
   TH1D *h_subtract;
+  TH1D *h_E1devE7_lessBins[3][28];
+  TH1D *h_E7devE19_lessBins[3][28];
+  TH1D *h_E1devE7_smallAngle_lessBins[3][28];
+  TH1D *h_E7devE19_smallAngle_lessBins[3][28];
 
-  sprintf(title,"h_totalCEE");
+
+  sprintf(title,"histo/h_totalCEE");
   h_totalCEE[0] = (TH1D *)f_MC.Get(title);
   h_totalCEE[0]->SetLineColor(Color(0));
   h_totalCEE[0]->SetLineWidth(2);
@@ -168,7 +173,7 @@ void Compare_DataMC(){
   h_totalCEE[2]->SetLineColor(1);
   h_totalCEE[2]->SetLineWidth(2);
   
-  sprintf(title,"Graph");
+  sprintf(title,"graph/Graph");
   g_Average_Nhits[0] = (TGraph *)f_MC.Get(title);
   g_Average_Nhits[0]->SetLineColor(Color(0));
   g_Average_Nhits[0]->SetMarkerColor(Color(0));
@@ -182,7 +187,7 @@ void Compare_DataMC(){
   g_Average_Nhits[2]->SetLineWidth(2);
   
   for(int iL = 0; iL < NLAYER ; ++iL){
-    sprintf(title,"layer%i_E1devE7",iL+1);
+    sprintf(title,"histo/layer%i/layer%i_E1devE7",iL+1, iL+1);
     h_E1devE7[0][iL] = (TH1D *)f_MC.Get(title);
     h_E1devE7[0][iL]->SetLineColor(Color(0));
     h_E1devE7[0][iL]->SetLineWidth(2.0);
@@ -193,7 +198,7 @@ void Compare_DataMC(){
     h_E1devE7[2][iL]->SetLineColor(1);
     h_E1devE7[2][iL]->SetLineWidth(2);
   
-    sprintf(title,"layer%i_E7devE19",iL+1);
+    sprintf(title,"histo/layer%i/layer%i_E7devE19",iL+1, iL+1);
     h_E7devE19[0][iL] = (TH1D *)f_MC.Get(title);
     h_E7devE19[0][iL]->SetLineColor(Color(0));
     h_E7devE19[0][iL]->SetLineWidth(2.0);
@@ -204,7 +209,7 @@ void Compare_DataMC(){
     h_E7devE19[2][iL]->SetLineColor(1);
     h_E7devE19[2][iL]->SetLineWidth(2);
 
-	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
+	sprintf(title,"histo/layer%i/layer%i_E1devE7_maxID50_70",iL+1, iL+1);
     h_E1devE7_differentMaxID_1[0][iL] = (TH1D *)f_MC.Get(title);
     h_E1devE7_differentMaxID_1[0][iL]->SetLineColor(Color(0));
     h_E1devE7_differentMaxID_1[0][iL]->SetLineWidth(2.0);
@@ -215,7 +220,7 @@ void Compare_DataMC(){
     h_E1devE7_differentMaxID_1[2][iL]->SetLineColor(1);
     h_E1devE7_differentMaxID_1[2][iL]->SetLineWidth(2);
 
-	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
+	sprintf(title,"histo/layer%i/layer%i_E1devE7_maxID75_100",iL+1, iL+1);
     h_E1devE7_differentMaxID_2[0][iL] = (TH1D *)f_MC.Get(title);
     h_E1devE7_differentMaxID_2[0][iL]->SetLineColor(Color(0));
     h_E1devE7_differentMaxID_2[0][iL]->SetLineWidth(2.0);
