@@ -388,7 +388,7 @@ void makePlots::Loop(){
 	  if ( iL == 5 && E7devE19 == 1) {
 		h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
 		h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
-	  }
+ 	  }
 	  
 	  if ( maxID[ iL ] > 50 && maxID[ iL ] < 70 ) 
 		h_E1devE7_differentMaxID_1[ iL ] -> Fill( E1devE7 );
@@ -403,7 +403,7 @@ void makePlots::Loop(){
 		h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
 	  }
 
-	  if ( beamEnergy == 50 && m_x < -0.00025 && m_x > -0.0004 && m_y > 0.00035 && m_y < 0.00055 ) {
+	  if ( beamEnergy == 50 && m_x < -0.00025 && m_x > -0.0004 && m_y > 0.00035 && m_y < 0.00055 && maxID[iL] > 50 && maxID[iL] < 100) {
 		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
 		h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
