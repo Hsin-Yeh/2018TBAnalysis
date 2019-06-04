@@ -241,7 +241,8 @@ void makePlots::Loop(){
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
-  TH2D *h_mx_my = new TH2D("h_mx_my","",100,-0.004,0.004,100,-0.004,0.004);
+  //TH2D *h_mx_my = new TH2D("h_mx_my","",100,-0.004,0.004,100,-0.004,0.004);
+  TH2D *h_mx_my = new TH2D("h_mx_my","",100,-0.4,0.4,100,-0.4,0.4);
   TH2D *h_bx_mx = new TH2D("h_bx_mx","",500,-60,60,100,-0.004,0.004);
   TH2D *h_by_my = new TH2D("h_by_my","",500,-60,60,100,-0.004,0.004);
   TH2D *h_mx_my_E1devE7[EE_NLAYER];
@@ -322,6 +323,7 @@ void makePlots::Loop(){
 	layerNhit_avg[iL] = 0;
   }
 
+  
   // -------------------- Loop Over Events -------------------- //
   for(int ev = 0; ev < nevents; ++ev){
 
@@ -347,7 +349,9 @@ void makePlots::Loop(){
 	h_bx_mx    -> Fill ( b_x, m_x );
 	h_by_my    -> Fill ( b_y, m_y );
 	cout << m_x << " " << m_y << endl;
-			
+
+
+	
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
 	  if( layerE1[iL] == 0) continue;
@@ -375,18 +379,23 @@ void makePlots::Loop(){
 	  E_moliere[iL][2] += layerE19[iL]/layerE[iL];
 	  E_moliere[iL][3] += layerE37[iL]/layerE[iL];
 	  E_moliere[iL][4] += layerE61[iL]/layerE[iL];
+	  
+	  //Average Layer Nhits
+	  layerNhit_avg [ iL ] += layerNhit[ iL ];
 
+	 
 	  if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
 	  if ( iL == 5 && E7devE19 == 1) {
 		h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
 		h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
 	  }
-
+	  
 	  if ( maxID[ iL ] > 50 && maxID[ iL ] < 70 ) 
 		h_E1devE7_differentMaxID_1[ iL ] -> Fill( E1devE7 );
 	  if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
 		h_E1devE7_differentMaxID_2[ iL ] -> Fill( E1devE7 );
 
+	  // Cut on m_x & m_y 
 	  if ( beamEnergy == 20 && m_x < -0.0004 && m_x > -0.00048 && m_y > 0.00048 && m_y < 0.00056 ) {
 		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
@@ -425,7 +434,6 @@ void makePlots::Loop(){
 	  if ( layer != 1 ) continue;
 	  h_impactX_posx -> Fill( impactX[0], posx );
 	  h_impactY_posy -> Fill( impactY[0], posy );
-	  
 	  //Energy_cell [ chip*32 + channel/2 ] += energy;
 	  //latShower_hits [ layer - 1 ] -> Fill( posx, posy, energy );
 	}
@@ -449,12 +457,9 @@ void makePlots::Loop(){
 	h_SHD_Elayer -> Fill( SHD_Elayer );
 	//h_SHD_impactR -> Fill( SHD_Elayer, impact_R );
 
-	// Average Nhits_Layer
-	for( int iL = 0; iL < EE_NLAYER; iL++){
-	  layerNhit_avg [ iL ] += layerNhit[ iL ];
-	}
   }
-
+  // -------------------- End of Loop -------------------- //
+  
   //Efficiency
   efficiency = Passed_events / nevents;
   cout << "\n\n";
