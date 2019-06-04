@@ -403,7 +403,7 @@ void makePlots::Loop(){
 		h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
 	  }
 
-	  if ( beamEnergy == 50 && m_x < -0.0003 && m_x > -0.0004 && m_y > 0.0004 && m_y < 0.00048 ) {
+	  if ( beamEnergy == 50 && m_x < -0.00025 && m_x > -0.0004 && m_y > 0.00035 && m_y < 0.00055 ) {
 		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
 		h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
