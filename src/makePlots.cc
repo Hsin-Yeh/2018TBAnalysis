@@ -241,7 +241,7 @@ void makePlots::Loop(){
   TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
   TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
   TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
-  TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.001,0.001,500,-0.001,0.001);
+  TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.002,0.002,500,-0.002,0.002);
   //TH2D *h_mx_my = new TH2D("h_mx_my","",100,-0.4,0.4,100,-0.4,0.4);
   TH2D *h_bx_mx = new TH2D("h_bx_mx","",500,-60,60,100,-0.004,0.004);
   TH2D *h_by_my = new TH2D("h_by_my","",500,-60,60,100,-0.004,0.004);
@@ -403,7 +403,7 @@ void makePlots::Loop(){
 		h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
 	  }
 
-	  if ( beamEnergy == 50 && m_x < -0.00025 && m_x > -0.0004 && m_y > 0.00035 && m_y < 0.00055 && maxID[iL] > 50 && maxID[iL] < 100) {
+	  if ( beamEnergy == 50 && m_x < -0.00025 && m_x > -0.0004 && m_y > 0.00035 && m_y < 0.00055 ) {
 		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
 		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
 		h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
