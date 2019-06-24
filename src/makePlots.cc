@@ -175,6 +175,11 @@ void makePlots::Loop(){
   Init();
   gROOT->SetBatch(kTRUE);
   gStyle->SetOptStat(1111);
+
+  string line;
+  ifstream f_weights("weights.txt");
+  getline(f_weights,line);
+  getline(f_weights,line);
   
   double X0_arr[EE_NLAYER];
   double *X0_layer = Set_X0(X0_arr);
@@ -350,6 +355,9 @@ void makePlots::Loop(){
 	h_by_my    -> Fill ( b_y, m_y );
 	//cout << m_x << " " << m_y << endl;
 
+	double weights;
+	f_weights >> weights;
+	cout << weights << endl;
 
 	
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
