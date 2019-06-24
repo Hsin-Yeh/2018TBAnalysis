@@ -1,1 +1,1 @@
-root_plot/plot_sim_50GeV_1.2X1_0.2X2.root
+output_root/data_20GeV_Ele.root
