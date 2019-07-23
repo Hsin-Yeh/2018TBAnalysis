@@ -442,14 +442,14 @@ void makePlots::Loop(){
 	  if ( layer != 1 ) continue;
 	  h_impactX_posx -> Fill( impactX[0], posx );
 	  h_impactY_posy -> Fill( impactY[0], posy );
-	  //Energy_cell [ chip*32 + channel/2 ] += energy;
+	  Energy_cell [ chip*64 + channel ] += energy;
 	  //latShower_hits [ layer - 1 ] -> Fill( posx, posy, energy );
 	}
 
 	double TwoPointCorrelation;
-	for ( int icell = 0; icell < NCHANNEL; icell++){
+	for ( int icell = 0; icell < NCHANNEL; icell+=2){
 	  if ( Energy_cell[icell] == 0 ) continue;
-	  for ( int jcell = 0; jcell < NCHANNEL; jcell++){
+	  for ( int jcell = 0; jcell < NCHANNEL; jcell+=2){
 		if ( Energy_cell[jcell] == 0 ) continue;
 		TwoPointCorrelation = Energy_cell[jcell] / Energy_cell[icell];
 		h_TwoPointCorrelation -> Fill ( TwoPointCorrelation );
