@@ -25,606 +25,606 @@
 makePlots::makePlots(){}
 makePlots::makePlots(TChain *c1, TChain *c2, TChain *c3, string filename):T_Rechit(c1),T_DWC(c2),T_rechit_var(c3)
 {
-  cout << "Constructor of makePlot ... \n" << endl;
-  fname = filename;
+	cout << "Constructor of makePlot ... \n" << endl;
+	fname = filename;
 
 }
 
 //Destructor
 makePlots::~makePlots()
 {
-  cout << "\n\n";
-  cout << "Destructor of makePlot ... " << endl;
+	cout << "\n\n";
+	cout << "Destructor of makePlot ... " << endl;
 }
 
 void makePlots::Init(){
-  // Set object pointer(Data)
-  rechit_detid = 0;
-  rechit_module = 0;
-  rechit_layer = 0;
-  rechit_chip = 0;
-  rechit_channel = 0;
-  rechit_type = 0;
-  rechit_x = 0;
-  rechit_y = 0;
-  rechit_z = 0;
-  rechit_iu = 0;
-  rechit_iv = 0;
-  rechit_energy = 0;
-  rechit_energy_noHG = 0;
-  rechit_amplitudeHigh = 0;
-  rechit_amplitudeLow = 0;
-  rechit_hg_goodFit = 0;
-  rechit_lg_goodFit = 0;
-  rechit_hg_saturated = 0;
-  rechit_lg_saturated = 0;
-  rechit_fully_calibrated = 0;
-  rechit_TS2High = 0;
-  rechit_TS2Low = 0;
-  rechit_TS3High = 0;
-  rechit_TS3Low = 0;
-  rechit_Tot = 0;
-  rechit_timeMaxHG = 0;
-  rechit_timeMaxLG = 0;
-  rechit_toaRise = 0;
-  rechit_toaFall = 0;
+	// Set object pointer(Data)
+	rechit_detid = 0;
+	rechit_module = 0;
+	rechit_layer = 0;
+	rechit_chip = 0;
+	rechit_channel = 0;
+	rechit_type = 0;
+	rechit_x = 0;
+	rechit_y = 0;
+	rechit_z = 0;
+	rechit_iu = 0;
+	rechit_iv = 0;
+	rechit_energy = 0;
+	rechit_energy_noHG = 0;
+	rechit_amplitudeHigh = 0;
+	rechit_amplitudeLow = 0;
+	rechit_hg_goodFit = 0;
+	rechit_lg_goodFit = 0;
+	rechit_hg_saturated = 0;
+	rechit_lg_saturated = 0;
+	rechit_fully_calibrated = 0;
+	rechit_TS2High = 0;
+	rechit_TS2Low = 0;
+	rechit_TS3High = 0;
+	rechit_TS3Low = 0;
+	rechit_Tot = 0;
+	rechit_timeMaxHG = 0;
+	rechit_timeMaxLG = 0;
+	rechit_toaRise = 0;
+	rechit_toaFall = 0;
 
-  hit_mip = 0;
-  hit_x = 0;
-  hit_y = 0;
-  hit_z = 0;
+	hit_mip = 0;
+	hit_x = 0;
+	hit_y = 0;
+	hit_z = 0;
 
-  T_Rechit->SetBranchAddress("event", &event);
-  T_Rechit->SetBranchAddress("run", &run);
-  T_Rechit->SetBranchAddress("pdgID", &pdgID);
-  T_Rechit->SetBranchAddress("beamEnergy", &beamEnergy);
-  T_Rechit->SetBranchAddress("trueBeamEnergy", &trueBeamEnergy);
-  T_Rechit->SetBranchAddress("NRechits", &NRechits);
-  T_Rechit->SetBranchAddress("rechit_detid", &rechit_detid);
-  T_Rechit->SetBranchAddress("rechit_module", &rechit_module);
-  T_Rechit->SetBranchAddress("rechit_layer", &rechit_layer);
-  T_Rechit->SetBranchAddress("rechit_chip", &rechit_chip);
-  T_Rechit->SetBranchAddress("rechit_channel", &rechit_channel);
+	T_Rechit->SetBranchAddress("event", &event);
+	T_Rechit->SetBranchAddress("run", &run);
+	T_Rechit->SetBranchAddress("pdgID", &pdgID);
+	T_Rechit->SetBranchAddress("beamEnergy", &beamEnergy);
+	T_Rechit->SetBranchAddress("trueBeamEnergy", &trueBeamEnergy);
+	T_Rechit->SetBranchAddress("NRechits", &NRechits);
+	T_Rechit->SetBranchAddress("rechit_detid", &rechit_detid);
+	T_Rechit->SetBranchAddress("rechit_module", &rechit_module);
+	T_Rechit->SetBranchAddress("rechit_layer", &rechit_layer);
+	T_Rechit->SetBranchAddress("rechit_chip", &rechit_chip);
+	T_Rechit->SetBranchAddress("rechit_channel", &rechit_channel);
 
-  T_Rechit->SetBranchAddress("rechit_x", &rechit_x);
-  T_Rechit->SetBranchAddress("rechit_y", &rechit_y);
-  T_Rechit->SetBranchAddress("rechit_z", &rechit_z);
-  T_Rechit->SetBranchAddress("rechit_iu", &rechit_iu);
-  T_Rechit->SetBranchAddress("rechit_iv", &rechit_iv);
-  T_Rechit->SetBranchAddress("rechit_energy", &rechit_energy);
+	T_Rechit->SetBranchAddress("rechit_x", &rechit_x);
+	T_Rechit->SetBranchAddress("rechit_y", &rechit_y);
+	T_Rechit->SetBranchAddress("rechit_z", &rechit_z);
+	T_Rechit->SetBranchAddress("rechit_iu", &rechit_iu);
+	T_Rechit->SetBranchAddress("rechit_iv", &rechit_iv);
+	T_Rechit->SetBranchAddress("rechit_energy", &rechit_energy);
 
-  T_Rechit->SetBranchAddress("rechit_amplitudeHigh", &rechit_amplitudeHigh);
-  T_Rechit->SetBranchAddress("rechit_amplitudeLow", &rechit_amplitudeLow);
+	T_Rechit->SetBranchAddress("rechit_amplitudeHigh", &rechit_amplitudeHigh);
+	T_Rechit->SetBranchAddress("rechit_amplitudeLow", &rechit_amplitudeLow);
     
-  T_Rechit->SetBranchAddress("rechit_Tot", &rechit_Tot);
-  T_Rechit->SetBranchAddress("rechit_timeMaxHG", &rechit_timeMaxHG);
-  T_Rechit->SetBranchAddress("rechit_timeMaxLG", &rechit_timeMaxLG);
-  T_Rechit->SetBranchAddress("rechit_toaRise", &rechit_toaRise);
-  T_Rechit->SetBranchAddress("rechit_toaFall", &rechit_toaFall);
+	T_Rechit->SetBranchAddress("rechit_Tot", &rechit_Tot);
+	T_Rechit->SetBranchAddress("rechit_timeMaxHG", &rechit_timeMaxHG);
+	T_Rechit->SetBranchAddress("rechit_timeMaxLG", &rechit_timeMaxLG);
+	T_Rechit->SetBranchAddress("rechit_toaRise", &rechit_toaRise);
+	T_Rechit->SetBranchAddress("rechit_toaFall", &rechit_toaFall);
 
-  T_DWC->SetBranchAddress("trackChi2_X", &trackChi2_X, &b_trackChi2_X);
-  T_DWC->SetBranchAddress("trackChi2_Y", &trackChi2_Y, &b_trackChi2_Y);
-  T_DWC->SetBranchAddress("dwcReferenceType", &dwcReferenceType, &b_dwcReferenceType);
-  T_DWC->SetBranchAddress("m_x", &m_x, &b_m_x);
-  T_DWC->SetBranchAddress("m_y", &m_y, &b_m_y);
-  T_DWC->SetBranchAddress("b_x", &b_x, &b_b_x);
-  T_DWC->SetBranchAddress("b_y", &b_y, &b_b_y);
+	T_DWC->SetBranchAddress("trackChi2_X", &trackChi2_X, &b_trackChi2_X);
+	T_DWC->SetBranchAddress("trackChi2_Y", &trackChi2_Y, &b_trackChi2_Y);
+	T_DWC->SetBranchAddress("dwcReferenceType", &dwcReferenceType, &b_dwcReferenceType);
+	T_DWC->SetBranchAddress("m_x", &m_x, &b_m_x);
+	T_DWC->SetBranchAddress("m_y", &m_y, &b_m_y);
+	T_DWC->SetBranchAddress("b_x", &b_x, &b_b_x);
+	T_DWC->SetBranchAddress("b_y", &b_y, &b_b_y);
 	
-  T_rechit_var->SetBranchAddress("hit_mip", &hit_mip, &b_hit_mip);
-  T_rechit_var->SetBranchAddress("hit_x", &hit_x, &b_hit_x);
-  T_rechit_var->SetBranchAddress("hit_y", &hit_y, &b_hit_y);
-  T_rechit_var->SetBranchAddress("hit_z", &hit_z, &b_hit_z);
-  T_rechit_var->SetBranchAddress("layerNhit", layerNhit, &b_layerNhit);
-  T_rechit_var->SetBranchAddress("totalE", &totalE, &b_totalE);
-  T_rechit_var->SetBranchAddress("totalE_CEE", &totalE_CEE, &b_totalE_CEE);
-  T_rechit_var->SetBranchAddress("totalE_CEH", &totalE_CEH, &b_totalE_CEH);
-  T_rechit_var->SetBranchAddress("layerE", layerE, &b_layerE);
-  T_rechit_var->SetBranchAddress("layerE1", layerE1, &b_layerE1);
-  T_rechit_var->SetBranchAddress("layerE7", layerE7, &b_layerE7);
-  T_rechit_var->SetBranchAddress("layerE19", layerE19, &b_layerE19);
-  T_rechit_var->SetBranchAddress("layerE37", layerE37, &b_layerE37);
-  T_rechit_var->SetBranchAddress("layerE61", layerE61, &b_layerE61);
-  T_rechit_var->SetBranchAddress("impactX", impactX, &b_impactX);
-  T_rechit_var->SetBranchAddress("impactY", impactY, &b_impactY);
-  T_rechit_var->SetBranchAddress("maxID", maxID, &b_maxID);
+	T_rechit_var->SetBranchAddress("hit_mip", &hit_mip, &b_hit_mip);
+	T_rechit_var->SetBranchAddress("hit_x", &hit_x, &b_hit_x);
+	T_rechit_var->SetBranchAddress("hit_y", &hit_y, &b_hit_y);
+	T_rechit_var->SetBranchAddress("hit_z", &hit_z, &b_hit_z);
+	T_rechit_var->SetBranchAddress("layerNhit", layerNhit, &b_layerNhit);
+	T_rechit_var->SetBranchAddress("totalE", &totalE, &b_totalE);
+	T_rechit_var->SetBranchAddress("totalE_CEE", &totalE_CEE, &b_totalE_CEE);
+	T_rechit_var->SetBranchAddress("totalE_CEH", &totalE_CEH, &b_totalE_CEH);
+	T_rechit_var->SetBranchAddress("layerE", layerE, &b_layerE);
+	T_rechit_var->SetBranchAddress("layerE1", layerE1, &b_layerE1);
+	T_rechit_var->SetBranchAddress("layerE7", layerE7, &b_layerE7);
+	T_rechit_var->SetBranchAddress("layerE19", layerE19, &b_layerE19);
+	T_rechit_var->SetBranchAddress("layerE37", layerE37, &b_layerE37);
+	T_rechit_var->SetBranchAddress("layerE61", layerE61, &b_layerE61);
+	T_rechit_var->SetBranchAddress("impactX", impactX, &b_impactX);
+	T_rechit_var->SetBranchAddress("impactY", impactY, &b_impactY);
+	T_rechit_var->SetBranchAddress("maxID", maxID, &b_maxID);
 
-  Init_Runinfo();
-  nevents = T_Rechit->GetEntries();
+	Init_Runinfo();
+	nevents = T_Rechit->GetEntries();
 
-  P->root_logon();
+	P->root_logon();
 }
 
 void makePlots::Init_Runinfo(){
-  T_Rechit->GetEntry(0);
-  beamE = beamEnergy;
-  if( pdgID == 11 ){
-	beam_str = "Ele";
-	PID = 0;}
-  else if( pdgID == 13){
-	beam_str = "Mu";
-	PID = 2;}
-  else if( pdgID == 211){
-	beam_str = "Pi";
-	PID = 1;}
-  else{
-	cout << "unknown PDGID QQ" << endl;
-	beam_str = "??";
-	PID = -1;}
+	T_Rechit->GetEntry(0);
+	beamE = beamEnergy;
+	if( pdgID == 11 ){
+		beam_str = "Ele";
+		PID = 0;}
+	else if( pdgID == 13){
+		beam_str = "Mu";
+		PID = 2;}
+	else if( pdgID == 211){
+		beam_str = "Pi";
+		PID = 1;}
+	else{
+		cout << "unknown PDGID QQ" << endl;
+		beam_str = "??";
+		PID = -1;}
 
-  cout << beam_str.c_str()  << " , "<< beamE << "GeV\n" << endl;
+	cout << beam_str.c_str()  << " , "<< beamE << "GeV\n" << endl;
 }
 
 void makePlots::GetData(int evt){
-  T_Rechit      -> GetEntry(evt);
-  T_DWC         -> GetEntry(evt);
-  T_rechit_var  -> GetEntry(evt);
+	T_Rechit      -> GetEntry(evt);
+	T_DWC         -> GetEntry(evt);
+	T_rechit_var  -> GetEntry(evt);
 }
 
 void makePlots::Getinfo(int ihit,int &layer, int &chip, int &channel, double &x, double &y,double &z,double &ene){
-  layer   = rechit_layer  ->at(ihit);
-  chip    = rechit_chip   ->at(ihit);
-  channel = rechit_channel->at(ihit);
-  x       = rechit_x      ->at(ihit);
-  y       = rechit_y      ->at(ihit);
-  z       = rechit_z      ->at(ihit);
-  ene     = rechit_energy ->at(ihit);
+	layer   = rechit_layer  ->at(ihit);
+	chip    = rechit_chip   ->at(ihit);
+	channel = rechit_channel->at(ihit);
+	x       = rechit_x      ->at(ihit);
+	y       = rechit_y      ->at(ihit);
+	z       = rechit_z      ->at(ihit);
+	ene     = rechit_energy ->at(ihit);
 }
 
 void makePlots::Loop(){
 
-  Init();
-  gROOT->SetBatch(kTRUE);
-  gStyle->SetOptStat(1111);
+	Init();
+	gROOT->SetBatch(kTRUE);
+	gStyle->SetOptStat(1111);
 
-  string line;
-  ifstream f_weights("weights.txt");
-  getline(f_weights,line);
-  getline(f_weights,line);
+	string line;
+	//ifstream f_weights("weights.txt");
+	//getline(f_weights,line);
+	//getline(f_weights,line);
   
-  double X0_arr[EE_NLAYER];
-  double *X0_layer = Set_X0(X0_arr);
-  double Passed_events = 0;
-  double efficiency;
-  int layer, chip, channel;
-  double posx, posy, posz, energy;
-  double layerID[EE_NLAYER];
-  double layerNhit_avg[EE_NLAYER];
-  int N_moliere_ring = 5;
-  double E_moliere[EE_NLAYER][N_moliere_ring];
-  double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626 
-  double R_moliere[N_moliere_ring];
-  double R_M[EE_NLAYER];
+	double X0_arr[EE_NLAYER];
+	double *X0_layer = Set_X0(X0_arr);
+	double Passed_events = 0;
+	double efficiency;
+	int layer, chip, channel;
+	double posx, posy, posz, energy;
+	double layerID[EE_NLAYER];
+	double layerNhit_avg[EE_NLAYER];
+	int N_moliere_ring = 5;
+	double E_moliere[EE_NLAYER][N_moliere_ring];
+	double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626 
+	double R_moliere[N_moliere_ring];
+	double R_M[EE_NLAYER];
 
-  // Declare Draw Options
-  //TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
-  //c1->Divide(7,4);
-  TCanvas *c1 = new TCanvas();
-  //gROOT->SetBatch(kTRUE);
-  char pltTit[200], leg[50], img_title[50];
-  string Xtit, Ytit, Opt;
-  int MkSty, MkClr, LClr, fitmin, fitmax;
-  bool Wait, SavePlot, Stat;
+	// Declare Draw Options
+	//TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
+	//c1->Divide(7,4);
+	TCanvas *c1 = new TCanvas();
+	//gROOT->SetBatch(kTRUE);
+	char pltTit[200], leg[50], img_title[50];
+	string Xtit, Ytit, Opt;
+	int MkSty, MkClr, LClr, fitmin, fitmax;
+	bool Wait, SavePlot, Stat;
 	
-  // Declare output filename
-  char title[200];
-  int start = fname.find_last_of("/");
-  int end = fname.find(".root");
-  string f_substr = fname.substr(start+1,end-start-1);
-  sprintf(title,"root_plot/plot_%s.root",f_substr.c_str());
-  cout << "output name : " << title << endl;
-  TFile *outf = new TFile(title,"recreate");
+	// Declare output filename
+	char title[200];
+	int start = fname.find_last_of("/");
+	int end = fname.find(".root");
+	string f_substr = fname.substr(start+1,end-start-1);
+	sprintf(title,"root_plot/plot_%s.root",f_substr.c_str());
+	cout << "output name : " << title << endl;
+	TFile *outf = new TFile(title,"recreate");
   
-  // Declare directories
-  TDirectory *cdhisto = outf->mkdir("histo");
-  TDirectory *cdgraph = outf->mkdir("graph");
-  TDirectory *cdlayer[EE_NLAYER];
+	// Declare directories
+	TDirectory *cdhisto = outf->mkdir("histo");
+	TDirectory *cdgraph = outf->mkdir("graph");
+	TDirectory *cdlayer[EE_NLAYER];
 
-  // Declare histograms
-  cdhisto->cd();
-  TH1D *h_E1devE7[EE_NLAYER]; 
-  TH1D *h_E7devE19[EE_NLAYER];
-  TH1D *h_E1devE7_smallAngle[EE_NLAYER];
-  TH1D *h_E7devE19_smallAngle[EE_NLAYER];
-  TH1D *h_E1devE7_lessBins[EE_NLAYER];
-  TH1D *h_E7devE19_lessBins[EE_NLAYER];
-  TH1D *h_E1devE7_smallAngle_lessBins[EE_NLAYER];
-  TH1D *h_E7devE19_smallAngle_lessBins[EE_NLAYER];
-  TH1D *h_E1[EE_NLAYER];
-  TH1F *h_maxID[EE_NLAYER];
-  TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
-  TH1D *h_E1devE7_differentMaxID_2[EE_NLAYER];
-  TH1D *h_totalE = new TH1D("h_totalE","",100,0,300);
-  TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
-  TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
-  h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
-  TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);
-  h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
-  TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
-  TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
+	// Declare histograms
+	cdhisto->cd();
+	TH1D *h_E1devE7[EE_NLAYER]; 
+	TH1D *h_E7devE19[EE_NLAYER];
+	TH1D *h_E1devE7_smallAngle[EE_NLAYER];
+	TH1D *h_E7devE19_smallAngle[EE_NLAYER];
+	TH1D *h_E1devE7_lessBins[EE_NLAYER];
+	TH1D *h_E7devE19_lessBins[EE_NLAYER];
+	TH1D *h_E1devE7_smallAngle_lessBins[EE_NLAYER];
+	TH1D *h_E7devE19_smallAngle_lessBins[EE_NLAYER];
+	TH1D *h_E1[EE_NLAYER];
+	TH1F *h_maxID[EE_NLAYER];
+	TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
+	TH1D *h_E1devE7_differentMaxID_2[EE_NLAYER];
+	TH1D *h_totalE = new TH1D("h_totalE","",100,0,300);
+	TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
+	TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
+	h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
+	TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);
+	h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
+	TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
+	TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
 
-  TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
-  TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
-  TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
-  TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
-  //TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.002,0.002,500,-0.002,0.002);
-  TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.4,0.4,500,-0.4,0.4);
-  TH2D *h_bx_mx = new TH2D("h_bx_mx","",500,-60,60,100,-0.004,0.004);
-  TH2D *h_by_my = new TH2D("h_by_my","",500,-60,60,100,-0.004,0.004);
-  TH2D *h_mx_my_E1devE7[EE_NLAYER];
-  TH2D *h_bx_by_E1devE7[EE_NLAYER];
-  TH2D *h_mx_my_E1[EE_NLAYER];
-  TH2D *h_bx_by_E1[EE_NLAYER];
-  TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
-  TH2D *h_impactX_impactY[EE_NLAYER];
-  TH2D *h_E1devE7_E1[EE_NLAYER];
-  TH2D *h_E7devE19_E1[EE_NLAYER];
-  TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
+	TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
+	TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
+	TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
+	TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
+	//TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.002,0.002,500,-0.002,0.002);
+	TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.4,0.4,500,-0.4,0.4);
+	TH2D *h_bx_mx = new TH2D("h_bx_mx","",500,-60,60,100,-0.004,0.004);
+	TH2D *h_by_my = new TH2D("h_by_my","",500,-60,60,100,-0.004,0.004);
+	TH2D *h_mx_my_E1devE7[EE_NLAYER];
+	TH2D *h_bx_by_E1devE7[EE_NLAYER];
+	TH2D *h_mx_my_E1[EE_NLAYER];
+	TH2D *h_bx_by_E1[EE_NLAYER];
+	TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
+	TH2D *h_impactX_impactY[EE_NLAYER];
+	TH2D *h_E1devE7_E1[EE_NLAYER];
+	TH2D *h_E7devE19_E1[EE_NLAYER];
+	TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
     
-  for(int iL = 0; iL < EE_NLAYER ; ++iL){
-	sprintf(title,"layer%i",iL+1);
-	cdlayer[iL] = cdhisto->mkdir(title);
-	cdlayer[iL]->cd();
-	sprintf(title,"layer%i_E1devE7",iL+1);
-	h_E1devE7[iL] = new TH1D(title, title, 101, 0, 1.01);
-	sprintf(title,"layer%i_E7devE19",iL+1);
-	h_E7devE19[iL] = new TH1D(title, title, 101, 0, 1.01);
-	sprintf(title,"layer%i_maxID",iL+1);
-	h_maxID[iL] = new TH1F( title, title, 128, 0, 128);
-	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
-	h_E1devE7_differentMaxID_1[iL] = new TH1D(title, title, 101, 0, 1.01);
-	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
-	h_E1devE7_differentMaxID_2[iL] = new TH1D(title, title, 101, 0, 1.01);
-	sprintf(title,"layer%i_impactX_impactY_E1devE7",iL+1);
-	h_impactX_impactY_E1devE7[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
-	sprintf(title,"layer%i_impactX_impactY",iL+1);
-	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
-	sprintf(title,"layer%i_mx_my_E1devE7",iL+1);
-	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
-	sprintf(title,"layer%i_mx_my_E1",iL+1);
-	h_mx_my_E1[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
-	sprintf(title,"layer%i_bx_by_E1devE7",iL+1);
-	h_bx_by_E1devE7[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
-	sprintf(title,"layer%i_bx_by_E1",iL+1);
-	h_bx_by_E1[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
-	sprintf(title,"layer%i_E1devE7_smallAngle",iL+1);
-	h_E1devE7_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
-	sprintf(title,"layer%i_E7devE19_smallAngle",iL+1);
-	h_E7devE19_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
-	sprintf(title,"layer%i_E1devE7_E1",iL+1);
-	h_E1devE7_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
-	sprintf(title,"layer%i_E7devE19_E1",iL+1);
-	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
-	sprintf(title,"layer%i_E1devE7_lessBins",iL+1);
-	h_E1devE7_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
-	sprintf(title,"layer%i_E7devE19_lessBins",iL+1);
-	h_E7devE19_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
-	sprintf(title,"layer%i_E1devE7_smallAngle_lessBins",iL+1);
-	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
-	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
-	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
-	sprintf(title,"layer%i_E1",iL+1);
-	h_E1[iL] = new TH1D(title, title, 100, 0, 300);
-  }
+	for(int iL = 0; iL < EE_NLAYER ; ++iL){
+		sprintf(title,"layer%i",iL+1);
+		cdlayer[iL] = cdhisto->mkdir(title);
+		cdlayer[iL]->cd();
+		sprintf(title,"layer%i_E1devE7",iL+1);
+		h_E1devE7[iL] = new TH1D(title, title, 101, 0, 1.01);
+		sprintf(title,"layer%i_E7devE19",iL+1);
+		h_E7devE19[iL] = new TH1D(title, title, 101, 0, 1.01);
+		sprintf(title,"layer%i_maxID",iL+1);
+		h_maxID[iL] = new TH1F( title, title, 128, 0, 128);
+		sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
+		h_E1devE7_differentMaxID_1[iL] = new TH1D(title, title, 101, 0, 1.01);
+		sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
+		h_E1devE7_differentMaxID_2[iL] = new TH1D(title, title, 101, 0, 1.01);
+		sprintf(title,"layer%i_impactX_impactY_E1devE7",iL+1);
+		h_impactX_impactY_E1devE7[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
+		sprintf(title,"layer%i_impactX_impactY",iL+1);
+		h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
+		sprintf(title,"layer%i_mx_my_E1devE7",iL+1);
+		h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
+		sprintf(title,"layer%i_mx_my_E1",iL+1);
+		h_mx_my_E1[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
+		sprintf(title,"layer%i_bx_by_E1devE7",iL+1);
+		h_bx_by_E1devE7[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
+		sprintf(title,"layer%i_bx_by_E1",iL+1);
+		h_bx_by_E1[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
+		sprintf(title,"layer%i_E1devE7_smallAngle",iL+1);
+		h_E1devE7_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
+		sprintf(title,"layer%i_E7devE19_smallAngle",iL+1);
+		h_E7devE19_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
+		sprintf(title,"layer%i_E1devE7_E1",iL+1);
+		h_E1devE7_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+		sprintf(title,"layer%i_E7devE19_E1",iL+1);
+		h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+		sprintf(title,"layer%i_E1devE7_lessBins",iL+1);
+		h_E1devE7_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+		sprintf(title,"layer%i_E7devE19_lessBins",iL+1);
+		h_E7devE19_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+		sprintf(title,"layer%i_E1devE7_smallAngle_lessBins",iL+1);
+		h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+		sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
+		h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+		sprintf(title,"layer%i_E1",iL+1);
+		h_E1[iL] = new TH1D(title, title, 100, 0, 300);
+	}
 
-  for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
+	for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
 
-  TH2Poly *poly = new TH2Poly();
-  InitTH2Poly(*poly);
+	TH2Poly *poly = new TH2Poly();
+	InitTH2Poly(*poly);
 
-  TH2Poly *latShower_hits[EE_NLAYER];
-  TH2Poly *latShower_bx_by [EE_NLAYER];
-  for(int iL = 0; iL < EE_NLAYER ; ++iL){
-	latShower_hits[iL] = new TH2Poly();
-	InitTH2Poly(*latShower_hits[iL]);
-	sprintf(title,"Layer_%i_hits",iL+1);
-	latShower_hits[iL]->SetTitle(title);
-	latShower_hits[iL]->SetName(title);
-	latShower_bx_by[iL] = new TH2Poly();
-	InitTH2Poly(*latShower_bx_by[iL]);
-	sprintf(title,"Layer_%i_bx_by",iL+1);
-	latShower_bx_by[iL]->SetTitle(title);
-	latShower_bx_by[iL]->SetName(title);
-	layerID[iL] = iL + 1;
-	layerNhit_avg[iL] = 0;
-  }
+	TH2Poly *latShower_hits[EE_NLAYER];
+	TH2Poly *latShower_bx_by [EE_NLAYER];
+	for(int iL = 0; iL < EE_NLAYER ; ++iL){
+		latShower_hits[iL] = new TH2Poly();
+		InitTH2Poly(*latShower_hits[iL]);
+		sprintf(title,"Layer_%i_hits",iL+1);
+		latShower_hits[iL]->SetTitle(title);
+		latShower_hits[iL]->SetName(title);
+		latShower_bx_by[iL] = new TH2Poly();
+		InitTH2Poly(*latShower_bx_by[iL]);
+		sprintf(title,"Layer_%i_bx_by",iL+1);
+		latShower_bx_by[iL]->SetTitle(title);
+		latShower_bx_by[iL]->SetName(title);
+		layerID[iL] = iL + 1;
+		layerNhit_avg[iL] = 0;
+	}
 
   
-  // -------------------- Loop Over Events -------------------- //
-  for(int ev = 0; ev < nevents; ++ev){
+	// -------------------- Loop Over Events -------------------- //
+	for(int ev = 0; ev < nevents; ++ev){
 
-	if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
-	GetData(ev);
+		if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
+		GetData(ev);
 
-	// Event Selection
-	if ( dwcReferenceType < 13) continue;
-	double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
-	//if ( impact_R < 1 ) continue;
-	//if ( impact_R > 1.5 ) continue;
+		// Event Selection
+		if ( dwcReferenceType < 13) continue;
+		double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
+		//if ( impact_R < 1 ) continue;
+		//if ( impact_R > 1.5 ) continue;
 	
-	int Nhits = NRechits;
-	//if ( Nhits < 200 ) continue;
-	//if ( maxID[0] < 50 )  continue;
-	//if ( maxID[0] > 70 ) continue;
-	Passed_events++;
+		int Nhits = NRechits;
+		//if ( Nhits < 200 ) continue;
+		//if ( maxID[0] < 50 )  continue;
+		//if ( maxID[0] > 70 ) continue;
+		Passed_events++;
 
-	h_totalE   -> Fill ( totalE );
-	h_totalCEE -> Fill ( totalE_CEE );
-	h_bx_by    -> Fill ( b_x, b_y );
-	h_mx_my    -> Fill ( m_x, m_y );
-	h_bx_mx    -> Fill ( b_x, m_x );
-	h_by_my    -> Fill ( b_y, m_y );
-	//cout << m_x << " " << m_y << endl;
+		h_totalE   -> Fill ( totalE );
+		h_totalCEE -> Fill ( totalE_CEE );
+		h_bx_by    -> Fill ( b_x, b_y );
+		h_mx_my    -> Fill ( m_x, m_y );
+		h_bx_mx    -> Fill ( b_x, m_x );
+		h_by_my    -> Fill ( b_y, m_y );
+		//cout << m_x << " " << m_y << endl;
 
-	double weights;
-	f_weights >> weights;
-	cout << weights << endl;
+		double weights;
+		//f_weights >> weights;
+		//cout << weights << endl;
 
 	
-	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
+		for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
-	  if( layerE1[iL] == 0) continue;
-	  double E1devE7   = layerE1[iL]/layerE7[iL];
-	  double E7devE19  = layerE7[iL]/layerE19[iL];
-	  double E19devE37 = layerE19[iL]/layerE37[iL];
-	  h_E1devE7 [iL]                 -> Fill ( E1devE7 );
-	  h_E7devE19 [iL]                -> Fill ( E7devE19 );
-	  h_maxID [iL]                   -> Fill ( maxID[iL] );
-	  h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
-	  h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
-	  h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
-	  h_mx_my_E1 [iL]                -> Fill ( m_x, m_y, layerE1[iL] );
-	  h_bx_by_E1devE7 [iL]           -> Fill ( b_x, b_y, E1devE7 );
-	  h_bx_by_E1 [iL]                -> Fill ( b_x, b_y, layerE1[iL] );
-	  h_E1devE7_E1  [iL]             -> Fill ( E1devE7, layerE1[iL] );
-	  h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
-	  h_E1devE7_lessBins [iL]        -> Fill ( E1devE7 );
-	  h_E7devE19_lessBins [iL]       -> Fill ( E7devE19 );
-	  h_E1 [iL]                      -> Fill ( layerE1[iL] );
+			if( layerE1[iL] == 0) continue;
+			double E1devE7   = layerE1[iL]/layerE7[iL];
+			double E7devE19  = layerE7[iL]/layerE19[iL];
+			double E19devE37 = layerE19[iL]/layerE37[iL];
+			h_E1devE7 [iL]                 -> Fill ( E1devE7 );
+			h_E7devE19 [iL]                -> Fill ( E7devE19 );
+			h_maxID [iL]                   -> Fill ( maxID[iL] );
+			h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
+			h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
+			h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
+			h_mx_my_E1 [iL]                -> Fill ( m_x, m_y, layerE1[iL] );
+			h_bx_by_E1devE7 [iL]           -> Fill ( b_x, b_y, E1devE7 );
+			h_bx_by_E1 [iL]                -> Fill ( b_x, b_y, layerE1[iL] );
+			h_E1devE7_E1  [iL]             -> Fill ( E1devE7, layerE1[iL] );
+			h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
+			h_E1devE7_lessBins [iL]        -> Fill ( E1devE7 );
+			h_E7devE19_lessBins [iL]       -> Fill ( E7devE19 );
+			h_E1 [iL]                      -> Fill ( layerE1[iL] );
 	  
-	  // Molie raius calculation
-	  E_moliere[iL][0] += layerE1[iL]/layerE[iL];
-	  E_moliere[iL][1] += layerE7[iL]/layerE[iL];
-	  E_moliere[iL][2] += layerE19[iL]/layerE[iL];
-	  E_moliere[iL][3] += layerE37[iL]/layerE[iL];
-	  E_moliere[iL][4] += layerE61[iL]/layerE[iL];
+			// Molie raius calculation
+			E_moliere[iL][0] += layerE1[iL]/layerE[iL];
+			E_moliere[iL][1] += layerE7[iL]/layerE[iL];
+			E_moliere[iL][2] += layerE19[iL]/layerE[iL];
+			E_moliere[iL][3] += layerE37[iL]/layerE[iL];
+			E_moliere[iL][4] += layerE61[iL]/layerE[iL];
 	  
-	  //Average Layer Nhits
-	  layerNhit_avg [ iL ] += layerNhit[ iL ];
+			//Average Layer Nhits
+			layerNhit_avg [ iL ] += layerNhit[ iL ];
 
 	 
-	  if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
-	  if ( iL == 5 && E7devE19 == 1) {
-		h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
-		h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
- 	  }
+			if ( iL == 5 && E1devE7 == 1 ) {  h_E1_no_XTalk->Fill(layerE1[iL]);  }
+			if ( iL == 5 && E7devE19 == 1) {
+				h_E1_SecondRing_no_XTalk->Fill(layerE1[iL]);
+				h_E1devE7_SecondRing_no_XTalk->Fill(E1devE7);
+			}
 	  
-	  if ( maxID[ iL ] > 50 && maxID[ iL ] < 70 ) 
-		h_E1devE7_differentMaxID_1[ iL ] -> Fill( E1devE7 );
-	  if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
-		h_E1devE7_differentMaxID_2[ iL ] -> Fill( E1devE7 );
+			if ( maxID[ iL ] > 50 && maxID[ iL ] < 70 ) 
+				h_E1devE7_differentMaxID_1[ iL ] -> Fill( E1devE7 );
+			if ( maxID[ iL ] > 75 && maxID[ iL ] < 100 )
+				h_E1devE7_differentMaxID_2[ iL ] -> Fill( E1devE7 );
 
-	  // Cut on m_x & m_y 
-	  if ( beamEnergy == 20 && m_x < -0.0004 && m_x > -0.00048 && m_y > 0.00048 && m_y < 0.00056 ) {
-		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
-		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
-		h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
-		h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
-	  }
+			// Cut on m_x & m_y 
+			if ( beamEnergy == 20 && m_x < -0.0004 && m_x > -0.00048 && m_y > 0.00048 && m_y < 0.00056 ) {
+				h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
+				h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
+				h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
+				h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
+			}
 
-	  if ( beamEnergy == 50 && m_x < -0.00025 && m_x > -0.0004 && m_y > 0.00035 && m_y < 0.00055 ) {
-		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
-		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
-		h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
-		h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
-	  }
+			if ( beamEnergy == 50 && m_x < -0.00025 && m_x > -0.0004 && m_y > 0.00035 && m_y < 0.00055 ) {
+				h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
+				h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
+				h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
+				h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
+			}
 	  
-	  if ( beamEnergy == 200 && m_x < -0.00032 && m_x > -0.0004 && m_y > 0.00048 && m_y < 0.00056 ) {
-		h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
-		h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
-		h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
-		h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
-	  }
-	}
+			if ( beamEnergy == 200 && m_x < -0.00032 && m_x > -0.0004 && m_y > 0.00048 && m_y < 0.00056 ) {
+				h_E1devE7_smallAngle [iL] -> Fill ( E1devE7 );
+				h_E7devE19_smallAngle[iL] -> Fill ( E7devE19 );
+				h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
+				h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
+			}
+		}
 
-	double Energy_cell[NCHANNEL];
-	for ( int icell = 0; icell < NCHANNEL; icell++){
-	  Energy_cell[icell] = 0;
-	}
+		double Energy_cell[NCHANNEL];
+		for ( int icell = 0; icell < NCHANNEL; icell++){
+			Energy_cell[icell] = 0;
+		}
 		
-	// Fill PolyHistograms
-	for(int ihit = 0; ihit < NRechits ; ++ihit){
-	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
-	  //cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
-	  if ( layer > EE_NLAYER ) continue;
-	  latShower_hits[layer-1] -> Fill ( posx, posy, 1);
-	  latShower_bx_by [layer-1] -> Fill ( b_x, b_y, 1 );
+		// Fill PolyHistograms
+		for(int ihit = 0; ihit < NRechits ; ++ihit){
+			Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
+			//cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
+			if ( layer > EE_NLAYER ) continue;
+			latShower_hits[layer-1] -> Fill ( posx, posy, 1);
+			latShower_bx_by [layer-1] -> Fill ( b_x, b_y, 1 );
 
-	  if ( layer != 1 ) continue;
-	  h_impactX_posx -> Fill( impactX[0], posx );
-	  h_impactY_posy -> Fill( impactY[0], posy );
-	  Energy_cell [ chip*64 + channel ] += energy;
-	  //latShower_hits [ layer - 1 ] -> Fill( posx, posy, energy );
+			if ( layer != 1 ) continue;
+			h_impactX_posx -> Fill( impactX[0], posx );
+			h_impactY_posy -> Fill( impactY[0], posy );
+			Energy_cell [ chip*64 + channel ] += energy;
+			//latShower_hits [ layer - 1 ] -> Fill( posx, posy, energy );
+		}
+
+		double TwoPointCorrelation;
+		for ( int icell = 0; icell < NCHANNEL; icell+=2){
+			if ( Energy_cell[icell] == 0 ) continue;
+			for ( int jcell = 0; jcell < NCHANNEL; jcell+=2){
+				if ( Energy_cell[jcell] == 0 ) continue;
+				TwoPointCorrelation = Energy_cell[jcell] / Energy_cell[icell];
+				h_TwoPointCorrelation -> Fill ( TwoPointCorrelation );
+			}
+		}
+
+		// Calculate the shower depth
+		double SHD_Elayer = 0;
+		for(int iL = 0 ; iL < EE_NLAYER ; ++iL){
+			SHD_Elayer += X0_layer[iL]*layerE[iL];
+		}
+		SHD_Elayer /= totalE;
+		h_SHD_Elayer -> Fill( SHD_Elayer );
+		//h_SHD_impactR -> Fill( SHD_Elayer, impact_R );
+
 	}
-
-	double TwoPointCorrelation;
-	for ( int icell = 0; icell < NCHANNEL; icell+=2){
-	  if ( Energy_cell[icell] == 0 ) continue;
-	  for ( int jcell = 0; jcell < NCHANNEL; jcell+=2){
-		if ( Energy_cell[jcell] == 0 ) continue;
-		TwoPointCorrelation = Energy_cell[jcell] / Energy_cell[icell];
-		h_TwoPointCorrelation -> Fill ( TwoPointCorrelation );
-	  }
-	}
-
-	// Calculate the shower depth
-	double SHD_Elayer = 0;
-	for(int iL = 0 ; iL < EE_NLAYER ; ++iL){
-	  SHD_Elayer += X0_layer[iL]*layerE[iL];
-	}
-	SHD_Elayer /= totalE;
-	h_SHD_Elayer -> Fill( SHD_Elayer );
-	//h_SHD_impactR -> Fill( SHD_Elayer, impact_R );
-
-  }
-  // -------------------- End of Loop -------------------- //
+	// -------------------- End of Loop -------------------- //
   
-  //Efficiency
-  efficiency = Passed_events / nevents;
-  cout << "\n\n";
-  cout << "Total Events = " << nevents << ", Passed Events = " << Passed_events  << endl;
-  cout << "Efficiency = " << efficiency << "\n" << endl;
+	//Efficiency
+	efficiency = Passed_events / nevents;
+	cout << "\n\n";
+	cout << "Total Events = " << nevents << ", Passed Events = " << Passed_events  << endl;
+	cout << "Efficiency = " << efficiency << "\n" << endl;
 	
-  // Normalize Histograms
-  Double_t scale = 1/h_totalE->Integral();
-  h_totalE->Scale(scale);
-  scale = 1/h_totalCEE->Integral();
-  h_totalCEE->Scale(scale);
-  scale = 1/h_SHD_Elayer->Integral();
-  h_SHD_Elayer->Scale(scale);
+	// Normalize Histograms
+	Double_t scale = 1/h_totalE->Integral();
+	h_totalE->Scale(scale);
+	scale = 1/h_totalCEE->Integral();
+	h_totalCEE->Scale(scale);
+	scale = 1/h_SHD_Elayer->Integral();
+	h_SHD_Elayer->Scale(scale);
 
-  for (int iL = 0; iL < EE_NLAYER; ++iL){
-	scale = 1 / h_E1devE7 [iL]->Integral();
-	h_E1devE7 [iL] -> Scale(scale);
-	scale = 1 / h_E7devE19[iL]->Integral();
-	h_E7devE19[iL] -> Scale(scale);
-	scale = 1 / h_E1devE7_differentMaxID_1[iL]->Integral();
-	h_E1devE7_differentMaxID_1[iL] -> Scale(scale);
-	scale = 1 / h_E1devE7_differentMaxID_2[iL]->Integral();
-	h_E1devE7_differentMaxID_2[iL] -> Scale(scale);
-	scale = 1 / h_E1devE7_smallAngle [iL]->Integral();
-	h_E1devE7_smallAngle [iL] -> Scale(scale);
-	scale = 1 / h_E7devE19_smallAngle [iL]->Integral();
-	h_E7devE19_smallAngle[iL] -> Scale(scale);
-	scale = 1 / h_E1devE7_lessBins [iL]->Integral();
-	h_E1devE7_lessBins [iL] -> Scale(scale);
-	scale = 1 / h_E7devE19_lessBins[iL]->Integral();
-	h_E7devE19_lessBins[iL] -> Scale(scale);
-	scale = 1 / h_E1devE7_smallAngle_lessBins [iL]->Integral();
-	h_E1devE7_smallAngle_lessBins [iL] -> Scale(scale);
-	scale = 1 / h_E7devE19_smallAngle_lessBins [iL]->Integral();
-	h_E7devE19_smallAngle_lessBins[iL] -> Scale(scale);
+	for (int iL = 0; iL < EE_NLAYER; ++iL){
+		scale = 1 / h_E1devE7 [iL]->Integral();
+		h_E1devE7 [iL] -> Scale(scale);
+		scale = 1 / h_E7devE19[iL]->Integral();
+		h_E7devE19[iL] -> Scale(scale);
+		scale = 1 / h_E1devE7_differentMaxID_1[iL]->Integral();
+		h_E1devE7_differentMaxID_1[iL] -> Scale(scale);
+		scale = 1 / h_E1devE7_differentMaxID_2[iL]->Integral();
+		h_E1devE7_differentMaxID_2[iL] -> Scale(scale);
+		scale = 1 / h_E1devE7_smallAngle [iL]->Integral();
+		h_E1devE7_smallAngle [iL] -> Scale(scale);
+		scale = 1 / h_E7devE19_smallAngle [iL]->Integral();
+		h_E7devE19_smallAngle[iL] -> Scale(scale);
+		scale = 1 / h_E1devE7_lessBins [iL]->Integral();
+		h_E1devE7_lessBins [iL] -> Scale(scale);
+		scale = 1 / h_E7devE19_lessBins[iL]->Integral();
+		h_E7devE19_lessBins[iL] -> Scale(scale);
+		scale = 1 / h_E1devE7_smallAngle_lessBins [iL]->Integral();
+		h_E1devE7_smallAngle_lessBins [iL] -> Scale(scale);
+		scale = 1 / h_E7devE19_smallAngle_lessBins [iL]->Integral();
+		h_E7devE19_smallAngle_lessBins[iL] -> Scale(scale);
 
-	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
-	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
-	h_mx_my_E1devE7 [ iL ] -> Divide ( h_mx_my );
-	h_bx_by_E1 [ iL ] -> Divide ( h_bx_by );
-	h_mx_my_E1 [ iL ] -> Divide ( h_mx_my ); 
-	for ( int r = 0; r < N_moliere_ring; r++ ) {                  // Calculate average E(r)/Etot for moliere radius
-	  E_moliere [iL] [r] /= nevents;
+		layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
+		h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
+		h_mx_my_E1devE7 [ iL ] -> Divide ( h_mx_my );
+		h_bx_by_E1 [ iL ] -> Divide ( h_bx_by );
+		h_mx_my_E1 [ iL ] -> Divide ( h_mx_my ); 
+		for ( int r = 0; r < N_moliere_ring; r++ ) {                  // Calculate average E(r)/Etot for moliere radius
+			E_moliere [iL] [r] /= nevents;
+		}
 	}
-  }
 
-  for ( int iL = 0; iL < EE_NLAYER; iL++){
-	cdgraph->cd();
-	latShower_hits [iL] -> Write();
-	latShower_bx_by[iL] -> Write();
+	for ( int iL = 0; iL < EE_NLAYER; iL++){
+		cdgraph->cd();
+		latShower_hits [iL] -> Write();
+		latShower_bx_by[iL] -> Write();
 					   
-	TGraph* g_layer_moliere = new TGraph ( N_moliere_ring, R_moliere, E_moliere[iL] );
-	TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 10);
-	fit_layer_moliere->SetParameter(0, -0.2);
-	fit_layer_moliere->SetParameter(1, -0.6);
-	fit_layer_moliere->SetLineColor(2);
-	sprintf(title, " layer%i_moliere ", iL+1);
-	g_layer_moliere->SetTitle(title);
-	g_layer_moliere->SetName(title);
-	g_layer_moliere->Fit("fit_layer_moliere");
-	g_layer_moliere->Write();
+		TGraph* g_layer_moliere = new TGraph ( N_moliere_ring, R_moliere, E_moliere[iL] );
+		TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 10);
+		fit_layer_moliere->SetParameter(0, -0.2);
+		fit_layer_moliere->SetParameter(1, -0.6);
+		fit_layer_moliere->SetLineColor(2);
+		sprintf(title, " layer%i_moliere ", iL+1);
+		g_layer_moliere->SetTitle(title);
+		g_layer_moliere->SetName(title);
+		g_layer_moliere->Fit("fit_layer_moliere");
+		g_layer_moliere->Write();
 
-	R_M[iL] = fit_layer_moliere->GetX ( 0.9 , 0, 10 );
-	delete g_layer_moliere;
-	delete fit_layer_moliere;
-  }
-  TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
-  g_layerNhit_avg->Write();
-  TGraph* g_layer_Moliere_Radius = new TGraph ( EE_NLAYER, layerID, R_M);
-  sprintf(title, "layer_Moliere_Radius");
-  g_layer_Moliere_Radius->SetName(title);
-  g_layer_Moliere_Radius->SetTitle(title);
-  g_layer_Moliere_Radius->Write();
+		R_M[iL] = fit_layer_moliere->GetX ( 0.9 , 0, 10 );
+		delete g_layer_moliere;
+		delete fit_layer_moliere;
+	}
+	TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
+	g_layerNhit_avg->Write();
+	TGraph* g_layer_Moliere_Radius = new TGraph ( EE_NLAYER, layerID, R_M);
+	sprintf(title, "layer_Moliere_Radius");
+	g_layer_Moliere_Radius->SetName(title);
+	g_layer_Moliere_Radius->SetTitle(title);
+	g_layer_Moliere_Radius->Write();
 
-  //c1->Update();
-  //gPad->WaitPrimitive();
-  //c1->Write();
-  delete c1;
-  outf->Write();
-  outf->Close();
+	//c1->Update();
+	//gPad->WaitPrimitive();
+	//c1->Write();
+	delete c1;
+	outf->Write();
+	outf->Close();
 }
 
 
 
 void makePlots::Event_Display(){
 
-  Init();
-  gStyle->SetPalette(54);
-  gStyle->SetOptStat(0);
-  gROOT->SetBatch(kTRUE);
-  //TCanvas *c1 = new TCanvas("c1","c1",1200,600);
-  TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
-  c1->Divide(7,4);
-  char title[50];
+	Init();
+	gStyle->SetPalette(54);
+	gStyle->SetOptStat(0);
+	gROOT->SetBatch(kTRUE);
+	//TCanvas *c1 = new TCanvas("c1","c1",1200,600);
+	TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
+	c1->Divide(7,4);
+	char title[50];
 
-  int Nlayer = 28;
-  TH2Poly *latShower_hits[Nlayer];
+	int Nlayer = 28;
+	TH2Poly *latShower_hits[Nlayer];
 
-  for(int iL = 0; iL < Nlayer ; ++iL){
-	latShower_hits[iL] = new TH2Poly();
-	InitTH2Poly(*latShower_hits[iL]);
-	sprintf(title,"Layer_%i",iL+1);
-	latShower_hits[iL]->SetTitle(title);
-  }
-
-  TH2Poly *firstL = new TH2Poly();
-  InitTH2Poly(*firstL);
-  int counts = 0;
-  for(int ev = 0; ev < nevents; ++ev){
-	if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
-    
-	GetData(ev);
-	int Nhits;
-	Nhits = NRechits;
-	//cout << Nhits << endl;
-	int layer, chip, channel;
-	double posx,posy,posz,energy;
-	double ENEPERMIP = 52.8e-03;
-    
-	double totalE = 0;
-	for(int ihit = 0; ihit < Nhits ; ++ihit){
-	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
-	  totalE += energy/ENEPERMIP;
+	for(int iL = 0; iL < Nlayer ; ++iL){
+		latShower_hits[iL] = new TH2Poly();
+		InitTH2Poly(*latShower_hits[iL]);
+		sprintf(title,"Layer_%i",iL+1);
+		latShower_hits[iL]->SetTitle(title);
 	}
-	//if(totalE >= 140000 && ev < 10000){
-	counts++;
-	for(int ihit = 0; ihit < Nhits ; ++ihit){
-	  Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
-	  if ( layer > 28 ) continue;
-	  //cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
-	  latShower_hits[layer-1]->Fill( posx, posy, energy/totalE_CEE );
-	  if(layer == 1) { firstL->Fill( posx, posy, energy/totalE_CEE ); }
+
+	TH2Poly *firstL = new TH2Poly();
+	InitTH2Poly(*firstL);
+	int counts = 0;
+	for(int ev = 0; ev < nevents; ++ev){
+		if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
+    
+		GetData(ev);
+		int Nhits;
+		Nhits = NRechits;
+		//cout << Nhits << endl;
+		int layer, chip, channel;
+		double posx,posy,posz,energy;
+		double ENEPERMIP = 52.8e-03;
+    
+		double totalE = 0;
+		for(int ihit = 0; ihit < Nhits ; ++ihit){
+			Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
+			totalE += energy/ENEPERMIP;
+		}
+		//if(totalE >= 140000 && ev < 10000){
+		counts++;
+		for(int ihit = 0; ihit < Nhits ; ++ihit){
+			Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
+			if ( layer > 28 ) continue;
+			//cout << "layer = " << layer << " , x = " << posx << ", y = " << posy << ", nmip = " << energy/ENEPERMIP <<endl;
+			latShower_hits[layer-1]->Fill( posx, posy, energy/totalE_CEE );
+			if(layer == 1) { firstL->Fill( posx, posy, energy/totalE_CEE ); }
+		}
+		//}
 	}
-	//}
-  }
-  cout << "end of loop" << endl;
+	cout << "end of loop" << endl;
 	
 	
-  for(int iL = 0; iL < EE_NLAYER ; ++iL){
-	c1->cd(iL+1);
-	//latShower_hits[iL]->SetMaximum(100);
-	latShower_hits[iL]->Draw("col");
-  }
-  c1->Update();
-  //gPad->WaitPrimitive();
-  sprintf(title,"plots/evt_dis/Occupancy_%iGeV_%ievts.pdf", beamE  ,counts);
-  //getchar();
-  //c1->Update();
+	for(int iL = 0; iL < EE_NLAYER ; ++iL){
+		c1->cd(iL+1);
+		//latShower_hits[iL]->SetMaximum(100);
+		latShower_hits[iL]->Draw("col");
+	}
+	c1->Update();
+	//gPad->WaitPrimitive();
+	sprintf(title,"plots/evt_dis/Occupancy_%iGeV_%ievts.pdf", beamE  ,counts);
+	//getchar();
+	//c1->Update();
 
-  c1->SaveAs(title);
-  TCanvas *c2 = new TCanvas();
-  firstL->Draw("samecolz");
-  c2->Update();
-  sprintf(title,"plots/evt_dis/evt_display_1st.png");
-  c2->SaveAs(title);
+	c1->SaveAs(title);
+	TCanvas *c2 = new TCanvas();
+	firstL->Draw("samecolz");
+	c2->Update();
+	sprintf(title,"plots/evt_dis/evt_display_1st.png");
+	c2->SaveAs(title);
 
-  //getchar();
+	//getchar();
   
 }
 
@@ -1003,61 +1003,61 @@ void makePlots::Event_Display(){
 
 void makePlots::InitTH2Poly(TH2Poly& poly)
 {
-  int MAXVERTICES = 6;
-  double HexX[MAXVERTICES];
-  double HexY[MAXVERTICES];
-  int iu,iv,CellXYsize;
-  ifstream file("src_txtfile/poly_frame.txt");
-  string line;
+	int MAXVERTICES = 6;
+	double HexX[MAXVERTICES];
+	double HexY[MAXVERTICES];
+	int iu,iv,CellXYsize;
+	ifstream file("src_txtfile/poly_frame.txt");
+	string line;
   
-  for(int header = 0; header < 4; ++header )     getline(file,line);
+	for(int header = 0; header < 4; ++header )     getline(file,line);
   
-  while(true){
-	getline(file,line);
-	if( file.eof() ) break;
-	file >> iu >> iv >> CellXYsize;    
-	for(int i = 0; i < CellXYsize ; ++i){
-	  getline(file,line);
-	  file >> HexX[i] >> HexY[i];
-	}
+	while(true){
+		getline(file,line);
+		if( file.eof() ) break;
+		file >> iu >> iv >> CellXYsize;    
+		for(int i = 0; i < CellXYsize ; ++i){
+			getline(file,line);
+			file >> HexX[i] >> HexY[i];
+		}
     
-	poly.AddBin(CellXYsize, HexX, HexY);
-  }
-  file.close();
+		poly.AddBin(CellXYsize, HexX, HexY);
+	}
+	file.close();
 }
 
 void makePlots::InitTH2Poly_flower(TH2Poly& poly){
-  int MAXVERTICES = 6;
-  double HexX[MAXVERTICES];
-  double HexY[MAXVERTICES];
-  double positionX, positionY, centerX, centerY;
-  int iu,iv,CellXYsize,Daisy_N;
-  ifstream file("src_txtfile/poly_frame.txt");
-  string line;
-  ifstream daisyfile("src_txtfile/daisy_frame_center_position.txt");
+	int MAXVERTICES = 6;
+	double HexX[MAXVERTICES];
+	double HexY[MAXVERTICES];
+	double positionX, positionY, centerX, centerY;
+	int iu,iv,CellXYsize,Daisy_N;
+	ifstream file("src_txtfile/poly_frame.txt");
+	string line;
+	ifstream daisyfile("src_txtfile/daisy_frame_center_position.txt");
 
-  for(int header = 0; header < 4; ++header )     getline(file,line);
-  daisyfile >> Daisy_N;
+	for(int header = 0; header < 4; ++header )     getline(file,line);
+	daisyfile >> Daisy_N;
   
-  for(int j = 0; j < Daisy_N ; j++){
-	daisyfile >> centerX >> centerY;
-	if( file.eof() ) {
-	  file.clear();
-	  file.seekg(0, ios::beg);
-	  for(int header = 0; header < 4; ++header )     getline(file,line);
-	} 
-	while(!file.eof()){
-	  file >> iu >> iv >> CellXYsize;
-	  for(int i = 0; i < CellXYsize ; ++i){
-		file >> positionX >> positionY;
-		HexX[i] = centerX + positionX;
-		HexY[i] = centerY + positionY;
-	  }
-	  poly.AddBin(CellXYsize, HexX, HexY);
+	for(int j = 0; j < Daisy_N ; j++){
+		daisyfile >> centerX >> centerY;
+		if( file.eof() ) {
+			file.clear();
+			file.seekg(0, ios::beg);
+			for(int header = 0; header < 4; ++header )     getline(file,line);
+		} 
+		while(!file.eof()){
+			file >> iu >> iv >> CellXYsize;
+			for(int i = 0; i < CellXYsize ; ++i){
+				file >> positionX >> positionY;
+				HexX[i] = centerX + positionX;
+				HexY[i] = centerY + positionY;
+			}
+			poly.AddBin(CellXYsize, HexX, HexY);
+		}
 	}
-  }
-  file.close();
-  daisyfile.close();
+	file.close();
+	daisyfile.close();
 }
 
 
@@ -1136,50 +1136,50 @@ void makePlots::InitTH2Poly_flower(TH2Poly& poly){
 
 double* makePlots::Set_X0(double X0_arr[]){
 
-  // len["Cu"] = 1.436; //cm                                  
-  // len["W"] = 0.35; //cm                                  
-  // len["Lead"] = 0.56; //cm                               
-  // len["Pb"] = 0.56; //cm                                 
-  // len["CuW"] = 0.43; //cm                                
-  // len["Al"] = 8.897; //cm
+	// len["Cu"] = 1.436; //cm                                  
+	// len["W"] = 0.35; //cm                                  
+	// len["Lead"] = 0.56; //cm                               
+	// len["Pb"] = 0.56; //cm                                 
+	// len["CuW"] = 0.43; //cm                                
+	// len["Al"] = 8.897; //cm
 
-  // 4-July-2018
-  // In all the checks done, Pb is 4.9 mm (~0.875 X0) and 
-  // Cu is 6 mm (~0.42 X0)  
+	// 4-July-2018
+	// In all the checks done, Pb is 4.9 mm (~0.875 X0) and 
+	// Cu is 6 mm (~0.42 X0)  
 
-  // 10-July-2018
-  // Odd layers have this config: 
-  // Fe(0.3)-Pb(4.9)-Fe(0.3)-Air (4.6) - PCB - Si
-  // Even layers have this config: 
-  // Kapton(0.01)-CuW(1.2)-Cu(6)-CuW-Kapton-Si
+	// 10-July-2018
+	// Odd layers have this config: 
+	// Fe(0.3)-Pb(4.9)-Fe(0.3)-Air (4.6) - PCB - Si
+	// Even layers have this config: 
+	// Kapton(0.01)-CuW(1.2)-Cu(6)-CuW-Kapton-Si
 
-  // 17-July-2018
-  // Fe-Pb-Fe-Air-PCB-Si 
-  // Kap-CuW-Cu-CuW-Si
+	// 17-July-2018
+	// Fe-Pb-Fe-Air-PCB-Si 
+	// Kap-CuW-Cu-CuW-Si
 
-  /*
-  // 17-July-2018
-  1 0.933   2 0.976   3 0.909   4 0.976   5 0.909
-  6 0.976   7 0.909   8 0.976   9 0.909   10 0.976
-  11 0.909  12 0.976  13 0.909  14 0.976  15 0.909
-  16 1.143  17 0.909  18 0.976  19 0.909  20 1.43
-  21 0.909  22 0.976  23 0.909  24 0.976  25 0.909
-  26 0.976  27 0.909  28 0.976
-  */
-  double single_layer_X0[28];
-  for( int i = 0 ; i < 28 ; ++i){
-	if ( i % 2 == 0) single_layer_X0[i] = 0.909;
-	else single_layer_X0[i] = 0.976;
-  }
-  single_layer_X0[0]  = 0.933;
-  single_layer_X0[15] = 1.143;
-  single_layer_X0[19] = 1.43;
+	/*
+	// 17-July-2018
+	1 0.933   2 0.976   3 0.909   4 0.976   5 0.909
+	6 0.976   7 0.909   8 0.976   9 0.909   10 0.976
+	11 0.909  12 0.976  13 0.909  14 0.976  15 0.909
+	16 1.143  17 0.909  18 0.976  19 0.909  20 1.43
+	21 0.909  22 0.976  23 0.909  24 0.976  25 0.909
+	26 0.976  27 0.909  28 0.976
+	*/
+	double single_layer_X0[28];
+	for( int i = 0 ; i < 28 ; ++i){
+		if ( i % 2 == 0) single_layer_X0[i] = 0.909;
+		else single_layer_X0[i] = 0.976;
+	}
+	single_layer_X0[0]  = 0.933;
+	single_layer_X0[15] = 1.143;
+	single_layer_X0[19] = 1.43;
 
-  double X0_sum = 0.;
-  for(int iL = 0 ; iL < 28 ; ++iL){
-	X0_sum += single_layer_X0[iL];
-	X0_arr[iL] = X0_sum;
-  }
+	double X0_sum = 0.;
+	for(int iL = 0 ; iL < 28 ; ++iL){
+		X0_sum += single_layer_X0[iL];
+		X0_arr[iL] = X0_sum;
+	}
   
-  return X0_arr;
+	return X0_arr;
 }
