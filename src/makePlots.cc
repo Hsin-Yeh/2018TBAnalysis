@@ -518,7 +518,7 @@ void makePlots::Loop(){
 		cdgraph->cd();
 		latShower_hits [iL] -> Write();
 		latShower_bx_by[iL] -> Write();
-					   
+		/*
 		TGraph* g_layer_moliere = new TGraph ( N_moliere_ring, R_moliere, E_moliere[iL] );
 		TF1* fit_layer_moliere = new TF1 ("fit_layer_moliere", "1-exp(x/[1]+[0])", 0, 10);
 		fit_layer_moliere->SetParameter(0, -0.2);
@@ -529,19 +529,22 @@ void makePlots::Loop(){
 		g_layer_moliere->SetName(title);
 		g_layer_moliere->Fit("fit_layer_moliere");
 		g_layer_moliere->Write();
-
+		
 		R_M[iL] = fit_layer_moliere->GetX ( 0.9 , 0, 10 );
 		delete g_layer_moliere;
 		delete fit_layer_moliere;
+		*/
 	}
+	
 	TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
 	g_layerNhit_avg->Write();
+	/*
 	TGraph* g_layer_Moliere_Radius = new TGraph ( EE_NLAYER, layerID, R_M);
 	sprintf(title, "layer_Moliere_Radius");
 	g_layer_Moliere_Radius->SetName(title);
 	g_layer_Moliere_Radius->SetTitle(title);
 	g_layer_Moliere_Radius->Write();
-
+	*/
 	//c1->Update();
 	//gPad->WaitPrimitive();
 	//c1->Write();
