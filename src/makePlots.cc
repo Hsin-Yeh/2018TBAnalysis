@@ -363,6 +363,10 @@ void makePlots::Loop(){
 	
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
+
+	    layerNhit_avg [iL] += layerNhit[iL];
+
+
 	    if( layerE1[iL] == 0) continue;
 	    double E1devE7   = layerE1[iL]/layerE7[iL];
 	    double E7devE19  = layerE7[iL]/layerE19[iL];
@@ -401,7 +405,7 @@ void makePlots::Loop(){
 	    cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
 	    
 #endif
-	    
+
 	    if ( layer > EE_NLAYER ) continue;
 	    latShower_hits[layer-1] -> Fill ( posx, posy, 1);
 	    latShower_bx_by [layer-1] -> Fill ( b_x, b_y, 1 );
@@ -505,6 +509,9 @@ void makePlots::Loop(){
     }
 	
     TGraph* g_layerNhit_avg = new TGraph ( EE_NLAYER, layerID, layerNhit_avg);
+    sprintf(title, "AverageNhits");
+    g_layerNhit_avg->SetName(title);
+    g_layerNhit_avg->SetTitle(title);
     g_layerNhit_avg->Write();
     /*
       TGraph* g_layer_Moliere_Radius = new TGraph ( EE_NLAYER, layerID, R_M);
