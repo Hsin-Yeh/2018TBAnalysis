@@ -187,6 +187,7 @@ void Compare_DataMC(){
   g_Average_Nhits[2]->SetLineColor(1);
   g_Average_Nhits[2]->SetLineWidth(2);
 
+  /*
   sprintf(title,"histo/h_bx_by");
   h_bx_by[0] = (TGraph *)f_MC.Get(title);
   h_bx_by[0]->SetLineColor(Color(0));
@@ -209,7 +210,7 @@ void Compare_DataMC(){
   h_bx_by[2]->Draw("colz");
   c1->Update();
   c1->SaveAs("bxbyData");
-  
+  */
   for(int iL = 0; iL < NLAYER ; ++iL){
     sprintf(title,"histo/layer%i/layer%i_E1devE7_smallAngle_lessBins",iL+1, iL+1);
     h_E1devE7[0][iL] = (TH1D *)f_MC.Get(title);
