@@ -363,9 +363,7 @@ void makePlots::Loop(){
 	
 	for(int iL = 0; iL < EE_NLAYER ; ++iL){ 	  //Fill shower shape histogram
 
-
 	    layerNhit_avg [iL] += layerNhit[iL];
-
 
 	    if( layerE1[iL] == 0) continue;
 	    double E1devE7   = layerE1[iL]/layerE7[iL];
