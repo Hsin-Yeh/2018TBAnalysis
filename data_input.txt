@@ -1,1 +1,1 @@
-output_root/sim_20GeV_EMN.root
+root_plot/plot_sim_20GeV_EMN.root
