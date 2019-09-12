@@ -112,16 +112,16 @@ void Compare_DataMC(){
     char title[200];
     char plot_title[200];
 
-    TCanvas* c1 = new TCanvas();
-    //TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
-    //TCanvas *c3 = new TCanvas("c3","c3",6400,3600);
-    //c2->Divide(7,4);
-    //c3->Divide(7,4);
-    //  gStyle->SetOptStat(0);
-    //  gROOT->SetBatch(kTRUE);
+    TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
+    TCanvas *c3 = new TCanvas("c3","c3",6400,3600);
+    c2->Divide(7,4);
+    c3->Divide(7,4);
+
+    gStyle->SetOptStat(0);
+    //gROOT->SetBatch(kTRUE);
     TImage *img = TImage::Create();
   
-    root_logon();
+    //root_logon();
 
     string filename;
     ifstream infile("data_input.txt");
@@ -211,7 +211,7 @@ void Compare_DataMC(){
       c1->Update();
       c1->SaveAs("bxbyData");
     */
-    double chi_cross[NLAYER], chi_original[NLAYER];
+    double chi_cross_E1devE7[NLAYER], chi_original_E1devE7[NLAYER], chi_cross_E7devE19[NLAYER], chi_original_E7devE19[NLAYER];
     double layerID[NLAYER];
   
     for(int iL = 0; iL < NLAYER ; ++iL){
@@ -231,15 +231,11 @@ void Compare_DataMC(){
 
 	int n = h_E1devE7[1][iL]->GetNbinsX();
 	cout << n << endl;
-	Double_t res[n], x[20];
-	chi_cross[iL] = h_E1devE7[0][iL]->Chi2Test(h_E1devE7[2][iL],"UU NORM CHI2/NDF P",res);
-	cout << chi_cross[iL] << endl;
+	Double_t res1[n], res2[n], x[20];
     
-	chi_original[iL] = h_E1devE7[1][iL]->Chi2Test(h_E1devE7[2][iL],"UU NORM CHI2/NDF P",res);
-	cout << chi_original[iL] << endl;
+	chi_original_E1devE7[iL] = h_E1devE7[1][iL]->Chi2Test(h_E1devE7[2][iL],"UU NORM CHI2/NDF P",res2);
+	chi_cross_E1devE7[iL] = h_E1devE7[0][iL]->Chi2Test(h_E1devE7[2][iL],"UU NORM CHI2/NDF P",res1);
 
-    
-    
 	sprintf(title,"histo/layer%i/layer%i_E7devE19_smallAngle_lessBins",iL+1, iL+1);
 	h_E7devE19[0][iL] = (TH1D *)f_MC.Get(title);
 	h_E7devE19[0][iL]->SetLineColor(Color(0));
@@ -250,6 +246,10 @@ void Compare_DataMC(){
 	h_E7devE19[2][iL] = (TH1D *)f_Data.Get(title);
 	h_E7devE19[2][iL]->SetLineColor(1);
 	h_E7devE19[2][iL]->SetLineWidth(2);
+
+	chi_original_E7devE19[iL] = h_E7devE19[1][iL]->Chi2Test(h_E7devE19[2][iL],"UU NORM CHI2/NDF P",res2);
+	chi_cross_E7devE19[iL] = h_E7devE19[0][iL]->Chi2Test(h_E7devE19[2][iL],"UU NORM CHI2/NDF P",res1);
+
 
 	sprintf(title,"histo/layer%i/layer%i_E1devE7_maxID50_70",iL+1, iL+1);
 	h_E1devE7_differentMaxID_1[0][iL] = (TH1D *)f_MC.Get(title);
@@ -273,161 +273,221 @@ void Compare_DataMC(){
 	h_E1devE7_differentMaxID_2[2][iL]->SetLineColor(1);
 	h_E1devE7_differentMaxID_2[2][iL]->SetLineWidth(2);
     }
-/*
-  TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
-  c1->cd();
+    TCanvas *c1 = new TCanvas("c1","example",600,700);
+    TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
+    c1->cd();
 
-  sprintf(title,"Total Energy CEE ");
-  h_totalCEE[0]->SetTitle("Total Energy CEE");
-  h_totalCEE[0]->Draw("HIST");
-  h_totalCEE[1]->Draw("HISTSame");
-  h_totalCEE[2]->Draw("Same");
+    sprintf(title,"Total Energy CEE ");
+    h_totalCEE[0]->SetTitle("Total Energy CEE");
+    h_totalCEE[0]->Draw("HIST");
+    h_totalCEE[1]->Draw("HISTSame");
+    h_totalCEE[2]->Draw("Same");
 
-  legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
-  legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
-  //legend->AddEntry(h_totalCEE[0],"w/ smearing","L");
-  //legend->AddEntry(h_totalCEE[1],"w/o smearing","L");
-  //legend->AddEntry(h_totalCEE[2],"Data","LP");
-  //legend->AddEntry(h_totalCEE[0],"new method","L");
-  //legend->AddEntry(h_totalCEE[1],"old method","L");
-  legend->AddEntry(h_totalCEE[2],"Data","LP");
-  //  sprintf(title,"beamE=%dGeV",Energy);
-  //  legend->SetHeader(title);
-  legend->SetTextSize(0.035);
-  legend->Draw();
-  c1->Update();
-  //gPad->WaitPrimitive();
-  sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
-  //  c1->SaveAs(title);
-  img->FromPad(c1);
-  img->WriteImage(title);
+    legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
+    legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+    //legend->AddEntry(h_totalCEE[0],"w/ smearing","L");
+    //legend->AddEntry(h_totalCEE[1],"w/o smearing","L");
+    //legend->AddEntry(h_totalCEE[2],"Data","LP");
+    //legend->AddEntry(h_totalCEE[0],"new method","L");
+    //legend->AddEntry(h_totalCEE[1],"old method","L");
+    legend->AddEntry(h_totalCEE[2],"Data","LP");
+    //  sprintf(title,"beamE=%dGeV",Energy);
+    //  legend->SetHeader(title);
+    legend->SetTextSize(0.035);
+    legend->Draw();
+    c1->Update();
+    sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
+    //  c1->SaveAs(title);
+    img->FromPad(c1);
+    img->WriteImage(title);
 
 
-  // Compare Average_Nhits
-  c1->SetGrid();
-  TLegend* legend_Nhits = new TLegend(0.7,0.75,0.9,0.9);
-  sprintf(title,"Total Energy CEE ");
-  g_Average_Nhits[0]->SetTitle("Average_Nhits");
-  g_Average_Nhits[0]->GetYaxis()->SetNdivisions(20);
-  g_Average_Nhits[0]->GetYaxis()->SetTitle("Average #hits");
-  g_Average_Nhits[0]->GetXaxis()->SetTitle("LayerID");
-  g_Average_Nhits[1]->Draw("APL");
-  g_Average_Nhits[2]->Draw("PLSame");
-  g_Average_Nhits[0]->Draw("PLSame");
-  legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
-  legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
-  //legend_Nhits->AddEntry(g_Average_Nhits[0],"new method","L");
-  //legend_Nhits->AddEntry(h_totalCEE[1],"old method","L");
-  legend_Nhits->AddEntry(g_Average_Nhits[2],"Data","LP");
-  legend_Nhits->Draw();
-  c1->Update();
-  sprintf(title,"plots/%s/Average_Nhits_%sGeV.png",f_substr.c_str(), Energy.c_str());
-  //  c1->SaveAs(title);
-  img->FromPad(c1);
-  img->WriteImage(title);
-
+    // Compare Average_Nhits
+    c1->SetGrid();
+    TLegend* legend_Nhits = new TLegend(0.7,0.75,0.9,0.9);
+    sprintf(title,"Total Energy CEE ");
+    g_Average_Nhits[0]->SetTitle("Average_Nhits");
+    g_Average_Nhits[0]->GetYaxis()->SetNdivisions(20);
+    g_Average_Nhits[0]->GetYaxis()->SetTitle("Average #hits");
+    g_Average_Nhits[0]->GetXaxis()->SetTitle("LayerID");
+    g_Average_Nhits[1]->Draw("APL");
+    g_Average_Nhits[2]->Draw("PLSame");
+    g_Average_Nhits[0]->Draw("PLSame");
+    legend_Nhits->AddEntry(g_Average_Nhits[0],"w/ Xtalk","L");
+    legend_Nhits->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
+    //legend_Nhits->AddEntry(g_Average_Nhits[0],"new method","L");
+    //legend_Nhits->AddEntry(h_totalCEE[1],"old method","L");
+    legend_Nhits->AddEntry(g_Average_Nhits[2],"Data","LP");
+    legend_Nhits->Draw();
+    c1->Update();
+    sprintf(title,"plots/%s/Average_Nhits_%sGeV.png",f_substr.c_str(), Energy.c_str());
+    //  c1->SaveAs(title);
+    img->FromPad(c1);
+    img->WriteImage(title);
   
 
-  for(int iL = 0; iL < NLAYER ; ++iL){
+    for(int iL = 0; iL < NLAYER ; ++iL){
 
-  c1->cd();
-  sprintf(title,"E1devE7_layer%02d_%sGeV", iL+1, Energy.c_str());
-  h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7[0][iL]->SetTitle(title);
-  h_E1devE7[0][iL]->Draw("HIST");
-  h_E1devE7[1][iL]->Draw("HISTSame");
-  h_E1devE7[2][iL]->Draw("Same");
-  legend->Draw();
-  c1->Update();
-  sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV.png", f_substr.c_str(), iL+1, Energy.c_str());
-  img->FromPad(c1);
-  img->WriteImage(title);
+	TPad *pad1 = new TPad("pad1","pad1",0,0.33,1,1);
+	TPad *pad2 = new TPad("pad2","pad2",0,0.,1,0.33);
 
-  sprintf(title,"E1devE7_layer%02d_%sGeV_maxID50_70", iL+1, Energy.c_str());
-  h_E1devE7_differentMaxID_1[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7_differentMaxID_1[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7_differentMaxID_1[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7_differentMaxID_1[0][iL]->SetTitle(title);
-  h_E1devE7_differentMaxID_1[0][iL]->Draw("HIST");
-  h_E1devE7_differentMaxID_1[1][iL]->Draw("HISTSame");
-  h_E1devE7_differentMaxID_1[2][iL]->Draw("Same");
-  legend->Draw();
-  c1->Update();
-  sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV_maxID50_70.png", f_substr.c_str(), iL+1, Energy.c_str());
-  img->FromPad(c1);
-  img->WriteImage(title);
-
-  sprintf(title,"E1devE7_layer%02d_%sGeV_maxID75_100", iL+1, Energy.c_str());
-  h_E1devE7_differentMaxID_2[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7_differentMaxID_2[1][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7_differentMaxID_2[2][iL]->GetYaxis()->SetRangeUser(0,0.06);
-  h_E1devE7_differentMaxID_2[0][iL]->SetTitle(title);
-  h_E1devE7_differentMaxID_2[0][iL]->Draw("HIST");
-  h_E1devE7_differentMaxID_2[1][iL]->Draw("HISTSame");
-  h_E1devE7_differentMaxID_2[2][iL]->Draw("Same");
-  legend->Draw();
-  c1->Update();
-  sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV_maxID75_100.png", f_substr.c_str(), iL+1, Energy.c_str());
-  img->FromPad(c1);
-  img->WriteImage(title);
+	c1->SetBorderSize(5);
+	c1->cd();
+	sprintf(title,"E1devE7_layer%02d_%sGeV", iL+1, Energy.c_str());
+	h_E1devE7[0][iL]->GetXaxis()->SetLabelFont(63); //font in pixels
+	h_E1devE7[0][iL]->GetXaxis()->SetLabelSize(16); //in pixels
+	h_E1devE7[0][iL]->GetYaxis()->SetLabelFont(63); //font in pixels
+	h_E1devE7[0][iL]->GetYaxis()->SetLabelSize(16); //in pixelsp
+	h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E1devE7[0][iL]->SetTitle(title);
+	pad1->SetBottomMargin(0);
+	pad1->Draw();
+	pad1->cd();
+	pad1->SetGrid();
+	h_E1devE7[0][iL]->DrawCopy("HIST");
+	h_E1devE7[1][iL]->DrawCopy("HISTSame");
+	h_E1devE7[2][iL]->Draw("Same");
+	legend->Draw();
+	c1->cd();
+	pad2->SetTopMargin(0);
+	pad2->Draw();
+	pad2->cd();
+	pad2->SetGrid();
+	h_E1devE7[0][iL]->Divide(h_E1devE7[2][iL]);
+	h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,2);
+	h_E1devE7[0][iL]->SetMarkerColor(Color(0));
+	h_E1devE7[0][iL]->SetTitle("Bin by Bin Ratio of MC and Data");
+	h_E1devE7[0][iL]->SetTitleOffset(1);
+	h_E1devE7[0][iL]->SetMarkerSize(0.2);
+	h_E1devE7[0][iL]->SetLineWidth(1);
+	h_E1devE7[0][iL]->GetYaxis()->SetNdivisions(5);
+	h_E1devE7[0][iL]->GetYaxis()->SetTitle("MC / Data");
+	h_E1devE7[0][iL]->GetYaxis()->SetTitleSize(0.08);
+	h_E1devE7[0][iL]->GetYaxis()->SetTitleOffset(0.5);
+	h_E1devE7[0][iL]->Draw("ep");
 	
-  c2->cd(iL+1);
-  h_E1devE7[0][iL]->Draw("HIST");
-  h_E1devE7[1][iL]->Draw("HISTSame");
-  h_E1devE7[2][iL]->Draw("Same");
-  legend->Draw();
-  c2->Update();
-	
-  c1->cd();
-  sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
-  h_E7devE19[0][iL]->SetTitle(title);
-  h_E7devE19[0][iL]->Draw("HIST");
-  h_E7devE19[1][iL]->Draw("HISTSame");
-  h_E7devE19[2][iL]->Draw("Same");
-  legend->Draw();
-  sprintf(title,"Beam Energy = %sGeV",Energy.c_str());
-  c1->Update();
-  sprintf(title,"plots/%s/E7devE19_layer%02d.png", f_substr.c_str(), iL+1);
-  img->FromPad(c1);
-  img->WriteImage(title);
-	
-  c3->cd(iL+1);
-  h_E7devE19[0][iL]->Draw("HIST");
-  h_E7devE19[1][iL]->Draw("HISTSame");
-  h_E7devE19[2][iL]->Draw("Same");
-  legend->Draw();
-  c3->Update();
-	
-  }
-  
-  sprintf(title,"plots/%s/E1devE7_%sGeV.png", f_substr.c_str(), Energy.c_str());
-  img->FromPad(c2);
-  img->WriteImage(title);
-  sprintf(title,"plots/%s/E7devE19_%sGeV.png", f_substr.c_str(), Energy.c_str());
-  img->FromPad(c3);
-  img->WriteImage(title);
-*/
+	h_E1devE7[1][iL]->SetMarkerSize(0.2);
+	h_E1devE7[1][iL]->SetLineWidth(1);
+	h_E1devE7[1][iL]->Divide(h_E1devE7[2][iL]);
+	h_E1devE7[1][iL]->SetMarkerColor(Color(1));
+	h_E1devE7[1][iL]->Draw("epSame");
+	c1->cd();
+	c1->Update();
+
+	sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV.png", f_substr.c_str(), iL+1, Energy.c_str());
+	img->FromPad(c1);
+	img->WriteImage(title);
+
+	c2->cd(iL+1);
+	c1->DrawClonePad();
+	c2->Update();
 
 
-    TGraph* g_chi_cross = new TGraph(NLAYER, layerID, chi_cross);
-    g_chi_cross->SetMarkerColor(1);
-    g_chi_cross->SetMarkerStyle(20);
-    g_chi_cross->SetFillColor(0);
-    g_chi_cross->SetTitle("w/ xtalk");
-    TGraph* g_chi_original = new TGraph(NLAYER, layerID, chi_original);
-    g_chi_original->SetTitle("w/o xtalk");
-    g_chi_original->SetFillColor(0);
-    g_chi_original->SetMarkerStyle(20);
-    g_chi_original->SetMarkerColor(2);
-    TMultiGraph* multi_chi = new TMultiGraph();
-    multi_chi->Add(g_chi_cross);
-    multi_chi->Add(g_chi_original);
-    multi_chi->Draw("AP");
+	c1->cd();
+	sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
+	h_E7devE19[0][iL]->GetXaxis()->SetLabelFont(63); //font in pixels
+	h_E7devE19[0][iL]->GetXaxis()->SetLabelSize(16); //in pixels
+	h_E7devE19[0][iL]->GetYaxis()->SetLabelFont(63); //font in pixels
+	h_E7devE19[0][iL]->GetYaxis()->SetLabelSize(16); //in pixelsp
+	//h_E7devE19[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	h_E7devE19[0][iL]->SetTitle(title);
+	pad1->SetBottomMargin(0);
+	pad1->Draw();
+	pad1->cd();
+	pad1->SetGrid();
+	h_E7devE19[0][iL]->DrawCopy("HIST");
+	h_E7devE19[1][iL]->DrawCopy("HISTSame");
+	h_E7devE19[2][iL]->Draw("Same");
+	legend->Draw();
+	c1->cd();
+	pad2->SetTopMargin(0);
+	pad2->Draw();
+	pad2->cd();
+	pad2->SetGrid();
+	h_E7devE19[0][iL]->Divide(h_E7devE19[2][iL]);
+	h_E7devE19[0][iL]->GetYaxis()->SetRangeUser(0,2);
+	h_E7devE19[0][iL]->SetMarkerColor(Color(0));
+	h_E7devE19[0][iL]->SetTitle("Bin by Bin Ratio of MC and Data");
+	h_E7devE19[0][iL]->SetTitleOffset(1);
+	h_E7devE19[0][iL]->SetMarkerSize(0.2);
+	h_E7devE19[0][iL]->SetLineWidth(1);
+	h_E7devE19[0][iL]->GetYaxis()->SetNdivisions(5);
+	h_E7devE19[0][iL]->GetYaxis()->SetTitle("MC / Data");
+	h_E7devE19[0][iL]->GetYaxis()->SetTitleSize(0.08);
+	h_E7devE19[0][iL]->GetYaxis()->SetTitleOffset(0.5);
+	h_E7devE19[0][iL]->Draw("ep");
+	
+	h_E7devE19[1][iL]->SetMarkerSize(0.2);
+	h_E7devE19[1][iL]->SetLineWidth(1);
+	h_E7devE19[1][iL]->Divide(h_E7devE19[2][iL]);
+	h_E7devE19[1][iL]->SetMarkerColor(Color(1));
+	h_E7devE19[1][iL]->Draw("epSame");
+	c1->cd();
+	c1->Update();
+
+	sprintf(title,"plots/%s/E7devE19_layer%02d_%sGeV.png", f_substr.c_str(), iL+1, Energy.c_str());
+	img->FromPad(c1);
+	img->WriteImage(title);
+
+	c3->cd(iL+1);
+	c1->DrawClonePad();
+	c3->Update();
+
+    }
+
+    sprintf(title,"plots/%s/E1devE7_%sGeV.png", f_substr.c_str(), Energy.c_str());
+    c2->SaveAs(title);
+    sprintf(title,"plots/%s/E7devE19_%sGeV.png", f_substr.c_str(), Energy.c_str());
+    c3->SaveAs(title);
+
+
+    TGraph* g_chi_cross_E1devE7 = new TGraph(NLAYER, layerID, chi_cross_E1devE7);
+    g_chi_cross_E1devE7->SetMarkerColor(1);
+    g_chi_cross_E1devE7->SetMarkerStyle(20);
+    g_chi_cross_E1devE7->SetFillColor(0);
+    g_chi_cross_E1devE7->SetTitle("w/ xtalk");
+    TGraph* g_chi_original_E1devE7 = new TGraph(NLAYER, layerID, chi_original_E1devE7);
+    g_chi_original_E1devE7->SetTitle("w/o xtalk");
+    g_chi_original_E1devE7->SetFillColor(0);
+    g_chi_original_E1devE7->SetMarkerStyle(20);
+    g_chi_original_E1devE7->SetMarkerColor(2);
+    TMultiGraph* multi_chi_E1devE7 = new TMultiGraph();
+    multi_chi_E1devE7->Add(g_chi_cross_E1devE7);
+    multi_chi_E1devE7->Add(g_chi_original_E1devE7);
+    sprintf(title,"Chi2Test_%sGeV",Energy.c_str());
+    multi_chi_E1devE7->SetTitle(title);
+    multi_chi_E1devE7->Draw("AP");
+    multi_chi_E1devE7->GetXaxis()->SetTitle("layerID");
+    multi_chi_E1devE7->GetYaxis()->SetTitle("Chi2 / NDF");
+    multi_chi_E1devE7->GetYaxis()->SetTitleOffset(1);
     c1->BuildLegend(0.7,0.7,0.85,0.85);
     c1->Update();
-    sprintf(title,"plots/%s/chi2_compare_%sGeV.png", f_substr.c_str(), Energy.c_str());
+    sprintf(title,"plots/%s/chi2_compareE1devE7_%sGeV.png", f_substr.c_str(), Energy.c_str());
+    c1->SaveAs(title);
+
+    
+    TGraph* g_chi_cross_E7devE19 = new TGraph(NLAYER, layerID, chi_cross_E7devE19);
+    g_chi_cross_E7devE19->SetMarkerColor(1);
+    g_chi_cross_E7devE19->SetMarkerStyle(20);
+    g_chi_cross_E7devE19->SetFillColor(0);
+    g_chi_cross_E7devE19->SetTitle("w/ xtalk");
+    TGraph* g_chi_original_E7devE19 = new TGraph(NLAYER, layerID, chi_original_E7devE19);
+    g_chi_original_E7devE19->SetTitle("w/o xtalk");
+    g_chi_original_E7devE19->SetFillColor(0);
+    g_chi_original_E7devE19->SetMarkerStyle(20);
+    g_chi_original_E7devE19->SetMarkerColor(2);
+    TMultiGraph* multi_chi_E7devE19 = new TMultiGraph();
+    multi_chi_E7devE19->Add(g_chi_cross_E7devE19);
+    multi_chi_E7devE19->Add(g_chi_original_E7devE19);
+    sprintf(title,"Chi2Test_%sGeV",Energy.c_str());
+    multi_chi_E7devE19->SetTitle(title);
+    multi_chi_E7devE19->Draw("AP");
+    multi_chi_E7devE19->GetXaxis()->SetTitle("layerID");
+    multi_chi_E7devE19->GetYaxis()->SetTitle("Chi2 / NDF");
+    multi_chi_E7devE19->GetYaxis()->SetTitleOffset(1);
+    c1->BuildLegend(0.7,0.7,0.85,0.85);
+    c1->Update();
+    sprintf(title,"plots/%s/chi2_compareE7devE19_%sGeV.png", f_substr.c_str(), Energy.c_str());
     c1->SaveAs(title);
 
     f_output.Write();
