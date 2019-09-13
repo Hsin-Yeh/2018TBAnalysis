@@ -443,6 +443,9 @@ void Compare_DataMC(){
     c3->SaveAs(title);
 
 
+    TCanvas* c4 = new TCanvas();
+    c4->cd();
+    c4->SetGrid();
     TGraph* g_chi_cross_E1devE7 = new TGraph(NLAYER, layerID, chi_cross_E1devE7);
     g_chi_cross_E1devE7->SetMarkerColor(1);
     g_chi_cross_E1devE7->SetMarkerStyle(20);
@@ -462,10 +465,11 @@ void Compare_DataMC(){
     multi_chi_E1devE7->GetXaxis()->SetTitle("layerID");
     multi_chi_E1devE7->GetYaxis()->SetTitle("Chi2 / NDF");
     multi_chi_E1devE7->GetYaxis()->SetTitleOffset(1);
-    c1->BuildLegend(0.7,0.7,0.85,0.85);
-    c1->Update();
+    c4->BuildLegend(0.7,0.7,0.85,0.85);
+    c4->Update();
     sprintf(title,"plots/%s/chi2_compareE1devE7_%sGeV.png", f_substr.c_str(), Energy.c_str());
-    c1->SaveAs(title);
+    c4->SaveAs(title);
+    gPad->WaitPrimitive();
 
     
     TGraph* g_chi_cross_E7devE19 = new TGraph(NLAYER, layerID, chi_cross_E7devE19);
@@ -487,10 +491,10 @@ void Compare_DataMC(){
     multi_chi_E7devE19->GetXaxis()->SetTitle("layerID");
     multi_chi_E7devE19->GetYaxis()->SetTitle("Chi2 / NDF");
     multi_chi_E7devE19->GetYaxis()->SetTitleOffset(1);
-    c1->BuildLegend(0.7,0.7,0.85,0.85);
-    c1->Update();
+    c4->BuildLegend(0.7,0.7,0.85,0.85);
+    c4->Update();
     sprintf(title,"plots/%s/chi2_compareE7devE19_%sGeV.png", f_substr.c_str(), Energy.c_str());
-    c1->SaveAs(title);
+    c4->SaveAs(title);
 
     f_output.Write();
     f_output.Close();
