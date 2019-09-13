@@ -377,6 +377,7 @@ void Compare_DataMC(){
 	sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV.png", f_substr.c_str(), iL+1, Energy.c_str());
 	img->FromPad(c1);
 	img->WriteImage(title);
+	cout << title << " plotted!! " << endl;
 
 	c2->cd(iL+1);
 	c1->DrawClonePad();
@@ -428,6 +429,7 @@ void Compare_DataMC(){
 	sprintf(title,"plots/%s/E7devE19_layer%02d_%sGeV.png", f_substr.c_str(), iL+1, Energy.c_str());
 	img->FromPad(c1);
 	img->WriteImage(title);
+	cout << title << " plotted!! " << endl;
 
 	c3->cd(iL+1);
 	c1->DrawClonePad();
