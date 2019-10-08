@@ -110,12 +110,14 @@ void makePlots::Init(){
     T_DWC->SetBranchAddress("m_y", &m_y, &b_m_y);
     T_DWC->SetBranchAddress("b_x", &b_x, &b_b_x);
     T_DWC->SetBranchAddress("b_y", &b_y, &b_b_y);
-	
+    
     T_rechit_var->SetBranchAddress("hit_mip", &hit_mip, &b_hit_mip);
     T_rechit_var->SetBranchAddress("hit_x", &hit_x, &b_hit_x);
     T_rechit_var->SetBranchAddress("hit_y", &hit_y, &b_hit_y);
     T_rechit_var->SetBranchAddress("hit_z", &hit_z, &b_hit_z);
     T_rechit_var->SetBranchAddress("layerNhit", layerNhit, &b_layerNhit);
+    T_rechit_var->SetBranchAddress("totalNhit_CEE", &totalE_CEE, &b_totalE_CEE);
+    T_rechit_var->SetBranchAddress("totalNhit_CEH", &totalE_CEH, &b_totalE_CEH);
     T_rechit_var->SetBranchAddress("totalE", &totalE, &b_totalE);
     T_rechit_var->SetBranchAddress("totalE_CEE", &totalE_CEE, &b_totalE_CEE);
     T_rechit_var->SetBranchAddress("totalE_CEH", &totalE_CEH, &b_totalE_CEH);
@@ -338,6 +340,7 @@ void makePlots::Loop(){
 
 	// Event Selection
 	if ( dwcReferenceType < 13) continue;
+	if ( totalNhit_CEH > 90 ) continue;
 	double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
 	//if ( impact_R < 1 ) continue;
 	//if ( impact_R > 1.5 ) continue;
