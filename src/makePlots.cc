@@ -341,8 +341,10 @@ void makePlots::Loop(){
 	// Event Selection
 	if ( dwcReferenceType != 13) continue;
 	if ( totalNhit_CEH > 80 ) continue;
-	if ( abs(b_x) > 1 ) continue;
-	if ( abs(b_y) > 1 ) continue;
+	if ( abs(b_x) < 1 || abs(b_x-33) < 1 ) {}
+	else continue;
+	if ( abs(b_y) < 1 || abs(b_y-21) < 1 ) {}
+	else continue;
 	
 	double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
 	//if ( impact_R < 1 ) continue;
@@ -405,7 +407,6 @@ void makePlots::Loop(){
 	    Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
 
 #ifdef DEBUG
-	    
 	    cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
 	    
 #endif
