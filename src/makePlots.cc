@@ -302,14 +302,14 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_E7devE19_lessBins",iL+1);
 	h_E7devE19_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E1devE7_smallAngle_lessBins",iL+1);
-	//h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
-	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
-	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
-	//sprintf(title,"layer%i_E1",iL+1);
-	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
+	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
-	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
+	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E1",iL+1);
+	//h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
+	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
+	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
+	//sprintf(title,"layer%i_E1",iL+1);
 
 	h_E1[iL] = new TH1D(title, title, 100, 0, 300);
     }
@@ -398,6 +398,14 @@ void makePlots::Loop(){
 	    h_E1 [iL]                      -> Fill ( layerE1[iL] );
 	    h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
 	    h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
+
+
+#ifdef DEBUG
+	    if ( E1devE7 == 1 ) {
+		cout << " Event = " << event <<  " Layer = " << iL << " E1 = " << layerE1[iL] << " E7 = " << layerE7[iL] << " E19 = " << layerE19[iL] << " E37 = " << layerE37[iL] << endl;
+	    }
+#endif
+
 	}
     
 
