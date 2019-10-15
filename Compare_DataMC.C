@@ -113,9 +113,22 @@ void Compare_DataMC(){
     char plot_title[200];
 
     //TCanvas* c1 = new TCanvas();
+    TCanvas *c1 = new TCanvas("c1","",600,650);
+    //TCanvas *c1 = new TCanvas("c1", "c1",260,71,886,635);
+    //c1->Range(-0.1244696,-0.007838658,1.125884,0.04384749);
+    c1->SetFillColor(0);
+    c1->SetBorderMode(0);
+    c1->SetBorderSize(2);
+    c1->SetGridx();
+    c1->SetGridy();
+    c1->SetBottomMargin(0.1516588);
+    c1->SetFrameBorderMode(0);
+    c1->SetFrameLineWidth(2);
+    c1->SetFrameBorderMode(0);
 
-    TCanvas *c1 = new TCanvas("c1","",600,700);
     TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
+
+    
     //c1->cd();
 
     /*
@@ -283,13 +296,13 @@ void Compare_DataMC(){
 	h_E1devE7_differentMaxID_2[2][iL]->SetLineColor(1);
 	h_E1devE7_differentMaxID_2[2][iL]->SetLineWidth(2);
     }
-
+/*
     sprintf(title,"Total Energy CEE ");
     h_totalCEE[0]->SetTitle("Total Energy CEE");
     h_totalCEE[0]->Draw("HIST");
     h_totalCEE[1]->Draw("HISTSame");
     h_totalCEE[2]->Draw("Same");
-
+*/
     legend->AddEntry(h_totalCEE[0],"w/ Xtalk","L");
     legend->AddEntry(h_totalCEE[1],"w/o Xtalk","L");
     //legend->AddEntry(h_totalCEE[0],"w/ smearing","L");
@@ -302,7 +315,7 @@ void Compare_DataMC(){
     //  legend->SetHeader(title);
     legend->SetTextSize(0.035);
     legend->Draw();
-    c1->Update();
+//    c1->Update();
     sprintf(title,"plots/%s/Total Energy CEE.png",f_substr.c_str());
     //  c1->SaveAs(title);
     img->FromPad(c1);
@@ -346,17 +359,21 @@ void Compare_DataMC(){
 	h_E1devE7[0][iL]->GetYaxis()->SetLabelFont(63); //font in pixels
 	h_E1devE7[0][iL]->GetYaxis()->SetLabelSize(16); //in pixelsp
 	//h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
-	h_E1devE7[0][iL]->SetTitle(title);
+	//h_E1devE7[0][iL]->SetTitle(title);
 	pad1->SetBottomMargin(0);
 	pad1->Draw();
 	pad1->cd();
 	pad1->SetGrid();
+	pad1->SetBorderSize(2);
 	h_E1devE7[0][iL]->DrawCopy("HIST");
 	h_E1devE7[1][iL]->DrawCopy("HISTSame");
 	h_E1devE7[2][iL]->Draw("Same");
 	legend->Draw();
+
 	c1->cd();
+
 	pad2->SetTopMargin(0);
+	pad2->SetBottomMargin(0.6);
 	pad2->Draw();
 	pad2->cd();
 	pad2->SetGrid();
@@ -368,11 +385,19 @@ void Compare_DataMC(){
 	h_E1devE7[0][iL]->SetLineWidth(1);
 	h_E1devE7[0][iL]->GetYaxis()->SetNdivisions(5);
 	h_E1devE7[0][iL]->GetYaxis()->SetTitle("MC / Data");
-	h_E1devE7[0][iL]->GetYaxis()->SetTitleSize(0.08);
-	h_E1devE7[0][iL]->GetYaxis()->SetTitleOffset(0.5);
-	h_E1devE7[0][iL]->GetXaxis()->SetTitle("MC / Data");
+	h_E1devE7[0][iL]->GetYaxis()->SetLabelFont(63);
+	h_E1devE7[0][iL]->GetYaxis()->SetLabelSize(16);
+	h_E1devE7[0][iL]->GetYaxis()->SetTitleSize(0.13);
+	//h_E1devE7[0][iL]->GetYaxis()->SetTitleOffset(0.8);
+
+	h_E1devE7[0][iL]->GetXaxis()->SetTitle("E1/E7 contaminant variable");
+	h_E1devE7[0][iL]->GetXaxis()->SetLabelFont(63);
+	//h_E1devE7[0][iL]->GetXaxis()->SetLabelOffset(0.1125);
+	h_E1devE7[0][iL]->GetXaxis()->SetLabelSize(16);
+	h_E1devE7[0][iL]->GetXaxis()->SetTitleSize(0.13);
+	//h_E1devE7[0][iL]->GetXaxis()->SetTitleOffset(6);
+	//h_E1devE7[0][iL]->GetXaxis()->SetTitleFont(42);
 	h_E1devE7[0][iL]->Draw("ep");
-	
 	h_E1devE7[1][iL]->SetMarkerSize(0.2);
 	h_E1devE7[1][iL]->SetLineWidth(1);
 	h_E1devE7[1][iL]->Divide(h_E1devE7[2][iL]);
