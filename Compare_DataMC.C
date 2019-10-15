@@ -370,6 +370,7 @@ void Compare_DataMC(){
 	h_E1devE7[0][iL]->GetYaxis()->SetTitle("MC / Data");
 	h_E1devE7[0][iL]->GetYaxis()->SetTitleSize(0.08);
 	h_E1devE7[0][iL]->GetYaxis()->SetTitleOffset(0.5);
+	h_E1devE7[0][iL]->GetXaxis()->SetTitle("MC / Data");
 	h_E1devE7[0][iL]->Draw("ep");
 	
 	h_E1devE7[1][iL]->SetMarkerSize(0.2);
