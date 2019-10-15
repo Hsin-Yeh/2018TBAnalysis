@@ -172,9 +172,9 @@ void xtalk_compare()
 	tex->Draw();
 	Canvas_1->Update();
 
-	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%d.png", Energy, Energy, iL);
+	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.png", Energy, Energy, iL);
 	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%d.pdf", Energy, Energy, iL);
+	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.pdf", Energy, Energy, iL);
 	Canvas_1->SaveAs(title);
 	//gPad->WaitPrimitive();
 
