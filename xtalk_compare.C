@@ -40,7 +40,7 @@ void xtalk_compare()
 	layer4_E1devE7_smallAngle_lessBins__1->SetMarkerColor(2);
 	layer4_E1devE7_smallAngle_lessBins__1->SetMarkerStyle(20);
 	layer4_E1devE7_smallAngle_lessBins__1->SetMarkerSize(0.5);
-	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetTitle("E1/E7 contamination variable");
+	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetTitle("E1/E7 containment variable");
 	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetLabelFont(42);
 	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetLabelOffset(0.01125);
 	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetLabelSize(0.045);
