@@ -302,10 +302,15 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_E7devE19_lessBins",iL+1);
 	h_E7devE19_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E1devE7_smallAngle_lessBins",iL+1);
-	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+	//h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
+	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+	//sprintf(title,"layer%i_E1",iL+1);
+	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
-	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	sprintf(title,"layer%i_E1",iL+1);
+
 	h_E1[iL] = new TH1D(title, title, 100, 0, 300);
     }
 

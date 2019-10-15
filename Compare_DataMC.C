@@ -112,11 +112,19 @@ void Compare_DataMC(){
     char title[200];
     char plot_title[200];
 
+    //TCanvas* c1 = new TCanvas();
+
+    TCanvas *c1 = new TCanvas("c1","",600,700);
+    TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
+    //c1->cd();
+
+    /*
     TCanvas *c2 = new TCanvas("c2","c2",6400,3600);
     TCanvas *c3 = new TCanvas("c3","c3",6400,3600);
     c2->Divide(7,4);
     c3->Divide(7,4);
-
+    */
+    
     gStyle->SetOptStat(0);
     //gROOT->SetBatch(kTRUE);
     TImage *img = TImage::Create();
@@ -173,6 +181,8 @@ void Compare_DataMC(){
     h_totalCEE[2] = (TH1D *)f_Data.Get(title);
     h_totalCEE[2]->SetLineColor(1);
     h_totalCEE[2]->SetLineWidth(2);
+    
+    
   
     sprintf(title,"graph/AverageNhits");
     g_Average_Nhits[0] = (TGraph *)f_MC.Get(title);
@@ -187,7 +197,7 @@ void Compare_DataMC(){
     g_Average_Nhits[2]->SetLineColor(1);
     g_Average_Nhits[2]->SetLineWidth(2);
 
-    /*
+/*
       sprintf(title,"histo/h_bx_by");
       h_bx_by[0] = (TGraph *)f_MC.Get(title);
       h_bx_by[0]->SetLineColor(Color(0));
@@ -210,7 +220,7 @@ void Compare_DataMC(){
       h_bx_by[2]->Draw("colz");
       c1->Update();
       c1->SaveAs("bxbyData");
-    */
+*/
     double chi_cross_E1devE7[NLAYER], chi_original_E1devE7[NLAYER], chi_cross_E7devE19[NLAYER], chi_original_E7devE19[NLAYER];
     double layerID[NLAYER];
   
@@ -273,9 +283,6 @@ void Compare_DataMC(){
 	h_E1devE7_differentMaxID_2[2][iL]->SetLineColor(1);
 	h_E1devE7_differentMaxID_2[2][iL]->SetLineWidth(2);
     }
-    TCanvas *c1 = new TCanvas("c1","example",600,700);
-    TLegend* legend = new TLegend(0.1,0.75,0.3,0.9);
-    c1->cd();
 
     sprintf(title,"Total Energy CEE ");
     h_totalCEE[0]->SetTitle("Total Energy CEE");
@@ -301,7 +308,7 @@ void Compare_DataMC(){
     img->FromPad(c1);
     img->WriteImage(title);
 
-
+/*
     // Compare Average_Nhits
     c1->SetGrid();
     TLegend* legend_Nhits = new TLegend(0.7,0.75,0.9,0.9);
@@ -321,24 +328,24 @@ void Compare_DataMC(){
     legend_Nhits->Draw();
     c1->Update();
     sprintf(title,"plots/%s/Average_Nhits_%sGeV.png",f_substr.c_str(), Energy.c_str());
-    //  c1->SaveAs(title);
+    c1->SaveAs(title);
     img->FromPad(c1);
     img->WriteImage(title);
-  
+*/
 
     for(int iL = 0; iL < NLAYER ; ++iL){
 
-	TPad *pad1 = new TPad("pad1","pad1",0,0.33,1,1);
-	TPad *pad2 = new TPad("pad2","pad2",0,0.,1,0.33);
+	TPad *pad1 = new TPad("pad1","pad1",0,0.3,1,1);
+	TPad *pad2 = new TPad("pad2","pad2",0,0.,1,0.3);
 
 	c1->SetBorderSize(5);
 	c1->cd();
-	sprintf(title,"E1devE7_layer%02d_%sGeV", iL+1, Energy.c_str());
+	sprintf(title,"TB2018 %sGeV.", Energy.c_str());
 	h_E1devE7[0][iL]->GetXaxis()->SetLabelFont(63); //font in pixels
 	h_E1devE7[0][iL]->GetXaxis()->SetLabelSize(16); //in pixels
 	h_E1devE7[0][iL]->GetYaxis()->SetLabelFont(63); //font in pixels
 	h_E1devE7[0][iL]->GetYaxis()->SetLabelSize(16); //in pixelsp
-	h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
+	//h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,0.06);
 	h_E1devE7[0][iL]->SetTitle(title);
 	pad1->SetBottomMargin(0);
 	pad1->Draw();
@@ -356,7 +363,6 @@ void Compare_DataMC(){
 	h_E1devE7[0][iL]->Divide(h_E1devE7[2][iL]);
 	h_E1devE7[0][iL]->GetYaxis()->SetRangeUser(0,2);
 	h_E1devE7[0][iL]->SetMarkerColor(Color(0));
-	h_E1devE7[0][iL]->SetTitle("Bin by Bin Ratio of MC and Data");
 	h_E1devE7[0][iL]->SetTitleOffset(1);
 	h_E1devE7[0][iL]->SetMarkerSize(0.2);
 	h_E1devE7[0][iL]->SetLineWidth(1);
@@ -373,16 +379,17 @@ void Compare_DataMC(){
 	h_E1devE7[1][iL]->Draw("epSame");
 	c1->cd();
 	c1->Update();
+	gPad->WaitPrimitive();
 
 	sprintf(title,"plots/%s/E1devE7_layer%02d_%sGeV.png", f_substr.c_str(), iL+1, Energy.c_str());
 	img->FromPad(c1);
 	img->WriteImage(title);
 	cout << title << " plotted!! " << endl;
-
+/*
 	c2->cd(iL+1);
 	c1->DrawClonePad();
 	c2->Update();
-
+*/
 
 	c1->cd();
 	sprintf(title,"E7devE19_layer%02d_%sGeV", iL+1, Energy.c_str());
@@ -430,18 +437,18 @@ void Compare_DataMC(){
 	img->FromPad(c1);
 	img->WriteImage(title);
 	cout << title << " plotted!! " << endl;
-
+/*
 	c3->cd(iL+1);
 	c1->DrawClonePad();
 	c3->Update();
-
+*/
     }
-
+/*
     sprintf(title,"plots/%s/E1devE7_%sGeV.png", f_substr.c_str(), Energy.c_str());
     c2->SaveAs(title);
     sprintf(title,"plots/%s/E7devE19_%sGeV.png", f_substr.c_str(), Energy.c_str());
     c3->SaveAs(title);
-
+*/
 
     TCanvas* c4 = new TCanvas();
     c4->cd();
@@ -469,7 +476,6 @@ void Compare_DataMC(){
     c4->Update();
     sprintf(title,"plots/%s/chi2_compareE1devE7_%sGeV.png", f_substr.c_str(), Energy.c_str());
     c4->SaveAs(title);
-    gPad->WaitPrimitive();
 
     
     TGraph* g_chi_cross_E7devE19 = new TGraph(NLAYER, layerID, chi_cross_E7devE19);
