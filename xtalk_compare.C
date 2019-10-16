@@ -165,7 +165,7 @@ void xtalk_compare()
 	entry->SetTextFont(42);
 	leg->Draw();
 
-	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+	sprintf(title,"TB2018 %dGeV layer%02d",Energy, iL);
 	TLatex *   tex = new TLatex(0.0586392,0.045,title);
 	tex->SetTextSize(0.0433213);
 	tex->SetLineWidth(2);
