@@ -44,7 +44,7 @@ void xtalk_compare()
 	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetLabelFont(42);
 	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetLabelOffset(0.01125);
 	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetLabelSize(0.045);
-	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetTitleSize(0.05);
+	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetTitleSize(0.052);
 	layer4_E1devE7_smallAngle_lessBins__1->GetXaxis()->SetTitleOffset(1.1);
 	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetLabelFont(42);
 	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetLabelOffset(0.01125);
@@ -136,7 +136,7 @@ void xtalk_compare()
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg->SetFillColor(ci);
 	leg->SetFillStyle(1001);
-	TLegendEntry *entry=leg->AddEntry("","with  xtalk","lpf");
+	TLegendEntry *entry=leg->AddEntry("","with xtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
