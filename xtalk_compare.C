@@ -56,7 +56,7 @@ void xtalk_compare()
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetLabelSize(0.045);
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetTitleSize(0.045);
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetTitleFont(42);
-	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetRangeUser(0,0.07);
+	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetRangeUser(0,0.05);
 	layer4_E1devE7_smallAngle_lessBins__1->Draw("HIST");
    
 	TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");
@@ -136,7 +136,7 @@ void xtalk_compare()
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg->SetFillColor(ci);
 	leg->SetFillStyle(1001);
-	TLegendEntry *entry=leg->AddEntry("","w/  xtalk","lpf");
+	TLegendEntry *entry=leg->AddEntry("","with  xtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -145,7 +145,7 @@ void xtalk_compare()
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg->AddEntry("","w/o xtalk","lpflpf");
+	entry=leg->AddEntry("","no xtalk","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
