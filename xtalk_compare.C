@@ -1,10 +1,10 @@
-void xtalk_compare()
+void xtalk_compare(int Energy)
 {
 //=========Macro generated from canvas: Canvas_1/Canvas_1
 //=========  (Tue Oct 15 20:48:04 2019) by ROOT version6.10/04
 
     char title[200];
-    int Energy = 300;
+    //int Energy = 300;
     
     sprintf(title,"root_plot/plot_sim_%dGeV_EMN.root",Energy);
     TFile f_MC(title);
@@ -56,7 +56,7 @@ void xtalk_compare()
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetLabelSize(0.045);
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetTitleSize(0.045);
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetTitleFont(42);
-	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetRangeUser(0,0.05);
+	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetRangeUser(0,0.06);
 	layer4_E1devE7_smallAngle_lessBins__1->Draw("HIST");
    
 	TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");
