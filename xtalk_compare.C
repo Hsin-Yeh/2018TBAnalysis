@@ -136,7 +136,7 @@ void xtalk_compare()
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg->SetFillColor(ci);
 	leg->SetFillStyle(1001);
-	TLegendEntry *entry=leg->AddEntry("","with xtalk","lpf");
+	TLegendEntry *entry=leg->AddEntry("","withxtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
