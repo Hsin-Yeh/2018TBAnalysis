@@ -56,7 +56,7 @@ void xtalk_compare(int Energy)
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetLabelSize(0.045);
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetTitleSize(0.045);
 	layer4_E1devE7_smallAngle_lessBins__1->GetZaxis()->SetTitleFont(42);
-	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetRangeUser(0,0.06);
+	layer4_E1devE7_smallAngle_lessBins__1->GetYaxis()->SetRangeUser(0,0.064);
 	layer4_E1devE7_smallAngle_lessBins__1->Draw("HIST");
    
 	TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");

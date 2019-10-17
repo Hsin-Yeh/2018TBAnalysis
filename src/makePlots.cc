@@ -16,8 +16,10 @@
 #include "TChain.h"
 #include "TH1.h"
 #include "TH2.h"
+#include "TProfile.h"
 #include "TGaxis.h"
 #include "TGraphErrors.h"
+
 #include <utility>
 
 //#define DEBUG
@@ -226,6 +228,9 @@ void makePlots::Loop(){
     cdhisto->cd();
     TH1D *h_E1devE7[EE_NLAYER]; 
     TH1D *h_E7devE19[EE_NLAYER];
+    TH1D *h_E1devE7_50[EE_NLAYER];
+    TH1D *h_E1devE7_250[EE_NLAYER];
+    TH1D *h_E1devE7_50_250[EE_NLAYER];
     TH1D *h_E1devE7_smallAngle[EE_NLAYER];
     TH1D *h_E7devE19_smallAngle[EE_NLAYER];
     TH1D *h_E1devE7_lessBins[EE_NLAYER];
@@ -262,7 +267,9 @@ void makePlots::Loop(){
     TH2D *h_E1devE7_E1[EE_NLAYER];
     TH2D *h_E7devE19_E1[EE_NLAYER];
     TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
+    TProfile *p_E1devE7_E1[EE_NLAYER];
     
+
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
 	sprintf(title,"layer%i",iL+1);
 	cdlayer[iL] = cdhisto->mkdir(title);
@@ -271,6 +278,12 @@ void makePlots::Loop(){
 	h_E1devE7[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_E7devE19",iL+1);
 	h_E7devE19[iL] = new TH1D(title, title, 101, 0, 1.01);
+	sprintf(title,"layer%i_E1devE7_E1_50",iL+1);
+	h_E1devE7_50[iL] = new TH1D(title, title, 101, 0, 1.01);
+	sprintf(title,"layer%i_E1devE7_E1_250",iL+1);
+	h_E1devE7_250[iL] = new TH1D(title, title, 101, 0, 1.01);
+	sprintf(title,"layer%i_E1devE7_E1_50_250",iL+1);
+	h_E1devE7_50_250[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_maxID",iL+1);
 	h_maxID[iL] = new TH1F( title, title, 128, 0, 128);
 	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
@@ -310,8 +323,10 @@ void makePlots::Loop(){
 	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	//sprintf(title,"layer%i_E1",iL+1);
-
 	h_E1[iL] = new TH1D(title, title, 100, 0, 300);
+	
+	sprintf(title,"layer%i_E1devE7_E1_profile",iL+1);
+	p_E1devE7_E1[iL] = new TProfile(title,"",50,0,400,0,1.01);
     }
 
     for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -398,7 +413,14 @@ void makePlots::Loop(){
 	    h_E1 [iL]                      -> Fill ( layerE1[iL] );
 	    h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
 	    h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
-
+	    p_E1devE7_E1[iL] -> Fill ( layerE1[iL], E1devE7, 1 );
+	    
+	    if ( layerE1[iL] <= 50 ) {
+		h_E1devE7_50[iL] -> Fill ( E1devE7 );}
+	    else if ( layerE1[iL] >= 250 ) {
+		h_E1devE7_250[iL] -> Fill ( E1devE7 );}
+	    else if ( layerE1[iL] < 250 && layerE1[iL] > 50 ) {
+		h_E1devE7_50_250[iL] -> Fill ( E1devE7 );}
 
 #ifdef DEBUG
 	    if ( E1devE7 == 1 ) {
@@ -477,6 +499,12 @@ void makePlots::Loop(){
 	h_E1devE7 [iL] -> Scale(scale);
 	scale = 1 / h_E7devE19[iL]->Integral();
 	h_E7devE19[iL] -> Scale(scale);
+	scale = 1 / h_E1devE7_50 [iL]->Integral();
+	h_E1devE7_50 [iL] -> Scale(scale);
+	scale = 1 / h_E1devE7_250 [iL]->Integral();
+	h_E1devE7_250 [iL] -> Scale(scale);
+	scale = 1 / h_E1devE7_50_250 [iL]->Integral();
+	h_E1devE7_50_250 [iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_differentMaxID_1[iL]->Integral();
 	h_E1devE7_differentMaxID_1[iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_differentMaxID_2[iL]->Integral();
