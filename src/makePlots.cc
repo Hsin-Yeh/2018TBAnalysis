@@ -424,8 +424,8 @@ void makePlots::Loop(){
 	    else if ( layerE1[iL] < 250 && layerE1[iL] > 50 ) {
 		h_E1devE7_50_250[iL] -> Fill ( E1devE7 );}
 
-	    if ( abs(b_x) < 1 || abs(b_x-33) < 1 ) {
-		if ( abs(b_y) < 1 || abs(b_y-21) < 1 ) {
+	    if ( abs(b_x) < 1 || abs(b_x-33) < 1 || abs(b_x+4) < 1 ) {
+		if ( abs(b_y) < 1 || abs(b_y-21) < 1 || abs(b_y-2) < 1 ) {
 		    h_E1devE7_positionSelection [iL] -> Fill ( E1devE7 );
 		}
 	    }
