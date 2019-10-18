@@ -266,6 +266,7 @@ void makePlots::Loop(){
     TH2D *h_impactX_impactY[EE_NLAYER];
     TH2D *h_E1devE7_E1[EE_NLAYER];
     TH2D *h_E7devE19_E1[EE_NLAYER];
+    TH2D *h_E1devE7_E7[EE_NLAYER];
     TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
     TProfile *p_E1devE7_E1[EE_NLAYER];
     
@@ -308,6 +309,8 @@ void makePlots::Loop(){
 	h_E7devE19_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
 	sprintf(title,"layer%i_E1devE7_E1",iL+1);
 	h_E1devE7_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+	sprintf(title,"layer%i_E1devE7_E7",iL+1);
+	h_E1devE7_E7[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
 	sprintf(title,"layer%i_E7devE19_E1",iL+1);
 	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
 	sprintf(title,"layer%i_E1devE7_lessBins",iL+1);
@@ -409,6 +412,7 @@ void makePlots::Loop(){
 	    h_bx_by_E1devE7 [iL]           -> Fill ( b_x, b_y, E1devE7 );
 	    h_bx_by_E1 [iL]                -> Fill ( b_x, b_y, layerE1[iL] );
 	    h_E1devE7_E1  [iL]             -> Fill ( E1devE7, layerE1[iL] );
+	    h_E1devE7_E7  [iL]             -> Fill ( E1devE7, layerE7[iL] );
 	    h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
 	    h_E1devE7_lessBins [iL]        -> Fill ( E1devE7 );
 	    h_E7devE19_lessBins [iL]       -> Fill ( E7devE19 );
