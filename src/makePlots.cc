@@ -250,7 +250,6 @@ void makePlots::Loop(){
     h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
     TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
     TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
-
     TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
     TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
     TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
@@ -319,7 +318,7 @@ void makePlots::Loop(){
 	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
-	sprintf(title,"layer%i_E7devE19_positionSelection",iL+1);
+	sprintf(title,"layer%i_E1devE7_positionSelection",iL+1);
 	h_E1devE7_positionSelection[iL] = new TH1D(title,title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E1",iL+1);
 	//h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
@@ -531,6 +530,8 @@ void makePlots::Loop(){
 	h_E1devE7_smallAngle_lessBins [iL] -> Scale(scale);
 	scale = 1 / h_E7devE19_smallAngle_lessBins [iL]->Integral();
 	h_E7devE19_smallAngle_lessBins[iL] -> Scale(scale);
+	scale = 1 / h_E1devE7_positionSelection [iL]->Integral();
+	h_E1devE7_positionSelection [iL] -> Scale(scale);
 
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
 	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
