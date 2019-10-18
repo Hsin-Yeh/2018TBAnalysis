@@ -269,6 +269,8 @@ void makePlots::Loop(){
     TH2D *h_E1devE7_E7[EE_NLAYER];
     TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
     TProfile *p_E1devE7_E1[EE_NLAYER];
+    TProfile *p_E1devE7_E7[EE_NLAYER];
+    TProfile *p_E1devE7_EFirstRing[EE_NLAYER];
     
 
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
@@ -332,6 +334,10 @@ void makePlots::Loop(){
 	
 	sprintf(title,"layer%i_E1devE7_E1_profile",iL+1);
 	p_E1devE7_E1[iL] = new TProfile(title,"",50,0,400,0,1.01);
+	sprintf(title,"layer%i_E1devE7_E7_profile",iL+1);
+	p_E1devE7_E7[iL] = new TProfile(title,"",50,0,400,0,1.01);
+	sprintf(title,"layer%i_E1devE7_EFirstRing_profile",iL+1);
+	p_E1devE7_EFirstRing[iL] = new TProfile(title,"",50,0,400,0,1.01);
     }
 
     for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -420,6 +426,8 @@ void makePlots::Loop(){
 	    h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
 	    h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
 	    p_E1devE7_E1[iL] -> Fill ( layerE1[iL], E1devE7, 1 );
+	    p_E1devE7_E7[iL] -> Fill ( layerE7[iL], E1devE7, 1 );
+	    p_E1devE7_EFirstRing[iL] -> Fill ( (layerE7[iL] - layerE1[iL]), E1devE7, 1 );
 	    
 	    if ( layerE1[iL] <= 50 ) {
 		h_E1devE7_50[iL] -> Fill ( E1devE7 );}
