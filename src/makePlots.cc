@@ -237,6 +237,7 @@ void makePlots::Loop(){
     TH1D *h_E7devE19_lessBins[EE_NLAYER];
     TH1D *h_E1devE7_smallAngle_lessBins[EE_NLAYER];
     TH1D *h_E7devE19_smallAngle_lessBins[EE_NLAYER];
+    TH1D *h_E1devE7_positionSelection[EE_NLAYER];
     TH1D *h_E1[EE_NLAYER];
     TH1F *h_maxID[EE_NLAYER];
     TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
@@ -318,12 +319,14 @@ void makePlots::Loop(){
 	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+	sprintf(title,"layer%i_E7devE19_positionSelection",iL+1);
+	h_E1devE7_positionSelection[iL] = new TH1D(title,title, 81, 0, 1.0125);
 	sprintf(title,"layer%i_E1",iL+1);
 	//h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	//sprintf(title,"layer%i_E1",iL+1);
-	h_E1[iL] = new TH1D(title, title, 100, 0, 300);
+	h_E1[iL] = new TH1D(title, title, 100, 0, 500);
 	
 	sprintf(title,"layer%i_E1devE7_E1_profile",iL+1);
 	p_E1devE7_E1[iL] = new TProfile(title,"",50,0,400,0,1.01);
@@ -421,6 +424,13 @@ void makePlots::Loop(){
 		h_E1devE7_250[iL] -> Fill ( E1devE7 );}
 	    else if ( layerE1[iL] < 250 && layerE1[iL] > 50 ) {
 		h_E1devE7_50_250[iL] -> Fill ( E1devE7 );}
+
+	    if ( abs(b_x) < 1 || abs(b_x-33) < 1 ) {
+		if ( abs(b_y) < 1 || abs(b_y-21) < 1 ) {
+		    h_E1devE7_positionSelection [iL] -> Fill ( E1devE7 );
+		}
+	    }
+
 
 #ifdef DEBUG
 	    if ( E1devE7 == 1 ) {

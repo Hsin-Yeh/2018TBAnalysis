@@ -176,7 +176,7 @@ void xtalk_compare(int Energy)
 	Canvas_1->SaveAs(title);
 	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.pdf", Energy, Energy, iL);
 	Canvas_1->SaveAs(title);
-	//gPad->WaitPrimitive();
+	gPad->WaitPrimitive();
 
     
 	Canvas_1->Modified();
