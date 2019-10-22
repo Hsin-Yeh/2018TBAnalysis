@@ -330,7 +330,7 @@ void makePlots::Loop(){
 	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	//sprintf(title,"layer%i_E1",iL+1);
-	h_E1[iL] = new TH1D(title, title, 100, 0, 500);
+	h_E1[iL] = new TH1D(title, title, 200, 0, 800);
 	
 	sprintf(title,"layer%i_E1devE7_E1_profile",iL+1);
 	p_E1devE7_E1[iL] = new TProfile(title,"",50,0,400,0,1.01);
