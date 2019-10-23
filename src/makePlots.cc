@@ -333,7 +333,7 @@ void makePlots::Loop(){
 	h_E1[iL] = new TH1D(title, title, 200, 0, 800);
 	
 	sprintf(title,"layer%i_E1devE7_E1_profile",iL+1);
-	p_E1devE7_E1[iL] = new TProfile(title,"",50,0,400,0,1.01);
+	p_E1devE7_E1[iL] = new TProfile(title,"",80,0,800,0,1.01);
 	sprintf(title,"layer%i_E1devE7_E7_profile",iL+1);
 	p_E1devE7_E7[iL] = new TProfile(title,"",50,0,400,0,1.01);
 	sprintf(title,"layer%i_E1devE7_EFirstRing_profile",iL+1);
@@ -410,7 +410,7 @@ void makePlots::Loop(){
 	    double E19devE37 = layerE19[iL]/layerE37[iL];
 	    h_E1devE7 [iL]                 -> Fill ( E1devE7 );
 	    h_E7devE19 [iL]                -> Fill ( E7devE19 );
-	    h_maxID [iL]                   -> Fill ( maxID[iL] );
+	    h_maxID [iL]                   -> Fill ( maxID[iL]*2 );
 	    h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	    h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
 	    h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
