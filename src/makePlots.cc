@@ -288,7 +288,7 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_E1devE7_E1_50_250",iL+1);
 	h_E1devE7_50_250[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_maxID",iL+1);
-	h_maxID[iL] = new TH1F( title, title, 128, 0, 128);
+	h_maxID[iL] = new TH1F( title, title, 128, 0, 256);
 	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
 	h_E1devE7_differentMaxID_1[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
