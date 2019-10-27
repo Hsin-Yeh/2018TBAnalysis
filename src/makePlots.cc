@@ -129,6 +129,11 @@ void makePlots::Init(){
     T_rechit_var->SetBranchAddress("layerE19", layerE19, &b_layerE19);
     T_rechit_var->SetBranchAddress("layerE37", layerE37, &b_layerE37);
     T_rechit_var->SetBranchAddress("layerE61", layerE61, &b_layerE61);
+    T_rechit_var->SetBranchAddress("layerE1_showerAxis", layerE1_showerAxis, &b_layerE1_showerAxis);
+    T_rechit_var->SetBranchAddress("layerE7_showerAxis", layerE7_showerAxis, &b_layerE7_showerAxis);
+    T_rechit_var->SetBranchAddress("layerE19_showerAxis", layerE19_showerAxis, &b_layerE19_showerAxis);
+    T_rechit_var->SetBranchAddress("layerE37_showerAxis", layerE37_showerAxis, &b_layerE37_showerAxis);
+    T_rechit_var->SetBranchAddress("layerE61_showerAxis", layerE61_showerAxis, &b_layerE61_showerAxis);
     T_rechit_var->SetBranchAddress("impactX", impactX, &b_impactX);
     T_rechit_var->SetBranchAddress("impactY", impactY, &b_impactY);
     T_rechit_var->SetBranchAddress("maxID", maxID, &b_maxID);
@@ -228,6 +233,8 @@ void makePlots::Loop(){
     cdhisto->cd();
     TH1D *h_E1devE7[EE_NLAYER]; 
     TH1D *h_E7devE19[EE_NLAYER];
+    TH1D *h_E1devE7_showerAxis[EE_NLAYER]; 
+    TH1D *h_E7devE19_showerAxis[EE_NLAYER];
     TH1D *h_E1devE7_50[EE_NLAYER];
     TH1D *h_E1devE7_250[EE_NLAYER];
     TH1D *h_E1devE7_50_250[EE_NLAYER];
@@ -281,6 +288,10 @@ void makePlots::Loop(){
 	h_E1devE7[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_E7devE19",iL+1);
 	h_E7devE19[iL] = new TH1D(title, title, 101, 0, 1.01);
+	sprintf(title,"layer%i_E1devE7_showerAxis",iL+1);
+	h_E1devE7_showerAxis[iL] = new TH1D(title, title, 101, 0, 1.01);
+	sprintf(title,"layer%i_E7devE19_showerAxis",iL+1);
+	h_E7devE19_showerAxis[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_E1devE7_E1_50",iL+1);
 	h_E1devE7_50[iL] = new TH1D(title, title, 101, 0, 1.01);
 	sprintf(title,"layer%i_E1devE7_E1_250",iL+1);
@@ -408,8 +419,13 @@ void makePlots::Loop(){
 	    double E1devE7   = layerE1[iL]/layerE7[iL];
 	    double E7devE19  = layerE7[iL]/layerE19[iL];
 	    double E19devE37 = layerE19[iL]/layerE37[iL];
+	    double E1devE7_showerAxis   = layerE1_showerAxis[iL]/layerE7_showerAxis[iL];
+	    double E7devE19_showerAxis  = layerE7_showerAxis[iL]/layerE19_showerAxis[iL];
+	    double E19devE37_showerAxis = layerE19_showerAxis[iL]/layerE37_showerAxis[iL];
 	    h_E1devE7 [iL]                 -> Fill ( E1devE7 );
 	    h_E7devE19 [iL]                -> Fill ( E7devE19 );
+	    h_E1devE7_showerAxis [iL]                 -> Fill ( E1devE7_showerAxis );
+	    h_E7devE19_showerAxis [iL]                -> Fill ( E7devE19_showerAxis );
 	    h_maxID [iL]                   -> Fill ( maxID[iL]*2 );
 	    h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	    h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
@@ -428,7 +444,7 @@ void makePlots::Loop(){
 	    p_E1devE7_E1[iL] -> Fill ( layerE1[iL], E1devE7, 1 );
 	    p_E1devE7_E7[iL] -> Fill ( layerE7[iL], E1devE7, 1 );
 	    p_E1devE7_EFirstRing[iL] -> Fill ( (layerE7[iL] - layerE1[iL]), E1devE7, 1 );
-	    
+
 	    if ( layerE1[iL] <= 50 ) {
 		h_E1devE7_50[iL] -> Fill ( E1devE7 );}
 	    else if ( layerE1[iL] >= 250 ) {
@@ -520,6 +536,10 @@ void makePlots::Loop(){
 	h_E1devE7 [iL] -> Scale(scale);
 	scale = 1 / h_E7devE19[iL]->Integral();
 	h_E7devE19[iL] -> Scale(scale);
+	scale = 1 / h_E1devE7_showerAxis [iL]->Integral();
+	h_E1devE7_showerAxis [iL] -> Scale(scale);
+	scale = 1 / h_E7devE19_showerAxis[iL]->Integral();
+	h_E7devE19_showerAxis[iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_50 [iL]->Integral();
 	h_E1devE7_50 [iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_250 [iL]->Integral();

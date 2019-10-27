@@ -304,6 +304,11 @@ private:
     Double_t        layerE19[40];
     Double_t        layerE37[40];
     Double_t        layerE61[40];
+    Double_t        layerE1_showerAxis[40];
+    Double_t        layerE7_showerAxis[40];
+    Double_t        layerE19_showerAxis[40];
+    Double_t        layerE37_showerAxis[40];
+    Double_t        layerE61_showerAxis[40];
     Double_t        impactX[40];
     Double_t        impactY[40];
     Int_t           maxID[40];
@@ -323,6 +328,11 @@ private:
     TBranch        *b_layerE19;   //!
     TBranch        *b_layerE37;   //!
     TBranch        *b_layerE61;   //!
+    TBranch        *b_layerE1_showerAxis;   //!
+    TBranch        *b_layerE7_showerAxis;   //!
+    TBranch        *b_layerE19_showerAxis;   //!
+    TBranch        *b_layerE37_showerAxis;   //!
+    TBranch        *b_layerE61_showerAxis;   //!
     TBranch        *b_impactX;   //!
     TBranch        *b_impactY;   //!
     TBranch        *b_maxID;
