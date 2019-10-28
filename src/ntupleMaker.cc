@@ -554,6 +554,8 @@ void ntupleMaker::NtupleMaker(){
 	    double E1devE7 =  E_1[iL] / E_7[iL];
 	    //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
 	}
+
+	
 	outT3->Fill();
     }
     outT1->Write();
