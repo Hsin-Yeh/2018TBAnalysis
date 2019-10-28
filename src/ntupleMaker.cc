@@ -494,7 +494,7 @@ void ntupleMaker::NtupleMaker(){
 	    if ( layer == 1  )
 		if ( chip == 0 ) continue;
 	    //Be careful here layerID start from 1
-	    //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+	    cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
 	    totalE += energy;
 	    if(layer <= 28) {
 		totalE_CEE += energy;
