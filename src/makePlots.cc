@@ -486,12 +486,12 @@ void makePlots::Loop(){
 	    p_radialEnergy[iL] -> Fill ( 3. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / layerE[iL] , 1 );
 	    p_radialEnergy[iL] -> Fill ( 4. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / layerE[iL] , 1 );
 	    p_radialEnergy[iL] -> Fill ( 5. , (layerE61_showerAxis[iL] - layerE37_showerAxis[iL]) / layerE[iL] , 1 );
-	    p_radialEnergy_totalE[iL] -> Fill ( 0. , (layerE1_showerAxis[iL]) / totalE_CEE [iL] , 1 );
-	    p_radialEnergy_totalE[iL] -> Fill ( 1. , (layerE7_showerAxis[iL] - layerE1_showerAxis[iL]) / totalE_CEE [iL] , 1 );
-	    p_radialEnergy_totalE[iL] -> Fill ( 2. , (layerE19_showerAxis[iL] - layerE7_showerAxis[iL]) / totalE_CEE [iL] , 1 );
-	    p_radialEnergy_totalE[iL] -> Fill ( 3. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE [iL] , 1 );
-	    p_radialEnergy_totalE[iL] -> Fill ( 4. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE [iL] , 1 );
-	    p_radialEnergy_totalE[iL] -> Fill ( 5. , (layerE61_showerAxis[iL] - layerE37_showerAxis[iL]) / totalE_CEE [iL] , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 0. , (layerE1_showerAxis[iL]) / totalE_CEE , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 1. , (layerE7_showerAxis[iL] - layerE1_showerAxis[iL]) / totalE_CEE , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 2. , (layerE19_showerAxis[iL] - layerE7_showerAxis[iL]) / totalE_CEE , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 3. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 4. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 5. , (layerE61_showerAxis[iL] - layerE37_showerAxis[iL]) / totalE_CEE , 1 );
 
 
 #ifdef DEBUG
