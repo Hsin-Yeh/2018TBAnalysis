@@ -504,8 +504,8 @@ void ntupleMaker::NtupleMaker(){
 		totalE_CEH += energy;
 		totalNhit_CEH++;
 	    }
-	    layerE[layer-1] += energy;
-	    cout << layer << " " << layerE[layer-1] << " " << totalE_CEE << endl;
+	    //layerE[layer-1] += energy;
+
 	    layerNhit[layer-1]++;
 	    hit_tmp[layer-1].push_back(energy);
 	    hit_x[layer-1].push_back(posx);
@@ -540,7 +540,7 @@ void ntupleMaker::NtupleMaker(){
 		if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*4*1.2) E_61[iL] += E_ch[iL][ich];
-		//layerE[iL] += E_ch[iL][ich];
+		layerE[iL] += E_ch[iL][ich];
 
 		// radial distribution w.r.t the shower axis
 		dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 + 2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
@@ -555,7 +555,7 @@ void ntupleMaker::NtupleMaker(){
 	    double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
 	    double E1devE7 =  E_1[iL] / E_7[iL];
 	    //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
-	    
+	    cout << layer << " " << layerE[layer-1] << " " << totalE_CEE << endl;	    
 	}
 
 	
