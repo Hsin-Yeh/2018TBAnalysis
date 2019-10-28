@@ -422,10 +422,12 @@ void makePlots::Loop(){
 	    double E1devE7_showerAxis   = layerE1_showerAxis[iL]/layerE7_showerAxis[iL];
 	    double E7devE19_showerAxis  = layerE7_showerAxis[iL]/layerE19_showerAxis[iL];
 	    double E19devE37_showerAxis = layerE19_showerAxis[iL]/layerE37_showerAxis[iL];
-	    h_E1devE7 [iL]                 -> Fill ( E1devE7 );
-	    h_E7devE19 [iL]                -> Fill ( E7devE19 );
-	    h_E1devE7_showerAxis [iL]                 -> Fill ( E1devE7_showerAxis );
-	    h_E7devE19_showerAxis [iL]                -> Fill ( E7devE19_showerAxis );
+	    if ( E1devE7 == E1devE7 )   h_E1devE7 [iL]  -> Fill ( E1devE7 );
+	    if ( E7devE19 == E7devE19 ) h_E7devE19 [iL] -> Fill ( E7devE19 );
+	    if ( maxID [0] == maxID [2] && maxID [1] == maxID [3] ) {
+		if ( E1devE7_showerAxis == E1devE7_showerAxis )   h_E1devE7_showerAxis [iL]  -> Fill ( E1devE7_showerAxis );
+		if ( E7devE19_showerAxis == E7devE19_showerAxis ) h_E7devE19_showerAxis [iL] -> Fill ( E7devE19_showerAxis );
+	    }
 	    h_maxID [iL]                   -> Fill ( maxID[iL]*2 );
 	    h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	    h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );

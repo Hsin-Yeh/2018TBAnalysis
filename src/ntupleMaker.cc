@@ -375,11 +375,11 @@ void ntupleMaker::NtupleMaker(){
     outT3->Branch("layerE19",E_19,"layerE19[40]/D");
     outT3->Branch("layerE37",E_37,"layerE37[40]/D");
     outT3->Branch("layerE61",E_61,"layerE61[40]/D");
-    outT3->Branch("layerE1_showerAxis",E_1,"layerE1_showerAxis[40]/D");
-    outT3->Branch("layerE7_showerAxis",E_7,"layerE7_showerAxis[40]/D");
-    outT3->Branch("layerE19_showerAxis",E_19,"layerE19_showerAxis[40]/D");
-    outT3->Branch("layerE37_showerAxis",E_37,"layerE37_showerAxis[40]/D");
-    outT3->Branch("layerE61_showerAxis",E_61,"layerE61_showerAxis[40]/D");
+    outT3->Branch("layerE1_showerAxis",E_1_showerAxis,"layerE1_showerAxis[40]/D");
+    outT3->Branch("layerE7_showerAxis",E_7_showerAxis,"layerE7_showerAxis[40]/D");
+    outT3->Branch("layerE19_showerAxis",E_19_showerAxis,"layerE19_showerAxis[40]/D");
+    outT3->Branch("layerE37_showerAxis",E_37_showerAxis,"layerE37_showerAxis[40]/D");
+    outT3->Branch("layerE61_showerAxis",E_61_showerAxis,"layerE61_showerAxis[40]/D");
     outT3->Branch("impactX",impactX,"impactX[40]/D");
     outT3->Branch("impactY",impactY,"impactY[40]/D");
     outT3->Branch("maxID",maxID,"maxID[40]/I");
@@ -541,8 +541,8 @@ void ntupleMaker::NtupleMaker(){
 		layerE[iL] += E_ch[iL][ich];
 
 		// radial distribution w.r.t the shower axis
-		dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
-		dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 ] ];
+		dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 + 2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
+		dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 + 2 ] ];
 		dR = sqrt(dx*dx + dy*dy);
 		E_1_showerAxis[iL] = E_ch[iL] [ maxID[ iL%2 + 2 ] ];
 		if( dR < 1.12455*1.2) E_7_showerAxis[iL] += E_ch[iL][ich];
@@ -550,6 +550,9 @@ void ntupleMaker::NtupleMaker(){
 		if( dR < 1.12455*3*1.2) E_37_showerAxis[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*4*1.2) E_61_showerAxis[iL] += E_ch[iL][ich];
 	    }
+	    double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
+	    double E1devE7 =  E_1[iL] / E_7[iL];
+	    //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
 	}
 	outT3->Fill();
     }
