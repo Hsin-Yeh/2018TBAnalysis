@@ -555,7 +555,7 @@ void ntupleMaker::NtupleMaker(){
 	    double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
 	    double E1devE7 =  E_1[iL] / E_7[iL];
 	    //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
-	    cout << layer << " " << layerE[layer-1] << " " << totalE_CEE << endl;	    
+	    cout << iL+1 << " " << layerE[iL] << " " << totalE_CEE << endl;	    
 	}
 
 	
