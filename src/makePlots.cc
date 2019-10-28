@@ -118,8 +118,8 @@ void makePlots::Init(){
     T_rechit_var->SetBranchAddress("hit_y", &hit_y, &b_hit_y);
     T_rechit_var->SetBranchAddress("hit_z", &hit_z, &b_hit_z);
     T_rechit_var->SetBranchAddress("layerNhit", layerNhit, &b_layerNhit);
-    T_rechit_var->SetBranchAddress("totalNhit_CEE", &totalE_CEE, &b_totalE_CEE);
-    T_rechit_var->SetBranchAddress("totalNhit_CEH", &totalE_CEH, &b_totalE_CEH);
+    T_rechit_var->SetBranchAddress("totalNhit_CEE", &totalNhit_CEE, &b_totalNhit_CEE);
+    T_rechit_var->SetBranchAddress("totalNhit_CEH", &totalNhit_CEH, &b_totalNhit_CEH);
     T_rechit_var->SetBranchAddress("totalE", &totalE, &b_totalE);
     T_rechit_var->SetBranchAddress("totalE_CEE", &totalE_CEE, &b_totalE_CEE);
     T_rechit_var->SetBranchAddress("totalE_CEH", &totalE_CEH, &b_totalE_CEH);

@@ -322,6 +322,8 @@ private:
     TBranch        *b_totalE;   //!
     TBranch        *b_totalE_CEE;   //!
     TBranch        *b_totalE_CEH;   //!
+    TBranch        *b_totalNhit_CEE;   //!
+    TBranch        *b_totalNhit_CEH;   //!
     TBranch        *b_layerE;   //!
     TBranch        *b_layerE1;   //!
     TBranch        *b_layerE7;   //!

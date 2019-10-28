@@ -494,7 +494,7 @@ void ntupleMaker::NtupleMaker(){
 	    if ( layer == 1  )
 		if ( chip == 0 ) continue;
 	    //Be careful here layerID start from 1
-	    cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+	    //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
 	    totalE += energy;
 	    if(layer <= 28) {
 		totalE_CEE += energy;
@@ -504,8 +504,6 @@ void ntupleMaker::NtupleMaker(){
 		totalE_CEH += energy;
 		totalNhit_CEH++;
 	    }
-	    //layerE[layer-1] += energy;
-
 	    layerNhit[layer-1]++;
 	    hit_tmp[layer-1].push_back(energy);
 	    hit_x[layer-1].push_back(posx);
@@ -555,7 +553,6 @@ void ntupleMaker::NtupleMaker(){
 	    double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
 	    double E1devE7 =  E_1[iL] / E_7[iL];
 	    //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
-	    cout << iL+1 << " " << layerE[iL] << " " << totalE_CEE << endl;	    
 	}
 
 	
