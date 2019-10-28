@@ -428,9 +428,7 @@ void makePlots::Loop(){
 
 	    layerNhit_avg [iL] += layerNhit[iL];
 
-	    cout << iL+1 << " " << totalE_CEE << " " << layerE[iL] << endl;
-
-	    //if( layerE1[iL] == 0) continue;
+	    if( layerE1[iL] == 0) continue;
 	    double E1devE7   = layerE1[iL]/layerE7[iL];
 	    double E7devE19  = layerE7[iL]/layerE19[iL];
 	    double E19devE37 = layerE19[iL]/layerE37[iL];
