@@ -280,6 +280,8 @@ void makePlots::Loop(){
     TProfile *p_E1devE7_E7[EE_NLAYER];
     TProfile *p_E1devE7_EFirstRing[EE_NLAYER];
     TProfile *p_radialEnergy[EE_NLAYER];
+    TProfile *p_radialEnergy_totalE[EE_NLAYER];
+    TProfile *p_radialEnergy_impactPosition[EE_NLAYER];
     
 
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
@@ -355,6 +357,10 @@ void makePlots::Loop(){
 	p_E1devE7_EFirstRing[iL] = new TProfile(title,"",50,0,400,0,1.01);
 	sprintf(title,"layer%i_radialEnergy_profile",iL+1);
 	p_radialEnergy[iL] = new TProfile(title,"",6,0,6,0,1.01,"");
+	sprintf(title,"layer%i_radialEnergy_totalE_profile",iL+1);
+	p_radialEnergy_totalE[iL] = new TProfile(title,"",6,0,6,0,1.01,"");
+	sprintf(title,"layer%i_radialEnergy_impactPosition_profile",iL+1);
+	p_radialEnergy_impactPosition[iL] = new TProfile(title,"",10,0,10,0,1.01,"");
 
     }
 
@@ -480,6 +486,12 @@ void makePlots::Loop(){
 	    p_radialEnergy[iL] -> Fill ( 3. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / layerE[iL] , 1 );
 	    p_radialEnergy[iL] -> Fill ( 4. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / layerE[iL] , 1 );
 	    p_radialEnergy[iL] -> Fill ( 5. , (layerE61_showerAxis[iL] - layerE37_showerAxis[iL]) / layerE[iL] , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 0. , (layerE1_showerAxis[iL]) / totalE_CEE [iL] , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 1. , (layerE7_showerAxis[iL] - layerE1_showerAxis[iL]) / totalE_CEE [iL] , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 2. , (layerE19_showerAxis[iL] - layerE7_showerAxis[iL]) / totalE_CEE [iL] , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 3. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE [iL] , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 4. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE [iL] , 1 );
+	    p_radialEnergy_totalE[iL] -> Fill ( 5. , (layerE61_showerAxis[iL] - layerE37_showerAxis[iL]) / totalE_CEE [iL] , 1 );
 
 
 #ifdef DEBUG
@@ -505,6 +517,14 @@ void makePlots::Loop(){
 	    cout << " Event = " << event << " hit = " << ihit << " Layer = " << layer << " Chip = " << chip << " channel = " << channel << " posx = " << posx << " posy = " << posy << " energy = " << energy << endl;
 	    
 #endif
+
+	    double dx = impactX[layer-1] - posx;
+	    double dy = impactY[layer-1] - posy;
+	    double dR = sqrt( dx*dx + dy*dy );
+
+	    p_radialEnergy_impactPosition[layer-1] -> Fill ( dR , energy , 1 );
+	    //cout << layer << " " << impactX[layer-1] << " " << posx << " " << dR << endl;
+
 
 	    if ( layer > EE_NLAYER ) continue;
 	    latShower_hits[layer-1] -> Fill ( posx, posy, 1);
