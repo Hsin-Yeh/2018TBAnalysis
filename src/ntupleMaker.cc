@@ -505,7 +505,7 @@ void ntupleMaker::NtupleMaker(){
 		totalNhit_CEH++;
 	    }
 	    layerE[layer-1] += energy;
-	    cout << layer << " " << layerE[layer-1] << endl;
+	    cout << layer << " " << layerE[layer-1] << " " << totalE_CEE << endl;
 	    layerNhit[layer-1]++;
 	    hit_tmp[layer-1].push_back(energy);
 	    hit_x[layer-1].push_back(posx);
