@@ -434,7 +434,7 @@ void makePlots::Loop(){
 	    if ( maxID [0] == maxID [2] && maxID [1] == maxID [3] ) {
 		if ( E1devE7_showerAxis == E1devE7_showerAxis )   h_E1devE7_showerAxis [iL]  -> Fill ( E1devE7_showerAxis );
 		if ( E7devE19_showerAxis == E7devE19_showerAxis ) h_E7devE19_showerAxis [iL] -> Fill ( E7devE19_showerAxis );
-		cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << endl;
+		//cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << endl;
 	    }
 	    h_maxID [iL]                   -> Fill ( maxID[iL]*2 );
 	    h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
