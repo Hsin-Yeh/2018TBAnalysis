@@ -1,1 +1,1 @@
-output_root/sim_20GeV_EMN.root
+ntuple/sim/sim_20GeV_EMN.root

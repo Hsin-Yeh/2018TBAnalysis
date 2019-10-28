@@ -525,7 +525,9 @@ void ntupleMaker::NtupleMaker(){
 		    E_1[iL] = E_ch[iL][ich];
 		}
 	    }
-            
+	}
+	
+	for(int iL = 0; iL < NLAYER; ++iL){
 	    double dx,dy,dR;
 	    for(int ich = 0; ich < NCHANNEL; ich++){
 		if( E_ch[iL][ich] == 0 ) continue;
@@ -539,8 +541,8 @@ void ntupleMaker::NtupleMaker(){
 		layerE[iL] += E_ch[iL][ich];
 
 		// radial distribution w.r.t the shower axis
-		dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 + 2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
-		dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 + 2 ] ];
+		dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
+		dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 ] ];
 		dR = sqrt(dx*dx + dy*dy);
 		E_1_showerAxis[iL] = E_ch[iL] [ maxID[ iL%2 + 2 ] ];
 		if( dR < 1.12455*1.2) E_7_showerAxis[iL] += E_ch[iL][ich];
