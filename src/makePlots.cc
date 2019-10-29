@@ -360,7 +360,7 @@ void makePlots::Loop(){
 	sprintf(title,"layer%i_radialEnergy_totalE_profile",iL+1);
 	p_radialEnergy_totalE[iL] = new TProfile(title,"",6,0,6,0,1.01,"");
 	sprintf(title,"layer%i_radialEnergy_impactPosition_profile",iL+1);
-	p_radialEnergy_impactPosition[iL] = new TProfile(title,"",10,0,10,0,800,"");
+	p_radialEnergy_impactPosition[iL] = new TProfile(title,"",20,0,10,0,1000,"");
 
     }
 
