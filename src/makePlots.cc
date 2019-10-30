@@ -527,7 +527,8 @@ void makePlots::Loop(){
 
 
 	    if ( layer > EE_NLAYER ) continue;
-	    latShower_hits[layer-1] -> Fill ( posx, posy, 1);
+	    if ( event != 2 ) continue;
+	    latShower_hits[layer-1] -> Fill ( posx, posy, energy);
 	    latShower_bx_by [layer-1] -> Fill ( b_x, b_y, 1 );
 
 	    if ( layer != 1 ) continue;
