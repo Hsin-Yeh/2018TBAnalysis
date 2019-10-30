@@ -1,25 +1,12 @@
-This code read the 2018 June TB rechit ntuple to produce Shower Shape variable
+ls ntuple.root > data_input.txt
+./makePlots -n 0      ( MC : 0, Data : 1 )
+#This will output a file "output_root/ntuple.root"
 
-input data file path:
-/eos/cms/store/group/dpg_hgcal/tb_hgcal/2018/cern_h2_june/offline_analysis/ntuples/v9/
-input MC file path:
-/eos/cms/store/group/dpg_hgcal/tb_hgcal/2018/cern_h2_june/offline_analysis/sim_ntuples/v9
 
-For the run information please refer to:
-https://docs.google.com/spreadsheets/d/1FlwthMixJHmHVBguYSbw5mIeBo2tF7rFJPTYLTNI9Vs/edit#gid=0
-Or
-run_list
+ls output_root/ntuple.root > data_input.txt
+./makePlots -m
+#This will output a file "root_plot/plot_ntuple.root"
 
-To Run:
-(Data -> For example run 316)
+root root_plot/plot_ntuple.root 
+new TBrowser
 
-make
-ls /eos/cms/store/group/dpg_hgcal/tb_hgcal/2018/cern_h2_june/offline_analysis/ntuples/v9/ntuple_316.root > input.txt
-./makePlots or ./makePlots 1
-
-(MC)
-make
-ls /eos/cms/store/group/dpg_hgcal/tb_hgcal/2018/cern_h2_june/offline_analysis/sim_ntuples/v9/ntuple_sim_pdgID11_beamMomentum100.0_listFTFP_BERT_EMM.root > input.txt
-./makePlots 0
-
-The output file will be store in output_root

@@ -6,7 +6,7 @@ void xtalk_compare(int Energy)
     char title[200];
     //int Energy = 300;
     
-    sprintf(title,"root_plot/EMN/plot_sim_%dGeV_EMN_1.1X1_1e-6X2_0.7X1_6e-7X2.root",Energy);
+    sprintf(title,"root_plot/plot_sim_%dGeV.root",Energy);
     TFile f_MC(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
     TFile f_Data(title);
@@ -17,7 +17,7 @@ void xtalk_compare(int Energy)
 	TH1D* layer4_E1devE7_showerAxis__1;
 	TH1D* layer4_E1devE7_showerAxis__2;
 	TH1D* layer4_E1devE7_showerAxis__3;
-	sprintf(title,"histo/layer%d/layer%d_E1devE7_showerAxis",iL,iL);
+	sprintf(title,"histo/layer%d/layer%d_E1devE7",iL,iL);
 	layer4_E1devE7_showerAxis__1 = (TH1D *)f_MC.Get(title);
 	layer4_E1devE7_showerAxis__2 = (TH1D *)f_MC_original.Get(title);
 	layer4_E1devE7_showerAxis__3 = (TH1D *)f_Data.Get(title);
