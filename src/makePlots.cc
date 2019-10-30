@@ -528,7 +528,7 @@ void makePlots::Loop(){
 
 	    if ( layer > EE_NLAYER ) continue;
 	    if ( event != 2 ) continue;
-	    cout << impactX[layer-1] << " " impactY[layer-1] << " " << energy << endl;
+	    cout << impactX[layer-1] << " " << impactY[layer-1] << " " << energy << endl;
 	    latShower_hits[layer-1] -> Fill ( posx, posy, energy);
 	    latShower_bx_by [layer-1] -> Fill ( impactX[layer-1], impactY[layer-1], energy );
 
