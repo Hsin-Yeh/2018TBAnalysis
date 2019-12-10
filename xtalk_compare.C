@@ -6,7 +6,7 @@ void xtalk_compare(int Energy)
     char title[200];
     //int Energy = 300;
     
-    sprintf(title,"root_plot/plot_sim_%dGeV.root",Energy);
+    sprintf(title,"root_plot/EMN/plot_sim_%dGeV_EMN_1X1.root",Energy);
     TFile f_MC(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
     TFile f_Data(title);
