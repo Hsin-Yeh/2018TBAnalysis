@@ -136,6 +136,8 @@ void makePlots::Init(){
     T_rechit_var->SetBranchAddress("layerE61_showerAxis", layerE61_showerAxis, &b_layerE61_showerAxis);
     T_rechit_var->SetBranchAddress("impactX", impactX, &b_impactX);
     T_rechit_var->SetBranchAddress("impactY", impactY, &b_impactY);
+    T_rechit_var->SetBranchAddress("COGx", COGx, &b_COGx);
+    T_rechit_var->SetBranchAddress("COGy", COGy, &b_COGy);
     T_rechit_var->SetBranchAddress("maxID", maxID, &b_maxID);
 
     Init_Runinfo();
@@ -271,6 +273,7 @@ void makePlots::Loop(){
     TH2D *h_bx_by_E1[EE_NLAYER];
     TH2D *h_impactX_impactY_E1devE7[EE_NLAYER];
     TH2D *h_impactX_impactY[EE_NLAYER];
+    TH2D *h_COGx_COGy[EE_NLAYER];
     TH2D *h_E1devE7_E1[EE_NLAYER];
     TH2D *h_E7devE19_E1[EE_NLAYER];
     TH2D *h_E1devE7_E7[EE_NLAYER];
@@ -286,82 +289,120 @@ void makePlots::Loop(){
     
 
     for(int iL = 0; iL < EE_NLAYER ; ++iL){
+
 	sprintf(title,"layer%i",iL+1);
 	cdlayer[iL] = cdhisto->mkdir(title);
 	cdlayer[iL]->cd();
+
 	sprintf(title,"layer%i_E1devE7",iL+1);
 	h_E1devE7[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_E7devE19",iL+1);
 	h_E7devE19[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_E1devE7_showerAxis",iL+1);
 	h_E1devE7_showerAxis[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_E7devE19_showerAxis",iL+1);
 	h_E7devE19_showerAxis[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_E1devE7_E1_50",iL+1);
 	h_E1devE7_50[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_E1devE7_E1_250",iL+1);
 	h_E1devE7_250[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_E1devE7_E1_50_250",iL+1);
 	h_E1devE7_50_250[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_maxID",iL+1);
 	h_maxID[iL] = new TH1F( title, title, 128, 0, 256);
+
 	sprintf(title,"layer%i_E1devE7_maxID50_70",iL+1);
 	h_E1devE7_differentMaxID_1[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_E1devE7_maxID75_100",iL+1);
 	h_E1devE7_differentMaxID_2[iL] = new TH1D(title, title, 101, 0, 1.01);
+
 	sprintf(title,"layer%i_impactX_impactY_E1devE7",iL+1);
 	h_impactX_impactY_E1devE7[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
+
 	sprintf(title,"layer%i_impactX_impactY",iL+1);
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
+	
+	sprintf(title,"layer%i_COGx_COGy",iL+1);
+	h_COGx_COGy[iL] = new TH2D(title,title,60,-60,60,60,-60,60);
+
 	sprintf(title,"layer%i_mx_my_E1devE7",iL+1);
 	h_mx_my_E1devE7[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
+
 	sprintf(title,"layer%i_mx_my_E1",iL+1);
 	h_mx_my_E1[iL] = new TH2D(title,title,100,-0.004,0.004,100,-0.004,0.004);
+
 	sprintf(title,"layer%i_bx_by_E1devE7",iL+1);
 	h_bx_by_E1devE7[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
+
 	sprintf(title,"layer%i_bx_by_E1",iL+1);
 	h_bx_by_E1[iL] = new TH2D(title, title, 100, -10, 10, 100, -10, 10);
+
 	sprintf(title,"layer%i_E1devE7_smallAngle",iL+1);
 	h_E1devE7_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
+
 	sprintf(title,"layer%i_E7devE19_smallAngle",iL+1);
 	h_E7devE19_smallAngle[iL] = new TH1D(title,title,101,0,1.01);
+
 	sprintf(title,"layer%i_E1devE7_E1",iL+1);
 	h_E1devE7_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+
 	sprintf(title,"layer%i_E1devE7_E7",iL+1);
 	h_E1devE7_E7[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+
 	sprintf(title,"layer%i_E7devE19_E1",iL+1);
 	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+
 	sprintf(title,"layer%i_E1devE7_lessBins",iL+1);
 	h_E1devE7_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+
 	sprintf(title,"layer%i_E7devE19_lessBins",iL+1);
 	h_E7devE19_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+
 	sprintf(title,"layer%i_E1devE7_smallAngle_lessBins",iL+1);
 	h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+
 	sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 81, 0, 1.0125);
+
 	sprintf(title,"layer%i_E1devE7_positionSelection",iL+1);
 	h_E1devE7_positionSelection[iL] = new TH1D(title,title, 81, 0, 1.0125);
+
 	sprintf(title,"layer%i_E1",iL+1);
 	//h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
 	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
 	//sprintf(title,"layer%i_E1",iL+1);
 	h_E1[iL] = new TH1D(title, title, 200, 0, 800);
+
 	sprintf(title,"layer%i_radialEnergy",iL+1);
 	h_radialEnergy[iL] = new TH2D(title,"",6,0,6,100,0,1.01);
 	
 	sprintf(title,"layer%i_E1devE7_E1_profile",iL+1);
 	p_E1devE7_E1[iL] = new TProfile(title,"",80,0,800,0,1.01);
+
 	sprintf(title,"layer%i_E1devE7_E7_profile",iL+1);
 	p_E1devE7_E7[iL] = new TProfile(title,"",50,0,400,0,1.01);
+
 	sprintf(title,"layer%i_E1devE7_EFirstRing_profile",iL+1);
 	p_E1devE7_EFirstRing[iL] = new TProfile(title,"",50,0,400,0,1.01);
+
 	sprintf(title,"layer%i_radialEnergy_profile",iL+1);
 	p_radialEnergy[iL] = new TProfile(title,"",6,0,6,0,1.01,"");
+
 	sprintf(title,"layer%i_radialEnergy_showerAxis_profile",iL+1);
 	p_radialEnergy_showerAxis[iL] = new TProfile(title,"",6,0,6,0,1.01,"");
+
 	sprintf(title,"layer%i_radialEnergy_totalE_profile",iL+1);
 	p_radialEnergy_totalE[iL] = new TProfile(title,"",6,0,6,0,1.01,"");
+
 	sprintf(title,"layer%i_radialEnergy_impactPosition_profile",iL+1);
 	p_radialEnergy_impactPosition[iL] = new TProfile(title,"",20,0,10,0,1000,"");
 
@@ -448,6 +489,7 @@ void makePlots::Loop(){
 	    h_maxID [iL]                   -> Fill ( maxID[iL]*2 );
 	    h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	    h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
+	    h_COGx_COGy [iL]               -> Fill ( COGx[iL], COGy[iL] );
 	    h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
 	    h_mx_my_E1 [iL]                -> Fill ( m_x, m_y, layerE1[iL] );
 	    h_bx_by_E1devE7 [iL]           -> Fill ( b_x, b_y, E1devE7 );
@@ -501,7 +543,6 @@ void makePlots::Loop(){
 	    p_radialEnergy_totalE[iL] -> Fill ( 3. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE , 1 );
 	    p_radialEnergy_totalE[iL] -> Fill ( 4. , (layerE37_showerAxis[iL] - layerE19_showerAxis[iL]) / totalE_CEE , 1 );
 	    p_radialEnergy_totalE[iL] -> Fill ( 5. , (layerE61_showerAxis[iL] - layerE37_showerAxis[iL]) / totalE_CEE , 1 );
-
 
 #ifdef DEBUG
 	    if ( E1devE7 == 1 ) {

@@ -355,12 +355,17 @@ void ntupleMaker::NtupleMaker(){
     double z_ch[NLAYER][NCHANNEL];
     double impactX[NLAYER];
     double impactY[NLAYER];
+    double COGx[NLAYER];
+    double COGy[NLAYER];
     int maxID[NLAYER];
+    
 
     outT3->Branch("hit_mip","std::vector< std::vector<double> >",&hit_tmp);
     outT3->Branch("hit_x","std::vector< std::vector<double> >",&hit_x);
     outT3->Branch("hit_y","std::vector< std::vector<double> >",&hit_y);
     outT3->Branch("hit_z","std::vector< std::vector<double> >",&hit_z);
+    outT3->Branch("COGx",COGx,"COGx[40]/D");
+    outT3->Branch("COGy",COGy,"COGy[40]/D");
     outT3->Branch("layerNhit",layerNhit,"layerNhit[40]/I");
     outT3->Branch("totalE",&totalE,"totalE/D");
     outT3->Branch("totalE_CEE",&totalE_CEE,"totalE_CEE/D");
@@ -505,6 +510,7 @@ void ntupleMaker::NtupleMaker(){
 		totalNhit_CEH++;
 	    }
 	    layerNhit[layer-1]++;
+	    layerE[layer-1] += energy;
 	    hit_tmp[layer-1].push_back(energy);
 	    hit_x[layer-1].push_back(posx);
 	    hit_y[layer-1].push_back(posy);
@@ -522,9 +528,32 @@ void ntupleMaker::NtupleMaker(){
 		if( E_ch[iL][ich] > Emax){
 		    Emax = E_ch[iL][ich];
 		    maxID[iL] = ich;
-		    E_1[iL] = E_ch[iL][ich];
+		    E_1[iL] = E_ch[iL][ich]; 
 		}
 	    }
+
+	    //Computing impact position of the shower on a given layer using Thorben's logE method
+	    double w, totalWeight;
+	    double numerator_x, numerator_y;
+	    numerator_x = 0;
+	    numerator_y = 0;
+	    totalWeight = 0;
+	    w = 0;
+
+	    float log_a = 3.5;
+	    float log_b = 1.0;
+	    
+	    for ( int ihit = 0 ; ihit < layerNhit[iL] ; ihit++ ) {
+		double E = hit_tmp[iL].at(ihit);
+		if ( E == 0 ) continue;
+		w = std::max( log_a * log(E/layerE[iL]) + log_b , 0.0 );
+		totalWeight += w;
+		numerator_x += w * hit_x[iL].at(ihit);
+		numerator_y += w * hit_y[iL].at(ihit);
+	    }
+	    
+	    COGx[iL] = numerator_x / totalWeight;
+	    COGy[iL] = numerator_y / totalWeight;
 	}
 	
 	for(int iL = 0; iL < NLAYER; ++iL){
@@ -538,8 +567,6 @@ void ntupleMaker::NtupleMaker(){
 		if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
 		if( dR < 1.12455*4*1.2) E_61[iL] += E_ch[iL][ich];
-		layerE[iL] += E_ch[iL][ich];
-
 		// radial distribution w.r.t the shower axis
 		dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 + 2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
 		dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 + 2 ] ];

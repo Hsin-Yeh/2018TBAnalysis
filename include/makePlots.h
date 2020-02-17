@@ -311,7 +311,10 @@ private:
     Double_t        layerE61_showerAxis[40];
     Double_t        impactX[40];
     Double_t        impactY[40];
+    Double_t        COGx[40];
+    Double_t        COGy[40];
     Int_t           maxID[40];
+    
 
     // List of branches
     TBranch        *b_hit_mip;   //!
@@ -337,6 +340,8 @@ private:
     TBranch        *b_layerE61_showerAxis;   //!
     TBranch        *b_impactX;   //!
     TBranch        *b_impactY;   //!
+    TBranch        *b_COGx;   //!
+    TBranch        *b_COGy;   //!
     TBranch        *b_maxID;
   
 };

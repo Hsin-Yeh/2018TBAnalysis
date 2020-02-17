@@ -6,7 +6,7 @@ void xtalk_compare(int Energy)
     char title[200];
     //int Energy = 300;
     
-    sprintf(title,"root_plot/EMN/plot_sim_%dGeV_EMN_1X1.root",Energy);
+    sprintf(title,"root_plot/plot_sim_%dGeV_EMN.root",Energy);
     TFile f_MC(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
     TFile f_Data(title);
@@ -163,14 +163,10 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	leg->Draw();
-
 	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
-	TLatex *   tex = new TLatex(0.0586392,0.058,title);
-	tex->SetTextSize(0.0433213);
-	tex->SetLineWidth(2);
-	tex->Draw();
-	Canvas_1->Update();
+	leg->SetTitle(title);
+	leg->Draw();
+	Canvas_1->Update();	
 
 	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.png", Energy, Energy, iL);
 	Canvas_1->SaveAs(title);
