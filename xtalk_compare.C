@@ -294,7 +294,7 @@ void xtalk_compare(int Energy)
 	layer4_COGx__1->GetZaxis()->SetTitleSize(0.045);
 	layer4_COGx__1->GetZaxis()->SetTitleFont(42);
 	layer4_COGx__1->GetYaxis()->SetRangeUser(0,0.08);
-	layer4_COGx__1->Draw("HIST");
+	layer4_COGx__1->Draw();
 
 	ci = 1180;
 	color = new TColor(ci, 0, 0, 0, " ", 0);
@@ -307,7 +307,7 @@ void xtalk_compare(int Energy)
 	layer4_COGx__2->SetMarkerColor(4);
 	layer4_COGx__2->SetMarkerStyle(20);
 	layer4_COGx__2->SetMarkerSize(0.5);
-	layer4_COGx__2->Draw("HISTSAME");
+	layer4_COGx__2->Draw("SAME");
     
 	layer4_COGx__3->SetLineWidth(2);
 	layer4_COGx__3->SetMarkerStyle(20);
@@ -407,7 +407,7 @@ void xtalk_compare(int Energy)
 	layer4_COGy__1->GetZaxis()->SetTitleSize(0.045);
 	layer4_COGy__1->GetZaxis()->SetTitleFont(42);
 	layer4_COGy__1->GetYaxis()->SetRangeUser(0,0.08);
-	layer4_COGy__1->Draw("HIST");
+	layer4_COGy__1->Draw();
 
 	ci = 1180;
 	color = new TColor(ci, 0, 0, 0, " ", 0);
@@ -420,7 +420,7 @@ void xtalk_compare(int Energy)
 	layer4_COGy__2->SetMarkerColor(4);
 	layer4_COGy__2->SetMarkerStyle(20);
 	layer4_COGy__2->SetMarkerSize(0.5);
-	layer4_COGy__2->Draw("HISTSAME");
+	layer4_COGy__2->Draw("SAME");
     
 	layer4_COGy__3->SetLineWidth(2);
 	layer4_COGy__3->SetMarkerStyle(20);
