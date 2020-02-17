@@ -546,7 +546,7 @@ void ntupleMaker::NtupleMaker(){
 	    for ( int ihit = 0 ; ihit < layerNhit[iL] ; ihit++ ) {
 		double E = hit_tmp[iL].at(ihit);
 		if ( E == 0 ) continue;
-		w = std::max( log_a * log(E/layerE[iL]) + log_b , 0.0 );
+		w = std::max( log_a + log_b * log(E/layerE[iL]) , 0.0 );
 		totalWeight += w;
 		numerator_x += w * hit_x[iL].at(ihit);
 		numerator_y += w * hit_y[iL].at(ihit);

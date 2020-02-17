@@ -259,6 +259,8 @@ void makePlots::Loop(){
     h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
     TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
     TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
+    TH1D *h_COGx[EE_NLAYER];
+    TH1D *h_COGy[EE_NLAYER];
     TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
     TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
     TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
@@ -329,6 +331,12 @@ void makePlots::Loop(){
 
 	sprintf(title,"layer%i_impactX_impactY",iL+1);
 	h_impactX_impactY[iL] = new TH2D(title,title,120,-60,60,120,-60,60);
+
+	sprintf(title,"layer%i_COGx",iL+1);
+	h_COGx[iL] = new TH1D(title,title,100,-10,10);
+
+	sprintf(title,"layer%i_COGy",iL+1);
+	h_COGy[iL] = new TH1D(title,title,100,-10,10);
 	
 	sprintf(title,"layer%i_COGx_COGy",iL+1);
 	h_COGx_COGy[iL] = new TH2D(title,title,60,-60,60,60,-60,60);
@@ -489,6 +497,8 @@ void makePlots::Loop(){
 	    h_maxID [iL]                   -> Fill ( maxID[iL]*2 );
 	    h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
 	    h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
+	    h_COGx [iL]                    -> Fill ( COGx[iL] );
+	    h_COGy [iL]                    -> Fill ( COGy[iL] ); 
 	    h_COGx_COGy [iL]               -> Fill ( COGx[iL], COGy[iL] );
 	    h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
 	    h_mx_my_E1 [iL]                -> Fill ( m_x, m_y, layerE1[iL] );
