@@ -669,6 +669,10 @@ void makePlots::Loop(){
 	h_E7devE19_smallAngle_lessBins[iL] -> Scale(scale);
 	scale = 1 / h_E1devE7_positionSelection [iL]->Integral();
 	h_E1devE7_positionSelection [iL] -> Scale(scale);
+	scale = 1 / h_COGx [iL]->Integral();
+	h_COGx [iL] -> Scale(scale);
+	scale = 1 / h_COGy [iL]->Integral();
+	h_COGy [iL] -> Scale(scale);
 
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
 	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
