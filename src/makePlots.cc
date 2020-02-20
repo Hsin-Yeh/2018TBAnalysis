@@ -278,6 +278,10 @@ void makePlots::Loop(){
     TH2D *h_COGx_COGy[EE_NLAYER];
     TH2D *h_E1devE7_E1[EE_NLAYER];
     TH2D *h_E7devE19_E1[EE_NLAYER];
+    TH2D *h_E1devE7_layerE[EE_NLAYER];
+    TH2D *h_E7devE19_layerE[EE_NLAYER];
+    TH2D *h_E1devE7_layerEdevTotalE[EE_NLAYER];
+    TH2D *h_E7devE19_layerEdevTotalE[EE_NLAYER];
     TH2D *h_E1devE7_E7[EE_NLAYER];
     TH2D *h_radialEnergy[EE_NLAYER];
     TH1D *h_TwoPointCorrelation = new TH1D("h_TwoPointCorrelation","",50,0,5);
@@ -364,6 +368,18 @@ void makePlots::Loop(){
 
 	sprintf(title,"layer%i_E1devE7_E7",iL+1);
 	h_E1devE7_E7[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
+
+	sprintf(title,"layer%i_E1devE7_layerE",iL+1);
+	h_E1devE7_layerE[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 1000);
+
+	sprintf(title,"layer%i_E7devE19_layerE",iL+1);
+	h_E7devE19_layerE[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 1000);
+
+	sprintf(title,"layer%i_E1devE7_layerEdevTotalE",iL+1);
+	h_E1devE7_layerEdevTotalE[iL] = new TH2D(title, title, 101, 0, 1.01, 50, 0, 0.5);
+
+	sprintf(title,"layer%i_E7devE19_layerEdevTotalE",iL+1);
+	h_E7devE19_layerEdevTotalE[iL] = new TH2D(title, title, 101, 0, 1.01, 50, 0, 0.5);
 
 	sprintf(title,"layer%i_E7devE19_E1",iL+1);
 	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
@@ -494,27 +510,31 @@ void makePlots::Loop(){
 		if ( E7devE19_showerAxis == E7devE19_showerAxis ) h_E7devE19_showerAxis [iL] -> Fill ( E7devE19_showerAxis );
 		//cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << endl;
 	    }
-	    h_maxID [iL]                   -> Fill ( maxID[iL]*2 );
-	    h_impactX_impactY_E1devE7 [iL] -> Fill ( impactX[iL], impactY[iL], E1devE7 );
-	    h_impactX_impactY [iL]         -> Fill ( impactX[0], impactY[0] );
-	    h_COGx [iL]                    -> Fill ( COGx[iL] );
-	    h_COGy [iL]                    -> Fill ( COGy[iL] ); 
-	    h_COGx_COGy [iL]               -> Fill ( COGx[iL], COGy[iL] );
-	    h_mx_my_E1devE7 [iL]           -> Fill ( m_x, m_y, E1devE7 );
-	    h_mx_my_E1 [iL]                -> Fill ( m_x, m_y, layerE1[iL] );
-	    h_bx_by_E1devE7 [iL]           -> Fill ( b_x, b_y, E1devE7 );
-	    h_bx_by_E1 [iL]                -> Fill ( b_x, b_y, layerE1[iL] );
-	    h_E1devE7_E1  [iL]             -> Fill ( E1devE7, layerE1[iL] );
-	    h_E1devE7_E7  [iL]             -> Fill ( E1devE7, layerE7[iL] );
-	    h_E7devE19_E1 [iL]             -> Fill ( E7devE19, layerE1[iL] );
-	    h_E1devE7_lessBins [iL]        -> Fill ( E1devE7 );
-	    h_E7devE19_lessBins [iL]       -> Fill ( E7devE19 );
-	    h_E1 [iL]                      -> Fill ( layerE1[iL] );
-	    h_E1devE7_smallAngle_lessBins [iL] -> Fill ( E1devE7 );
-	    h_E7devE19_smallAngle_lessBins[iL] -> Fill ( E7devE19 );
-	    p_E1devE7_E1[iL] -> Fill ( layerE1[iL], E1devE7, 1 );
-	    p_E1devE7_E7[iL] -> Fill ( layerE7[iL], E1devE7, 1 );
-	    p_E1devE7_EFirstRing[iL] -> Fill ( (layerE7[iL] - layerE1[iL]), E1devE7, 1 );
+	    h_maxID [iL]                            -> Fill ( maxID[iL]*2 );
+	    h_impactX_impactY_E1devE7 [iL]          -> Fill ( impactX[iL], impactY[iL], E1devE7 );
+	    h_impactX_impactY [iL]                  -> Fill ( impactX[0], impactY[0] );
+	    h_COGx [iL]                             -> Fill ( COGx[iL] );
+	    h_COGy [iL]                             -> Fill ( COGy[iL] ); 
+	    h_COGx_COGy [iL]                        -> Fill ( COGx[iL], COGy[iL] );
+	    h_mx_my_E1devE7 [iL]                    -> Fill ( m_x, m_y, E1devE7 );
+	    h_mx_my_E1 [iL]                         -> Fill ( m_x, m_y, layerE1[iL] );
+	    h_bx_by_E1devE7 [iL]                    -> Fill ( b_x, b_y, E1devE7 );
+	    h_bx_by_E1 [iL]                         -> Fill ( b_x, b_y, layerE1[iL] ) ;
+	    h_E1devE7_E1  [iL]                      -> Fill ( E1devE7, layerE1[iL] );
+	    h_E1devE7_E7  [iL]                      -> Fill ( E1devE7, layerE7[iL] );
+	    h_E1devE7_layerE  [iL]                  -> Fill ( E1devE7, layerE[iL] );
+	    h_E7devE19_layerE  [iL]                 -> Fill ( E7devE19, layerE[iL] );
+	    h_E1devE7_layerEdevTotalE  [iL]         -> Fill ( E1devE7, layerE[iL] / totalE_CEE);
+	    h_E7devE19_layerEdevTotalE  [iL]        -> Fill ( E7devE19, layerE[iL] / totalE_CEE);
+	    h_E7devE19_E1 [iL]                      -> Fill ( E7devE19, layerE1[iL] );
+	    h_E1devE7_lessBins [iL]                 -> Fill ( E1devE7 );
+	    h_E7devE19_lessBins [iL]                -> Fill ( E7devE19 );
+	    h_E1 [iL]                               -> Fill ( layerE1[iL] );
+	    h_E1devE7_smallAngle_lessBins [iL]      -> Fill ( E1devE7 );
+	    h_E7devE19_smallAngle_lessBins[iL]      -> Fill ( E7devE19 );
+	    p_E1devE7_E1[iL]                        -> Fill ( layerE1[iL], E1devE7, 1 );
+	    p_E1devE7_E7[iL]                        -> Fill ( layerE7[iL], E1devE7, 1 );
+	    p_E1devE7_EFirstRing[iL]                -> Fill ( (layerE7[iL] - layerE1[iL]), E1devE7, 1 );
 
 	    if ( layerE1[iL] <= 50 ) {
 		h_E1devE7_50[iL] -> Fill ( E1devE7 );}
