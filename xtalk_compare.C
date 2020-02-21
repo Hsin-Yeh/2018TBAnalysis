@@ -508,6 +508,50 @@ void xtalk_compare(int Energy)
 	// chi square test
 	chi_cross_COGy[iL-1]    = COGy__3->Chi2Test(COGy__1,"UW CHI2/NDF");
 	chi_original_COGy[iL-1] = COGy__3->Chi2Test(COGy__2,"UW CHI2/NDF");
+
+
+
+	// E1devE7 vs layerE/TotalE
+
+	TH2D* E1devE7_layerEdevTotalE__1;
+	TH2D* E1devE7_layerEdevTotalE__2;
+	TH2D* E1devE7_layerEdevTotalE__3;
+	sprintf(title,"histo/layer%d/layer%i_E1devE7_layerEdevTotalE",iL,iL);
+	E1devE7_layerEdevTotalE__1 = (TH2D *)f_MC.Get(title);
+	E1devE7_layerEdevTotalE__2 = (TH2D *)f_MC_original.Get(title);
+	E1devE7_layerEdevTotalE__3 = (TH2D *)f_Data.Get(title);
+
+	E1devE7_layerEdevTotalE__3->SetStats(0);
+	E1devE7_layerEdevTotalE__3->SetLineColor(2);
+	E1devE7_layerEdevTotalE__3->SetLineWidth(2);
+	E1devE7_layerEdevTotalE__3->SetMarkerColor(2);
+	E1devE7_layerEdevTotalE__3->SetMarkerStyle(20);
+	E1devE7_layerEdevTotalE__3->SetMarkerSize(0.5);
+	E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitle("E1/E7 containment variable");
+	E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelFont(42);
+	E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelOffset(0.01125);
+	E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelSize(0.045);
+	E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitleSize(0.052);
+	E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitleOffset(1.1);
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitle("layerE/TotalE containment variable");
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelFont(42);
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelOffset(0.01125);
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelSize(0.045);
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleSize(0.045);
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleOffset(1.4);
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleFont(42);
+	E1devE7_layerEdevTotalE__3->GetZaxis()->SetLabelFont(42);
+	E1devE7_layerEdevTotalE__3->GetZaxis()->SetLabelSize(0.045);
+	E1devE7_layerEdevTotalE__3->GetZaxis()->SetTitleSize(0.045);
+	E1devE7_layerEdevTotalE__3->GetZaxis()->SetTitleFont(42);
+	E1devE7_layerEdevTotalE__3->Draw();
+	Canvas_1->Update();
+	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
+	Canvas_1->SaveAs(title);
+	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
+	Canvas_1->SaveAs(title);
+	
+	
     }
 
     // ========== chi square plot ========== //
