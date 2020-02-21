@@ -376,10 +376,10 @@ void makePlots::Loop(){
 	h_E7devE19_layerE[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 1000);
 
 	sprintf(title,"layer%i_E1devE7_layerEdevTotalE",iL+1);
-	h_E1devE7_layerEdevTotalE[iL] = new TH2D(title, title, 101, 0, 1.01, 50, 0, 0.5);
+	h_E1devE7_layerEdevTotalE[iL] = new TH2D(title, title, 101, 0, 1.01, 20, 0, 0.2);
 
 	sprintf(title,"layer%i_E7devE19_layerEdevTotalE",iL+1);
-	h_E7devE19_layerEdevTotalE[iL] = new TH2D(title, title, 101, 0, 1.01, 50, 0, 0.5);
+	h_E7devE19_layerEdevTotalE[iL] = new TH2D(title, title, 101, 0, 1.01, 20, 0, 0.2);
 
 	sprintf(title,"layer%i_E7devE19_E1",iL+1);
 	h_E7devE19_E1[iL] = new TH2D(title, title, 101, 0, 1.01, 100, 0, 300);
