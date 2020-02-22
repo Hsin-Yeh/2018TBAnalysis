@@ -248,11 +248,12 @@ void makePlots::Loop(){
     TH1D *h_E7devE19_smallAngle_lessBins[EE_NLAYER];
     TH1D *h_E1devE7_positionSelection[EE_NLAYER];
     TH1D *h_E1[EE_NLAYER];
+    TH1D *h_layerE[EE_NLAYER];
     TH1F *h_maxID[EE_NLAYER];
     TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
     TH1D *h_E1devE7_differentMaxID_2[EE_NLAYER];
-    TH1D *h_totalE = new TH1D("h_totalE","",100,0,300);
-    TH1D *h_totalCEE = new TH1D("h_totalCEE","",100,0,3000);
+    TH1D *h_totalE = new TH1D("h_totalE","h_totalE",100,0,5000);
+    TH1D *h_totalCEE = new TH1D("h_totalCEE","h_totalCEE",100,0,5000);
     TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
     h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
     TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);
@@ -400,11 +401,10 @@ void makePlots::Loop(){
 	h_E1devE7_positionSelection[iL] = new TH1D(title,title, 81, 0, 1.0125);
 
 	sprintf(title,"layer%i_E1",iL+1);
-	//h_E1devE7_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
-	//sprintf(title,"layer%i_E7devE19_smallAngle_lessBins",iL+1);
-	//h_E7devE19_smallAngle_lessBins[iL] = new TH1D(title, title, 80, 0, 1.);
-	//sprintf(title,"layer%i_E1",iL+1);
 	h_E1[iL] = new TH1D(title, title, 200, 0, 800);
+
+	sprintf(title,"layer%i_layerE",iL+1);
+	h_layerE[iL] = new TH1D(title, title, 200, 0, 1000);
 
 	sprintf(title,"layer%i_radialEnergy",iL+1);
 	h_radialEnergy[iL] = new TH2D(title,"",6,0,6,100,0,1.01);
@@ -530,6 +530,7 @@ void makePlots::Loop(){
 	    h_E1devE7_lessBins [iL]                 -> Fill ( E1devE7 );
 	    h_E7devE19_lessBins [iL]                -> Fill ( E7devE19 );
 	    h_E1 [iL]                               -> Fill ( layerE1[iL] );
+	    h_layerE [iL]                           -> Fill ( layerE[iL] );
 	    h_E1devE7_smallAngle_lessBins [iL]      -> Fill ( E1devE7 );
 	    h_E7devE19_smallAngle_lessBins[iL]      -> Fill ( E7devE19 );
 	    p_E1devE7_E1[iL]                        -> Fill ( layerE1[iL], E1devE7, 1 );

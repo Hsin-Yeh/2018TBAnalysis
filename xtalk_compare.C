@@ -14,8 +14,8 @@ void xtalk_compare(int Energy)
     TFile f_MC_original(title);
 
     int NLAYER = 28;
-    double chi_cross_COGx[NLAYER], chi_cross_COGy[NLAYER], chi_cross_E1devE7[NLAYER], chi_cross_E7devE19[NLAYER];
-    double chi_original_COGx[NLAYER], chi_original_COGy[NLAYER], chi_original_E1devE7[NLAYER], chi_original_E7devE19[NLAYER];
+    double chi_cross_layerE[NLAYER], chi_cross_COGx[NLAYER], chi_cross_COGy[NLAYER], chi_cross_E1devE7[NLAYER], chi_cross_E7devE19[NLAYER];
+    double chi_original_layerE[NLAYER], chi_original_COGx[NLAYER], chi_original_COGy[NLAYER], chi_original_E1devE7[NLAYER], chi_original_E7devE19[NLAYER];
     double layerID[NLAYER];
 
     for( int iL = 1; iL <= 28; iL++) {
@@ -510,7 +510,124 @@ void xtalk_compare(int Energy)
 	chi_original_COGy[iL-1] = COGy__3->Chi2Test(COGy__2,"UW CHI2/NDF");
 
 
+	// layerE
+	TH1D* layerE__1;
+	TH1D* layerE__2;
+	TH1D* layerE__3;
+	sprintf(title,"histo/layer%d/layer%d_layerE",iL,iL);
+	layerE__1 = (TH1D *)f_MC.Get(title);
+	layerE__2 = (TH1D *)f_MC_original.Get(title);
+	layerE__3 = (TH1D *)f_Data.Get(title);
 
+	layerE__1->SetStats(0);
+	layerE__1->SetLineColor(2);
+	layerE__1->SetLineWidth(2);
+	layerE__1->SetMarkerColor(2);
+	layerE__1->SetMarkerStyle(20);
+	layerE__1->SetMarkerSize(0.5);
+	layerE__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+	layerE__1->GetXaxis()->SetLabelFont(42);
+	layerE__1->GetXaxis()->SetLabelOffset(0.01125);
+	layerE__1->GetXaxis()->SetLabelSize(0.045);
+	layerE__1->GetXaxis()->SetTitleSize(0.052);
+	layerE__1->GetXaxis()->SetTitleOffset(1.1);
+	layerE__1->GetYaxis()->SetLabelFont(42);
+	layerE__1->GetYaxis()->SetLabelOffset(0.01125);
+	layerE__1->GetYaxis()->SetLabelSize(0.045);
+	layerE__1->GetYaxis()->SetTitleSize(0.045);
+	layerE__1->GetYaxis()->SetTitleOffset(1.4);
+	layerE__1->GetYaxis()->SetTitleFont(42);
+	layerE__1->GetZaxis()->SetLabelFont(42);
+	layerE__1->GetZaxis()->SetLabelSize(0.045);
+	layerE__1->GetZaxis()->SetTitleSize(0.045);
+	layerE__1->GetZaxis()->SetTitleFont(42);
+	//layerE__1->GetYaxis()->SetRangeUser(0,0.095);
+	layerE__1->Draw("HIST");
+
+	ci = 1180;
+	color = new TColor(ci, 0, 0, 0, " ", 0);
+	pt->SetTextColor(ci);
+	pt->SetTextFont(42);
+	pt->Draw();
+   
+	layerE__2->SetLineColor(4);
+	layerE__2->SetLineWidth(2);
+	layerE__2->SetMarkerColor(4);
+	layerE__2->SetMarkerStyle(20);
+	layerE__2->SetMarkerSize(0.5);
+	layerE__2->Draw("HISTSAME");
+    
+	layerE__3->SetLineWidth(2);
+	layerE__3->SetMarkerStyle(20);
+	layerE__3->SetMarkerSize(0.5);
+	layerE__3->Draw("SAME");
+
+   
+	TLegend *leg_layerE = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+	leg_layerE->SetBorderSize(1);
+
+	ci = TColor::GetColor("#000000");
+	leg_layerE->SetTextColor(ci);
+	leg_layerE->SetTextFont(62);
+	
+
+	ci = 1183;
+	color = new TColor(ci, 0, 0, 0, " ", 0.011);
+	leg_layerE->SetLineColor(ci);
+	leg_layerE->SetLineStyle(1);
+	leg_layerE->SetLineWidth(1);
+	ci = 1180;
+	color = new TColor(ci, 1, 1, 1, " ", 0);
+	leg_layerE->SetFillColor(ci);
+	leg_layerE->SetFillStyle(1001);
+	entry=leg_layerE->AddEntry("","with xtalk","lpf");
+	entry->SetFillStyle(1001);
+	entry->SetLineColor(2);
+	entry->SetLineStyle(1);
+	entry->SetLineWidth(2);
+	entry->SetMarkerColor(2);
+	entry->SetMarkerStyle(20);
+	entry->SetMarkerSize(0.5);
+	entry->SetTextFont(42);
+	entry=leg_layerE->AddEntry("","no xtalk","lpflpf");
+	entry->SetFillStyle(1001);
+	entry->SetLineColor(4);
+	entry->SetLineStyle(1);
+	entry->SetLineWidth(2);
+	entry->SetMarkerColor(4);
+	entry->SetMarkerStyle(20);
+	entry->SetMarkerSize(0.5);
+	entry->SetTextFont(42);
+	entry=leg_layerE->AddEntry("","data","lpflpflpf");
+	entry->SetFillStyle(1001);
+	entry->SetLineColor(1);
+	entry->SetLineStyle(1);
+	entry->SetLineWidth(2);
+	entry->SetMarkerColor(1);
+	entry->SetMarkerStyle(20);
+	entry->SetMarkerSize(0.5);
+	entry->SetTextFont(42);
+	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+        leg_layerE->SetHeader(title);
+	leg_layerE->Draw();
+	Canvas_1->Update();	
+
+	sprintf(title,"plots/%dGeV/%dGeV_layerE_layer%02d.png", Energy, Energy, iL);
+	Canvas_1->SaveAs(title);
+	sprintf(title,"plots/%dGeV/%dGeV_layerE_layer%02d.pdf", Energy, Energy, iL);
+	Canvas_1->SaveAs(title);
+	//gPad->WaitPrimitive();
+
+    
+	Canvas_1->Modified();
+	Canvas_1->cd();
+	Canvas_1->SetSelected(Canvas_1);
+
+	// chi square test
+	chi_cross_layerE[iL-1]    = layerE__3->Chi2Test(layerE__1,"UW CHI2/NDF");
+	chi_original_layerE[iL-1] = layerE__3->Chi2Test(layerE__2,"UW CHI2/NDF");
+
+	
 	// E1devE7 vs layerE/TotalE
 
 	TH2D* E1devE7_layerEdevTotalE__1;
@@ -533,7 +650,7 @@ void xtalk_compare(int Energy)
 	E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelOffset(0.01125);
 	E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelSize(0.045);
 	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleSize(0.045);
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleOffset(1.3);
+	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleOffset(1.2);
 	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleFont(42);
 	E1devE7_layerEdevTotalE__1->GetZaxis()->SetLabelFont(42);
 	E1devE7_layerEdevTotalE__1->Draw("colz");
@@ -555,7 +672,7 @@ void xtalk_compare(int Energy)
 	E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelOffset(0.01125);
 	E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelSize(0.045);
 	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleSize(0.045);
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleOffset(1.3);
+	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleOffset(1.2);
 	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleFont(42);
 	E1devE7_layerEdevTotalE__2->GetZaxis()->SetLabelFont(42);
 	E1devE7_layerEdevTotalE__2->Draw("colz");
@@ -577,7 +694,7 @@ void xtalk_compare(int Energy)
 	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelOffset(0.01125);
 	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelSize(0.045);
 	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleSize(0.045);
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleOffset(1.3);
+	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleOffset(1.2);
 	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleFont(42);
 	E1devE7_layerEdevTotalE__3->GetZaxis()->SetLabelFont(42);
 	E1devE7_layerEdevTotalE__3->Draw("colz");
@@ -586,10 +703,142 @@ void xtalk_compare(int Energy)
 	Canvas_1->SaveAs(title);
 	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
 	Canvas_1->SaveAs(title);
-	
+
 	
     }
 
+    // ========== Total CEE ========== //
+    
+    TH1D* totalCEE__1;
+    TH1D* totalCEE__2;
+    TH1D* totalCEE__3;
+    sprintf(title,"histo/h_totalCEE");
+    totalCEE__1 = (TH1D *)f_MC.Get(title);
+    totalCEE__2 = (TH1D *)f_MC_original.Get(title);
+    totalCEE__3 = (TH1D *)f_Data.Get(title);
+
+    
+    TCanvas *Canvas_1 = new TCanvas("Canvas_1", "Canvas_1",333,105,837,583);
+    Canvas_1->Range(-0.127676,-0.01502931,1.140176,0.07874052);
+    Canvas_1->SetFillColor(0);
+    Canvas_1->SetBorderMode(0);
+    Canvas_1->SetBorderSize(2);
+    Canvas_1->SetTopMargin(0.08013938);
+    Canvas_1->SetBottomMargin(0.1602788);
+    Canvas_1->SetFrameBorderMode(0);
+    Canvas_1->SetFrameLineWidth(2);
+    Canvas_1->SetFrameBorderMode(0);
+   
+    totalCEE__1->SetStats(0);
+    totalCEE__1->SetLineColor(2);
+    totalCEE__1->SetLineWidth(2);
+    totalCEE__1->SetMarkerColor(2);
+    totalCEE__1->SetMarkerStyle(20);
+    totalCEE__1->SetMarkerSize(0.5);
+    totalCEE__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+    totalCEE__1->GetXaxis()->SetLabelFont(42);
+    totalCEE__1->GetXaxis()->SetLabelOffset(0.01125);
+    totalCEE__1->GetXaxis()->SetLabelSize(0.045);
+    totalCEE__1->GetXaxis()->SetTitleSize(0.052);
+    totalCEE__1->GetXaxis()->SetTitleOffset(1.1);
+    totalCEE__1->GetYaxis()->SetLabelFont(42);
+    totalCEE__1->GetYaxis()->SetLabelOffset(0.01125);
+    totalCEE__1->GetYaxis()->SetLabelSize(0.045);
+    totalCEE__1->GetYaxis()->SetTitleSize(0.045);
+    totalCEE__1->GetYaxis()->SetTitleOffset(1.4);
+    totalCEE__1->GetYaxis()->SetTitleFont(42);
+    totalCEE__1->Draw("HIST");
+   
+    TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");
+    pt->SetName("title");
+    pt->SetBorderSize(0);
+    pt->SetFillColor(0);
+    pt->SetFillStyle(0);
+
+    Int_t ci;      // for color index setting
+    TColor *color; // for color definition with alpha
+    ci = 1180;
+    color = new TColor(ci, 0, 0, 0, " ", 0);
+    pt->SetTextColor(ci);
+    pt->SetTextFont(42);
+    TText *pt_LaTex = pt->AddText("w/  xtalk");
+    pt->Draw();
+   
+    totalCEE__2->SetLineColor(4);
+    totalCEE__2->SetLineWidth(2);
+    totalCEE__2->SetMarkerColor(4);
+    totalCEE__2->SetMarkerStyle(20);
+    totalCEE__2->SetMarkerSize(0.5);
+    totalCEE__2->Draw("HISTSAME");
+    
+    totalCEE__3->SetLineWidth(2);
+    totalCEE__3->SetMarkerStyle(20);
+    totalCEE__3->SetMarkerSize(0.5);
+    totalCEE__3->Draw("SAME");
+
+   
+    TLegend *leg = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+    leg->SetBorderSize(1);
+
+    ci = TColor::GetColor("#000000");
+    leg->SetTextColor(ci);
+    leg->SetTextFont(62);
+	
+
+    ci = 1183;
+    color = new TColor(ci, 0, 0, 0, " ", 0.011);
+    leg->SetLineColor(ci);
+    leg->SetLineStyle(1);
+    leg->SetLineWidth(1);
+    ci = 1180;
+    color = new TColor(ci, 1, 1, 1, " ", 0);
+    leg->SetFillColor(ci);
+    leg->SetFillStyle(1001);
+    TLegendEntry *entry=leg->AddEntry("","with xtalk","lpf");
+    entry->SetFillStyle(1001);
+    entry->SetLineColor(2);
+    entry->SetLineStyle(1);
+    entry->SetLineWidth(2);
+    entry->SetMarkerColor(2);
+    entry->SetMarkerStyle(20);
+    entry->SetMarkerSize(0.5);
+    entry->SetTextFont(42);
+    entry=leg->AddEntry("","no xtalk","lpflpf");
+    entry->SetFillStyle(1001);
+    entry->SetLineColor(4);
+    entry->SetLineStyle(1);
+    entry->SetLineWidth(2);
+    entry->SetMarkerColor(4);
+    entry->SetMarkerStyle(20);
+    entry->SetMarkerSize(0.5);
+    entry->SetTextFont(42);
+    entry=leg->AddEntry("","data","lpflpflpf");
+    entry->SetFillStyle(1001);
+    entry->SetLineColor(1);
+    entry->SetLineStyle(1);
+    entry->SetLineWidth(2);
+    entry->SetMarkerColor(1);
+    entry->SetMarkerStyle(20);
+    entry->SetMarkerSize(0.5);
+    entry->SetTextFont(42);
+    sprintf(title,"TB2018 %dGeV",Energy);
+    leg->SetHeader(title);
+    leg->Draw();
+    Canvas_1->Update();	
+
+    sprintf(title,"plots/%dGeV/%dGeV_totalCEE.png", Energy, Energy);
+    Canvas_1->SaveAs(title);
+    sprintf(title,"plots/%dGeV/%dGeV_totalCEE.pdf", Energy, Energy);
+    Canvas_1->SaveAs(title);
+    //gPad->WaitPrimitive();
+
+    
+    Canvas_1->Modified();
+    Canvas_1->cd();
+    Canvas_1->SetSelected(Canvas_1);
+	
+    
+    
     // ========== chi square plot ========== //
     TCanvas* c4 = new TCanvas();
     TGraph* g_chi_cross_E1devE7 = new TGraph(NLAYER, layerID, chi_cross_E1devE7); 
@@ -687,6 +936,30 @@ void xtalk_compare(int Energy)
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_compareCOGy_%dGeV.png", Energy, Energy);
+    c4->SaveAs(title);
+
+    TGraph* g_chi_cross_layerE = new TGraph(NLAYER, layerID, chi_cross_layerE);
+    g_chi_cross_layerE->SetMarkerColor(2);
+    g_chi_cross_layerE->SetMarkerStyle(20);
+    g_chi_cross_layerE->SetFillColor(0);
+    g_chi_cross_layerE->SetTitle("w/ xtalk");
+    TGraph* g_chi_original_layerE = new TGraph(NLAYER, layerID, chi_original_layerE);
+    g_chi_original_layerE->SetTitle("w/o xtalk");
+    g_chi_original_layerE->SetFillColor(0);
+    g_chi_original_layerE->SetMarkerStyle(20);
+    g_chi_original_layerE->SetMarkerColor(4);
+    TMultiGraph* multi_chi_layerE = new TMultiGraph();
+    multi_chi_layerE->Add(g_chi_cross_layerE);
+    multi_chi_layerE->Add(g_chi_original_layerE);
+    sprintf(title,"Chi2Test_%dGeV_layerE",Energy);
+    multi_chi_layerE->SetTitle(title);
+    multi_chi_layerE->Draw("AP");
+    multi_chi_layerE->GetXaxis()->SetTitle("layerID");
+    multi_chi_layerE->GetYaxis()->SetTitle("Chi2 / NDF");
+    multi_chi_layerE->GetYaxis()->SetTitleOffset(1);
+    c4->BuildLegend(0.7,0.7,0.85,0.85);
+    c4->Update();
+    sprintf(title,"plots/%dGeV/chi2_comparelayerE_%dGeV.png", Energy, Energy);
     c4->SaveAs(title);
 
 }
