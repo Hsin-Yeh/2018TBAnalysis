@@ -253,7 +253,7 @@ void makePlots::Loop(){
     TH1D *h_E1devE7_differentMaxID_1[EE_NLAYER];
     TH1D *h_E1devE7_differentMaxID_2[EE_NLAYER];
     TH1D *h_totalE = new TH1D("h_totalE","h_totalE",100,0,5000);
-    TH1D *h_totalCEE = new TH1D("h_totalCEE","h_totalCEE",100,0,5000);
+    TH1D *h_totalCEE = new TH1D("h_totalCEE","h_totalCEE",100,0,20000);
     TH1D *h_E1_no_XTalk = new TH1D("h_E1_no_XTalk","E1/E7==1, E1 Energy",100,0,300);
     h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
     TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);

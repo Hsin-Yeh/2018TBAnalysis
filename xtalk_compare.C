@@ -525,7 +525,7 @@ void xtalk_compare(int Energy)
 	layerE__1->SetMarkerColor(2);
 	layerE__1->SetMarkerStyle(20);
 	layerE__1->SetMarkerSize(0.5);
-	layerE__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+	layerE__1->GetXaxis()->SetTitle("layerE");
 	layerE__1->GetXaxis()->SetLabelFont(42);
 	layerE__1->GetXaxis()->SetLabelOffset(0.01125);
 	layerE__1->GetXaxis()->SetLabelSize(0.045);
