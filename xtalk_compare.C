@@ -735,7 +735,7 @@ void xtalk_compare(int Energy)
     totalCEE__1->SetMarkerColor(2);
     totalCEE__1->SetMarkerStyle(20);
     totalCEE__1->SetMarkerSize(0.5);
-    totalCEE__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+    totalCEE__1->GetXaxis()->SetTitle("totalCEE [MIP]");
     totalCEE__1->GetXaxis()->SetLabelFont(42);
     totalCEE__1->GetXaxis()->SetLabelOffset(0.01125);
     totalCEE__1->GetXaxis()->SetLabelSize(0.045);

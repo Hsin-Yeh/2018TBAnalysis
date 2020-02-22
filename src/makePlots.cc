@@ -694,6 +694,9 @@ void makePlots::Loop(){
 	h_COGx [iL] -> Scale(scale);
 	scale = 1 / h_COGy [iL]->Integral();
 	h_COGy [iL] -> Scale(scale);
+	scale = 1 / h_layerE [iL]->Integral();
+	h_layerE [iL] -> Scale(scale);
+	
 
 	layerNhit_avg [ iL ] /= Passed_events;                                   // Calculate Average #hits	
 //	h_impactX_impactY_E1devE7 [ iL ] -> Divide( h_impactX_impactY [ iL ] );  // Calculate Average E1devE7 for each impact position
