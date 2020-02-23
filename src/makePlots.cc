@@ -462,12 +462,12 @@ void makePlots::Loop(){
 	GetData(ev);
 
 	// Event Selection
-	if ( dwcReferenceType != 13) continue;
+	if ( dwcReferenceType != 13) continue; 
 	if ( totalNhit_CEH > 80 ) continue;
-	//if ( abs(b_x) < 1 || abs(b_x-33) < 1 ) {}
-	//else continue;
-	//if ( abs(b_y) < 1 || abs(b_y-21) < 1 ) {}
-	//else continue;
+	if ( abs(b_x) < 1 || abs(b_x-33) < 1 ) {}
+	else continue;
+	if ( abs(b_y) < 1 || abs(b_y-21) < 1 ) {}
+	else continue;
 	
 	double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
 	//if ( impact_R < 1 ) continue;
