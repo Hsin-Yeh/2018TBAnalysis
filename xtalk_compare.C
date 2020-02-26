@@ -541,8 +541,18 @@ void xtalk_compare(int Energy)
 	layerE__1->GetZaxis()->SetLabelSize(0.045);
 	layerE__1->GetZaxis()->SetTitleSize(0.045);
 	layerE__1->GetZaxis()->SetTitleFont(42);
-	layerE__1->GetXaxis()->SetRangeUser(0,300);
-	layerE__1->GetYaxis()->SetRangeUser(0,0.15);
+	if ( iL == 1 ) {
+	    layerE__1->GetXaxis()->SetRangeUser(0,100);
+	    layerE__1->GetYaxis()->SetRangeUser(0,0.3);
+	}
+	if ( iL == 2 ) {
+	    layerE__1->GetXaxis()->SetRangeUser(0,200);
+	    layerE__1->GetYaxis()->SetRangeUser(0,0.14);
+	}
+	else {
+	    layerE__1->GetXaxis()->SetRangeUser(0,300);
+	    layerE__1->GetYaxis()->SetRangeUser(0,0.14);
+	}
 	layerE__1->Draw("HIST");
 
 	ci = 1180;
@@ -865,6 +875,8 @@ void xtalk_compare(int Energy)
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_compareE1devE7_%dGeV.png", Energy, Energy);
     c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/chi2_compareE1devE7_%dGeV.pdf", Energy, Energy);
+    c4->SaveAs(title);
 
     
     TGraph* g_chi_cross_E7devE19 = new TGraph(NLAYER, layerID, chi_cross_E7devE19);
@@ -890,6 +902,8 @@ void xtalk_compare(int Energy)
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_compareE7devE19_%dGeV.png", Energy, Energy);
     c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/chi2_compareE7devE19_%dGeV.pdf", Energy, Energy);
+    c4->SaveAs(title);
 
     TGraph* g_chi_cross_COGx = new TGraph(NLAYER, layerID, chi_cross_COGx);
     g_chi_cross_COGx->SetMarkerColor(2);
@@ -913,6 +927,8 @@ void xtalk_compare(int Energy)
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_compareCOGx_%dGeV.png", Energy, Energy);
+    c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/chi2_compareCOGx_%dGeV.pdf", Energy, Energy);
     c4->SaveAs(title);
 
     TGraph* g_chi_cross_COGy = new TGraph(NLAYER, layerID, chi_cross_COGy);
@@ -938,6 +954,8 @@ void xtalk_compare(int Energy)
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_compareCOGy_%dGeV.png", Energy, Energy);
     c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/chi2_compareCOGy_%dGeV.pdf", Energy, Energy);
+    c4->SaveAs(title);
 
     TGraph* g_chi_cross_layerE = new TGraph(NLAYER, layerID, chi_cross_layerE);
     g_chi_cross_layerE->SetMarkerColor(2);
@@ -961,6 +979,8 @@ void xtalk_compare(int Energy)
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_comparelayerE_%dGeV.png", Energy, Energy);
+    c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/chi2_comparelayerE_%dGeV.pdf", Energy, Energy);
     c4->SaveAs(title);
 
 }
