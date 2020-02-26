@@ -541,7 +541,7 @@ void xtalk_compare(int Energy)
 	layerE__1->GetZaxis()->SetLabelSize(0.045);
 	layerE__1->GetZaxis()->SetTitleSize(0.045);
 	layerE__1->GetZaxis()->SetTitleFont(42);
-	//layerE__1->GetYaxis()->SetRangeUser(0,0.095);
+	layerE__1->GetXaxis()->SetRangeUser(0,500);
 	layerE__1->Draw("HIST");
 
 	ci = 1180;
