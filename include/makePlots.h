@@ -9,6 +9,7 @@
 #ifndef makePlots_h
 #define makePlots_h
 
+#include "PlotSetting.h"
 #include "TTree.h"
 #include "TROOT.h"
 #include "TH2Poly.h"

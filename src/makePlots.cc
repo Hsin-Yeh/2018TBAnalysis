@@ -1,4 +1,3 @@
-#include "PlotSetting.h"
 #include "makePlots.h"
 #include "ntupleMaker.h"
 #include <iostream>
