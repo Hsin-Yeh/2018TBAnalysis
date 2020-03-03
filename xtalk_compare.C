@@ -48,7 +48,7 @@ void xtalk_compare(int Energy)
 	E1devE7__1->SetMarkerColor(2);
 	E1devE7__1->SetMarkerStyle(20);
 	E1devE7__1->SetMarkerSize(0.5);
-	E1devE7__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+	E1devE7__1->GetXaxis()->SetTitle("E1 / E7");
 	E1devE7__1->GetXaxis()->SetLabelFont(42);
 	E1devE7__1->GetXaxis()->SetLabelOffset(0.01125);
 	E1devE7__1->GetXaxis()->SetLabelSize(0.045);
@@ -173,7 +173,7 @@ void xtalk_compare(int Energy)
 	E7devE19__1->SetMarkerColor(2);
 	E7devE19__1->SetMarkerStyle(20);
 	E7devE19__1->SetMarkerSize(0.5);
-	E7devE19__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+	E7devE19__1->GetXaxis()->SetTitle("E7 / E19");
 	E7devE19__1->GetXaxis()->SetLabelFont(42);
 	E7devE19__1->GetXaxis()->SetLabelOffset(0.01125);
 	E7devE19__1->GetXaxis()->SetLabelSize(0.045);
@@ -290,7 +290,7 @@ void xtalk_compare(int Energy)
 	COGx__1->SetMarkerColor(2);
 	COGx__1->SetMarkerStyle(20);
 	COGx__1->SetMarkerSize(0.5);
-	COGx__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+	COGx__1->GetXaxis()->SetTitle("COGx");
 	COGx__1->GetXaxis()->SetLabelFont(42);
 	COGx__1->GetXaxis()->SetLabelOffset(0.01125);
 	COGx__1->GetXaxis()->SetLabelSize(0.045);
@@ -407,7 +407,7 @@ void xtalk_compare(int Energy)
 	COGy__1->SetMarkerColor(2);
 	COGy__1->SetMarkerStyle(20);
 	COGy__1->SetMarkerSize(0.5);
-	COGy__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+	COGy__1->GetXaxis()->SetTitle("COGy");
 	COGy__1->GetXaxis()->SetLabelFont(42);
 	COGy__1->GetXaxis()->SetLabelOffset(0.01125);
 	COGy__1->GetXaxis()->SetLabelSize(0.045);
@@ -650,7 +650,7 @@ void xtalk_compare(int Energy)
 	E1devE7_layerEdevTotalE__3 = (TH2D *)f_Data.Get(title);
 
 	E1devE7_layerEdevTotalE__1->SetStats(0);
-	E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitle("E1/E7 containment variable");
+	E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitle("layerE");
 	E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelFont(42);
 	E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelOffset(0.01125);
 	E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelSize(0.045);
@@ -672,7 +672,7 @@ void xtalk_compare(int Energy)
 	Canvas_1->SaveAs(title);
 	
 	E1devE7_layerEdevTotalE__2->SetStats(0);
-	E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitle("E1/E7 containment variable");
+	E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitle("layerE");
 	E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelFont(42);
 	E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelOffset(0.01125);
 	E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelSize(0.045);
@@ -899,6 +899,7 @@ void xtalk_compare(int Energy)
     multi_chi_E7devE19->GetXaxis()->SetTitle("layerID");
     multi_chi_E7devE19->GetYaxis()->SetTitle("Chi2 / NDF");
     multi_chi_E7devE19->GetYaxis()->SetTitleOffset(1);
+    multi_chi_E7devE19->GetYaxis()->SetRangeUser(0,0.012)
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_compareE7devE19_%dGeV.png", Energy, Energy);
