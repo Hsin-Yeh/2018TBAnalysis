@@ -871,6 +871,7 @@ void xtalk_compare(int Energy)
     multi_chi_E1devE7->GetXaxis()->SetTitle("layerID");
     multi_chi_E1devE7->GetYaxis()->SetTitle("Chi2 / NDF");
     multi_chi_E1devE7->GetYaxis()->SetTitleOffset(1);
+    multi_chi_E1devE7->GetYaxis()->SetRangeUser(0,0.012);
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
     sprintf(title,"plots/%dGeV/chi2_compareE1devE7_%dGeV.png", Energy, Energy);
