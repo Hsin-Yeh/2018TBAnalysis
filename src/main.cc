@@ -8,7 +8,6 @@
 string main_outpath = "./";
 string main_default_rootname = "ntuple.root";
 string main_datainput = "./data_input.txt";
-
 // Usage
 void main_makeNtuple(bool Is_Data);
 void main_makePlots();
