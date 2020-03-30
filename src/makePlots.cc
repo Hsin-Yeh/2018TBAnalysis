@@ -191,7 +191,7 @@ void makePlots::Loop(){
     //ifstream f_weights("weights.txt");
     //getline(f_weights,line);
     //getline(f_weights,line);
-  
+    double b_x_mean, b_y_mean;
     double X0_arr[EE_NLAYER];
     double *X0_layer = Set_X0(X0_arr);
     double Passed_events = 0;
@@ -403,7 +403,15 @@ void makePlots::Loop(){
         layerNhit_avg[iL] = 0;
     }
 
-  
+    // Calculate DWC mean postiion
+    for(int ev = 0; ev < nevents; ++ev){
+        GetData(ev);
+        b_x_mean += b_x;
+        b_y_mean += b_y;
+    }
+    b_x_mean /= nevents;
+    b_y_mean /= nevents;
+
     // -------------------- Loop Over Events -------------------- //
     for(int ev = 0; ev < nevents; ++ev){
 
@@ -414,9 +422,9 @@ void makePlots::Loop(){
         if ( dwcReferenceType != 13) continue;
         if ( totalNhit_CEH > 80 ) continue;
 
-        if ( abs(b_x) < 1 ) {}
+        if ( abs(b_x - b_x_mean) < 1 ) {}
         else continue;
-        if ( abs(b_y) < 1 ) {}
+        if ( abs(b_y - b_y_mean) < 1 ) {}
         else continue;
 
 #ifdef DEBUG
