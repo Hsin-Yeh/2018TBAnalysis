@@ -430,7 +430,7 @@ void makePlots::Loop(){
         //if ( maxID[0] < 50 )  continue;
         //if ( maxID[0] > 70 ) continue;
         Passed_events++;
-        cout << event << " " << b_x << endl;
+        // cout << event << " " << b_x << endl;
         h_totalE   -> Fill ( totalE );
         h_totalCEE -> Fill ( totalE_CEE );
         h_bx_by    -> Fill ( b_x, b_y );
