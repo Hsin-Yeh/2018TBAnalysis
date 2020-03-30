@@ -203,18 +203,14 @@ void makePlots::Loop(){
     int N_moliere_ring = 5;
     double E_moliere[EE_NLAYER][N_moliere_ring];
     double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626 
-    double R_moliere[N_moliere_ring];
-    double R_M[EE_NLAYER];
+    // double R_moliere[N_moliere_ring];
+    // double R_M[EE_NLAYER];
 
     // Declare Draw Options
     //TCanvas *c1 = new TCanvas("c1","c1",6400,3600);
     //c1->Divide(7,4);
     TCanvas *c1 = new TCanvas();
     //gROOT->SetBatch(kTRUE);
-    char pltTit[200], leg[50], img_title[50];
-    string Xtit, Ytit, Opt;
-    int MkSty, MkClr, LClr, fitmin, fitmax;
-    bool Wait, SavePlot, Stat;
 
     // Declare output filename
     char title[200];
@@ -257,13 +253,13 @@ void makePlots::Loop(){
     h_E1_no_XTalk->GetXaxis()->SetTitle("[MIP]");
     TH1D *h_E1_SecondRing_no_XTalk = new TH1D("h_E1_SecondRing_no_XTalk","E7/E19==1, E1 Energy",100,0,300);
     h_E1_SecondRing_no_XTalk->GetXaxis()->SetTitle("[MIP]");
-    TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
+    // TH1D *h_E1devE7_SecondRing_no_XTalk = new TH1D("h_E1deve7_SecondRing_no_XTalk","",101,0,1.01);
     TH1D *h_SHD_Elayer = new TH1D("h_SHD_Elayer","",50,0,25);
     TH1D *h_COGx[EE_NLAYER];
     TH1D *h_COGy[EE_NLAYER];
     TH2D *h_impactX_posx = new TH2D("h_impactX_posx","",50,-6,6,50,-6,6);
     TH2D *h_impactY_posy = new TH2D("h_impactY_posy","",50,-6,6,50,-6,6);
-    TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
+    // TH2D *h_SHD_impactR = new TH2D("h_SHD_impactR","",50,0,25,50,0,5);
     TH2D *h_bx_by = new TH2D("h_bx_by","",500,-60,60,500,-60,60);
     //TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.002,0.002,500,-0.002,0.002);
     TH2D *h_mx_my = new TH2D("h_mx_my","",500,-0.4,0.4,500,-0.4,0.4);
@@ -384,7 +380,7 @@ void makePlots::Loop(){
         p_radialEnergy_impactPosition[iL] = new TProfile(title,"",20,0,10,0,1000,"");
     }
 
-    for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
+    // for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
 
     TH2Poly *poly = new TH2Poly();
     InitTH2Poly(*poly);
@@ -431,11 +427,9 @@ void makePlots::Loop(){
             else continue;
         }
 
-        double impact_R = sqrt ( (impactX[0] * impactX[0]) + (impactY[0] * impactY[0]) );
         //if ( impact_R < 1 ) continue;
         //if ( impact_R > 1.5 ) continue;
 
-        int Nhits = NRechits;
         //if ( Nhits < 200 ) continue;
         //if ( maxID[0] < 50 )  continue;
         //if ( maxID[0] > 70 ) continue;
@@ -449,7 +443,6 @@ void makePlots::Loop(){
         h_by_my    -> Fill ( b_y, m_y );
         //cout << m_x << " " << m_y << endl;
 
-        double weights;
         //f_weights >> weights;
         //cout << weights << endl;
 
@@ -461,10 +454,8 @@ void makePlots::Loop(){
             if( layerE1[iL] == 0) continue;
             double E1devE7   = layerE1[iL]/layerE7[iL];
             double E7devE19  = layerE7[iL]/layerE19[iL];
-            double E19devE37 = layerE19[iL]/layerE37[iL];
             double E1devE7_showerAxis   = layerE1_showerAxis[iL]/layerE7_showerAxis[iL];
             double E7devE19_showerAxis  = layerE7_showerAxis[iL]/layerE19_showerAxis[iL];
-            double E19devE37_showerAxis = layerE19_showerAxis[iL]/layerE37_showerAxis[iL];
             if ( E1devE7 == E1devE7 )   h_E1devE7 [iL]  -> Fill ( E1devE7 );
             if ( E7devE19 == E7devE19 ) h_E7devE19 [iL] -> Fill ( E7devE19 );
             if ( maxID [0] == maxID [2] && maxID [1] == maxID [3] ) {
@@ -553,7 +544,7 @@ void makePlots::Loop(){
 
 
         // Fill PolyHistograms
-        for(int ihit = 0; ihit < NRechits ; ++ihit){
+        for( unsigned ihit = 0; ihit < NRechits ; ++ihit){
             Getinfo ( ihit, layer, chip, channel, posx, posy, posz, energy );
 
 #ifdef DEBUG
