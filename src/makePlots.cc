@@ -202,7 +202,7 @@ void makePlots::Loop(){
     double layerNhit_avg[EE_NLAYER];
     int N_moliere_ring = 5;
     double E_moliere[EE_NLAYER][N_moliere_ring];
-    double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626 
+    // double Average_cell_radius = 0.6061175;  // Long side r = 0.649635, Short side r = 0.5626
     // double R_moliere[N_moliere_ring];
     // double R_M[EE_NLAYER];
 
@@ -430,7 +430,7 @@ void makePlots::Loop(){
         //if ( maxID[0] < 50 )  continue;
         //if ( maxID[0] > 70 ) continue;
         Passed_events++;
-
+        if ( abs(b_x) > 1 ) { cout << event << " " << b_x << endl; }
         h_totalE   -> Fill ( totalE );
         h_totalCEE -> Fill ( totalE_CEE );
         h_bx_by    -> Fill ( b_x, b_y );
