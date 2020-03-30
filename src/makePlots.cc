@@ -21,7 +21,7 @@
 
 #include <utility>
 
-//#define DEBUG
+#define DEBUG
 
 //makePlots
 makePlots::makePlots(){}
@@ -414,18 +414,14 @@ void makePlots::Loop(){
         if ( dwcReferenceType != 13) continue;
         if ( totalNhit_CEH > 80 ) continue;
 
-        if ( trueBeamEnergy == 20 ) {
-            if ( abs(b_x) < 1 ) {}
-            else continue;
-            if ( abs(b_y) < 1 ) {}
-            else continue;
-        }
-        if ( trueBeamEnergy == 200 ) {
-            if ( abs(b_x) < 1 ) {}
-            else continue;
-            if ( abs(b_y) < 1 ) {}
-            else continue;
-        }
+        if ( abs(b_x) < 1 ) {}
+        else continue;
+        if ( abs(b_y) < 1 ) {}
+        else continue;
+
+#ifdef DEBUG
+        cout << event << " " << b_x << " " << b_y << end;
+#endif
 
         //if ( impact_R < 1 ) continue;
         //if ( impact_R > 1.5 ) continue;
