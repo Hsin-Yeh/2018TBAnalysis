@@ -181,6 +181,19 @@ void makePlots::Getinfo(int ihit,int &layer, int &chip, int &channel, double &x,
     ene     = rechit_energy ->at(ihit);
 }
 
+// Function for calculating median
+double makePlots::findMedian(double a[], int n)
+{
+    // First we sort the array
+    sort(a, a + n);
+
+    // check for even case
+    if (n % 2 != 0)
+        return (double)a[n / 2];
+
+    return (double)(a[(n - 1) / 2] + a[n / 2]) / 2.0;
+}
+
 void makePlots::Loop(){
 
     Init();
@@ -191,6 +204,10 @@ void makePlots::Loop(){
     //ifstream f_weights("weights.txt");
     //getline(f_weights,line);
     //getline(f_weights,line);
+    double *b_x_array;
+    double *b_y_array;
+    b_x_array = new double[nevents];
+    b_y_array = new double[nevents];
     double b_x_mean, b_y_mean;
     double X0_arr[EE_NLAYER];
     double *X0_layer = Set_X0(X0_arr);
@@ -406,12 +423,12 @@ void makePlots::Loop(){
     // Calculate DWC mean postiion
     for(int ev = 0; ev < nevents; ++ev){
         GetData(ev);
-        b_x_mean += b_x;
-        b_y_mean += b_y;
+        b_x_array[ev] = b_x;
+        b_y_array[ev] = b_y;
     }
-    b_x_mean /= nevents;
-    b_y_mean /= nevents;
-
+    b_x_mean = findMedian(b_x_array, nevents);
+    b_y_mean = findMedian(b_y_array, nevents);
+    cout << b_x_mean << " " << b_y_mean << end;
     // -------------------- Loop Over Events -------------------- //
     for(int ev = 0; ev < nevents; ++ev){
 

@@ -63,6 +63,7 @@ private:
     void InitTH2Poly_flower(TH2Poly& poly);
     void root_logon();
     double* Set_X0(double X0_arr[]); // Set accumulated X0 to 28 layers
+    double findMedian(double a[], int n);
  
     ///////////////////////////////
     // Declaration of leaf types //
