@@ -190,6 +190,7 @@ void xtalk_compare(int Energy)
 	E7devE19__1->GetZaxis()->SetTitleSize(0.045);
 	E7devE19__1->GetZaxis()->SetTitleFont(42);
 	//E7devE19__1->GetYaxis()->SetRangeUser(0,0.095);
+	E7devE19__1->GetXaxis()->SetRangeUser(0.2,1.01);
 	E7devE19__1->Draw("HIST");
 
 	ci = 1180;
