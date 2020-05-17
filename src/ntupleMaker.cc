@@ -521,7 +521,7 @@ void ntupleMaker::NtupleMaker(){
             z_ch[layer-1][ (chip*32) + (channel/2) ] = posz;
 
             if ( chip == 0 ) {
-                cout << "hi" << endl;
+                cout << "channel =" << channel << endl;
             }
             if ( chip == 0 && channel == 26 ) {
                 cout << "chip0 channel26 x=" << posx << "y" << posy << endl;
