@@ -523,9 +523,9 @@ void ntupleMaker::NtupleMaker(){
             if ( chip == 0 && channel == 26 ) {
                 cout << "chip0 channel26 x=" << posx << "y" << posy << endl;
             }
-            else if ( chip == 1 && channel == 0 ) {
-                cout << "chip1 channel0 x=" << posx << "y" << posy << endl;
-            }
+            // else if ( chip == 1 && channel == 0 ) {
+                // cout << "chip1 channel0 x=" << posx << "y" << posy << endl;
+            // }
         }
  
         for(int iL = 0; iL < NLAYER ; ++iL){
