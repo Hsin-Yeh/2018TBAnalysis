@@ -138,9 +138,9 @@ void ntupleMaker::Init(){
 
     nevents = T_Rechit->GetEntries();
     if(Is_Data)
-	cout << "(Data)Nevents: "<< nevents << endl;
+        cout << "(Data)Nevents: "<< nevents << endl;
     else
-	cout << "(MC)Nevents: "<< nevents << endl;
+        cout << "(MC)Nevents: "<< nevents << endl;
 
     T_Rechit->SetBranchAddress("event", &event);
     T_Rechit->SetBranchAddress("run", &run);
@@ -171,17 +171,17 @@ void ntupleMaker::Init(){
     T_Rechit->SetBranchAddress("rechit_toaFall", &rechit_toaFall);
 
     if(Is_Data){
-	T_Rechit->SetBranchAddress("rechit_type", &rechit_type);
-	T_Rechit->SetBranchAddress("rechit_energy_noHG", &rechit_energy_noHG);
-	T_Rechit->SetBranchAddress("rechit_hg_goodFit", &rechit_hg_goodFit);
-	T_Rechit->SetBranchAddress("rechit_lg_goodFit", &rechit_lg_goodFit);
-	T_Rechit->SetBranchAddress("rechit_hg_saturated", &rechit_hg_saturated);
-	T_Rechit->SetBranchAddress("rechit_lg_saturated", &rechit_lg_saturated);
-	T_Rechit->SetBranchAddress("rechit_fully_calibrated", &rechit_fully_calibrated);
-	T_Rechit->SetBranchAddress("rechit_TS2High", &rechit_TS2High);
-	T_Rechit->SetBranchAddress("rechit_TS2Low", &rechit_TS2Low);
-	T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
-	T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
+        T_Rechit->SetBranchAddress("rechit_type", &rechit_type);
+        T_Rechit->SetBranchAddress("rechit_energy_noHG", &rechit_energy_noHG);
+        T_Rechit->SetBranchAddress("rechit_hg_goodFit", &rechit_hg_goodFit);
+        T_Rechit->SetBranchAddress("rechit_lg_goodFit", &rechit_lg_goodFit);
+        T_Rechit->SetBranchAddress("rechit_hg_saturated", &rechit_hg_saturated);
+        T_Rechit->SetBranchAddress("rechit_lg_saturated", &rechit_lg_saturated);
+        T_Rechit->SetBranchAddress("rechit_fully_calibrated", &rechit_fully_calibrated);
+        T_Rechit->SetBranchAddress("rechit_TS2High", &rechit_TS2High);
+        T_Rechit->SetBranchAddress("rechit_TS2Low", &rechit_TS2Low);
+        T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
+        T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
     }
 
     T_DWC->SetBranchAddress("ntracks", &ntracks, &b_ntracks);
@@ -292,22 +292,22 @@ void ntupleMaker::Init_Runinfo(){
     T_Rechit->GetEntry(0);
     beamE = beamEnergy;
     if( pdgID == 11 ){
-	beam_str = "Ele";
-	PID = 0;}
+        beam_str = "Ele";
+        PID = 0;}
     else if( pdgID == 13){
-	beam_str = "Mu";
-	PID = 2;}
+        beam_str = "Mu";
+        PID = 2;}
     else if( pdgID == 211){
-	beam_str = "Pi";
-	PID = 1;}
+        beam_str = "Pi";
+        PID = 1;}
     else{
-	cout << "unknown PDGID QQ" << endl;
-	beam_str = "??";
-	PID = -1;}
+        cout << "unknown PDGID QQ" << endl;
+        beam_str = "??";
+        PID = -1;}
     if(Is_Data)
-	runN = run;
+        runN = run;
     else
-	runN = 0;
+        runN = 0;
     cout << beam_str.c_str()  << " , "<< beamE << "GeV\n" << endl;
 }
 
@@ -320,9 +320,9 @@ void ntupleMaker::NtupleMaker(){
     string f_substr = fname.substr(start+1,end-start-1);
 
     if(Is_Data)
-	sprintf(title,"output_root/data_%iGeV_%s.root",beamE,beam_str.c_str());
+        sprintf(title,"output_root/data_%iGeV_%s.root",beamE,beam_str.c_str());
     else
-	sprintf(title,"output_root/%s.root",f_substr.c_str());
+        sprintf(title,"output_root/%s.root",f_substr.c_str());
 
     cout << "output file: " << title << endl;
     TFile outf(title,"recreate");
@@ -394,196 +394,203 @@ void ntupleMaker::NtupleMaker(){
     // ------------------------------ Loop Over Events ------------------------------ //
   
     for(int ev = 0; ev < nevents; ++ev){
-	if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
-	GetData(ev);
-	Nhits = NRechits;
+        if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
+        GetData(ev);
+        Nhits = NRechits;
 
-	// Initialize
-	for(int iL = 0; iL < NLAYER ; ++iL){
-	    hit_tmp[iL].clear();
-	    hit_x[iL].clear();
-	    hit_y[iL].clear();
-	    hit_z[iL].clear();
-	    layerE[iL] = 0;
-	    layerNhit[iL] = 0;
-	    E_1[iL] = 0;
-	    E_7[iL] = 0;
-	    E_19[iL] = 0;
-	    E_37[iL] = 0;
-	    E_61[iL] = 0;
-	    E_1_showerAxis[iL] = 0;
-	    E_7_showerAxis[iL] = 0;
-	    E_19_showerAxis[iL] = 0;
-	    E_37_showerAxis[iL] = 0;
-	    E_61_showerAxis[iL] = 0;
-	    maxID[iL] = -1;
-	    for(int ich = 0; ich < NCHANNEL; ++ich){
-		E_ch[iL][ich] = 0;
-	    }
-	}
+        // Initialize
+        for(int iL = 0; iL < NLAYER ; ++iL){
+            hit_tmp[iL].clear();
+            hit_x[iL].clear();
+            hit_y[iL].clear();
+            hit_z[iL].clear();
+            layerE[iL] = 0;
+            layerNhit[iL] = 0;
+            E_1[iL] = 0;
+            E_7[iL] = 0;
+            E_19[iL] = 0;
+            E_37[iL] = 0;
+            E_61[iL] = 0;
+            E_1_showerAxis[iL] = 0;
+            E_7_showerAxis[iL] = 0;
+            E_19_showerAxis[iL] = 0;
+            E_37_showerAxis[iL] = 0;
+            E_61_showerAxis[iL] = 0;
+            maxID[iL] = -1;
+            for(int ich = 0; ich < NCHANNEL; ++ich){
+                E_ch[iL][ich] = 0;
+            }
+        }
 
-	impactX[0] = impactX_HGCal_layer_1;
-	impactX[1] = impactX_HGCal_layer_2;
-	impactX[2] = impactX_HGCal_layer_3;
-	impactX[3] = impactX_HGCal_layer_4;
-	impactX[4] = impactX_HGCal_layer_5;
-	impactX[5] = impactX_HGCal_layer_6;
-	impactX[6] = impactX_HGCal_layer_7;
-	impactX[7] = impactX_HGCal_layer_8;
-	impactX[8] = impactX_HGCal_layer_9;
-	impactX[9] = impactX_HGCal_layer_10;
-	impactX[10] = impactX_HGCal_layer_11;
-	impactX[11] = impactX_HGCal_layer_12;
-	impactX[12] = impactX_HGCal_layer_13;
-	impactX[13] = impactX_HGCal_layer_14;
-	impactX[14] = impactX_HGCal_layer_15;
-	impactX[15] = impactX_HGCal_layer_16;
-	impactX[16] = impactX_HGCal_layer_17;
-	impactX[17] = impactX_HGCal_layer_18;
-	impactX[18] = impactX_HGCal_layer_19;
-	impactX[19] = impactX_HGCal_layer_20;
-	impactX[20] = impactX_HGCal_layer_21;
-	impactX[21] = impactX_HGCal_layer_22;
-	impactX[22] = impactX_HGCal_layer_23;
-	impactX[23] = impactX_HGCal_layer_24;
-	impactX[24] = impactX_HGCal_layer_25;
-	impactX[25] = impactX_HGCal_layer_26;
-	impactX[26] = impactX_HGCal_layer_27;
-	impactX[27] = impactX_HGCal_layer_28;
-	impactY[0] = impactY_HGCal_layer_1;
-	impactY[1] = impactY_HGCal_layer_2;
-	impactY[2] = impactY_HGCal_layer_3;
-	impactY[3] = impactY_HGCal_layer_4;
-	impactY[4] = impactY_HGCal_layer_5;
-	impactY[5] = impactY_HGCal_layer_6;
-	impactY[6] = impactY_HGCal_layer_7;
-	impactY[7] = impactY_HGCal_layer_8;
-	impactY[8] = impactY_HGCal_layer_9;
-	impactY[9] = impactY_HGCal_layer_10;
-	impactY[10] = impactY_HGCal_layer_11;
-	impactY[11] = impactY_HGCal_layer_12;
-	impactY[12] = impactY_HGCal_layer_13;
-	impactY[13] = impactY_HGCal_layer_14;
-	impactY[14] = impactY_HGCal_layer_15;
-	impactY[15] = impactY_HGCal_layer_16;
-	impactY[16] = impactY_HGCal_layer_17;
-	impactY[17] = impactY_HGCal_layer_18;
-	impactY[18] = impactY_HGCal_layer_19;
-	impactY[19] = impactY_HGCal_layer_20;
-	impactY[20] = impactY_HGCal_layer_21;
-	impactY[21] = impactY_HGCal_layer_22;
-	impactY[22] = impactY_HGCal_layer_23;
-	impactY[23] = impactY_HGCal_layer_24;
-	impactY[24] = impactY_HGCal_layer_25;
-	impactY[25] = impactY_HGCal_layer_26;
-	impactY[26] = impactY_HGCal_layer_27;
-	impactY[27] = impactY_HGCal_layer_28;
+        impactX[0] = impactX_HGCal_layer_1;
+        impactX[1] = impactX_HGCal_layer_2;
+        impactX[2] = impactX_HGCal_layer_3;
+        impactX[3] = impactX_HGCal_layer_4;
+        impactX[4] = impactX_HGCal_layer_5;
+        impactX[5] = impactX_HGCal_layer_6;
+        impactX[6] = impactX_HGCal_layer_7;
+        impactX[7] = impactX_HGCal_layer_8;
+        impactX[8] = impactX_HGCal_layer_9;
+        impactX[9] = impactX_HGCal_layer_10;
+        impactX[10] = impactX_HGCal_layer_11;
+        impactX[11] = impactX_HGCal_layer_12;
+        impactX[12] = impactX_HGCal_layer_13;
+        impactX[13] = impactX_HGCal_layer_14;
+        impactX[14] = impactX_HGCal_layer_15;
+        impactX[15] = impactX_HGCal_layer_16;
+        impactX[16] = impactX_HGCal_layer_17;
+        impactX[17] = impactX_HGCal_layer_18;
+        impactX[18] = impactX_HGCal_layer_19;
+        impactX[19] = impactX_HGCal_layer_20;
+        impactX[20] = impactX_HGCal_layer_21;
+        impactX[21] = impactX_HGCal_layer_22;
+        impactX[22] = impactX_HGCal_layer_23;
+        impactX[23] = impactX_HGCal_layer_24;
+        impactX[24] = impactX_HGCal_layer_25;
+        impactX[25] = impactX_HGCal_layer_26;
+        impactX[26] = impactX_HGCal_layer_27;
+        impactX[27] = impactX_HGCal_layer_28;
+        impactY[0] = impactY_HGCal_layer_1;
+        impactY[1] = impactY_HGCal_layer_2;
+        impactY[2] = impactY_HGCal_layer_3;
+        impactY[3] = impactY_HGCal_layer_4;
+        impactY[4] = impactY_HGCal_layer_5;
+        impactY[5] = impactY_HGCal_layer_6;
+        impactY[6] = impactY_HGCal_layer_7;
+        impactY[7] = impactY_HGCal_layer_8;
+        impactY[8] = impactY_HGCal_layer_9;
+        impactY[9] = impactY_HGCal_layer_10;
+        impactY[10] = impactY_HGCal_layer_11;
+        impactY[11] = impactY_HGCal_layer_12;
+        impactY[12] = impactY_HGCal_layer_13;
+        impactY[13] = impactY_HGCal_layer_14;
+        impactY[14] = impactY_HGCal_layer_15;
+        impactY[15] = impactY_HGCal_layer_16;
+        impactY[16] = impactY_HGCal_layer_17;
+        impactY[17] = impactY_HGCal_layer_18;
+        impactY[18] = impactY_HGCal_layer_19;
+        impactY[19] = impactY_HGCal_layer_20;
+        impactY[20] = impactY_HGCal_layer_21;
+        impactY[21] = impactY_HGCal_layer_22;
+        impactY[22] = impactY_HGCal_layer_23;
+        impactY[23] = impactY_HGCal_layer_24;
+        impactY[24] = impactY_HGCal_layer_25;
+        impactY[25] = impactY_HGCal_layer_26;
+        impactY[26] = impactY_HGCal_layer_27;
+        impactY[27] = impactY_HGCal_layer_28;
 
 
-	double dR = sqrt( impactX[0]*impactX[0] + impactY[0]*impactY[0]);
+        double dR = sqrt( impactX[0]*impactX[0] + impactY[0]*impactY[0]);
 
-	int layer, chip, channel;
-	double posx, posy, posz, energy, TOT;
-	totalE = 0;
-	totalE_CEE = 0;
-	totalE_CEH = 0;
-	totalNhit_CEE = 0;
-	totalNhit_CEH = 0;
+        int layer, chip, channel;
+        double posx, posy, posz, energy, TOT;
+        totalE = 0;
+        totalE_CEE = 0;
+        totalE_CEH = 0;
+        totalNhit_CEE = 0;
+        totalNhit_CEH = 0;
     
 
-	for(int h = 0; h < Nhits ; ++h){
+        for(int h = 0; h < Nhits ; ++h){
 
-	    Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
-	    //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
-	    if ( energy < 0.5 ) continue;
-	    if ( layer == 1  )
-		if ( chip == 0 ) continue;
-	    //Be careful here layerID start from 1
-	    //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
-	    totalE += energy;
-	    if(layer <= 28) {
-		totalE_CEE += energy;
-		totalNhit_CEE++;
-	    }
-	    else {
-		totalE_CEH += energy;
-		totalNhit_CEH++;
-	    }
-	    layerNhit[layer-1]++;
-	    layerE[layer-1] += energy;
-	    hit_tmp[layer-1].push_back(energy);
-	    hit_x[layer-1].push_back(posx);
-	    hit_y[layer-1].push_back(posy);
-	    hit_z[layer-1].push_back(posz);
-	    E_ch[layer-1][ (chip*32) + (channel/2) ] += energy;
-	    x_ch[layer-1][ (chip*32) + (channel/2) ] = posx;
-	    y_ch[layer-1][ (chip*32) + (channel/2) ] = posy;
-	    z_ch[layer-1][ (chip*32) + (channel/2) ] = posz;
-	}
+            Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
+            //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+            if ( energy < 0.5 ) continue;
+            if ( layer == 1  )
+                if ( chip == 0 ) continue;
+            //Be careful here layerID start from 1
+            //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+            totalE += energy;
+            if(layer <= 28) {
+                totalE_CEE += energy;
+                totalNhit_CEE++;
+            }
+            else {
+                totalE_CEH += energy;
+                totalNhit_CEH++;
+            }
+            layerNhit[layer-1]++;
+            layerE[layer-1] += energy;
+            hit_tmp[layer-1].push_back(energy);
+            hit_x[layer-1].push_back(posx);
+            hit_y[layer-1].push_back(posy);
+            hit_z[layer-1].push_back(posz);
+            E_ch[layer-1][ (chip*32) + (channel/2) ] += energy;
+            x_ch[layer-1][ (chip*32) + (channel/2) ] = posx;
+            y_ch[layer-1][ (chip*32) + (channel/2) ] = posy;
+            z_ch[layer-1][ (chip*32) + (channel/2) ] = posz;
+
+            if ( chip == 0 && channel == 26 ) {
+                cout << "chip0 channel26 x=" << posx << "y" << posy << endl;
+            }
+            else if ( chip == 1 && channel == 0 ) {
+                cout << "chip1 channel0 x=" << posx << "y" << posy << endl;
+            }
+        }
  
-	for(int iL = 0; iL < NLAYER ; ++iL){
-	    //Find seed
-	    double Emax = -1;
-	    for(int ich = 0; ich < NCHANNEL; ich++){
-		if( E_ch[iL][ich] > Emax){
-		    Emax = E_ch[iL][ich];
-		    maxID[iL] = ich;
-		    E_1[iL] = E_ch[iL][ich]; 
-		}
-	    }
+        for(int iL = 0; iL < NLAYER ; ++iL){
+            //Find seed
+            double Emax = -1;
+            for(int ich = 0; ich < NCHANNEL; ich++){
+                if( E_ch[iL][ich] > Emax){
+                    Emax = E_ch[iL][ich];
+                    maxID[iL] = ich;
+                    E_1[iL] = E_ch[iL][ich];
+                }
+            }
 
-	    //Computing impact position of the shower on a given layer using Thorben's logE method
-	    double w, totalWeight;
-	    double numerator_x, numerator_y;
-	    numerator_x = 0;
-	    numerator_y = 0;
-	    totalWeight = 0;
-	    w = 0;
+            //Computing impact position of the shower on a given layer using Thorben's logE method
+            double w, totalWeight;
+            double numerator_x, numerator_y;
+            numerator_x = 0;
+            numerator_y = 0;
+            totalWeight = 0;
+            w = 0;
 
-	    float log_a = 3.5;
-	    float log_b = 1.0;
-	    
-	    for ( int ihit = 0 ; ihit < layerNhit[iL] ; ihit++ ) {
-		double E = hit_tmp[iL].at(ihit);
-		if ( E == 0 ) continue;
-		w = std::max( log_a + log_b * log(E/layerE[iL]) , 0.0 );
-		totalWeight += w;
-		numerator_x += w * hit_x[iL].at(ihit);
-		numerator_y += w * hit_y[iL].at(ihit);
-	    }
-	    
-	    COGx[iL] = numerator_x / totalWeight;
-	    COGy[iL] = numerator_y / totalWeight;
-	}
-	
-	for(int iL = 0; iL < NLAYER; ++iL){
-	    double dx,dy,dR;
-	    for(int ich = 0; ich < NCHANNEL; ich++){
-		if( E_ch[iL][ich] == 0 ) continue;
-		dx = x_ch[iL][ich] - x_ch [iL] [ maxID[iL] ];
-		dy = y_ch[iL][ich] - y_ch [iL] [ maxID[iL] ];
-		dR = sqrt(dx*dx + dy*dy);
-		if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
-		if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
-		if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
-		if( dR < 1.12455*4*1.2) E_61[iL] += E_ch[iL][ich];
-		// radial distribution w.r.t the shower axis
-		dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 + 2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
-		dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 + 2 ] ];
-		dR = sqrt(dx*dx + dy*dy);
-		E_1_showerAxis[iL] = E_ch[iL] [ maxID[ iL%2 + 2 ] ];
-		if( dR < 1.12455*1.2) E_7_showerAxis[iL] += E_ch[iL][ich];
-		if( dR < 1.12455*2*1.2) E_19_showerAxis[iL] += E_ch[iL][ich];
-		if( dR < 1.12455*3*1.2) E_37_showerAxis[iL] += E_ch[iL][ich];
-		if( dR < 1.12455*4*1.2) E_61_showerAxis[iL] += E_ch[iL][ich];
-	    }
-	    double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
-	    double E1devE7 =  E_1[iL] / E_7[iL];
-	    //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
-	}
+            float log_a = 3.5;
+            float log_b = 1.0;
 
-	
-	outT3->Fill();
+            for ( int ihit = 0 ; ihit < layerNhit[iL] ; ihit++ ) {
+                double E = hit_tmp[iL].at(ihit);
+                if ( E == 0 ) continue;
+                w = std::max( log_a + log_b * log(E/layerE[iL]) , 0.0 );
+                totalWeight += w;
+                numerator_x += w * hit_x[iL].at(ihit);
+                numerator_y += w * hit_y[iL].at(ihit);
+            }
+
+            COGx[iL] = numerator_x / totalWeight;
+            COGy[iL] = numerator_y / totalWeight;
+        }
+
+        for(int iL = 0; iL < NLAYER; ++iL){
+            double dx,dy,dR;
+            for(int ich = 0; ich < NCHANNEL; ich++){
+                if( E_ch[iL][ich] == 0 ) continue;
+                dx = x_ch[iL][ich] - x_ch [iL] [ maxID[iL] ];
+                dy = y_ch[iL][ich] - y_ch [iL] [ maxID[iL] ];
+                dR = sqrt(dx*dx + dy*dy);
+                if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
+                if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
+                if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
+                if( dR < 1.12455*4*1.2) E_61[iL] += E_ch[iL][ich];
+                // radial distribution w.r.t the shower axis
+                dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 + 2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
+                dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 + 2 ] ];
+                dR = sqrt(dx*dx + dy*dy);
+                E_1_showerAxis[iL] = E_ch[iL] [ maxID[ iL%2 + 2 ] ];
+                if( dR < 1.12455*1.2) E_7_showerAxis[iL] += E_ch[iL][ich];
+                if( dR < 1.12455*2*1.2) E_19_showerAxis[iL] += E_ch[iL][ich];
+                if( dR < 1.12455*3*1.2) E_37_showerAxis[iL] += E_ch[iL][ich];
+                if( dR < 1.12455*4*1.2) E_61_showerAxis[iL] += E_ch[iL][ich];
+            }
+            double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
+            double E1devE7 =  E_1[iL] / E_7[iL];
+            //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
+        }
+
+
+        outT3->Fill();
     }
     outT1->Write();
     outT2->Write(); 
@@ -654,8 +661,8 @@ double* ntupleMaker::Set_X0(double X0_arr[]){
     */
     double single_layer_X0[NLAYER];
     for( int i = 0 ; i < NLAYER ; ++i){
-	if ( i % 2 == 0) single_layer_X0[i] = 0.909;
-	else single_layer_X0[i] = 0.976;
+        if ( i % 2 == 0) single_layer_X0[i] = 0.909;
+        else single_layer_X0[i] = 0.976;
     }
     single_layer_X0[0]  = 0.933;
     single_layer_X0[15] = 1.143;
@@ -663,13 +670,13 @@ double* ntupleMaker::Set_X0(double X0_arr[]){
 
     //Temporarily assign 4.5X0 to the layer in FH
     for(int i = 28 ; i < NLAYER ; ++i){
-	single_layer_X0[i]  = 4.5;    
+        single_layer_X0[i]  = 4.5;
     }
   
     double X0_sum = 0.;
     for(int iL = 0 ; iL < NLAYER ; ++iL){
-	X0_sum += single_layer_X0[iL];
-	X0_arr[iL] = X0_sum;
+        X0_sum += single_layer_X0[iL];
+        X0_arr[iL] = X0_sum;
     }
   
     return X0_arr;
