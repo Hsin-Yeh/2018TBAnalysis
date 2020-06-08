@@ -6,11 +6,13 @@ void xtalk_compare(int Energy)
     char title[200];
     //int Energy = 300;
     
-    sprintf(title,"root_plot/plot_sim_%dGeV_EMN.root",Energy);
+    // sprintf(title,"root_plot/plot_sim_%dGeV_EMN.root",Energy);
+    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root")
     TFile f_MC(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
     TFile f_Data(title);
-    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN.root",Energy);
+    // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN.root",Energy);
+    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadBeforeHalo.root",Energy);
     TFile f_MC_original(title);
 
     int NLAYER = 28;
@@ -112,7 +114,8 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg->SetFillColor(ci);
 	leg->SetFillStyle(1001);
-	TLegendEntry *entry=leg->AddEntry("","with xtalk","lpf");
+	// TLegendEntry *entry=leg->AddEntry("","LeadNearHGCAL","lpf");
+	TLegendEntry *entry=leg->AddEntry("","LeadNearHGCAL","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -121,7 +124,8 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg->AddEntry("","no xtalk","lpflpf");
+	// entry=leg->AddEntry("","LeadBeforeHalo","lpflpf");
+	entry=leg->AddEntry("","LeadBeforeHalo","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -229,7 +233,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_E7devE19->SetFillColor(ci);
 	leg_E7devE19->SetFillStyle(1001);
-	entry=leg_E7devE19->AddEntry("","with xtalk","lpf");
+	entry=leg_E7devE19->AddEntry("","LeadNearHGCAL","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -238,7 +242,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_E7devE19->AddEntry("","no xtalk","lpflpf");
+	entry=leg_E7devE19->AddEntry("","LeadBeforeHalo","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -346,7 +350,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_COGx->SetFillColor(ci);
 	leg_COGx->SetFillStyle(1001);
-	entry=leg_COGx->AddEntry("","with xtalk","lpf");
+	entry=leg_COGx->AddEntry("","LeadNearHGCAL","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -355,7 +359,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_COGx->AddEntry("","no xtalk","lpflpf");
+	entry=leg_COGx->AddEntry("","LeadBeforeHalo","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -463,7 +467,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_COGy->SetFillColor(ci);
 	leg_COGy->SetFillStyle(1001);
-	entry=leg_COGy->AddEntry("","with xtalk","lpf");
+	entry=leg_COGy->AddEntry("","LeadNearHGCAL","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -472,7 +476,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_COGy->AddEntry("","no xtalk","lpflpf");
+	entry=leg_COGy->AddEntry("","LeadBeforeHalo","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -592,7 +596,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_layerE->SetFillColor(ci);
 	leg_layerE->SetFillStyle(1001);
-	entry=leg_layerE->AddEntry("","with xtalk","lpf");
+	entry=leg_layerE->AddEntry("","LeadNearHGCAL","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -601,7 +605,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_layerE->AddEntry("","no xtalk","lpflpf");
+	entry=leg_layerE->AddEntry("","LeadBeforeHalo","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -806,7 +810,7 @@ void xtalk_compare(int Energy)
     color = new TColor(ci, 1, 1, 1, " ", 0);
     leg->SetFillColor(ci);
     leg->SetFillStyle(1001);
-    TLegendEntry *entry=leg->AddEntry("","with xtalk","lpf");
+    TLegendEntry *entry=leg->AddEntry("","LeadNearHGCAL","lpf");
     entry->SetFillStyle(1001);
     entry->SetLineColor(2);
     entry->SetLineStyle(1);
@@ -815,7 +819,7 @@ void xtalk_compare(int Energy)
     entry->SetMarkerStyle(20);
     entry->SetMarkerSize(0.5);
     entry->SetTextFont(42);
-    entry=leg->AddEntry("","no xtalk","lpflpf");
+    entry=leg->AddEntry("","LeadBeforeHalo","lpflpf");
     entry->SetFillStyle(1001);
     entry->SetLineColor(4);
     entry->SetLineStyle(1);
