@@ -81,7 +81,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 0, 0, 0, " ", 0);
 	pt->SetTextColor(ci);
 	pt->SetTextFont(42);
-	TText *pt_LaTex = pt->AddText("w/  xtalk");
+	TText *pt_LaTex = pt->AddText("LeadNearHGCAL");
 	pt->Draw();
    
 	E1devE7__2->SetLineColor(4);
@@ -777,7 +777,7 @@ void xtalk_compare(int Energy)
     color = new TColor(ci, 0, 0, 0, " ", 0);
     pt->SetTextColor(ci);
     pt->SetTextFont(42);
-    TText *pt_LaTex = pt->AddText("w/  xtalk");
+    TText *pt_LaTex = pt->AddText("LeadNearHGCAL");
     pt->Draw();
    
     totalCEE__2->SetLineColor(4);
@@ -861,9 +861,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_E1devE7->SetMarkerColor(2);
     g_chi_cross_E1devE7->SetMarkerStyle(20);
     g_chi_cross_E1devE7->SetFillColor(0);
-    g_chi_cross_E1devE7->SetTitle("w/ xtalk");
+    g_chi_cross_E1devE7->SetTitle("LeadNearHGCAL");
     TGraph* g_chi_original_E1devE7 = new TGraph(NLAYER, layerID, chi_original_E1devE7);
-    g_chi_original_E1devE7->SetTitle("w/o xtalk");
+    g_chi_original_E1devE7->SetTitle("LeadBeforeHalo");
     g_chi_original_E1devE7->SetFillColor(0);
     g_chi_original_E1devE7->SetMarkerStyle(20);
     g_chi_original_E1devE7->SetMarkerColor(4);
@@ -889,9 +889,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_E7devE19->SetMarkerColor(2);
     g_chi_cross_E7devE19->SetMarkerStyle(20);
     g_chi_cross_E7devE19->SetFillColor(0);
-    g_chi_cross_E7devE19->SetTitle("w/ xtalk");
+    g_chi_cross_E7devE19->SetTitle("LeadNearHGCAL");
     TGraph* g_chi_original_E7devE19 = new TGraph(NLAYER, layerID, chi_original_E7devE19);
-    g_chi_original_E7devE19->SetTitle("w/o xtalk");
+    g_chi_original_E7devE19->SetTitle("LeadBeforeHalo");
     g_chi_original_E7devE19->SetFillColor(0);
     g_chi_original_E7devE19->SetMarkerStyle(20);
     g_chi_original_E7devE19->SetMarkerColor(4);
@@ -916,9 +916,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_COGx->SetMarkerColor(2);
     g_chi_cross_COGx->SetMarkerStyle(20);
     g_chi_cross_COGx->SetFillColor(0);
-    g_chi_cross_COGx->SetTitle("w/ xtalk");
+    g_chi_cross_COGx->SetTitle("LeadNearHGCAL");
     TGraph* g_chi_original_COGx = new TGraph(NLAYER, layerID, chi_original_COGx);
-    g_chi_original_COGx->SetTitle("w/o xtalk");
+    g_chi_original_COGx->SetTitle("LeadBeforeHalo");
     g_chi_original_COGx->SetFillColor(0);
     g_chi_original_COGx->SetMarkerStyle(20);
     g_chi_original_COGx->SetMarkerColor(4);
@@ -942,9 +942,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_COGy->SetMarkerColor(2);
     g_chi_cross_COGy->SetMarkerStyle(20);
     g_chi_cross_COGy->SetFillColor(0);
-    g_chi_cross_COGy->SetTitle("w/ xtalk");
+    g_chi_cross_COGy->SetTitle("LeadNearHGCAL");
     TGraph* g_chi_original_COGy = new TGraph(NLAYER, layerID, chi_original_COGy);
-    g_chi_original_COGy->SetTitle("w/o xtalk");
+    g_chi_original_COGy->SetTitle("LeadBeforeHalo");
     g_chi_original_COGy->SetFillColor(0);
     g_chi_original_COGy->SetMarkerStyle(20);
     g_chi_original_COGy->SetMarkerColor(4);
@@ -968,9 +968,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_layerE->SetMarkerColor(2);
     g_chi_cross_layerE->SetMarkerStyle(20);
     g_chi_cross_layerE->SetFillColor(0);
-    g_chi_cross_layerE->SetTitle("w/ xtalk");
+    g_chi_cross_layerE->SetTitle("LeadNearHGCAL");
     TGraph* g_chi_original_layerE = new TGraph(NLAYER, layerID, chi_original_layerE);
-    g_chi_original_layerE->SetTitle("w/o xtalk");
+    g_chi_original_layerE->SetTitle("LeadBeforeHalo");
     g_chi_original_layerE->SetFillColor(0);
     g_chi_original_layerE->SetMarkerStyle(20);
     g_chi_original_layerE->SetMarkerColor(4);
