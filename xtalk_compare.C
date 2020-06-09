@@ -193,7 +193,7 @@ void xtalk_compare(int Energy)
 	E7devE19__1->GetZaxis()->SetLabelSize(0.045);
 	E7devE19__1->GetZaxis()->SetTitleSize(0.045);
 	E7devE19__1->GetZaxis()->SetTitleFont(42);
-	//E7devE19__1->GetYaxis()->SetRangeUser(0,0.095);
+	E7devE19__1->GetYaxis()->SetRangeUser(0,0.12);
 	E7devE19__1->GetXaxis()->SetRangeUser(0.2,1.01);
 	E7devE19__1->Draw("HIST");
 
@@ -643,7 +643,7 @@ void xtalk_compare(int Energy)
 	chi_cross_layerE[iL-1]    = layerE__3->Chi2Test(layerE__1,"UW CHI2/NDF");
 	chi_original_layerE[iL-1] = layerE__3->Chi2Test(layerE__2,"UW CHI2/NDF");
 
-	
+/*
 	// E1devE7 vs layerE/TotalE
 
 	TH2D* E1devE7_layerEdevTotalE__1;
@@ -675,7 +675,7 @@ void xtalk_compare(int Energy)
 	Canvas_1->SaveAs(title);
 	sprintf(title,"plots/%dGeV/%dGeV_Xtalk_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
 	Canvas_1->SaveAs(title);
-	
+
 	E1devE7_layerEdevTotalE__2->SetStats(0);
 	E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitle("layerE");
 	E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelFont(42);
@@ -718,9 +718,8 @@ void xtalk_compare(int Energy)
 	sprintf(title,"plots/%dGeV/%dGeV_data_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
 	Canvas_1->SaveAs(title);
 	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-
-	
+	Canvas_1->SaveAs(title)
+*/
     }
 
     // ========== Total CEE ========== //
