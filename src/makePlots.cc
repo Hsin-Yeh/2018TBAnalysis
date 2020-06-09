@@ -428,7 +428,7 @@ void makePlots::Loop(){
     }
     b_x_mean = findMedian(b_x_array, nevents);
     b_y_mean = findMedian(b_y_array, nevents);
-    cout << b_x_mean << " " << b_y_mean << end;
+    // cout << b_x_mean << " " << b_y_mean << end;
     // -------------------- Loop Over Events -------------------- //
     for(int ev = 0; ev < nevents; ++ev){
 
