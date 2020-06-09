@@ -437,8 +437,9 @@ void makePlots::Loop(){
 
         // Event Selection
         if ( dwcReferenceType != 13) continue;
-        int totalNhit_CEH_wo3637 = totalNhit_CEH - layerNhit[35] - layerNhit[36] ;
-        if ( totalNhit_CEH_wo3637 > 25 ) continue;
+        // int totalNhit_CEH_wo3637 = totalNhit_CEH - layerNhit[35] - layerNhit[36] ;
+        // if ( totalNhit_CEH_wo3637 > 25 ) continue;
+        if ( totalNhit_CEH > 80 ) continue;
         if ( totalE_CEE / totalE < 0.95) continue;
 
         if ( abs(b_x - b_x_mean) < 1 ) {}
