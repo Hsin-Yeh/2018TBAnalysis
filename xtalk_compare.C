@@ -6,7 +6,7 @@ void xtalk_compare(int Energy)
     char title[200];
     //int Energy = 300;
     
-    sprintf(title,"root_plot/plot_sim_%dGeV_EMN_fullbeamline_LeadBeforeHalo.root",Energy);
+    sprintf(title,"root_plot/plot_sim_%dGeV_EMN_fullbeamline_LeadBeforeHalo_6per.root",Energy);
     // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
     TFile f_MC(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
