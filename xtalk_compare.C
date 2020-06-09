@@ -6,8 +6,8 @@ void xtalk_compare(int Energy)
     char title[200];
     //int Energy = 300;
     
-    // sprintf(title,"root_plot/plot_sim_%dGeV_EMN.root",Energy);
-    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
+    sprintf(title,"root_plot/plot_sim_%dGeV_EMN.root",Energy);
+    // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
     TFile f_MC(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
     TFile f_Data(title);
@@ -114,8 +114,8 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg->SetFillColor(ci);
 	leg->SetFillStyle(1001);
-	// TLegendEntry *entry=leg->AddEntry("","LeadNearHGCAL","lpf");
-	TLegendEntry *entry=leg->AddEntry("","LeadNearHGCAL","lpf");
+	// TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
+	TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -124,8 +124,8 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	// entry=leg->AddEntry("","LeadBeforeHalo","lpflpf");
-	entry=leg->AddEntry("","LeadBeforeHalo","lpflpf");
+	// entry=leg->AddEntry("","w/o xtalk","lpflpf");
+	entry=leg->AddEntry("","w/o xtalk","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -233,7 +233,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_E7devE19->SetFillColor(ci);
 	leg_E7devE19->SetFillStyle(1001);
-	entry=leg_E7devE19->AddEntry("","LeadNearHGCAL","lpf");
+	entry=leg_E7devE19->AddEntry("","w/ xtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -242,7 +242,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_E7devE19->AddEntry("","LeadBeforeHalo","lpflpf");
+	entry=leg_E7devE19->AddEntry("","w/o xtalk","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -350,7 +350,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_COGx->SetFillColor(ci);
 	leg_COGx->SetFillStyle(1001);
-	entry=leg_COGx->AddEntry("","LeadNearHGCAL","lpf");
+	entry=leg_COGx->AddEntry("","w/ xtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -359,7 +359,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_COGx->AddEntry("","LeadBeforeHalo","lpflpf");
+	entry=leg_COGx->AddEntry("","w/o xtalk","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -467,7 +467,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_COGy->SetFillColor(ci);
 	leg_COGy->SetFillStyle(1001);
-	entry=leg_COGy->AddEntry("","LeadNearHGCAL","lpf");
+	entry=leg_COGy->AddEntry("","w/ xtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -476,7 +476,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_COGy->AddEntry("","LeadBeforeHalo","lpflpf");
+	entry=leg_COGy->AddEntry("","w/o xtalk","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -596,7 +596,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 1, 1, 1, " ", 0);
 	leg_layerE->SetFillColor(ci);
 	leg_layerE->SetFillStyle(1001);
-	entry=leg_layerE->AddEntry("","LeadNearHGCAL","lpf");
+	entry=leg_layerE->AddEntry("","w/ xtalk","lpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(2);
 	entry->SetLineStyle(1);
@@ -605,7 +605,7 @@ void xtalk_compare(int Energy)
 	entry->SetMarkerStyle(20);
 	entry->SetMarkerSize(0.5);
 	entry->SetTextFont(42);
-	entry=leg_layerE->AddEntry("","LeadBeforeHalo","lpflpf");
+	entry=leg_layerE->AddEntry("","w/o xtalk","lpflpf");
 	entry->SetFillStyle(1001);
 	entry->SetLineColor(4);
 	entry->SetLineStyle(1);
@@ -776,7 +776,7 @@ void xtalk_compare(int Energy)
     color = new TColor(ci, 0, 0, 0, " ", 0);
     pt->SetTextColor(ci);
     pt->SetTextFont(42);
-    TText *pt_LaTex = pt->AddText("LeadNearHGCAL");
+    TText *pt_LaTex = pt->AddText("w/ xtalk");
     pt->Draw();
    
     totalCEE__2->SetLineColor(4);
@@ -809,7 +809,7 @@ void xtalk_compare(int Energy)
     color = new TColor(ci, 1, 1, 1, " ", 0);
     leg->SetFillColor(ci);
     leg->SetFillStyle(1001);
-    TLegendEntry *entry=leg->AddEntry("","LeadNearHGCAL","lpf");
+    TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
     entry->SetFillStyle(1001);
     entry->SetLineColor(2);
     entry->SetLineStyle(1);
@@ -818,7 +818,7 @@ void xtalk_compare(int Energy)
     entry->SetMarkerStyle(20);
     entry->SetMarkerSize(0.5);
     entry->SetTextFont(42);
-    entry=leg->AddEntry("","LeadBeforeHalo","lpflpf");
+    entry=leg->AddEntry("","w/o xtalk","lpflpf");
     entry->SetFillStyle(1001);
     entry->SetLineColor(4);
     entry->SetLineStyle(1);
@@ -860,9 +860,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_E1devE7->SetMarkerColor(2);
     g_chi_cross_E1devE7->SetMarkerStyle(20);
     g_chi_cross_E1devE7->SetFillColor(0);
-    g_chi_cross_E1devE7->SetTitle("LeadNearHGCAL");
+    g_chi_cross_E1devE7->SetTitle("w/ xtalk");
     TGraph* g_chi_original_E1devE7 = new TGraph(NLAYER, layerID, chi_original_E1devE7);
-    g_chi_original_E1devE7->SetTitle("LeadBeforeHalo");
+    g_chi_original_E1devE7->SetTitle("w/o xtalk");
     g_chi_original_E1devE7->SetFillColor(0);
     g_chi_original_E1devE7->SetMarkerStyle(20);
     g_chi_original_E1devE7->SetMarkerColor(4);
@@ -888,9 +888,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_E7devE19->SetMarkerColor(2);
     g_chi_cross_E7devE19->SetMarkerStyle(20);
     g_chi_cross_E7devE19->SetFillColor(0);
-    g_chi_cross_E7devE19->SetTitle("LeadNearHGCAL");
+    g_chi_cross_E7devE19->SetTitle("w/ xtalk");
     TGraph* g_chi_original_E7devE19 = new TGraph(NLAYER, layerID, chi_original_E7devE19);
-    g_chi_original_E7devE19->SetTitle("LeadBeforeHalo");
+    g_chi_original_E7devE19->SetTitle("w/o xtalk");
     g_chi_original_E7devE19->SetFillColor(0);
     g_chi_original_E7devE19->SetMarkerStyle(20);
     g_chi_original_E7devE19->SetMarkerColor(4);
@@ -915,9 +915,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_COGx->SetMarkerColor(2);
     g_chi_cross_COGx->SetMarkerStyle(20);
     g_chi_cross_COGx->SetFillColor(0);
-    g_chi_cross_COGx->SetTitle("LeadNearHGCAL");
+    g_chi_cross_COGx->SetTitle("w/ xtalk");
     TGraph* g_chi_original_COGx = new TGraph(NLAYER, layerID, chi_original_COGx);
-    g_chi_original_COGx->SetTitle("LeadBeforeHalo");
+    g_chi_original_COGx->SetTitle("w/o xtalk");
     g_chi_original_COGx->SetFillColor(0);
     g_chi_original_COGx->SetMarkerStyle(20);
     g_chi_original_COGx->SetMarkerColor(4);
@@ -941,9 +941,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_COGy->SetMarkerColor(2);
     g_chi_cross_COGy->SetMarkerStyle(20);
     g_chi_cross_COGy->SetFillColor(0);
-    g_chi_cross_COGy->SetTitle("LeadNearHGCAL");
+    g_chi_cross_COGy->SetTitle("w/ xtalk");
     TGraph* g_chi_original_COGy = new TGraph(NLAYER, layerID, chi_original_COGy);
-    g_chi_original_COGy->SetTitle("LeadBeforeHalo");
+    g_chi_original_COGy->SetTitle("w/o xtalk");
     g_chi_original_COGy->SetFillColor(0);
     g_chi_original_COGy->SetMarkerStyle(20);
     g_chi_original_COGy->SetMarkerColor(4);
@@ -967,9 +967,9 @@ void xtalk_compare(int Energy)
     g_chi_cross_layerE->SetMarkerColor(2);
     g_chi_cross_layerE->SetMarkerStyle(20);
     g_chi_cross_layerE->SetFillColor(0);
-    g_chi_cross_layerE->SetTitle("LeadNearHGCAL");
+    g_chi_cross_layerE->SetTitle("w/ xtalk");
     TGraph* g_chi_original_layerE = new TGraph(NLAYER, layerID, chi_original_layerE);
-    g_chi_original_layerE->SetTitle("LeadBeforeHalo");
+    g_chi_original_layerE->SetTitle("w/o xtalk");
     g_chi_original_layerE->SetFillColor(0);
     g_chi_original_layerE->SetMarkerStyle(20);
     g_chi_original_layerE->SetMarkerColor(4);
