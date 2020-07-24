@@ -185,6 +185,9 @@ void ntupleMaker::Init(){
         T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
         T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
     }
+    if(!Is_Data){
+        T_Rechit->SetBranchAddress("ahc_energySum", &ahc_energySum);
+    }
 
 
     T_DWC->SetBranchAddress("ntracks", &ntracks, &b_ntracks);
