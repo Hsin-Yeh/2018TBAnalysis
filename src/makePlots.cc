@@ -428,7 +428,7 @@ void makePlots::Loop(){
     }
     b_x_mean = findMedian(b_x_array, nevents);
     b_y_mean = findMedian(b_y_array, nevents);
-    // cout << b_x_mean << " " << b_y_mean << end;
+    cout << b_x_mean << " " << b_y_mean << end;
     // -------------------- Loop Over Events -------------------- //
     for(int ev = 0; ev < nevents; ++ev){
 
@@ -437,10 +437,8 @@ void makePlots::Loop(){
 
         // Event Selection
         if ( dwcReferenceType != 13) continue;
-        // int totalNhit_CEH_wo3637 = totalNhit_CEH - layerNhit[35] - layerNhit[36] ;
-        // if ( totalNhit_CEH_wo3637 > 25 ) continue;
-        if ( totalNhit_CEH > 80 ) continue;
-        if ( totalE_CEE / totalE < 0.95) continue;
+        if ( totalNhit_CEH >= 50 ) continue;
+        if ( totalE_CEE / totalE <= 0.95) continue;
 
         if ( abs(b_x - b_x_mean) < 1 ) {}
         else continue;

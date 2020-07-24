@@ -107,6 +107,7 @@ class ntupleMaker{
    vector<float>   *rechit_timeMaxLG;
    vector<unsigned short>   *rechit_toaRise;
    vector<unsigned short>   *rechit_toaFall;
+   Float_t          ahc_energySum;
 
    // For ImpactPoints (from Delayed wire chamber)
       // Declaration of leaf types

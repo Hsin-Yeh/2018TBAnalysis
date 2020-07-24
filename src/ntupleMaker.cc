@@ -170,6 +170,8 @@ void ntupleMaker::Init(){
     T_Rechit->SetBranchAddress("rechit_toaRise", &rechit_toaRise);
     T_Rechit->SetBranchAddress("rechit_toaFall", &rechit_toaFall);
 
+    T_Rechit->SetBranchAddress("ahc_energySum", &ahc_energySum);
+
     if(Is_Data){
         T_Rechit->SetBranchAddress("rechit_type", &rechit_type);
         T_Rechit->SetBranchAddress("rechit_energy_noHG", &rechit_energy_noHG);
@@ -183,6 +185,7 @@ void ntupleMaker::Init(){
         T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
         T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
     }
+
 
     T_DWC->SetBranchAddress("ntracks", &ntracks, &b_ntracks);
     T_DWC->SetBranchAddress("impactX_HGCal_layer_1", &impactX_HGCal_layer_1, &b_impactX_HGCal_layer_1);
@@ -491,13 +494,20 @@ void ntupleMaker::NtupleMaker(){
         totalNhit_CEH = 0;
     
 
+        if ( ahc_energySum > 0 ) continue;
+
         for(int h = 0; h < Nhits ; ++h){
 
             Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
             //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+            if ( layer == 36 ) continue;
+            if ( layer == 37 ) continue;
             if ( energy < 0.5 ) continue;
             if ( layer == 1  )
                 if ( chip == 0 ) continue;
+            if ( chip == 3 )
+                if ( channel == 22 ) continue;
+            if ( energy < 0.5 ) continue;
             //Be careful here layerID start from 1
             //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
             totalE += energy;
