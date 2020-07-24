@@ -493,8 +493,8 @@ void ntupleMaker::NtupleMaker(){
         totalNhit_CEE = 0;
         totalNhit_CEH = 0;
     
-
-        if ( ahc_energySum > 0 ) continue;
+        if ( !Is_Data )
+            if ( ahc_energySum > 0 ) continue;
 
         for(int h = 0; h < Nhits ; ++h){
 
