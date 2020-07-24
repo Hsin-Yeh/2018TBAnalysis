@@ -186,6 +186,7 @@ void ntupleMaker::Init(){
         T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
     }
     else {
+        cout << "hi" << endl;
         T_Rechit->SetBranchAddress("ahc_energySum", &ahc_energySum);
     }
 
