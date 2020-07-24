@@ -170,8 +170,6 @@ void ntupleMaker::Init(){
     T_Rechit->SetBranchAddress("rechit_toaRise", &rechit_toaRise);
     T_Rechit->SetBranchAddress("rechit_toaFall", &rechit_toaFall);
 
-    T_Rechit->SetBranchAddress("ahc_energySum", &ahc_energySum);
-
     if(Is_Data){
         T_Rechit->SetBranchAddress("rechit_type", &rechit_type);
         T_Rechit->SetBranchAddress("rechit_energy_noHG", &rechit_energy_noHG);
