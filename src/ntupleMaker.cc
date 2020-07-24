@@ -142,10 +142,6 @@ void ntupleMaker::Init(){
     else
         cout << "(MC)Nevents: "<< nevents << endl;
 
-    if(!Is_Data){
-        cout << "hi" << endl;
-    }
-
     T_Rechit->SetBranchAddress("event", &event);
     T_Rechit->SetBranchAddress("run", &run);
     T_Rechit->SetBranchAddress("pdgID", &pdgID);
@@ -189,7 +185,7 @@ void ntupleMaker::Init(){
         T_Rechit->SetBranchAddress("rechit_TS3High", &rechit_TS3High);
         T_Rechit->SetBranchAddress("rechit_TS3Low", &rechit_TS3Low);
     }
-    if(!Is_Data){
+    else {
         T_Rechit->SetBranchAddress("ahc_energySum", &ahc_energySum);
     }
 
@@ -500,7 +496,7 @@ void ntupleMaker::NtupleMaker(){
         totalNhit_CEE = 0;
         totalNhit_CEH = 0;
     
-        if ( !Is_Data )
+        if ( Is_Data == false )
             if ( ahc_energySum > 0 ) continue;
 
         for(int h = 0; h < Nhits ; ++h){
