@@ -142,6 +142,10 @@ void ntupleMaker::Init(){
     else
         cout << "(MC)Nevents: "<< nevents << endl;
 
+    if(!Is_Data){
+        cout << "hi" << endl;
+    }
+
     T_Rechit->SetBranchAddress("event", &event);
     T_Rechit->SetBranchAddress("run", &run);
     T_Rechit->SetBranchAddress("pdgID", &pdgID);
