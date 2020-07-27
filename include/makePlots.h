@@ -316,7 +316,7 @@ private:
     Double_t        COGx[40];
     Double_t        COGy[40];
     Int_t           maxID[40];
-    
+    Double_t        ahc_Esum;
 
     // List of branches
     TBranch        *b_hit_mip;   //!
@@ -345,7 +345,7 @@ private:
     TBranch        *b_COGx;   //!
     TBranch        *b_COGy;   //!
     TBranch        *b_maxID;
-  
+    TBranch        *b_ahc_Esum;
 };
 
 #endif

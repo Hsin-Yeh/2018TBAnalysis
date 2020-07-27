@@ -394,7 +394,7 @@ void ntupleMaker::NtupleMaker(){
     outT3->Branch("impactX",impactX,"impactX[40]/D");
     outT3->Branch("impactY",impactY,"impactY[40]/D");
     outT3->Branch("maxID",maxID,"maxID[40]/I");
-    outT3->Branch("ahc_Esum",&ahc_Esum,"ahc_Esum/D")
+    outT3->Branch("ahc_Esum",&ahc_Esum,"ahc_Esum/D");
 
   
 

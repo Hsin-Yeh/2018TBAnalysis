@@ -138,6 +138,7 @@ void makePlots::Init(){
     T_rechit_var->SetBranchAddress("COGx", COGx, &b_COGx);
     T_rechit_var->SetBranchAddress("COGy", COGy, &b_COGy);
     T_rechit_var->SetBranchAddress("maxID", maxID, &b_maxID);
+    T_rechit_var->SetBranchAddress("ahc_Esum", &ahc_Esum, &b_ahc_Esum);
 
     Init_Runinfo();
     nevents = T_Rechit->GetEntries();
@@ -444,6 +445,8 @@ void makePlots::Loop(){
         else continue;
         if ( abs(b_y - b_y_mean) < 1 ) {}
         else continue;
+
+        if ( ahc_Esum > 0 ) continue;
 
 #ifdef DEBUG
         cout << event << " " << b_x << " " << b_y << end;
