@@ -495,9 +495,10 @@ void ntupleMaker::NtupleMaker(){
         totalNhit_CEE = 0;
         totalNhit_CEH = 0;
     
-        // if ( Is_Data == false )
-            // if ( ahc_energySum > 0 ) continue;
-
+        if ( Is_Data == false )
+            {
+                if ( ahc_energySum > 0 ) continue;
+            }
         for(int h = 0; h < Nhits ; ++h){
 
             Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
