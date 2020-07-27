@@ -363,6 +363,7 @@ void ntupleMaker::NtupleMaker(){
     double COGx[NLAYER];
     double COGy[NLAYER];
     int maxID[NLAYER];
+    double ahc_Esum;
     
 
     outT3->Branch("hit_mip","std::vector< std::vector<double> >",&hit_tmp);
@@ -393,6 +394,7 @@ void ntupleMaker::NtupleMaker(){
     outT3->Branch("impactX",impactX,"impactX[40]/D");
     outT3->Branch("impactY",impactY,"impactY[40]/D");
     outT3->Branch("maxID",maxID,"maxID[40]/I");
+    outT3->Branch("ahc_Esum",&ahc_Esum,"ahc_Esum/D")
 
   
 
@@ -495,10 +497,15 @@ void ntupleMaker::NtupleMaker(){
         totalNhit_CEE = 0;
         totalNhit_CEH = 0;
     
-        if ( Is_Data == false )
+        if ( Is_Data )
             {
-                if ( ahc_energySum > 0 ) continue;
+                ahc_Esum = 0;
             }
+        else
+            {
+                ahc_Esum = ahc_energySum;
+            }
+
         for(int h = 0; h < Nhits ; ++h){
 
             Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
