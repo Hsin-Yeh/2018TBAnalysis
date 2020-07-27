@@ -507,8 +507,8 @@ void ntupleMaker::NtupleMaker(){
             if ( energy < 0.5 ) continue;
             if ( layer == 1  )
                 if ( chip == 0 ) continue;
-            // if ( chip == 3 )
-                // if ( channel == 22 ) continue;
+            if ( chip == 3 )
+                if ( channel == 22 ) continue;
             if ( energy < 0.5 ) continue;
             //Be careful here layerID start from 1
             //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
