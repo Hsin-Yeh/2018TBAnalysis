@@ -1,7 +1,7 @@
 void xtalk_compare(int Energy)
 {
-//=========Macro generated from canvas: Canvas_1/Canvas_1
-//=========  (Tue Oct 15 20:48:04 2019) by ROOT version6.10/04
+    //=========Macro generated from canvas: Canvas_1/Canvas_1
+    //=========  (Tue Oct 15 20:48:04 2019) by ROOT version6.10/04
 
     char title[200];
     //int Energy = 300;
@@ -21,705 +21,705 @@ void xtalk_compare(int Energy)
     double layerID[NLAYER];
 
     for( int iL = 1; iL <= 28; iL++) {
-	
-	layerID[iL-1] = iL;
-	
-	TH1D* E1devE7__1;
-	TH1D* E1devE7__2;
-	TH1D* E1devE7__3;
-	sprintf(title,"histo/layer%d/layer%d_E1devE7",iL,iL);
-	E1devE7__1 = (TH1D *)f_MC.Get(title);
-	E1devE7__2 = (TH1D *)f_MC_original.Get(title);
-	E1devE7__3 = (TH1D *)f_Data.Get(title);
+
+        layerID[iL-1] = iL;
+
+        TH1D* E1devE7__1;
+        TH1D* E1devE7__2;
+        TH1D* E1devE7__3;
+        sprintf(title,"histo/layer%d/layer%d_E1devE7",iL,iL);
+        E1devE7__1 = (TH1D *)f_MC.Get(title);
+        E1devE7__2 = (TH1D *)f_MC_original.Get(title);
+        E1devE7__3 = (TH1D *)f_Data.Get(title);
 
     
-	TCanvas *Canvas_1 = new TCanvas("Canvas_1", "Canvas_1",333,105,837,583);
-	Canvas_1->Range(-0.127676,-0.01502931,1.140176,0.07874052);
-	Canvas_1->SetFillColor(0);
-	Canvas_1->SetBorderMode(0);
-	Canvas_1->SetBorderSize(2);
-	Canvas_1->SetTopMargin(0.08013938);
-	Canvas_1->SetBottomMargin(0.1602788);
-	Canvas_1->SetFrameBorderMode(0);
-	Canvas_1->SetFrameLineWidth(2);
-	Canvas_1->SetFrameBorderMode(0);
+        TCanvas *Canvas_1 = new TCanvas("Canvas_1", "Canvas_1",333,105,837,583);
+        Canvas_1->Range(-0.127676,-0.01502931,1.140176,0.07874052);
+        Canvas_1->SetFillColor(0);
+        Canvas_1->SetBorderMode(0);
+        Canvas_1->SetBorderSize(2);
+        Canvas_1->SetTopMargin(0.08013938);
+        Canvas_1->SetBottomMargin(0.1602788);
+        Canvas_1->SetFrameBorderMode(0);
+        Canvas_1->SetFrameLineWidth(2);
+        Canvas_1->SetFrameBorderMode(0);
    
-	E1devE7__1->SetStats(0);
-	E1devE7__1->SetLineColor(2);
-	E1devE7__1->SetLineWidth(2);
-	E1devE7__1->SetMarkerColor(2);
-	E1devE7__1->SetMarkerStyle(20);
-	E1devE7__1->SetMarkerSize(0.5);
-	E1devE7__1->GetXaxis()->SetTitle("E1 / E7");
-	E1devE7__1->GetXaxis()->SetLabelFont(42);
-	E1devE7__1->GetXaxis()->SetLabelOffset(0.01125);
-	E1devE7__1->GetXaxis()->SetLabelSize(0.045);
-	E1devE7__1->GetXaxis()->SetTitleSize(0.052);
-	E1devE7__1->GetXaxis()->SetTitleOffset(1.1);
-	E1devE7__1->GetYaxis()->SetLabelFont(42);
-	E1devE7__1->GetYaxis()->SetLabelOffset(0.01125);
-	E1devE7__1->GetYaxis()->SetLabelSize(0.045);
-	E1devE7__1->GetYaxis()->SetTitleSize(0.045);
-	E1devE7__1->GetYaxis()->SetTitleOffset(1.4);
-	E1devE7__1->GetYaxis()->SetTitleFont(42);
-	E1devE7__1->GetZaxis()->SetLabelFont(42);
-	E1devE7__1->GetZaxis()->SetLabelSize(0.045);
-	E1devE7__1->GetZaxis()->SetTitleSize(0.045);
-	E1devE7__1->GetZaxis()->SetTitleFont(42);
-	E1devE7__1->GetYaxis()->SetRangeUser(0,0.064);
-	E1devE7__1->Draw("HIST");
+        E1devE7__1->SetStats(0);
+        E1devE7__1->SetLineColor(2);
+        E1devE7__1->SetLineWidth(2);
+        E1devE7__1->SetMarkerColor(2);
+        E1devE7__1->SetMarkerStyle(20);
+        E1devE7__1->SetMarkerSize(0.5);
+        E1devE7__1->GetXaxis()->SetTitle("E1 / E7");
+        E1devE7__1->GetXaxis()->SetLabelFont(42);
+        E1devE7__1->GetXaxis()->SetLabelOffset(0.01125);
+        E1devE7__1->GetXaxis()->SetLabelSize(0.045);
+        E1devE7__1->GetXaxis()->SetTitleSize(0.052);
+        E1devE7__1->GetXaxis()->SetTitleOffset(1.1);
+        E1devE7__1->GetYaxis()->SetLabelFont(42);
+        E1devE7__1->GetYaxis()->SetLabelOffset(0.01125);
+        E1devE7__1->GetYaxis()->SetLabelSize(0.045);
+        E1devE7__1->GetYaxis()->SetTitleSize(0.045);
+        E1devE7__1->GetYaxis()->SetTitleOffset(1.4);
+        E1devE7__1->GetYaxis()->SetTitleFont(42);
+        E1devE7__1->GetZaxis()->SetLabelFont(42);
+        E1devE7__1->GetZaxis()->SetLabelSize(0.045);
+        E1devE7__1->GetZaxis()->SetTitleSize(0.045);
+        E1devE7__1->GetZaxis()->SetTitleFont(42);
+        E1devE7__1->GetYaxis()->SetRangeUser(0,0.064);
+        E1devE7__1->Draw("HIST");
    
-	TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");
-	pt->SetName("title");
-	pt->SetBorderSize(0);
-	pt->SetFillColor(0);
-	pt->SetFillStyle(0);
+        TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");
+        pt->SetName("title");
+        pt->SetBorderSize(0);
+        pt->SetFillColor(0);
+        pt->SetFillStyle(0);
 
-	Int_t ci;      // for color index setting
-	TColor *color; // for color definition with alpha
-	ci = 1180;
-	color = new TColor(ci, 0, 0, 0, " ", 0);
-	pt->SetTextColor(ci);
-	pt->SetTextFont(42);
-	TText *pt_LaTex = pt->AddText("E1devE7");
-	pt->Draw();
+        Int_t ci;      // for color index setting
+        TColor *color; // for color definition with alpha
+        ci = 1180;
+        color = new TColor(ci, 0, 0, 0, " ", 0);
+        pt->SetTextColor(ci);
+        pt->SetTextFont(42);
+        TText *pt_LaTex = pt->AddText("E1devE7");
+        pt->Draw();
    
-	E1devE7__2->SetLineColor(4);
-	E1devE7__2->SetLineWidth(2);
-	E1devE7__2->SetMarkerColor(4);
-	E1devE7__2->SetMarkerStyle(20);
-	E1devE7__2->SetMarkerSize(0.5);
-	E1devE7__2->Draw("HISTSAME");
+        E1devE7__2->SetLineColor(4);
+        E1devE7__2->SetLineWidth(2);
+        E1devE7__2->SetMarkerColor(4);
+        E1devE7__2->SetMarkerStyle(20);
+        E1devE7__2->SetMarkerSize(0.5);
+        E1devE7__2->Draw("HISTSAME");
     
-	E1devE7__3->SetLineWidth(2);
-	E1devE7__3->SetMarkerStyle(20);
-	E1devE7__3->SetMarkerSize(0.5);
-	E1devE7__3->Draw("SAME");
+        E1devE7__3->SetLineWidth(2);
+        E1devE7__3->SetMarkerStyle(20);
+        E1devE7__3->SetMarkerSize(0.5);
+        E1devE7__3->Draw("SAME");
 
    
-	TLegend *leg = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
-	leg->SetBorderSize(1);
+        TLegend *leg = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        leg->SetBorderSize(1);
 
-	ci = TColor::GetColor("#000000");
-	leg->SetTextColor(ci);
-	leg->SetTextFont(62);
-	
+        ci = TColor::GetColor("#000000");
+        leg->SetTextColor(ci);
+        leg->SetTextFont(62);
 
-	ci = 1183;
-	color = new TColor(ci, 0, 0, 0, " ", 0.011);
-	leg->SetLineColor(ci);
-	leg->SetLineStyle(1);
-	leg->SetLineWidth(1);
-	ci = 1180;
-	color = new TColor(ci, 1, 1, 1, " ", 0);
-	leg->SetFillColor(ci);
-	leg->SetFillStyle(1001);
-	// TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
-	TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(2);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(2);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	// entry=leg->AddEntry("","w/o xtalk","lpflpf");
-	entry=leg->AddEntry("","w/o xtalk","lpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(4);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(4);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg->AddEntry("","data","lpflpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(1);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(1);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+
+        ci = 1183;
+        color = new TColor(ci, 0, 0, 0, " ", 0.011);
+        leg->SetLineColor(ci);
+        leg->SetLineStyle(1);
+        leg->SetLineWidth(1);
+        ci = 1180;
+        color = new TColor(ci, 1, 1, 1, " ", 0);
+        leg->SetFillColor(ci);
+        leg->SetFillStyle(1001);
+        // TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
+        TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(2);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(2);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        // entry=leg->AddEntry("","w/o xtalk","lpflpf");
+        entry=leg->AddEntry("","w/o xtalk","lpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(4);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(4);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg->AddEntry("","data","lpflpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(1);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(1);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
         leg->SetHeader(title);
-	leg->Draw();
-	Canvas_1->Update();	
+        leg->Draw();
+        Canvas_1->Update();
 
-	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	//gPad->WaitPrimitive();
+        sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        //gPad->WaitPrimitive();
 
     
-	Canvas_1->Modified();
-	Canvas_1->cd();
-	Canvas_1->SetSelected(Canvas_1);
-	
-	chi_cross_E1devE7[iL-1]    = E1devE7__3->Chi2Test(E1devE7__1,"UW CHI2/NDF");
-	chi_original_E1devE7[iL-1] = E1devE7__3->Chi2Test(E1devE7__2,"UW CHI2/NDF");
+        Canvas_1->Modified();
+        Canvas_1->cd();
+        Canvas_1->SetSelected(Canvas_1);
 
-	// E7 dev E19
-	TH1D* E7devE19__1;
-	TH1D* E7devE19__2;
-	TH1D* E7devE19__3;
-	sprintf(title,"histo/layer%d/layer%d_E7devE19",iL,iL);
-	E7devE19__1 = (TH1D *)f_MC.Get(title);
-	E7devE19__2 = (TH1D *)f_MC_original.Get(title);
-	E7devE19__3 = (TH1D *)f_Data.Get(title);
+        chi_cross_E1devE7[iL-1]    = E1devE7__3->Chi2Test(E1devE7__1,"UW CHI2/NDF");
+        chi_original_E1devE7[iL-1] = E1devE7__3->Chi2Test(E1devE7__2,"UW CHI2/NDF");
 
-	E7devE19__1->SetStats(0);
-	E7devE19__1->SetLineColor(2);
-	E7devE19__1->SetLineWidth(2);
-	E7devE19__1->SetMarkerColor(2);
-	E7devE19__1->SetMarkerStyle(20);
-	E7devE19__1->SetMarkerSize(0.5);
-	E7devE19__1->GetXaxis()->SetTitle("E7 / E19");
-	E7devE19__1->GetXaxis()->SetLabelFont(42);
-	E7devE19__1->GetXaxis()->SetLabelOffset(0.01125);
-	E7devE19__1->GetXaxis()->SetLabelSize(0.045);
-	E7devE19__1->GetXaxis()->SetTitleSize(0.052);
-	E7devE19__1->GetXaxis()->SetTitleOffset(1.1);
-	E7devE19__1->GetYaxis()->SetLabelFont(42);
-	E7devE19__1->GetYaxis()->SetLabelOffset(0.01125);
-	E7devE19__1->GetYaxis()->SetLabelSize(0.045);
-	E7devE19__1->GetYaxis()->SetTitleSize(0.045);
-	E7devE19__1->GetYaxis()->SetTitleOffset(1.4);
-	E7devE19__1->GetYaxis()->SetTitleFont(42);
-	E7devE19__1->GetZaxis()->SetLabelFont(42);
-	E7devE19__1->GetZaxis()->SetLabelSize(0.045);
-	E7devE19__1->GetZaxis()->SetTitleSize(0.045);
-	E7devE19__1->GetZaxis()->SetTitleFont(42);
-	E7devE19__1->GetYaxis()->SetRangeUser(0,0.12);
-	E7devE19__1->GetXaxis()->SetRangeUser(0.2,1.01);
-	E7devE19__1->Draw("HIST");
+        // E7 dev E19
+        TH1D* E7devE19__1;
+        TH1D* E7devE19__2;
+        TH1D* E7devE19__3;
+        sprintf(title,"histo/layer%d/layer%d_E7devE19",iL,iL);
+        E7devE19__1 = (TH1D *)f_MC.Get(title);
+        E7devE19__2 = (TH1D *)f_MC_original.Get(title);
+        E7devE19__3 = (TH1D *)f_Data.Get(title);
 
-	ci = 1180;
-	color = new TColor(ci, 0, 0, 0, " ", 0);
-	pt->SetTextColor(ci);
-	pt->SetTextFont(42);
-	pt->Draw();
+        E7devE19__1->SetStats(0);
+        E7devE19__1->SetLineColor(2);
+        E7devE19__1->SetLineWidth(2);
+        E7devE19__1->SetMarkerColor(2);
+        E7devE19__1->SetMarkerStyle(20);
+        E7devE19__1->SetMarkerSize(0.5);
+        E7devE19__1->GetXaxis()->SetTitle("E7 / E19");
+        E7devE19__1->GetXaxis()->SetLabelFont(42);
+        E7devE19__1->GetXaxis()->SetLabelOffset(0.01125);
+        E7devE19__1->GetXaxis()->SetLabelSize(0.045);
+        E7devE19__1->GetXaxis()->SetTitleSize(0.052);
+        E7devE19__1->GetXaxis()->SetTitleOffset(1.1);
+        E7devE19__1->GetYaxis()->SetLabelFont(42);
+        E7devE19__1->GetYaxis()->SetLabelOffset(0.01125);
+        E7devE19__1->GetYaxis()->SetLabelSize(0.045);
+        E7devE19__1->GetYaxis()->SetTitleSize(0.045);
+        E7devE19__1->GetYaxis()->SetTitleOffset(1.4);
+        E7devE19__1->GetYaxis()->SetTitleFont(42);
+        E7devE19__1->GetZaxis()->SetLabelFont(42);
+        E7devE19__1->GetZaxis()->SetLabelSize(0.045);
+        E7devE19__1->GetZaxis()->SetTitleSize(0.045);
+        E7devE19__1->GetZaxis()->SetTitleFont(42);
+        E7devE19__1->GetYaxis()->SetRangeUser(0,0.12);
+        E7devE19__1->GetXaxis()->SetRangeUser(0.2,1.01);
+        E7devE19__1->Draw("HIST");
+
+        ci = 1180;
+        color = new TColor(ci, 0, 0, 0, " ", 0);
+        pt->SetTextColor(ci);
+        pt->SetTextFont(42);
+        pt->Draw();
    
-	E7devE19__2->SetLineColor(4);
-	E7devE19__2->SetLineWidth(2);
-	E7devE19__2->SetMarkerColor(4);
-	E7devE19__2->SetMarkerStyle(20);
-	E7devE19__2->SetMarkerSize(0.5);
-	E7devE19__2->Draw("HISTSAME");
+        E7devE19__2->SetLineColor(4);
+        E7devE19__2->SetLineWidth(2);
+        E7devE19__2->SetMarkerColor(4);
+        E7devE19__2->SetMarkerStyle(20);
+        E7devE19__2->SetMarkerSize(0.5);
+        E7devE19__2->Draw("HISTSAME");
     
-	E7devE19__3->SetLineWidth(2);
-	E7devE19__3->SetMarkerStyle(20);
-	E7devE19__3->SetMarkerSize(0.5);
-	E7devE19__3->Draw("SAME");
+        E7devE19__3->SetLineWidth(2);
+        E7devE19__3->SetMarkerStyle(20);
+        E7devE19__3->SetMarkerSize(0.5);
+        E7devE19__3->Draw("SAME");
 
    
-	TLegend *leg_E7devE19 = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
-	leg_E7devE19->SetBorderSize(1);
+        TLegend *leg_E7devE19 = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        leg_E7devE19->SetBorderSize(1);
 
-	ci = TColor::GetColor("#000000");
-	leg_E7devE19->SetTextColor(ci);
-	leg_E7devE19->SetTextFont(62);
-	
+        ci = TColor::GetColor("#000000");
+        leg_E7devE19->SetTextColor(ci);
+        leg_E7devE19->SetTextFont(62);
 
-	ci = 1183;
-	color = new TColor(ci, 0, 0, 0, " ", 0.011);
-	leg_E7devE19->SetLineColor(ci);
-	leg_E7devE19->SetLineStyle(1);
-	leg_E7devE19->SetLineWidth(1);
-	ci = 1180;
-	color = new TColor(ci, 1, 1, 1, " ", 0);
-	leg_E7devE19->SetFillColor(ci);
-	leg_E7devE19->SetFillStyle(1001);
-	entry=leg_E7devE19->AddEntry("","w/ xtalk","lpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(2);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(2);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_E7devE19->AddEntry("","w/o xtalk","lpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(4);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(4);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_E7devE19->AddEntry("","data","lpflpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(1);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(1);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+
+        ci = 1183;
+        color = new TColor(ci, 0, 0, 0, " ", 0.011);
+        leg_E7devE19->SetLineColor(ci);
+        leg_E7devE19->SetLineStyle(1);
+        leg_E7devE19->SetLineWidth(1);
+        ci = 1180;
+        color = new TColor(ci, 1, 1, 1, " ", 0);
+        leg_E7devE19->SetFillColor(ci);
+        leg_E7devE19->SetFillStyle(1001);
+        entry=leg_E7devE19->AddEntry("","w/ xtalk","lpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(2);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(2);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_E7devE19->AddEntry("","w/o xtalk","lpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(4);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(4);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_E7devE19->AddEntry("","data","lpflpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(1);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(1);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
         leg_E7devE19->SetHeader(title);
-	leg_E7devE19->Draw();
-	Canvas_1->Update();	
+        leg_E7devE19->Draw();
+        Canvas_1->Update();
 
-	sprintf(title,"plots/%dGeV/%dGeV_E7devE19_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_E7devE19_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	//gPad->WaitPrimitive();
+        sprintf(title,"plots/%dGeV/%dGeV_E7devE19_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_E7devE19_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        //gPad->WaitPrimitive();
 
     
-	Canvas_1->Modified();
-	Canvas_1->cd();
-	Canvas_1->SetSelected(Canvas_1);
+        Canvas_1->Modified();
+        Canvas_1->cd();
+        Canvas_1->SetSelected(Canvas_1);
 
-	// chi square test
-	chi_cross_E7devE19[iL-1]    = E7devE19__3->Chi2Test(E7devE19__1,"UW CHI2/NDF");
-	chi_original_E7devE19[iL-1] = E7devE19__3->Chi2Test(E7devE19__2,"UW CHI2/NDF");
+        // chi square test
+        chi_cross_E7devE19[iL-1]    = E7devE19__3->Chi2Test(E7devE19__1,"UW CHI2/NDF");
+        chi_original_E7devE19[iL-1] = E7devE19__3->Chi2Test(E7devE19__2,"UW CHI2/NDF");
 
-	// ========== COGx ========== //
-	TH1D* COGx__1;
-	TH1D* COGx__2;
-	TH1D* COGx__3;
-	sprintf(title,"histo/layer%d/layer%d_COGx",iL,iL);
-	COGx__1 = (TH1D *)f_MC.Get(title);
-	COGx__2 = (TH1D *)f_MC_original.Get(title);
-	COGx__3 = (TH1D *)f_Data.Get(title);
+        // ========== COGx ========== //
+        TH1D* COGx__1;
+        TH1D* COGx__2;
+        TH1D* COGx__3;
+        sprintf(title,"histo/layer%d/layer%d_COGx",iL,iL);
+        COGx__1 = (TH1D *)f_MC.Get(title);
+        COGx__2 = (TH1D *)f_MC_original.Get(title);
+        COGx__3 = (TH1D *)f_Data.Get(title);
 
-	COGx__1->SetStats(0);
-	COGx__1->SetLineColor(2);
-	COGx__1->SetLineWidth(2);
-	COGx__1->SetMarkerColor(2);
-	COGx__1->SetMarkerStyle(20);
-	COGx__1->SetMarkerSize(0.5);
-	COGx__1->GetXaxis()->SetTitle("COGx");
-	COGx__1->GetXaxis()->SetLabelFont(42);
-	COGx__1->GetXaxis()->SetLabelOffset(0.01125);
-	COGx__1->GetXaxis()->SetLabelSize(0.045);
-	COGx__1->GetXaxis()->SetTitleSize(0.052);
-	COGx__1->GetXaxis()->SetTitleOffset(1.1);
-	COGx__1->GetYaxis()->SetLabelFont(42);
-	COGx__1->GetYaxis()->SetLabelOffset(0.01125);
-	COGx__1->GetYaxis()->SetLabelSize(0.045);
-	COGx__1->GetYaxis()->SetTitleSize(0.045);
-	COGx__1->GetYaxis()->SetTitleOffset(1.4);
-	COGx__1->GetYaxis()->SetTitleFont(42);
-	COGx__1->GetZaxis()->SetLabelFont(42);
-	COGx__1->GetZaxis()->SetLabelSize(0.045);
-	COGx__1->GetZaxis()->SetTitleSize(0.045);
-	COGx__1->GetZaxis()->SetTitleFont(42);
-	//COGx__1->GetYaxis()->SetRangeUser(0,0.08);
-	COGx__1->Draw();
+        COGx__1->SetStats(0);
+        COGx__1->SetLineColor(2);
+        COGx__1->SetLineWidth(2);
+        COGx__1->SetMarkerColor(2);
+        COGx__1->SetMarkerStyle(20);
+        COGx__1->SetMarkerSize(0.5);
+        COGx__1->GetXaxis()->SetTitle("COGx");
+        COGx__1->GetXaxis()->SetLabelFont(42);
+        COGx__1->GetXaxis()->SetLabelOffset(0.01125);
+        COGx__1->GetXaxis()->SetLabelSize(0.045);
+        COGx__1->GetXaxis()->SetTitleSize(0.052);
+        COGx__1->GetXaxis()->SetTitleOffset(1.1);
+        COGx__1->GetYaxis()->SetLabelFont(42);
+        COGx__1->GetYaxis()->SetLabelOffset(0.01125);
+        COGx__1->GetYaxis()->SetLabelSize(0.045);
+        COGx__1->GetYaxis()->SetTitleSize(0.045);
+        COGx__1->GetYaxis()->SetTitleOffset(1.4);
+        COGx__1->GetYaxis()->SetTitleFont(42);
+        COGx__1->GetZaxis()->SetLabelFont(42);
+        COGx__1->GetZaxis()->SetLabelSize(0.045);
+        COGx__1->GetZaxis()->SetTitleSize(0.045);
+        COGx__1->GetZaxis()->SetTitleFont(42);
+        //COGx__1->GetYaxis()->SetRangeUser(0,0.08);
+        COGx__1->Draw();
 
-	ci = 1180;
-	color = new TColor(ci, 0, 0, 0, " ", 0);
-	pt->SetTextColor(ci);
-	pt->SetTextFont(42);
-	pt->Draw();
+        ci = 1180;
+        color = new TColor(ci, 0, 0, 0, " ", 0);
+        pt->SetTextColor(ci);
+        pt->SetTextFont(42);
+        pt->Draw();
    
-	COGx__2->SetLineColor(4);
-	COGx__2->SetLineWidth(2);
-	COGx__2->SetMarkerColor(4);
-	COGx__2->SetMarkerStyle(20);
-	COGx__2->SetMarkerSize(0.5);
-	COGx__2->Draw("SAME");
+        COGx__2->SetLineColor(4);
+        COGx__2->SetLineWidth(2);
+        COGx__2->SetMarkerColor(4);
+        COGx__2->SetMarkerStyle(20);
+        COGx__2->SetMarkerSize(0.5);
+        COGx__2->Draw("SAME");
     
-	COGx__3->SetLineWidth(2);
-	COGx__3->SetMarkerStyle(20);
-	COGx__3->SetMarkerSize(0.5);
-	COGx__3->Draw("SAME");
+        COGx__3->SetLineWidth(2);
+        COGx__3->SetMarkerStyle(20);
+        COGx__3->SetMarkerSize(0.5);
+        COGx__3->Draw("SAME");
 
    
-	TLegend *leg_COGx = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
-	leg_COGx->SetBorderSize(1);
+        TLegend *leg_COGx = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        leg_COGx->SetBorderSize(1);
 
-	ci = TColor::GetColor("#000000");
-	leg_COGx->SetTextColor(ci);
-	leg_COGx->SetTextFont(62);
-	
+        ci = TColor::GetColor("#000000");
+        leg_COGx->SetTextColor(ci);
+        leg_COGx->SetTextFont(62);
 
-	ci = 1183;
-	color = new TColor(ci, 0, 0, 0, " ", 0.011);
-	leg_COGx->SetLineColor(ci);
-	leg_COGx->SetLineStyle(1);
-	leg_COGx->SetLineWidth(1);
-	ci = 1180;
-	color = new TColor(ci, 1, 1, 1, " ", 0);
-	leg_COGx->SetFillColor(ci);
-	leg_COGx->SetFillStyle(1001);
-	entry=leg_COGx->AddEntry("","w/ xtalk","lpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(2);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(2);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_COGx->AddEntry("","w/o xtalk","lpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(4);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(4);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_COGx->AddEntry("","data","lpflpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(1);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(1);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+
+        ci = 1183;
+        color = new TColor(ci, 0, 0, 0, " ", 0.011);
+        leg_COGx->SetLineColor(ci);
+        leg_COGx->SetLineStyle(1);
+        leg_COGx->SetLineWidth(1);
+        ci = 1180;
+        color = new TColor(ci, 1, 1, 1, " ", 0);
+        leg_COGx->SetFillColor(ci);
+        leg_COGx->SetFillStyle(1001);
+        entry=leg_COGx->AddEntry("","w/ xtalk","lpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(2);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(2);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_COGx->AddEntry("","w/o xtalk","lpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(4);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(4);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_COGx->AddEntry("","data","lpflpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(1);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(1);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
         leg_COGx->SetHeader(title);
-	leg_COGx->Draw();
-	Canvas_1->Update();	
+        leg_COGx->Draw();
+        Canvas_1->Update();
 
-	sprintf(title,"plots/%dGeV/%dGeV_COGx_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_COGx_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	//gPad->WaitPrimitive();
+        sprintf(title,"plots/%dGeV/%dGeV_COGx_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_COGx_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        //gPad->WaitPrimitive();
 
     
-	Canvas_1->Modified();
-	Canvas_1->cd();
-	Canvas_1->SetSelected(Canvas_1);
+        Canvas_1->Modified();
+        Canvas_1->cd();
+        Canvas_1->SetSelected(Canvas_1);
 
-	// chi square test
-	chi_cross_COGx[iL-1]    = COGx__3->Chi2Test(COGx__1,"UW CHI2/NDF");
-	chi_original_COGx[iL-1] = COGx__3->Chi2Test(COGx__2,"UW CHI2/NDF");
+        // chi square test
+        chi_cross_COGx[iL-1]    = COGx__3->Chi2Test(COGx__1,"UW CHI2/NDF");
+        chi_original_COGx[iL-1] = COGx__3->Chi2Test(COGx__2,"UW CHI2/NDF");
 
-	// ========== COGy ========== //
-	TH1D* COGy__1;
-	TH1D* COGy__2;
-	TH1D* COGy__3;
-	sprintf(title,"histo/layer%d/layer%d_COGy",iL,iL);
-	COGy__1 = (TH1D *)f_MC.Get(title);
-	COGy__2 = (TH1D *)f_MC_original.Get(title);
-	COGy__3 = (TH1D *)f_Data.Get(title);
+        // ========== COGy ========== //
+        TH1D* COGy__1;
+        TH1D* COGy__2;
+        TH1D* COGy__3;
+        sprintf(title,"histo/layer%d/layer%d_COGy",iL,iL);
+        COGy__1 = (TH1D *)f_MC.Get(title);
+        COGy__2 = (TH1D *)f_MC_original.Get(title);
+        COGy__3 = (TH1D *)f_Data.Get(title);
 
-	COGy__1->SetStats(0);
-	COGy__1->SetLineColor(2);
-	COGy__1->SetLineWidth(2);
-	COGy__1->SetMarkerColor(2);
-	COGy__1->SetMarkerStyle(20);
-	COGy__1->SetMarkerSize(0.5);
-	COGy__1->GetXaxis()->SetTitle("COGy");
-	COGy__1->GetXaxis()->SetLabelFont(42);
-	COGy__1->GetXaxis()->SetLabelOffset(0.01125);
-	COGy__1->GetXaxis()->SetLabelSize(0.045);
-	COGy__1->GetXaxis()->SetTitleSize(0.052);
-	COGy__1->GetXaxis()->SetTitleOffset(1.1);
-	COGy__1->GetYaxis()->SetLabelFont(42);
-	COGy__1->GetYaxis()->SetLabelOffset(0.01125);
-	COGy__1->GetYaxis()->SetLabelSize(0.045);
-	COGy__1->GetYaxis()->SetTitleSize(0.045);
-	COGy__1->GetYaxis()->SetTitleOffset(1.4);
-	COGy__1->GetYaxis()->SetTitleFont(42);
-	COGy__1->GetZaxis()->SetLabelFont(42);
-	COGy__1->GetZaxis()->SetLabelSize(0.045);
-	COGy__1->GetZaxis()->SetTitleSize(0.045);
-	COGy__1->GetZaxis()->SetTitleFont(42);
-	//COGy__1->GetYaxis()->SetRangeUser(0,0.08);
-	COGy__1->Draw();
+        COGy__1->SetStats(0);
+        COGy__1->SetLineColor(2);
+        COGy__1->SetLineWidth(2);
+        COGy__1->SetMarkerColor(2);
+        COGy__1->SetMarkerStyle(20);
+        COGy__1->SetMarkerSize(0.5);
+        COGy__1->GetXaxis()->SetTitle("COGy");
+        COGy__1->GetXaxis()->SetLabelFont(42);
+        COGy__1->GetXaxis()->SetLabelOffset(0.01125);
+        COGy__1->GetXaxis()->SetLabelSize(0.045);
+        COGy__1->GetXaxis()->SetTitleSize(0.052);
+        COGy__1->GetXaxis()->SetTitleOffset(1.1);
+        COGy__1->GetYaxis()->SetLabelFont(42);
+        COGy__1->GetYaxis()->SetLabelOffset(0.01125);
+        COGy__1->GetYaxis()->SetLabelSize(0.045);
+        COGy__1->GetYaxis()->SetTitleSize(0.045);
+        COGy__1->GetYaxis()->SetTitleOffset(1.4);
+        COGy__1->GetYaxis()->SetTitleFont(42);
+        COGy__1->GetZaxis()->SetLabelFont(42);
+        COGy__1->GetZaxis()->SetLabelSize(0.045);
+        COGy__1->GetZaxis()->SetTitleSize(0.045);
+        COGy__1->GetZaxis()->SetTitleFont(42);
+        //COGy__1->GetYaxis()->SetRangeUser(0,0.08);
+        COGy__1->Draw();
 
-	ci = 1180;
-	color = new TColor(ci, 0, 0, 0, " ", 0);
-	pt->SetTextColor(ci);
-	pt->SetTextFont(42);
-	pt->Draw();
+        ci = 1180;
+        color = new TColor(ci, 0, 0, 0, " ", 0);
+        pt->SetTextColor(ci);
+        pt->SetTextFont(42);
+        pt->Draw();
    
-	COGy__2->SetLineColor(4);
-	COGy__2->SetLineWidth(2);
-	COGy__2->SetMarkerColor(4);
-	COGy__2->SetMarkerStyle(20);
-	COGy__2->SetMarkerSize(0.5);
-	COGy__2->Draw("SAME");
+        COGy__2->SetLineColor(4);
+        COGy__2->SetLineWidth(2);
+        COGy__2->SetMarkerColor(4);
+        COGy__2->SetMarkerStyle(20);
+        COGy__2->SetMarkerSize(0.5);
+        COGy__2->Draw("SAME");
     
-	COGy__3->SetLineWidth(2);
-	COGy__3->SetMarkerStyle(20);
-	COGy__3->SetMarkerSize(0.5);
-	COGy__3->Draw("SAME");
+        COGy__3->SetLineWidth(2);
+        COGy__3->SetMarkerStyle(20);
+        COGy__3->SetMarkerSize(0.5);
+        COGy__3->Draw("SAME");
 
    
-	TLegend *leg_COGy = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
-	leg_COGy->SetBorderSize(1);
+        TLegend *leg_COGy = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        leg_COGy->SetBorderSize(1);
 
-	ci = TColor::GetColor("#000000");
-	leg_COGy->SetTextColor(ci);
-	leg_COGy->SetTextFont(62);
-	
+        ci = TColor::GetColor("#000000");
+        leg_COGy->SetTextColor(ci);
+        leg_COGy->SetTextFont(62);
 
-	ci = 1183;
-	color = new TColor(ci, 0, 0, 0, " ", 0.011);
-	leg_COGy->SetLineColor(ci);
-	leg_COGy->SetLineStyle(1);
-	leg_COGy->SetLineWidth(1);
-	ci = 1180;
-	color = new TColor(ci, 1, 1, 1, " ", 0);
-	leg_COGy->SetFillColor(ci);
-	leg_COGy->SetFillStyle(1001);
-	entry=leg_COGy->AddEntry("","w/ xtalk","lpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(2);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(2);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_COGy->AddEntry("","w/o xtalk","lpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(4);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(4);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_COGy->AddEntry("","data","lpflpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(1);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(1);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+
+        ci = 1183;
+        color = new TColor(ci, 0, 0, 0, " ", 0.011);
+        leg_COGy->SetLineColor(ci);
+        leg_COGy->SetLineStyle(1);
+        leg_COGy->SetLineWidth(1);
+        ci = 1180;
+        color = new TColor(ci, 1, 1, 1, " ", 0);
+        leg_COGy->SetFillColor(ci);
+        leg_COGy->SetFillStyle(1001);
+        entry=leg_COGy->AddEntry("","w/ xtalk","lpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(2);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(2);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_COGy->AddEntry("","w/o xtalk","lpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(4);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(4);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_COGy->AddEntry("","data","lpflpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(1);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(1);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
         leg_COGy->SetHeader(title);
-	leg_COGy->Draw();
-	Canvas_1->Update();	
+        leg_COGy->Draw();
+        Canvas_1->Update();
 
-	sprintf(title,"plots/%dGeV/%dGeV_COGy_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_COGy_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	//gPad->WaitPrimitive();
+        sprintf(title,"plots/%dGeV/%dGeV_COGy_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_COGy_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        //gPad->WaitPrimitive();
 
     
-	Canvas_1->Modified();
-	Canvas_1->cd();
-	Canvas_1->SetSelected(Canvas_1);
+        Canvas_1->Modified();
+        Canvas_1->cd();
+        Canvas_1->SetSelected(Canvas_1);
 
-	// chi square test
-	chi_cross_COGy[iL-1]    = COGy__3->Chi2Test(COGy__1,"UW CHI2/NDF");
-	chi_original_COGy[iL-1] = COGy__3->Chi2Test(COGy__2,"UW CHI2/NDF");
+        // chi square test
+        chi_cross_COGy[iL-1]    = COGy__3->Chi2Test(COGy__1,"UW CHI2/NDF");
+        chi_original_COGy[iL-1] = COGy__3->Chi2Test(COGy__2,"UW CHI2/NDF");
 
 
-	// layerE
-	TH1D* layerE__1;
-	TH1D* layerE__2;
-	TH1D* layerE__3;
-	sprintf(title,"histo/layer%d/layer%d_layerE",iL,iL);
-	layerE__1 = (TH1D *)f_MC.Get(title);
-	layerE__2 = (TH1D *)f_MC_original.Get(title);
-	layerE__3 = (TH1D *)f_Data.Get(title);
+        // layerE
+        TH1D* layerE__1;
+        TH1D* layerE__2;
+        TH1D* layerE__3;
+        sprintf(title,"histo/layer%d/layer%d_layerE",iL,iL);
+        layerE__1 = (TH1D *)f_MC.Get(title);
+        layerE__2 = (TH1D *)f_MC_original.Get(title);
+        layerE__3 = (TH1D *)f_Data.Get(title);
 
-	layerE__1->SetStats(0);
-	layerE__1->SetLineColor(2);
-	layerE__1->SetLineWidth(2);
-	layerE__1->SetMarkerColor(2);
-	layerE__1->SetMarkerStyle(20);
-	layerE__1->SetMarkerSize(0.5);
-	layerE__1->GetXaxis()->SetTitle("layerE");
-	layerE__1->GetXaxis()->SetLabelFont(42);
-	layerE__1->GetXaxis()->SetLabelOffset(0.01125);
-	layerE__1->GetXaxis()->SetLabelSize(0.045);
-	layerE__1->GetXaxis()->SetTitleSize(0.052);
-	layerE__1->GetXaxis()->SetTitleOffset(1.1);
-	layerE__1->GetYaxis()->SetLabelFont(42);
-	layerE__1->GetYaxis()->SetLabelOffset(0.01125);
-	layerE__1->GetYaxis()->SetLabelSize(0.045);
-	layerE__1->GetYaxis()->SetTitleSize(0.045);
-	layerE__1->GetYaxis()->SetTitleOffset(1.4);
-	layerE__1->GetYaxis()->SetTitleFont(42);
-	layerE__1->GetZaxis()->SetLabelFont(42);
-	layerE__1->GetZaxis()->SetLabelSize(0.045);
-	layerE__1->GetZaxis()->SetTitleSize(0.045);
-	layerE__1->GetZaxis()->SetTitleFont(42);
-	if ( iL == 1 ) {
-	    layerE__1->GetXaxis()->SetRangeUser(0,100);
-	    layerE__1->GetYaxis()->SetRangeUser(0,0.3);
-	}
-	if ( iL == 2 ) {
-	    layerE__1->GetXaxis()->SetRangeUser(0,200);
-	    layerE__1->GetYaxis()->SetRangeUser(0,0.14);
-	}
-	else {
-	    layerE__1->GetXaxis()->SetRangeUser(0,300);
-	    layerE__1->GetYaxis()->SetRangeUser(0,0.14);
-	}
-	layerE__1->Draw("HIST");
+        layerE__1->SetStats(0);
+        layerE__1->SetLineColor(2);
+        layerE__1->SetLineWidth(2);
+        layerE__1->SetMarkerColor(2);
+        layerE__1->SetMarkerStyle(20);
+        layerE__1->SetMarkerSize(0.5);
+        layerE__1->GetXaxis()->SetTitle("layerE");
+        layerE__1->GetXaxis()->SetLabelFont(42);
+        layerE__1->GetXaxis()->SetLabelOffset(0.01125);
+        layerE__1->GetXaxis()->SetLabelSize(0.045);
+        layerE__1->GetXaxis()->SetTitleSize(0.052);
+        layerE__1->GetXaxis()->SetTitleOffset(1.1);
+        layerE__1->GetYaxis()->SetLabelFont(42);
+        layerE__1->GetYaxis()->SetLabelOffset(0.01125);
+        layerE__1->GetYaxis()->SetLabelSize(0.045);
+        layerE__1->GetYaxis()->SetTitleSize(0.045);
+        layerE__1->GetYaxis()->SetTitleOffset(1.4);
+        layerE__1->GetYaxis()->SetTitleFont(42);
+        layerE__1->GetZaxis()->SetLabelFont(42);
+        layerE__1->GetZaxis()->SetLabelSize(0.045);
+        layerE__1->GetZaxis()->SetTitleSize(0.045);
+        layerE__1->GetZaxis()->SetTitleFont(42);
+        if ( iL == 1 ) {
+            layerE__1->GetXaxis()->SetRangeUser(0,100);
+            layerE__1->GetYaxis()->SetRangeUser(0,0.3);
+        }
+        if ( iL == 2 ) {
+            layerE__1->GetXaxis()->SetRangeUser(0,200);
+            layerE__1->GetYaxis()->SetRangeUser(0,0.14);
+        }
+        else {
+            layerE__1->GetXaxis()->SetRangeUser(0,300);
+            layerE__1->GetYaxis()->SetRangeUser(0,0.14);
+        }
+        layerE__1->Draw("HIST");
 
-	ci = 1180;
-	color = new TColor(ci, 0, 0, 0, " ", 0);
-	pt->SetTextColor(ci);
-	pt->SetTextFont(42);
-	pt->Draw();
+        ci = 1180;
+        color = new TColor(ci, 0, 0, 0, " ", 0);
+        pt->SetTextColor(ci);
+        pt->SetTextFont(42);
+        pt->Draw();
    
-	layerE__2->SetLineColor(4);
-	layerE__2->SetLineWidth(2);
-	layerE__2->SetMarkerColor(4);
-	layerE__2->SetMarkerStyle(20);
-	layerE__2->SetMarkerSize(0.5);
-	layerE__2->Draw("HISTSAME");
+        layerE__2->SetLineColor(4);
+        layerE__2->SetLineWidth(2);
+        layerE__2->SetMarkerColor(4);
+        layerE__2->SetMarkerStyle(20);
+        layerE__2->SetMarkerSize(0.5);
+        layerE__2->Draw("HISTSAME");
     
-	layerE__3->SetLineWidth(2);
-	layerE__3->SetMarkerStyle(20);
-	layerE__3->SetMarkerSize(0.5);
-	layerE__3->Draw("SAME");
+        layerE__3->SetLineWidth(2);
+        layerE__3->SetMarkerStyle(20);
+        layerE__3->SetMarkerSize(0.5);
+        layerE__3->Draw("SAME");
 
    
-	TLegend *leg_layerE = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
-	leg_layerE->SetBorderSize(1);
+        TLegend *leg_layerE = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        leg_layerE->SetBorderSize(1);
 
-	ci = TColor::GetColor("#000000");
-	leg_layerE->SetTextColor(ci);
-	leg_layerE->SetTextFont(62);
-	
+        ci = TColor::GetColor("#000000");
+        leg_layerE->SetTextColor(ci);
+        leg_layerE->SetTextFont(62);
 
-	ci = 1183;
-	color = new TColor(ci, 0, 0, 0, " ", 0.011);
-	leg_layerE->SetLineColor(ci);
-	leg_layerE->SetLineStyle(1);
-	leg_layerE->SetLineWidth(1);
-	ci = 1180;
-	color = new TColor(ci, 1, 1, 1, " ", 0);
-	leg_layerE->SetFillColor(ci);
-	leg_layerE->SetFillStyle(1001);
-	entry=leg_layerE->AddEntry("","w/ xtalk","lpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(2);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(2);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_layerE->AddEntry("","w/o xtalk","lpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(4);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(4);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	entry=leg_layerE->AddEntry("","data","lpflpflpf");
-	entry->SetFillStyle(1001);
-	entry->SetLineColor(1);
-	entry->SetLineStyle(1);
-	entry->SetLineWidth(2);
-	entry->SetMarkerColor(1);
-	entry->SetMarkerStyle(20);
-	entry->SetMarkerSize(0.5);
-	entry->SetTextFont(42);
-	sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+
+        ci = 1183;
+        color = new TColor(ci, 0, 0, 0, " ", 0.011);
+        leg_layerE->SetLineColor(ci);
+        leg_layerE->SetLineStyle(1);
+        leg_layerE->SetLineWidth(1);
+        ci = 1180;
+        color = new TColor(ci, 1, 1, 1, " ", 0);
+        leg_layerE->SetFillColor(ci);
+        leg_layerE->SetFillStyle(1001);
+        entry=leg_layerE->AddEntry("","w/ xtalk","lpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(2);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(2);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_layerE->AddEntry("","w/o xtalk","lpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(4);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(4);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_layerE->AddEntry("","data","lpflpflpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(1);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(1);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
         leg_layerE->SetHeader(title);
-	leg_layerE->Draw();
-	Canvas_1->Update();	
+        leg_layerE->Draw();
+        Canvas_1->Update();
 
-	sprintf(title,"plots/%dGeV/%dGeV_layerE_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_layerE_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	//gPad->WaitPrimitive();
+        sprintf(title,"plots/%dGeV/%dGeV_layerE_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_layerE_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        //gPad->WaitPrimitive();
 
     
-	Canvas_1->Modified();
-	Canvas_1->cd();
-	Canvas_1->SetSelected(Canvas_1);
+        Canvas_1->Modified();
+        Canvas_1->cd();
+        Canvas_1->SetSelected(Canvas_1);
 
-	// chi square test
-	chi_cross_layerE[iL-1]    = layerE__3->Chi2Test(layerE__1,"UW CHI2/NDF");
-	chi_original_layerE[iL-1] = layerE__3->Chi2Test(layerE__2,"UW CHI2/NDF");
+        // chi square test
+        chi_cross_layerE[iL-1]    = layerE__3->Chi2Test(layerE__1,"UW CHI2/NDF");
+        chi_original_layerE[iL-1] = layerE__3->Chi2Test(layerE__2,"UW CHI2/NDF");
 
-/*
-	// E1devE7 vs layerE/TotalE
+        /*
+        // E1devE7 vs layerE/TotalE
 
-	TH2D* E1devE7_layerEdevTotalE__1;
-	TH2D* E1devE7_layerEdevTotalE__2;
-	TH2D* E1devE7_layerEdevTotalE__3;
-	sprintf(title,"histo/layer%d/layer%i_E1devE7_layerEdevTotalE",iL,iL);
-	E1devE7_layerEdevTotalE__1 = (TH2D *)f_MC.Get(title);
-	E1devE7_layerEdevTotalE__2 = (TH2D *)f_MC_original.Get(title);
-	E1devE7_layerEdevTotalE__3 = (TH2D *)f_Data.Get(title);
+        TH2D* E1devE7_layerEdevTotalE__1;
+        TH2D* E1devE7_layerEdevTotalE__2;
+        TH2D* E1devE7_layerEdevTotalE__3;
+        sprintf(title,"histo/layer%d/layer%i_E1devE7_layerEdevTotalE",iL,iL);
+        E1devE7_layerEdevTotalE__1 = (TH2D *)f_MC.Get(title);
+        E1devE7_layerEdevTotalE__2 = (TH2D *)f_MC_original.Get(title);
+        E1devE7_layerEdevTotalE__3 = (TH2D *)f_Data.Get(title);
 
-	E1devE7_layerEdevTotalE__1->SetStats(0);
-	E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitle("layerE");
-	E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelOffset(0.01125);
-	E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelSize(0.045);
-	E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitleSize(0.052);
-	E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitleOffset(1.1);
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitle("layerE/TotalE containment variable");
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelOffset(0.01125);
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelSize(0.045);
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleSize(0.045);
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleOffset(1.2);
-	E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleFont(42);
-	E1devE7_layerEdevTotalE__1->GetZaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__1->Draw("colz");
-	Canvas_1->Update();
-	sprintf(title,"plots/%dGeV/%dGeV_Xtalk_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_Xtalk_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
+        E1devE7_layerEdevTotalE__1->SetStats(0);
+        E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitle("layerE");
+        E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelOffset(0.01125);
+        E1devE7_layerEdevTotalE__1->GetXaxis()->SetLabelSize(0.045);
+        E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitleSize(0.052);
+        E1devE7_layerEdevTotalE__1->GetXaxis()->SetTitleOffset(1.1);
+        E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitle("layerE/TotalE containment variable");
+        E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelOffset(0.01125);
+        E1devE7_layerEdevTotalE__1->GetYaxis()->SetLabelSize(0.045);
+        E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleSize(0.045);
+        E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleOffset(1.2);
+        E1devE7_layerEdevTotalE__1->GetYaxis()->SetTitleFont(42);
+        E1devE7_layerEdevTotalE__1->GetZaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__1->Draw("colz");
+        Canvas_1->Update();
+        sprintf(title,"plots/%dGeV/%dGeV_Xtalk_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_Xtalk_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
 
-	E1devE7_layerEdevTotalE__2->SetStats(0);
-	E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitle("layerE");
-	E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelOffset(0.01125);
-	E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelSize(0.045);
-	E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitleSize(0.052);
-	E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitleOffset(1.1);
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitle("layerE/TotalE containment variable");
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelOffset(0.01125);
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelSize(0.045);
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleSize(0.045);
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleOffset(1.2);
-	E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleFont(42);
-	E1devE7_layerEdevTotalE__2->GetZaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__2->Draw("colz");
-	Canvas_1->Update();
-	sprintf(title,"plots/%dGeV/%dGeV_MC_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_MC_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
+        E1devE7_layerEdevTotalE__2->SetStats(0);
+        E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitle("layerE");
+        E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelOffset(0.01125);
+        E1devE7_layerEdevTotalE__2->GetXaxis()->SetLabelSize(0.045);
+        E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitleSize(0.052);
+        E1devE7_layerEdevTotalE__2->GetXaxis()->SetTitleOffset(1.1);
+        E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitle("layerE/TotalE containment variable");
+        E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelOffset(0.01125);
+        E1devE7_layerEdevTotalE__2->GetYaxis()->SetLabelSize(0.045);
+        E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleSize(0.045);
+        E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleOffset(1.2);
+        E1devE7_layerEdevTotalE__2->GetYaxis()->SetTitleFont(42);
+        E1devE7_layerEdevTotalE__2->GetZaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__2->Draw("colz");
+        Canvas_1->Update();
+        sprintf(title,"plots/%dGeV/%dGeV_MC_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_MC_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
 
-	E1devE7_layerEdevTotalE__3->SetStats(0);
-	E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitle("E1/E7 containment variable");
-	E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelOffset(0.01125);
-	E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelSize(0.045);
-	E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitleSize(0.052);
-	E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitleOffset(1.1);
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitle("layerE/TotalE containment variable");
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelOffset(0.01125);
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelSize(0.045);
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleSize(0.045);
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleOffset(1.2);
-	E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleFont(42);
-	E1devE7_layerEdevTotalE__3->GetZaxis()->SetLabelFont(42);
-	E1devE7_layerEdevTotalE__3->Draw("colz");
-	Canvas_1->Update();
-	sprintf(title,"plots/%dGeV/%dGeV_data_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
-	Canvas_1->SaveAs(title);
-	sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
-	Canvas_1->SaveAs(title)
-*/
+        E1devE7_layerEdevTotalE__3->SetStats(0);
+        E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitle("E1/E7 containment variable");
+        E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelOffset(0.01125);
+        E1devE7_layerEdevTotalE__3->GetXaxis()->SetLabelSize(0.045);
+        E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitleSize(0.052);
+        E1devE7_layerEdevTotalE__3->GetXaxis()->SetTitleOffset(1.1);
+        E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitle("layerE/TotalE containment variable");
+        E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelOffset(0.01125);
+        E1devE7_layerEdevTotalE__3->GetYaxis()->SetLabelSize(0.045);
+        E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleSize(0.045);
+        E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleOffset(1.2);
+        E1devE7_layerEdevTotalE__3->GetYaxis()->SetTitleFont(42);
+        E1devE7_layerEdevTotalE__3->GetZaxis()->SetLabelFont(42);
+        E1devE7_layerEdevTotalE__3->Draw("colz");
+        Canvas_1->Update();
+        sprintf(title,"plots/%dGeV/%dGeV_data_E1devE7_layerEdevTotalE_layer%02d.png", Energy, Energy, iL);
+        Canvas_1->SaveAs(title);
+        sprintf(title,"plots/%dGeV/%dGeV_E1devE7_layerEdevTotalE_layer%02d.pdf", Energy, Energy, iL);
+        Canvas_1->SaveAs(title)
+        */
     }
 
     // ========== Total CEE ========== //
@@ -798,7 +798,7 @@ void xtalk_compare(int Energy)
     ci = TColor::GetColor("#000000");
     leg->SetTextColor(ci);
     leg->SetTextFont(62);
-	
+
 
     ci = 1183;
     color = new TColor(ci, 0, 0, 0, " ", 0.011);
@@ -851,7 +851,7 @@ void xtalk_compare(int Energy)
     Canvas_1->Modified();
     Canvas_1->cd();
     Canvas_1->SetSelected(Canvas_1);
-	
+
     
     
     // ========== chi square plot ========== //
