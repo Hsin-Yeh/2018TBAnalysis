@@ -12,7 +12,7 @@ void xtalk_compare(int Energy)
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
     TFile f_Data(title);
     // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN.root",Energy);
-    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_v46_0000.root",Energy);
+    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_v46_0000_0.root",Energy);
     TFile f_MC_original(title);
 
     int NLAYER = 28;
