@@ -6,13 +6,13 @@ void xtalk_compare(int Energy)
     char title[200];
     //int Energy = 300;
     
-    sprintf(title,"root_plot/plot_sim_%dGeV_EMN_fullbeamline_LeadBeforeHalo_6per.root",Energy);
+    sprintf(title,"root_plot/plot_sim_%dGeV_EMN_fullbeamline_v46.root",Energy);
     // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
     TFile f_MC(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
     TFile f_Data(title);
     // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN.root",Energy);
-    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadBeforeHalo.root",Energy);
+    sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_v46.root",Energy);
     TFile f_MC_original(title);
 
     int NLAYER = 28;
@@ -81,7 +81,7 @@ void xtalk_compare(int Energy)
 	color = new TColor(ci, 0, 0, 0, " ", 0);
 	pt->SetTextColor(ci);
 	pt->SetTextFont(42);
-	TText *pt_LaTex = pt->AddText("LeadNearHGCAL");
+	TText *pt_LaTex = pt->AddText("E1devE7");
 	pt->Draw();
    
 	E1devE7__2->SetLineColor(4);
