@@ -875,12 +875,12 @@ void xtalk_compare(int Energy)
     multi_chi_E1devE7->GetXaxis()->SetTitle("layerID");
     multi_chi_E1devE7->GetYaxis()->SetTitle("Chi2 / NDF");
     multi_chi_E1devE7->GetYaxis()->SetTitleOffset(1);
-    multi_chi_E1devE7->GetYaxis()->SetRangeUser(0,0.012);
+    multi_chi_E1devE7->GetYaxis()->SetRangeUser(0,0.006);
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
-    sprintf(title,"plots/%dGeV/chi2_compareE1devE7_%dGeV.png", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_E1devE7_chi2Test.png", Energy, Energy);
     c4->SaveAs(title);
-    sprintf(title,"plots/%dGeV/chi2_compareE1devE7_%dGeV.pdf", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_E1devE7_chi2Test.pdf", Energy, Energy);
     c4->SaveAs(title);
 
     
@@ -903,12 +903,12 @@ void xtalk_compare(int Energy)
     multi_chi_E7devE19->GetXaxis()->SetTitle("layerID");
     multi_chi_E7devE19->GetYaxis()->SetTitle("Chi2 / NDF");
     multi_chi_E7devE19->GetYaxis()->SetTitleOffset(1);
-    multi_chi_E7devE19->GetYaxis()->SetRangeUser(0,0.02);
+    multi_chi_E7devE19->GetYaxis()->SetRangeUser(0,0.006);
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
-    sprintf(title,"plots/%dGeV/chi2_compareE7devE19_%dGeV.png", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_E7devE19_chi2Test.png", Energy, Energy);
     c4->SaveAs(title);
-    sprintf(title,"plots/%dGeV/chi2_compareE7devE19_%dGeV.pdf", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_E7devE19_chi2Test.pdf", Energy, Energy);
     c4->SaveAs(title);
 
     TGraph* g_chi_cross_COGx = new TGraph(NLAYER, layerID, chi_cross_COGx);
@@ -932,9 +932,9 @@ void xtalk_compare(int Energy)
     multi_chi_COGx->GetYaxis()->SetTitleOffset(1);
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
-    sprintf(title,"plots/%dGeV/chi2_compareCOGx_%dGeV.png", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_COGx_chi2Test.png", Energy, Energy);
     c4->SaveAs(title);
-    sprintf(title,"plots/%dGeV/chi2_compareCOGx_%dGeV.pdf", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_COGx_chi2Test.pdf", Energy, Energy);
     c4->SaveAs(title);
 
     TGraph* g_chi_cross_COGy = new TGraph(NLAYER, layerID, chi_cross_COGy);
@@ -958,9 +958,9 @@ void xtalk_compare(int Energy)
     multi_chi_COGy->GetYaxis()->SetTitleOffset(1);
     c4->BuildLegend(0.7,0.7,0.85,0.85);
     c4->Update();
-    sprintf(title,"plots/%dGeV/chi2_compareCOGy_%dGeV.png", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_COGy_chi2Test.png", Energy, Energy);
     c4->SaveAs(title);
-    sprintf(title,"plots/%dGeV/chi2_compareCOGy_%dGeV.pdf", Energy, Energy);
+    sprintf(title,"plots/%dGeV/%dGeV_COGy_chi2Test.pdf", Energy, Energy);
     c4->SaveAs(title);
 
     TGraph* g_chi_cross_layerE = new TGraph(NLAYER, layerID, chi_cross_layerE);
