@@ -479,7 +479,7 @@ void makePlots::Loop(){
         h_mx_my    -> Fill ( m_x, m_y );
         h_bx_mx    -> Fill ( b_x, m_x );
         h_by_my    -> Fill ( b_y, m_y );
-        p_bx_totalCEE -> Fill ( b_x, totalCEE, 1);
+        p_bx_totalCEE -> Fill ( b_x, totalE_CEE, 1);
         //cout << m_x << " " << m_y << endl;
 
         //f_weights >> weights;
