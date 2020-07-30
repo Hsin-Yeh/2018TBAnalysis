@@ -447,7 +447,6 @@ void makePlots::Loop(){
             if ( abs( b_y - 1.0 ) > 1 ) continue;
         }
         else {
-            cout << "hi" << end;
             if ( abs( -b_x + 2.7 - 3.6 ) > 1 ) continue;
             if ( abs( -b_y - 1.0 + 2.6 ) > 1 ) continue;
         }
