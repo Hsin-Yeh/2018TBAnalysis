@@ -307,6 +307,7 @@ void makePlots::Loop(){
     TProfile *p_radialEnergy_totalE[EE_NLAYER];
     TProfile *p_radialEnergy_impactPosition[EE_NLAYER];
     TProfile *p_bx_E1[EE_NLAYER];
+    TProfile *p_bx_totalCEE = new TProfile("h_bx_totalCEE","",100,-10,10,0,100000);
 
     for( int iL = 0; iL < EE_NLAYER ; ++iL){
         sprintf(title,"layer%i",iL+1);
@@ -478,6 +479,7 @@ void makePlots::Loop(){
         h_mx_my    -> Fill ( m_x, m_y );
         h_bx_mx    -> Fill ( b_x, m_x );
         h_by_my    -> Fill ( b_y, m_y );
+        p_bx_totalCEE -> Fill ( b_x, totalCEE, 1);
         //cout << m_x << " " << m_y << endl;
 
         //f_weights >> weights;
