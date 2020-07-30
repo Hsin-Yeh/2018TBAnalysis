@@ -62,6 +62,7 @@ void xtalk_compare(int Energy)
         E1devE7__1->GetYaxis()->SetTitleSize(0.045);
         E1devE7__1->GetYaxis()->SetTitleOffset(1.4);
         E1devE7__1->GetYaxis()->SetTitleFont(42);
+        E1devE7__1->GetYaxis()->SetTitle("Events (normalized)");
         E1devE7__1->GetZaxis()->SetLabelFont(42);
         E1devE7__1->GetZaxis()->SetLabelSize(0.045);
         E1devE7__1->GetZaxis()->SetTitleSize(0.045);
@@ -115,7 +116,17 @@ void xtalk_compare(int Energy)
         leg->SetFillColor(ci);
         leg->SetFillStyle(1001);
         // TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
-        TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
+        TLegendEntry *entry=leg->AddEntry("","data","lpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(1);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(1);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+
+        entry=leg->AddEntry("","MC with xtalk","lpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(2);
         entry->SetLineStyle(1);
@@ -125,7 +136,7 @@ void xtalk_compare(int Energy)
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
         // entry=leg->AddEntry("","w/o xtalk","lpflpf");
-        entry=leg->AddEntry("","w/o xtalk","lpflpf");
+        entry=leg->AddEntry("","MC without xtalk","lpflpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(4);
         entry->SetLineStyle(1);
@@ -134,16 +145,7 @@ void xtalk_compare(int Energy)
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
-        entry=leg->AddEntry("","data","lpflpflpf");
-        entry->SetFillStyle(1001);
-        entry->SetLineColor(1);
-        entry->SetLineStyle(1);
-        entry->SetLineWidth(2);
-        entry->SetMarkerColor(1);
-        entry->SetMarkerStyle(20);
-        entry->SetMarkerSize(0.5);
-        entry->SetTextFont(42);
-        sprintf(title,"TB2018 %dGeV layer%d",Energy, iL);
+        sprintf(title,"e+ %d GeV layer%d",Energy, iL);
         leg->SetHeader(title);
         leg->Draw();
         Canvas_1->Update();
@@ -841,10 +843,10 @@ void xtalk_compare(int Energy)
     leg->Draw();
     Canvas_1->Update();	
 
-    sprintf(title,"plots/%dGeV/%dGeV_totalCEE.png", Energy, Energy);
-    Canvas_1->SaveAs(title);
-    sprintf(title,"plots/%dGeV/%dGeV_totalCEE.pdf", Energy, Energy);
-    Canvas_1->SaveAs(title);
+    // sprintf(title,"plots/%dGeV/%dGeV_totalCEE.png", Energy, Energy);
+    // Canvas_1->SaveAs(title);
+    // sprintf(title,"plots/%dGeV/%dGeV_totalCEE.pdf", Energy, Energy);
+    // Canvas_1->SaveAs(title);
     //gPad->WaitPrimitive();
 
     

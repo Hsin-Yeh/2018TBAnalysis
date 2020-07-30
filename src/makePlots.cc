@@ -436,15 +436,25 @@ void makePlots::Loop(){
         if(ev %10000 == 0) cout << "Processing event: "<< ev << endl;
         GetData(ev);
 
+
         // Event Selection
         if ( dwcReferenceType != 13) continue;
         if ( totalNhit_CEH >= 50 ) continue;
         if ( totalE_CEE / totalE <= 0.95) continue;
 
-        if ( abs(b_x - b_x_mean) < 1 ) {}
-        else continue;
-        if ( abs(b_y - b_y_mean) < 1 ) {}
-        else continue;
+        if ( Is_Data ) {
+            if ( abs( b_x + 2.7 ) > 1 ) continue;
+            if ( abs( b_y - 1.0 ) > 1 ) continue;
+        }
+        else {
+            cout << "hi" << end;
+            if ( abs( -b_x + 2.7 - 3.6 ) > 1 ) continue;
+            if ( abs( -b_y - 1.0 + 2.6 ) > 1 ) continue;
+        }
+        // if ( abs(b_x - b_x_mean) < 1 ) {}
+        // else continue;
+        // if ( abs(b_y - b_y_mean) < 1 ) {}
+        // else continue;
 
         if ( ahc_Esum > 0 ) continue;
 
