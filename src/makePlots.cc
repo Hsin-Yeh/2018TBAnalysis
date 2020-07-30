@@ -445,14 +445,14 @@ void makePlots::Loop(){
         if ( totalNhit_CEH >= 50 ) continue;
         if ( totalE_CEE / totalE <= 0.95) continue;
 
-        if ( Is_Data ) {
-            if ( abs( b_x + 2.7 ) > 1 ) continue;
-            if ( abs( b_y - 1.0 ) > 1 ) continue;
-        }
-        else {
-            if ( abs( -b_x + 2.7 - 3.6 ) > 1 ) continue;
-            if ( abs( -b_y - 1.0 + 2.6 ) > 1 ) continue;
-        }
+        // if ( Is_Data ) {
+            // if ( abs( b_x + 2.7 ) > 1 ) continue;
+            // if ( abs( b_y - 1.0 ) > 1 ) continue;
+        // }
+        // else {
+            // if ( abs( -b_x + 2.7 - 3.6 ) > 1 ) continue;
+            // if ( abs( -b_y - 1.0 + 2.6 ) > 1 ) continue;
+        // }
         // if ( abs(b_x - b_x_mean) < 1 ) {}
         // else continue;
         // if ( abs(b_y - b_y_mean) < 1 ) {}
