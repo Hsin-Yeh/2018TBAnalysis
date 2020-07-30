@@ -306,6 +306,7 @@ void makePlots::Loop(){
     TProfile *p_radialEnergy_showerAxis[EE_NLAYER];
     TProfile *p_radialEnergy_totalE[EE_NLAYER];
     TProfile *p_radialEnergy_impactPosition[EE_NLAYER];
+    TProfile *p_bx_E1[EE_NLAYER];
 
     for( int iL = 0; iL < EE_NLAYER ; ++iL){
         sprintf(title,"layer%i",iL+1);
@@ -396,6 +397,8 @@ void makePlots::Loop(){
         p_radialEnergy_totalE[iL] = new TProfile(title,"",6,0,6,0,1.01,"");
         sprintf(title,"layer%i_radialEnergy_impactPosition_profile",iL+1);
         p_radialEnergy_impactPosition[iL] = new TProfile(title,"",20,0,10,0,1000,"");
+        sprintf(title,"layer%i_bx_E1_profile",iL+1);
+        p_bx_E1[iL] = new TProfile(title,"",100,-10,10,0,1000,"");
     }
 
     // for(int r = 0; r < N_moliere_ring; r++) {	R_moliere [r] = Average_cell_radius * (r+1);  }
@@ -523,6 +526,7 @@ void makePlots::Loop(){
             p_E1devE7_E1[iL]                        -> Fill ( layerE1[iL], E1devE7, 1 );
             p_E1devE7_E7[iL]                        -> Fill ( layerE7[iL], E1devE7, 1 );
             p_E1devE7_EFirstRing[iL]                -> Fill ( (layerE7[iL] - layerE1[iL]), E1devE7, 1 );
+            p_bx_E1[iL]                             -> Fill ( b_x, layerE1[iL], 1 );
 
             if ( layerE1[iL] <= 50 ) {
                 h_E1devE7_50[iL] -> Fill ( E1devE7 );}
