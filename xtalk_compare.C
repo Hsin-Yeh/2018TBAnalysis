@@ -19,6 +19,7 @@ void xtalk_compare(int Energy)
     double chi_cross_layerE[NLAYER], chi_cross_COGx[NLAYER], chi_cross_COGy[NLAYER], chi_cross_E1devE7[NLAYER], chi_cross_E7devE19[NLAYER];
     double chi_original_layerE[NLAYER], chi_original_COGx[NLAYER], chi_original_COGy[NLAYER], chi_original_E1devE7[NLAYER], chi_original_E7devE19[NLAYER];
     double layerID[NLAYER];
+    double Y_max;
 
     for( int iL = 1; iL <= 28; iL++) {
 
@@ -40,6 +41,7 @@ void xtalk_compare(int Energy)
         Canvas_1->SetBorderSize(2);
         Canvas_1->SetTopMargin(0.08013938);
         Canvas_1->SetBottomMargin(0.1602788);
+        Canvas_1->SetLeftMargin(0.15);
         Canvas_1->SetFrameBorderMode(0);
         Canvas_1->SetFrameLineWidth(2);
         Canvas_1->SetFrameBorderMode(0);
@@ -56,6 +58,8 @@ void xtalk_compare(int Energy)
         E1devE7__1->GetXaxis()->SetLabelSize(0.045);
         E1devE7__1->GetXaxis()->SetTitleSize(0.052);
         E1devE7__1->GetXaxis()->SetTitleOffset(1.1);
+        E1devE7__1->GetXaxis()->SetRangeUser(0,1.0);
+        Y_max = E1devE7__1->GetMaximum();
         E1devE7__1->GetYaxis()->SetLabelFont(42);
         E1devE7__1->GetYaxis()->SetLabelOffset(0.01125);
         E1devE7__1->GetYaxis()->SetLabelSize(0.045);
@@ -67,9 +71,9 @@ void xtalk_compare(int Energy)
         E1devE7__1->GetZaxis()->SetLabelSize(0.045);
         E1devE7__1->GetZaxis()->SetTitleSize(0.045);
         E1devE7__1->GetZaxis()->SetTitleFont(42);
-        E1devE7__1->GetYaxis()->SetRangeUser(0,0.064);
+        E1devE7__1->GetYaxis()->SetRangeUser(0,Y_max*1.4);
         E1devE7__1->Draw("HIST");
-   
+
         TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");
         pt->SetName("title");
         pt->SetBorderSize(0);
@@ -98,7 +102,7 @@ void xtalk_compare(int Energy)
         E1devE7__3->Draw("SAME");
 
    
-        TLegend *leg = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        TLegend *leg = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
         leg->SetBorderSize(1);
 
         ci = TColor::GetColor("#000000");
@@ -185,18 +189,20 @@ void xtalk_compare(int Energy)
         E7devE19__1->GetXaxis()->SetLabelSize(0.045);
         E7devE19__1->GetXaxis()->SetTitleSize(0.052);
         E7devE19__1->GetXaxis()->SetTitleOffset(1.1);
+        E7devE19__1->GetXaxis()->SetRangeUser(0,1.0);
+        Y_max = E7devE19__1->GetMaximum();
         E7devE19__1->GetYaxis()->SetLabelFont(42);
         E7devE19__1->GetYaxis()->SetLabelOffset(0.01125);
         E7devE19__1->GetYaxis()->SetLabelSize(0.045);
         E7devE19__1->GetYaxis()->SetTitleSize(0.045);
         E7devE19__1->GetYaxis()->SetTitleOffset(1.4);
         E7devE19__1->GetYaxis()->SetTitleFont(42);
+        E7devE19__1->GetYaxis()->SetTitle("Events (normalized)");
         E7devE19__1->GetZaxis()->SetLabelFont(42);
         E7devE19__1->GetZaxis()->SetLabelSize(0.045);
         E7devE19__1->GetZaxis()->SetTitleSize(0.045);
         E7devE19__1->GetZaxis()->SetTitleFont(42);
-        E7devE19__1->GetYaxis()->SetRangeUser(0,0.12);
-        E7devE19__1->GetXaxis()->SetRangeUser(0.2,1.01);
+        E7devE19__1->GetYaxis()->SetRangeUser(0,Y_max*1.4);
         E7devE19__1->Draw("HIST");
 
         ci = 1180;
@@ -218,7 +224,7 @@ void xtalk_compare(int Energy)
         E7devE19__3->Draw("SAME");
 
    
-        TLegend *leg_E7devE19 = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        TLegend *leg_E7devE19 = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
         leg_E7devE19->SetBorderSize(1);
 
         ci = TColor::GetColor("#000000");
@@ -235,7 +241,16 @@ void xtalk_compare(int Energy)
         color = new TColor(ci, 1, 1, 1, " ", 0);
         leg_E7devE19->SetFillColor(ci);
         leg_E7devE19->SetFillStyle(1001);
-        entry=leg_E7devE19->AddEntry("","w/ xtalk","lpf");
+        entry=leg_E7devE19->AddEntry("","data","lpf");
+        entry->SetFillStyle(1001);
+        entry->SetLineColor(1);
+        entry->SetLineStyle(1);
+        entry->SetLineWidth(2);
+        entry->SetMarkerColor(1);
+        entry->SetMarkerStyle(20);
+        entry->SetMarkerSize(0.5);
+        entry->SetTextFont(42);
+        entry=leg_E7devE19->AddEntry("","MC with xtalk","lpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(2);
         entry->SetLineStyle(1);
@@ -244,21 +259,12 @@ void xtalk_compare(int Energy)
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
-        entry=leg_E7devE19->AddEntry("","w/o xtalk","lpflpf");
+        entry=leg_E7devE19->AddEntry("","MC without xtalk","lpflpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(4);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
         entry->SetMarkerColor(4);
-        entry->SetMarkerStyle(20);
-        entry->SetMarkerSize(0.5);
-        entry->SetTextFont(42);
-        entry=leg_E7devE19->AddEntry("","data","lpflpflpf");
-        entry->SetFillStyle(1001);
-        entry->SetLineColor(1);
-        entry->SetLineStyle(1);
-        entry->SetLineWidth(2);
-        entry->SetMarkerColor(1);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
@@ -317,7 +323,7 @@ void xtalk_compare(int Energy)
         COGx__1->Draw();
 
         ci = 1180;
-        color = new TColor(ci, 0, 0, 0, " ", 0);
+        // color = new TColor(ci, 0, 0, 0, " ", 0);
         pt->SetTextColor(ci);
         pt->SetTextFont(42);
         pt->Draw();
@@ -335,7 +341,7 @@ void xtalk_compare(int Energy)
         COGx__3->Draw("SAME");
 
    
-        TLegend *leg_COGx = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        TLegend *leg_COGx = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
         leg_COGx->SetBorderSize(1);
 
         ci = TColor::GetColor("#000000");
@@ -452,7 +458,7 @@ void xtalk_compare(int Energy)
         COGy__3->Draw("SAME");
 
    
-        TLegend *leg_COGy = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        TLegend *leg_COGy = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
         leg_COGy->SetBorderSize(1);
 
         ci = TColor::GetColor("#000000");
@@ -581,7 +587,7 @@ void xtalk_compare(int Energy)
         layerE__3->Draw("SAME");
 
    
-        TLegend *leg_layerE = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+        TLegend *leg_layerE = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
         leg_layerE->SetBorderSize(1);
 
         ci = TColor::GetColor("#000000");
@@ -794,7 +800,7 @@ void xtalk_compare(int Energy)
     totalCEE__3->Draw("SAME");
 
    
-    TLegend *leg = new TLegend(0.13,0.7,0.43,0.9,NULL,"brNDC");
+    TLegend *leg = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
     leg->SetBorderSize(1);
 
     ci = TColor::GetColor("#000000");
