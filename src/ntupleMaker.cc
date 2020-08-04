@@ -563,11 +563,10 @@ void ntupleMaker::NtupleMaker(){
                 // }
             // }
             for (int idx = 0; idx < (int)hit_tmp[iL].size(); idx++){
-                if ( hit_tmp[iL].at(idx) > Emax ) {
-                    Emax = hit_tmp[iL].at(idx);
-                    cout << hit_tmp[iL].at(idx) << endl;
+                if ( hit_tmp[iL][idx] > Emax ) {
+                    Emax = hit_tmp[iL][idx];
                     maxID[iL] = idx;
-                    E_1[iL] = hit_tmp[iL].at(idx);
+                    E_1[iL] = hit_tmp[iL][idx];
                 }
             }
             //Computing impact position of the shower on a given layer using Thorben's logE method
