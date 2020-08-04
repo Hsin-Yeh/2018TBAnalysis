@@ -509,7 +509,7 @@ void ntupleMaker::NtupleMaker(){
         for(int h = 0; h < Nhits ; ++h){
 
             Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
-            //cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+            cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
             if ( layer == 36 ) continue;
             if ( layer == 37 ) continue;
             if ( energy < 0.5 ) continue;
