@@ -561,7 +561,7 @@ void ntupleMaker::NtupleMaker(){
                     // E_1[iL] = E_ch[iL][ich];
                 // }
             // }
-            cout << iL << endl;
+            cout << (int)hit_tmp[iL-1].size() << endl;
             for (int idx = 0; idx < (int)hit_tmp[iL-1].size(); idx++){
                 if ( hit_tmp[iL-1].at(idx) > Emax ) {
                     Emax = hit_tmp[iL-1].at(idx);
