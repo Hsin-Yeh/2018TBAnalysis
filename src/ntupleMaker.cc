@@ -570,7 +570,6 @@ void ntupleMaker::NtupleMaker(){
                     E_1[iL] = hit_tmp[iL].at(idx);
                 }
             }
-            cout << "hi" << endl;
             //Computing impact position of the shower on a given layer using Thorben's logE method
             double w, totalWeight;
             double numerator_x, numerator_y;
@@ -616,14 +615,14 @@ void ntupleMaker::NtupleMaker(){
                 if( dR < 1.12455*3*1.2) E_37_showerAxis[iL] += E_ch[iL][ich];
                 if( dR < 1.12455*4*1.2) E_61_showerAxis[iL] += E_ch[iL][ich];
             }
-            for( int idx = 0; idx < (int)hit_tmp[iL-1].size(); idx++ ){
-                dx = hit_x[iL-1][idx] - hit_x[iL-1][maxID[iL-1]];
-                dy = hit_y[iL-1][idx] - hit_y[iL-1][maxID[iL-1]];
+            for( int idx = 0; idx < (int)hit_tmp[iL].size(); idx++ ){
+                dx = hit_x[iL][idx] - hit_x[iL][maxID[iL]];
+                dy = hit_y[iL][idx] - hit_y[iL][maxID[iL]];
                 dR = sqrt(dx*dx + dy*dy);
-                if( dR < 1.12455*1.2) E_7[iL] += hit_tmp[iL-1][idx];
-                if( dR < 1.12455*2*1.2) E_19[iL] += hit_tmp[iL-1][idx];
-                if( dR < 1.12455*3*1.2) E_37[iL] += hit_tmp[iL-1][idx];
-                if( dR < 1.12455*4*1.2) E_61[iL] += hit_tmp[iL-1][idx];
+                if( dR < 1.12455*1.2) E_7[iL] += hit_tmp[iL][idx];
+                if( dR < 1.12455*2*1.2) E_19[iL] += hit_tmp[iL][idx];
+                if( dR < 1.12455*3*1.2) E_37[iL] += hit_tmp[iL][idx];
+                if( dR < 1.12455*4*1.2) E_61[iL] += hit_tmp[iL][idx];
 
             }
 
