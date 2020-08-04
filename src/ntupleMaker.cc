@@ -551,7 +551,7 @@ void ntupleMaker::NtupleMaker(){
             // }
 */
         }
- 
+
         for(int iL = 0; iL < NLAYER ; ++iL){
             //Find seed
             double Emax = -1;
@@ -562,6 +562,14 @@ void ntupleMaker::NtupleMaker(){
                     E_1[iL] = E_ch[iL][ich];
                 }
             }
+
+            Emax = -1;
+            for(int idx = 0; idx < hit_tmp[iL-1].size(); idx++){
+                if( hit_tmp[iL-1].at(idx) > Emax ){
+                    Emax = hit_tmp[iL-1].at(idx);
+                }
+            }
+            cout << Emax - E_1[iL] << end;
 
             //Computing impact position of the shower on a given layer using Thorben's logE method
             double w, totalWeight;
