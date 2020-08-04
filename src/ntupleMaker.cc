@@ -509,7 +509,7 @@ void ntupleMaker::NtupleMaker(){
         for(int h = 0; h < Nhits ; ++h){
 
             Getinfo(h, layer, chip, channel, posx, posy, posz, energy, TOT);
-            cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
+            // cout << " event: " << event << " dwcReferenceType: " << dwcReferenceType <<  " layer: " << layer << " chip: " << chip << " channel: " << channel << " energy: " << energy << endl;
             if ( layer == 36 ) continue;
             if ( layer == 37 ) continue;
             if ( energy < 0.5 ) continue;
@@ -540,25 +540,32 @@ void ntupleMaker::NtupleMaker(){
             y_ch[layer-1][ (chip*32) + (channel/2) ] = posy;
             z_ch[layer-1][ (chip*32) + (channel/2) ] = posz;
 
-            if ( chip == 0 ) {
-                cout << "channel =" << channel << endl;
-            }
-            if ( chip == 0 && channel == 26 ) {
-                cout << "chip0 channel26 x=" << posx << "y" << posy << endl;
-            }
-            else if ( chip == 1 && channel == 0 ) {
-                cout << "chip1 channel0 x=" << posx << "y" << posy << endl;
-            }
+            // if ( chip == 0 ) {
+            //     cout << "channel =" << channel << endl;
+            // }
+            // if ( chip == 0 && channel == 26 ) {
+            //     cout << "chip0 channel26 x=" << posx << "y" << posy << endl;
+            // }
+            // else if ( chip == 1 && channel == 0 ) {
+            //     cout << "chip1 channel0 x=" << posx << "y" << posy << endl;
+            // }
         }
 
         for(int iL = 0; iL < NLAYER ; ++iL){
             //Find seed
             double Emax = -1;
-            for(int ich = 0; ich < NCHANNEL; ich++){
-                if( E_ch[iL][ich] > Emax){
-                    Emax = E_ch[iL][ich];
-                    maxID[iL] = ich;
-                    E_1[iL] = E_ch[iL][ich];
+            // for(int ich = 0; ich < NCHANNEL; ich++){
+                // if( E_ch[iL][ich] > Emax){
+                    // Emax = E_ch[iL][ich];
+                    // maxID[iL] = ich;
+                    // E_1[iL] = E_ch[iL][ich];
+                // }
+            // }
+            for (int idx = 0; idx < int(hit_tmp[iL-1].size()); idx++){
+                if ( hit_tmp[iL-1][idx] > Emax ) {
+                    Emax = hit_tmp[iL-1][idx];
+                    maxID[iL] = idx;
+                    E_1[iL] = hit_tmp[iL-1][idx];
                 }
             }
 
@@ -590,14 +597,14 @@ void ntupleMaker::NtupleMaker(){
             double dx,dy,dR;
             for(int ich = 0; ich < NCHANNEL; ich++){
                 if( E_ch[iL][ich] == 0 ) continue;
-                dx = x_ch[iL][ich] - x_ch [iL] [ maxID[iL] ];
-                dy = y_ch[iL][ich] - y_ch [iL] [ maxID[iL] ];
-                dR = sqrt(dx*dx + dy*dy);
-                if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
-                if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
-                if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
-                if( dR < 1.12455*4*1.2) E_61[iL] += E_ch[iL][ich];
-                // radial distribution w.r.t the shower axis
+                // dx = x_ch[iL][ich] - x_ch [iL] [ maxID[iL] ];
+                // dy = y_ch[iL][ich] - y_ch [iL] [ maxID[iL] ];
+                // dR = sqrt(dx*dx + dy*dy);
+                // if( dR < 1.12455*1.2) E_7[iL] += E_ch[iL][ich];
+                // if( dR < 1.12455*2*1.2) E_19[iL] += E_ch[iL][ich];
+                // if( dR < 1.12455*3*1.2) E_37[iL] += E_ch[iL][ich];
+                // if( dR < 1.12455*4*1.2) E_61[iL] += E_ch[iL][ich];
+                // // radial distribution w.r.t the shower axis
                 dx = x_ch[iL][ich] - x_ch[iL] [ maxID[ iL%2 + 2 ] ]; // using the layer 3 & 4 energy max channel as shower axis
                 dy = y_ch[iL][ich] - y_ch[iL] [ maxID[ iL%2 + 2 ] ];
                 dR = sqrt(dx*dx + dy*dy);
@@ -607,6 +614,17 @@ void ntupleMaker::NtupleMaker(){
                 if( dR < 1.12455*3*1.2) E_37_showerAxis[iL] += E_ch[iL][ich];
                 if( dR < 1.12455*4*1.2) E_61_showerAxis[iL] += E_ch[iL][ich];
             }
+            for( int idx = 0; idx < int(hit_tmp[iL-1].size()); idx++ ){
+                dx = hit_x[iL-1][idx] - hit_x[iL-1][maxID[iL-1]];
+                dy = hit_y[iL-1][idx] - hit_y[iL-1][maxID[iL-1]];
+                dR = sqrt(dx*dx + dy*dy);
+                if( dR < 1.12455*1.2) E_7[iL] += hit_tmp[iL-1][idx];
+                if( dR < 1.12455*2*1.2) E_19[iL] += hit_tmp[iL-1][idx];
+                if( dR < 1.12455*3*1.2) E_37[iL] += hit_tmp[iL-1][idx];
+                if( dR < 1.12455*4*1.2) E_61[iL] += hit_tmp[iL-1][idx];
+
+            }
+
             double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
             double E1devE7 =  E_1[iL] / E_7[iL];
             //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
