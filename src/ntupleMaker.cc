@@ -539,17 +539,16 @@ void ntupleMaker::NtupleMaker(){
             x_ch[layer-1][ (chip*32) + (channel/2) ] = posx;
             y_ch[layer-1][ (chip*32) + (channel/2) ] = posy;
             z_ch[layer-1][ (chip*32) + (channel/2) ] = posz;
-/*
+
             if ( chip == 0 ) {
                 cout << "channel =" << channel << endl;
             }
             if ( chip == 0 && channel == 26 ) {
                 cout << "chip0 channel26 x=" << posx << "y" << posy << endl;
             }
-            // else if ( chip == 1 && channel == 0 ) {
-                // cout << "chip1 channel0 x=" << posx << "y" << posy << endl;
-            // }
-*/
+            else if ( chip == 1 && channel == 0 ) {
+                cout << "chip1 channel0 x=" << posx << "y" << posy << endl;
+            }
         }
 
         for(int iL = 0; iL < NLAYER ; ++iL){
@@ -562,14 +561,6 @@ void ntupleMaker::NtupleMaker(){
                     E_1[iL] = E_ch[iL][ich];
                 }
             }
-
-            Emax = -1;
-            for(int idx = 0; idx < hit_tmp[iL-1].size(); idx++){
-                if( hit_tmp[iL-1].at(idx) > Emax ){
-                    Emax = hit_tmp[iL-1].at(idx);
-                }
-            }
-            cout << Emax - E_1[iL] << end;
 
             //Computing impact position of the shower on a given layer using Thorben's logE method
             double w, totalWeight;
