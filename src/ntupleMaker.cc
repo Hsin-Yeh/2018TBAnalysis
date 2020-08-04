@@ -17,6 +17,7 @@
 #include "TH2.h"
 #include "TGaxis.h"
 #include <utility>
+#include <vector>
 
 //Constructor
 ntupleMaker::ntupleMaker(){}
