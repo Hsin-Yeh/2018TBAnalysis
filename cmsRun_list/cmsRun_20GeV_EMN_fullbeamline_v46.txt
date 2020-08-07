@@ -1,7 +1,7 @@
-cho 'Set the runtime environment.'
+echo 'Set the runtime environment.'
 cmsenv;
 
-echo 'Compile everything';
+ echo 'Compile everything';
 scram b -j16;
 
 echo 'Running the command.'
