@@ -8,6 +8,8 @@
 #include "TCanvas.h"
 #include "TStyle.h"
 #include <string>
+#include <iostream>
+
 using namespace std;
 
 class PlotSetting{
