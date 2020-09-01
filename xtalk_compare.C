@@ -167,7 +167,7 @@ void xtalk_compare(int Energy)
 
         chi_cross_E1devE7[iL-1]    = E1devE7__3->Chi2Test(E1devE7__1,"UW CHI2/NDF");
         chi_original_E1devE7[iL-1] = E1devE7__3->Chi2Test(E1devE7__2,"UW CHI2/NDF");
-
+        chi_MC_E1devE7[iL-1]       = E1devE7__1->Chi2Test(E1devE7__2,"W CHI2/NDF");
         // E7 dev E19
         TH1D* E7devE19__1;
         TH1D* E7devE19__2;
@@ -890,6 +890,17 @@ void xtalk_compare(int Energy)
     c4->SaveAs(title);
     sprintf(title,"plots/%dGeV/%dGeV_E1devE7_chi2Test.pdf", Energy, Energy);
     c4->SaveAs(title);
+
+    TGraph* g_chi_MC_E1devE7 = new TGraph(NLAYER, layerID, chi_MC_E1devE7);
+    g_chi_MC_E1devE7->SetMarkerColor(2);
+    g_chi_MC_E1devE7->SetMarkerStyle(20);
+    g_chi_MC_E1devE7->SetFillColor(0);
+    g_chi_MC_E1devE7->SetTitle("w/ and w/o xtalk comparison");
+    sprintf(title,"plots/%dGeV/%dGeV_E1devE7_chi2Test_MC.png", Energy, Energy);
+    c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/%dGeV_E1devE7_chi2Test_MC.pdf", Energy, Energy);
+    c4->SaveAs(title);
+
 
     
     TGraph* g_chi_cross_E7devE19 = new TGraph(NLAYER, layerID, chi_cross_E7devE19);
