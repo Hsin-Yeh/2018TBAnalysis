@@ -896,6 +896,8 @@ void xtalk_compare(int Energy)
     g_chi_MC_E1devE7->SetMarkerStyle(20);
     g_chi_MC_E1devE7->SetFillColor(0);
     g_chi_MC_E1devE7->SetTitle("w/ and w/o xtalk comparison");
+    g_chi_MC_E1devE7->Draw("AP");
+    c4->Update();
     sprintf(title,"plots/%dGeV/%dGeV_E1devE7_chi2Test_MC.png", Energy, Energy);
     c4->SaveAs(title);
     sprintf(title,"plots/%dGeV/%dGeV_E1devE7_chi2Test_MC.pdf", Energy, Energy);
