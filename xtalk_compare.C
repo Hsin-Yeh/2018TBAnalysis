@@ -16,7 +16,7 @@ void xtalk_compare(int Energy)
     TFile f_MC_original(title);
 
     int NLAYER = 28;
-    double chi_cross_layerE[NLAYER], chi_cross_COGx[NLAYER], chi_cross_COGy[NLAYER], chi_cross_E1devE7[NLAYER], chi_cross_E7devE19[NLAYER];
+    double chi_cross_layerE[NLAYER], chi_cross_COGx[NLAYER], chi_cross_COGy[NLAYER], chi_cross_E1devE7[NLAYER], chi_cross_E7devE19[NLAYER], chi_MC_E1devE7[NLAYER];
     double chi_original_layerE[NLAYER], chi_original_COGx[NLAYER], chi_original_COGy[NLAYER], chi_original_E1devE7[NLAYER], chi_original_E7devE19[NLAYER];
     double layerID[NLAYER];
     double Y_max;
