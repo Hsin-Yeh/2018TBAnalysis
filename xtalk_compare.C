@@ -895,7 +895,7 @@ void xtalk_compare(int Energy)
     g_chi_MC_E1devE7->SetMarkerColor(2);
     g_chi_MC_E1devE7->SetMarkerStyle(20);
     g_chi_MC_E1devE7->SetFillColor(0);
-    g_chi_MC_E1devE7->SetTitle("w/ and w/o xtalk MC E1/E7 chi2Test");
+    g_chi_MC_E1devE7->SetTitle("MC w/ and w/o xtalk E1/E7 chi2Test");
     g_chi_MC_E1devE7->GetYaxis()->SetTitle("Chi2 / NDF");
     g_chi_MC_E1devE7->GetYaxis()->SetTitleOffset(1);
     g_chi_MC_E1devE7->GetXaxis()->SetTitle("layerID");
