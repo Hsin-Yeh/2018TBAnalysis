@@ -1025,6 +1025,9 @@ void xtalk_compare(int Energy)
     g_E1devE7_mean->SetMarkerStyle(20);
     g_E1devE7_mean->SetFillColor(0);
     g_E1devE7_mean->SetTitle("E1devE7 mean");
+    g_E1devE7_mean->GetXaxis()->SetTitle("LayerID");
+    g_E1devE7_mean->GetYaxis()->SetTitle("E1/E7 mean");
+    g_E1devE7_mean->GetYaxis()->SetTitleOffset(1);
     g_E1devE7_mean->Draw("AP");
     c4->Update();
     sprintf(title,"plots/%dGeV/E1devE7_mean_%dGeV.png", Energy, Energy);
