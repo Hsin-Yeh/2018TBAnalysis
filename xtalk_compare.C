@@ -168,6 +168,12 @@ void xtalk_compare(int Energy)
         chi_cross_E1devE7[iL-1]    = E1devE7__3->Chi2Test(E1devE7__1,"UW CHI2/NDF");
         chi_original_E1devE7[iL-1] = E1devE7__3->Chi2Test(E1devE7__2,"UW CHI2/NDF");
         chi_MC_E1devE7[iL-1]       = E1devE7__1->Chi2Test(E1devE7__2,"W CHI2/NDF");
+
+
+        E1devE7_mean[iL-1] = E1devE7__2->GetMean();
+        E1devE7_std[iL-1]  = E1devE7__2->GetStdDev();
+
+
         // E7 dev E19
         TH1D* E7devE19__1;
         TH1D* E7devE19__2;
@@ -1012,5 +1018,18 @@ void xtalk_compare(int Energy)
     c4->SaveAs(title);
     sprintf(title,"plots/%dGeV/chi2_comparelayerE_%dGeV.pdf", Energy, Energy);
     c4->SaveAs(title);
+
+
+    TGraphErrors* g_E1devE7_mean = new TGraphErrors(NLAYER, layerID, E1devE7_mean, 0, E1devE7_std);
+    g_E1devE7_mean->SetMarkerStyle(20);
+    g_E1devE7_mean->SetFillColor(0);
+    g_E1devE7_mean->SetTitle("E1devE7 mean");
+    g_E1devE7_mean->Draw("AP");
+    c4->Update();
+    sprintf(title,"plots/%dGeV/E1devE7_mean_%dGeV.png", Energy, Energy);
+    c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/E1devE7_mean_%dGeV.pdf", Energy, Energy);
+    c4->SaveAs(title);
+
 
 }
