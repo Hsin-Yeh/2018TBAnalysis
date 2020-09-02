@@ -20,6 +20,7 @@ void xtalk_compare(int Energy)
     double chi_original_layerE[NLAYER], chi_original_COGx[NLAYER], chi_original_COGy[NLAYER], chi_original_E1devE7[NLAYER], chi_original_E7devE19[NLAYER];
     double layerID[NLAYER];
     double Y_max;
+    double E1devE7_mean[NLAYER], E1devE7_std[NLAYER];
 
     for( int iL = 1; iL <= 28; iL++) {
 
