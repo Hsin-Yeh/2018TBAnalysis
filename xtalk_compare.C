@@ -20,7 +20,7 @@ void xtalk_compare(int Energy)
     double chi_original_layerE[NLAYER], chi_original_COGx[NLAYER], chi_original_COGy[NLAYER], chi_original_E1devE7[NLAYER], chi_original_E7devE19[NLAYER];
     double layerID[NLAYER];
     double Y_max;
-    double E1devE7_mean[NLAYER], E1devE7_std[NLAYER];
+    double E1devE7_mean[NLAYER], E1devE7_std[NLAYER], E7devE19_mean[NLAYER], E7devE19_std[NLAYER];
 
     for( int iL = 1; iL <= 28; iL++) {
 
@@ -294,6 +294,10 @@ void xtalk_compare(int Energy)
         // chi square test
         chi_cross_E7devE19[iL-1]    = E7devE19__3->Chi2Test(E7devE19__1,"UW CHI2/NDF");
         chi_original_E7devE19[iL-1] = E7devE19__3->Chi2Test(E7devE19__2,"UW CHI2/NDF");
+
+        E7devE19_mean[iL-1] = E7devE19__2->GetMean();
+        E7devE19_std[iL-1]  = E7devE19__2->GetStdDev();
+
 
         // ========== COGx ========== //
         TH1D* COGx__1;
@@ -1033,6 +1037,19 @@ void xtalk_compare(int Energy)
     sprintf(title,"plots/%dGeV/E1devE7_mean_%dGeV.png", Energy, Energy);
     c4->SaveAs(title);
     sprintf(title,"plots/%dGeV/E1devE7_mean_%dGeV.pdf", Energy, Energy);
+    c4->SaveAs(title);
+    TGraphErrors* g_E7devE19_mean = new TGraphErrors(NLAYER, layerID, E7devE19_mean, 0, E7devE19_std);
+    g_E7devE19_mean->SetMarkerStyle(20);
+    g_E7devE19_mean->SetFillColor(0);
+    g_E7devE19_mean->SetTitle("E7devE19 mean");
+    g_E7devE19_mean->GetXaxis()->SetTitle("LayerID");
+    g_E7devE19_mean->GetYaxis()->SetTitle("E7/E19 mean");
+    g_E7devE19_mean->GetYaxis()->SetTitleOffset(1);
+    g_E7devE19_mean->Draw("AP");
+    c4->Update();
+    sprintf(title,"plots/%dGeV/E7devE19_mean_%dGeV.png", Energy, Energy);
+    c4->SaveAs(title);
+    sprintf(title,"plots/%dGeV/E7devE19_mean_%dGeV.pdf", Energy, Energy);
     c4->SaveAs(title);
 
 
