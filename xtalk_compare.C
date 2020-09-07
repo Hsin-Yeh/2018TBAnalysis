@@ -48,9 +48,9 @@ void xtalk_compare(int Energy)
         Canvas_1->SetFrameBorderMode(0);
    
         E1devE7__1->SetStats(0);
-        E1devE7__1->SetLineColor(2);
+        E1devE7__1->SetLineColor(4);
         E1devE7__1->SetLineWidth(2);
-        E1devE7__1->SetMarkerColor(2);
+        E1devE7__1->SetMarkerColor(4);
         E1devE7__1->SetMarkerStyle(20);
         E1devE7__1->SetMarkerSize(0.5);
         E1devE7__1->GetXaxis()->SetTitle("#font[12]{E}(#font[12]{r_}0)#font[12]{/E}(#font[12]{r_}1)");
@@ -90,9 +90,9 @@ void xtalk_compare(int Energy)
         TText *pt_LaTex = pt->AddText("E1devE7");
         pt->Draw();
    
-        E1devE7__2->SetLineColor(4);
+        E1devE7__2->SetLineColor(2);
         E1devE7__2->SetLineWidth(2);
-        E1devE7__2->SetMarkerColor(4);
+        E1devE7__2->SetMarkerColor(2);
         E1devE7__2->SetMarkerStyle(20);
         E1devE7__2->SetMarkerSize(0.5);
         E1devE7__2->Draw("HISTSAME");
@@ -133,20 +133,20 @@ void xtalk_compare(int Energy)
 
         entry=leg->AddEntry("","MC with xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(2);
+        entry->SetLineColor(4);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(2);
+        entry->SetMarkerColor(4);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
         // entry=leg->AddEntry("","w/o xtalk","lpflpf");
         entry=leg->AddEntry("","MC without xtalk","lpflpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(2);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(2);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
@@ -185,12 +185,12 @@ void xtalk_compare(int Energy)
         E7devE19__3 = (TH1D *)f_Data.Get(title);
 
         E7devE19__1->SetStats(0);
-        E7devE19__1->SetLineColor(2);
+        E7devE19__1->SetLineColor(4);
         E7devE19__1->SetLineWidth(2);
-        E7devE19__1->SetMarkerColor(2);
+        E7devE19__1->SetMarkerColor(4);
         E7devE19__1->SetMarkerStyle(20);
         E7devE19__1->SetMarkerSize(0.5);
-        E7devE19__1->GetXaxis()->SetTitle("E7 / E19");
+        E7devE19__1->GetXaxis()->SetTitle("#font[12]{E}(#font[12]{r_}1)#font[12]{/E}(#font[12]{r_}2)");
         E7devE19__1->GetXaxis()->SetLabelFont(42);
         E7devE19__1->GetXaxis()->SetLabelOffset(0.01125);
         E7devE19__1->GetXaxis()->SetLabelSize(0.045);
@@ -218,9 +218,9 @@ void xtalk_compare(int Energy)
         pt->SetTextFont(42);
         pt->Draw();
    
-        E7devE19__2->SetLineColor(4);
+        E7devE19__2->SetLineColor(2);
         E7devE19__2->SetLineWidth(2);
-        E7devE19__2->SetMarkerColor(4);
+        E7devE19__2->SetMarkerColor(2);
         E7devE19__2->SetMarkerStyle(20);
         E7devE19__2->SetMarkerSize(0.5);
         E7devE19__2->Draw("HISTSAME");
@@ -259,19 +259,19 @@ void xtalk_compare(int Energy)
         entry->SetTextFont(42);
         entry=leg_E7devE19->AddEntry("","MC with xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(2);
+        entry->SetLineColor(4);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(2);
+        entry->SetMarkerColor(4);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
         entry=leg_E7devE19->AddEntry("","MC without xtalk","lpflpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(2);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(2);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
@@ -309,9 +309,9 @@ void xtalk_compare(int Energy)
         COGx__3 = (TH1D *)f_Data.Get(title);
 
         COGx__1->SetStats(0);
-        COGx__1->SetLineColor(2);
+        COGx__1->SetLineColor(4);
         COGx__1->SetLineWidth(2);
-        COGx__1->SetMarkerColor(2);
+        COGx__1->SetMarkerColor(4);
         COGx__1->SetMarkerStyle(20);
         COGx__1->SetMarkerSize(0.5);
         COGx__1->GetXaxis()->SetTitle("COGx");
@@ -339,9 +339,9 @@ void xtalk_compare(int Energy)
         pt->SetTextFont(42);
         pt->Draw();
    
-        COGx__2->SetLineColor(4);
+        COGx__2->SetLineColor(2);
         COGx__2->SetLineWidth(2);
-        COGx__2->SetMarkerColor(4);
+        COGx__2->SetMarkerColor(2);
         COGx__2->SetMarkerStyle(20);
         COGx__2->SetMarkerSize(0.5);
         COGx__2->Draw("SAME");
@@ -371,19 +371,19 @@ void xtalk_compare(int Energy)
         leg_COGx->SetFillStyle(1001);
         entry=leg_COGx->AddEntry("","w/ xtalk","lpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(2);
+        entry->SetLineColor(4);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(2);
+        entry->SetMarkerColor(4);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
         entry=leg_COGx->AddEntry("","w/o xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(2);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(2);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
@@ -426,9 +426,9 @@ void xtalk_compare(int Energy)
         COGy__3 = (TH1D *)f_Data.Get(title);
 
         COGy__1->SetStats(0);
-        COGy__1->SetLineColor(2);
+        COGy__1->SetLineColor(4);
         COGy__1->SetLineWidth(2);
-        COGy__1->SetMarkerColor(2);
+        COGy__1->SetMarkerColor(4);
         COGy__1->SetMarkerStyle(20);
         COGy__1->SetMarkerSize(0.5);
         COGy__1->GetXaxis()->SetTitle("COGy");
@@ -456,9 +456,9 @@ void xtalk_compare(int Energy)
         pt->SetTextFont(42);
         pt->Draw();
    
-        COGy__2->SetLineColor(4);
+        COGy__2->SetLineColor(2);
         COGy__2->SetLineWidth(2);
-        COGy__2->SetMarkerColor(4);
+        COGy__2->SetMarkerColor(2);
         COGy__2->SetMarkerStyle(20);
         COGy__2->SetMarkerSize(0.5);
         COGy__2->Draw("SAME");
@@ -488,19 +488,19 @@ void xtalk_compare(int Energy)
         leg_COGy->SetFillStyle(1001);
         entry=leg_COGy->AddEntry("","w/ xtalk","lpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(2);
+        entry->SetLineColor(4);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(2);
+        entry->SetMarkerColor(4);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
         entry=leg_COGy->AddEntry("","w/o xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(2);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(2);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
@@ -544,9 +544,9 @@ void xtalk_compare(int Energy)
         layerE__3 = (TH1D *)f_Data.Get(title);
 
         layerE__1->SetStats(0);
-        layerE__1->SetLineColor(2);
+        layerE__1->SetLineColor(4);
         layerE__1->SetLineWidth(2);
-        layerE__1->SetMarkerColor(2);
+        layerE__1->SetMarkerColor(4);
         layerE__1->SetMarkerStyle(20);
         layerE__1->SetMarkerSize(0.5);
         layerE__1->GetXaxis()->SetTitle("layerE");
@@ -585,9 +585,9 @@ void xtalk_compare(int Energy)
         pt->SetTextFont(42);
         pt->Draw();
    
-        layerE__2->SetLineColor(4);
+        layerE__2->SetLineColor(2);
         layerE__2->SetLineWidth(2);
-        layerE__2->SetMarkerColor(4);
+        layerE__2->SetMarkerColor(2);
         layerE__2->SetMarkerStyle(20);
         layerE__2->SetMarkerSize(0.5);
         layerE__2->Draw("HISTSAME");
@@ -617,19 +617,19 @@ void xtalk_compare(int Energy)
         leg_layerE->SetFillStyle(1001);
         entry=leg_layerE->AddEntry("","w/ xtalk","lpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(2);
+        entry->SetLineColor(4);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(2);
+        entry->SetMarkerColor(4);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
         entry=leg_layerE->AddEntry("","w/o xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(2);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(2);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
@@ -764,9 +764,9 @@ void xtalk_compare(int Energy)
     Canvas_1->SetFrameBorderMode(0);
    
     totalCEE__1->SetStats(0);
-    totalCEE__1->SetLineColor(2);
+    totalCEE__1->SetLineColor(4);
     totalCEE__1->SetLineWidth(2);
-    totalCEE__1->SetMarkerColor(2);
+    totalCEE__1->SetMarkerColor(4);
     totalCEE__1->SetMarkerStyle(20);
     totalCEE__1->SetMarkerSize(0.5);
     totalCEE__1->GetXaxis()->SetTitle("totalCEE [MIP]");
@@ -798,9 +798,9 @@ void xtalk_compare(int Energy)
     TText *pt_LaTex = pt->AddText("w/ xtalk");
     pt->Draw();
    
-    totalCEE__2->SetLineColor(4);
+    totalCEE__2->SetLineColor(2);
     totalCEE__2->SetLineWidth(2);
-    totalCEE__2->SetMarkerColor(4);
+    totalCEE__2->SetMarkerColor(2);
     totalCEE__2->SetMarkerStyle(20);
     totalCEE__2->SetMarkerSize(0.5);
     totalCEE__2->Draw("HISTSAME");
@@ -830,19 +830,19 @@ void xtalk_compare(int Energy)
     leg->SetFillStyle(1001);
     TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
     entry->SetFillStyle(1001);
-    entry->SetLineColor(2);
+    entry->SetLineColor(4);
     entry->SetLineStyle(1);
     entry->SetLineWidth(2);
-    entry->SetMarkerColor(2);
+    entry->SetMarkerColor(4);
     entry->SetMarkerStyle(20);
     entry->SetMarkerSize(0.5);
     entry->SetTextFont(42);
     entry=leg->AddEntry("","w/o xtalk","lpflpf");
     entry->SetFillStyle(1001);
-    entry->SetLineColor(4);
+    entry->SetLineColor(2);
     entry->SetLineStyle(1);
     entry->SetLineWidth(2);
-    entry->SetMarkerColor(4);
+    entry->SetMarkerColor(2);
     entry->SetMarkerStyle(20);
     entry->SetMarkerSize(0.5);
     entry->SetTextFont(42);
@@ -876,7 +876,7 @@ void xtalk_compare(int Energy)
     // ========== chi square plot ========== //
     TCanvas* c4 = new TCanvas();
     TGraph* g_chi_cross_E1devE7 = new TGraph(NLAYER, layerID, chi_cross_E1devE7); 
-    g_chi_cross_E1devE7->SetMarkerColor(2);
+    g_chi_cross_E1devE7->SetMarkerColor(4);
     g_chi_cross_E1devE7->SetMarkerStyle(20);
     g_chi_cross_E1devE7->SetFillColor(0);
     g_chi_cross_E1devE7->SetTitle("w/ xtalk");
@@ -884,7 +884,7 @@ void xtalk_compare(int Energy)
     g_chi_original_E1devE7->SetTitle("w/o xtalk");
     g_chi_original_E1devE7->SetFillColor(0);
     g_chi_original_E1devE7->SetMarkerStyle(20);
-    g_chi_original_E1devE7->SetMarkerColor(4);
+    g_chi_original_E1devE7->SetMarkerColor(2);
     TMultiGraph* multi_chi_E1devE7 = new TMultiGraph();
     multi_chi_E1devE7->Add(g_chi_cross_E1devE7);
     multi_chi_E1devE7->Add(g_chi_original_E1devE7);
@@ -903,7 +903,7 @@ void xtalk_compare(int Energy)
     c4->SaveAs(title);
 
     TGraph* g_chi_MC_E1devE7 = new TGraph(NLAYER, layerID, chi_MC_E1devE7);
-    g_chi_MC_E1devE7->SetMarkerColor(2);
+    g_chi_MC_E1devE7->SetMarkerColor(4);
     g_chi_MC_E1devE7->SetMarkerStyle(20);
     g_chi_MC_E1devE7->SetFillColor(0);
     g_chi_MC_E1devE7->SetTitle("MC w/ and w/o xtalk E1/E7 chi2Test");
@@ -920,7 +920,7 @@ void xtalk_compare(int Energy)
 
     
     TGraph* g_chi_cross_E7devE19 = new TGraph(NLAYER, layerID, chi_cross_E7devE19);
-    g_chi_cross_E7devE19->SetMarkerColor(2);
+    g_chi_cross_E7devE19->SetMarkerColor(4);
     g_chi_cross_E7devE19->SetMarkerStyle(20);
     g_chi_cross_E7devE19->SetFillColor(0);
     g_chi_cross_E7devE19->SetTitle("w/ xtalk");
@@ -928,7 +928,7 @@ void xtalk_compare(int Energy)
     g_chi_original_E7devE19->SetTitle("w/o xtalk");
     g_chi_original_E7devE19->SetFillColor(0);
     g_chi_original_E7devE19->SetMarkerStyle(20);
-    g_chi_original_E7devE19->SetMarkerColor(4);
+    g_chi_original_E7devE19->SetMarkerColor(2);
     TMultiGraph* multi_chi_E7devE19 = new TMultiGraph();
     multi_chi_E7devE19->Add(g_chi_cross_E7devE19);
     multi_chi_E7devE19->Add(g_chi_original_E7devE19);
@@ -947,7 +947,7 @@ void xtalk_compare(int Energy)
     c4->SaveAs(title);
 
     TGraph* g_chi_cross_COGx = new TGraph(NLAYER, layerID, chi_cross_COGx);
-    g_chi_cross_COGx->SetMarkerColor(2);
+    g_chi_cross_COGx->SetMarkerColor(4);
     g_chi_cross_COGx->SetMarkerStyle(20);
     g_chi_cross_COGx->SetFillColor(0);
     g_chi_cross_COGx->SetTitle("w/ xtalk");
@@ -955,7 +955,7 @@ void xtalk_compare(int Energy)
     g_chi_original_COGx->SetTitle("w/o xtalk");
     g_chi_original_COGx->SetFillColor(0);
     g_chi_original_COGx->SetMarkerStyle(20);
-    g_chi_original_COGx->SetMarkerColor(4);
+    g_chi_original_COGx->SetMarkerColor(2);
     TMultiGraph* multi_chi_COGx = new TMultiGraph();
     multi_chi_COGx->Add(g_chi_cross_COGx);
     multi_chi_COGx->Add(g_chi_original_COGx);
@@ -973,7 +973,7 @@ void xtalk_compare(int Energy)
     c4->SaveAs(title);
 
     TGraph* g_chi_cross_COGy = new TGraph(NLAYER, layerID, chi_cross_COGy);
-    g_chi_cross_COGy->SetMarkerColor(2);
+    g_chi_cross_COGy->SetMarkerColor(4);
     g_chi_cross_COGy->SetMarkerStyle(20);
     g_chi_cross_COGy->SetFillColor(0);
     g_chi_cross_COGy->SetTitle("w/ xtalk");
@@ -981,7 +981,7 @@ void xtalk_compare(int Energy)
     g_chi_original_COGy->SetTitle("w/o xtalk");
     g_chi_original_COGy->SetFillColor(0);
     g_chi_original_COGy->SetMarkerStyle(20);
-    g_chi_original_COGy->SetMarkerColor(4);
+    g_chi_original_COGy->SetMarkerColor(2);
     TMultiGraph* multi_chi_COGy = new TMultiGraph();
     multi_chi_COGy->Add(g_chi_cross_COGy);
     multi_chi_COGy->Add(g_chi_original_COGy);
@@ -999,7 +999,7 @@ void xtalk_compare(int Energy)
     c4->SaveAs(title);
 
     TGraph* g_chi_cross_layerE = new TGraph(NLAYER, layerID, chi_cross_layerE);
-    g_chi_cross_layerE->SetMarkerColor(2);
+    g_chi_cross_layerE->SetMarkerColor(4);
     g_chi_cross_layerE->SetMarkerStyle(20);
     g_chi_cross_layerE->SetFillColor(0);
     g_chi_cross_layerE->SetTitle("w/ xtalk");
@@ -1007,7 +1007,7 @@ void xtalk_compare(int Energy)
     g_chi_original_layerE->SetTitle("w/o xtalk");
     g_chi_original_layerE->SetFillColor(0);
     g_chi_original_layerE->SetMarkerStyle(20);
-    g_chi_original_layerE->SetMarkerColor(4);
+    g_chi_original_layerE->SetMarkerColor(2);
     TMultiGraph* multi_chi_layerE = new TMultiGraph();
     multi_chi_layerE->Add(g_chi_cross_layerE);
     multi_chi_layerE->Add(g_chi_original_layerE);
