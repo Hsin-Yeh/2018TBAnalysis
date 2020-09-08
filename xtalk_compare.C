@@ -53,7 +53,7 @@ void xtalk_compare(int Energy)
         E1devE7__1->SetMarkerColor(4);
         E1devE7__1->SetMarkerStyle(20);
         E1devE7__1->SetMarkerSize(0.5);
-        E1devE7__1->GetXaxis()->SetTitle("#font[12]{E}(#font[12]{r_}0)#font[12]{/E}(#font[12]{r_}1)");
+        E1devE7__1->GetXaxis()->SetTitle("#font[12]{E}(#font[12]{r}_{0})#font[12]{/E}(#font[12]{r}_{1})");
         E1devE7__1->GetXaxis()->SetLabelFont(42);
         E1devE7__1->GetXaxis()->SetLabelOffset(0.01125);
         E1devE7__1->GetXaxis()->SetLabelSize(0.045);
@@ -190,7 +190,7 @@ void xtalk_compare(int Energy)
         E7devE19__1->SetMarkerColor(4);
         E7devE19__1->SetMarkerStyle(20);
         E7devE19__1->SetMarkerSize(0.5);
-        E7devE19__1->GetXaxis()->SetTitle("#font[12]{E}(#font[12]{r_}1)#font[12]{/E}(#font[12]{r_}2)");
+        E7devE19__1->GetXaxis()->SetTitle("#font[12]{E}(#font[12]{r}_{1})#font[12]{/E}(#font[12]{r}_{2})");
         E7devE19__1->GetXaxis()->SetLabelFont(42);
         E7devE19__1->GetXaxis()->SetLabelOffset(0.01125);
         E7devE19__1->GetXaxis()->SetLabelSize(0.045);
