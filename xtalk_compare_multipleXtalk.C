@@ -230,18 +230,6 @@ void xtalk_compare_multipleXtalk(int Energy)
         E7devE19__3 = (TH1D *)f_MC_1.Get(title);
         E7devE19__4 = (TH1D *)f_MC_2.Get(title);
 
-        TCanvas *Canvas_1 = new TCanvas("Canvas_1", "Canvas_1",333,105,837,583);
-        Canvas_1->Range(-0.127676,-0.01502931,1.140176,0.07874052);
-        Canvas_1->SetFillColor(0);
-        Canvas_1->SetBorderMode(0);
-        Canvas_1->SetBorderSize(2);
-        Canvas_1->SetTopMargin(0.08013938);
-        Canvas_1->SetBottomMargin(0.1602788);
-        Canvas_1->SetLeftMargin(0.15);
-        Canvas_1->SetFrameBorderMode(0);
-        Canvas_1->SetFrameLineWidth(2);
-        Canvas_1->SetFrameBorderMode(0);
-
         E7devE19__1->SetStats(0);
         E7devE19__1->SetLineColor(4);
         E7devE19__1->SetLineWidth(2);
