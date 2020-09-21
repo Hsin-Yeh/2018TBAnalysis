@@ -40,7 +40,7 @@ void xtalk_compare_multipleXtalk(int Energy)
         sprintf(title,"histo/layer%d/layer%d_E1devE7",iL,iL);
         E1devE7__1 = (TH1D *)f_MC.Get(title);
         E1devE7__2 = (TH1D *)f_MC_original.Get(title);
-        E1devE7__3 = (TH1D *)f_Data.Get(title);
+        E1devE7__5 = (TH1D *)f_Data.Get(title);
         E1devE7__3 = (TH1D *)f_MC_1.Get(title);
         E1devE7__4 = (TH1D *)f_MC_2.Get(title);
 
@@ -106,9 +106,9 @@ void xtalk_compare_multipleXtalk(int Energy)
         E1devE7__2->SetMarkerSize(0.5);
         E1devE7__2->Draw("HISTSAME");
 
-        E1devE7__3->SetLineColor(5);
+        E1devE7__3->SetLineColor(8);
         E1devE7__3->SetLineWidth(2);
-        E1devE7__3->SetMarkerColor(5);
+        E1devE7__3->SetMarkerColor(8);
         E1devE7__3->SetMarkerStyle(20);
         E1devE7__3->SetMarkerSize(0.5);
         E1devE7__3->Draw("HISTSAME");
@@ -120,10 +120,10 @@ void xtalk_compare_multipleXtalk(int Energy)
         E1devE7__4->SetMarkerSize(0.5);
         E1devE7__4->Draw("HISTSAME");
 
-        E1devE7__3->SetLineWidth(2);
-        E1devE7__3->SetMarkerStyle(20);
-        E1devE7__3->SetMarkerSize(0.5);
-        E1devE7__3->Draw("SAME");
+        E1devE7__5->SetLineWidth(2);
+        E1devE7__5->SetMarkerStyle(20);
+        E1devE7__5->SetMarkerSize(0.5);
+        E1devE7__5->Draw("SAME");
 
 
         TLegend *leg = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
@@ -166,20 +166,20 @@ void xtalk_compare_multipleXtalk(int Energy)
 
         entry=leg->AddEntry("","MC with 5% xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(6);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(6);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
 
         entry=leg->AddEntry("","MC with 10% xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(8);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(8);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
