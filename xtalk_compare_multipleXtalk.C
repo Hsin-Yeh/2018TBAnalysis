@@ -113,9 +113,9 @@ void xtalk_compare_multipleXtalk(int Energy)
         E1devE7__3->SetMarkerSize(0.5);
         E1devE7__3->Draw("HISTSAME");
 
-        E1devE7__4->SetLineColor(6);
+        E1devE7__4->SetLineColor(8);
         E1devE7__4->SetLineWidth(2);
-        E1devE7__4->SetMarkerColor(6);
+        E1devE7__4->SetMarkerColor(8);
         E1devE7__4->SetMarkerStyle(20);
         E1devE7__4->SetMarkerSize(0.5);
         E1devE7__4->Draw("HISTSAME");
@@ -156,10 +156,10 @@ void xtalk_compare_multipleXtalk(int Energy)
 
         entry=leg->AddEntry("","MC with 1% xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(6);
+        entry->SetLineColor(8);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(6);
+        entry->SetMarkerColor(8);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
@@ -279,9 +279,9 @@ void xtalk_compare_multipleXtalk(int Energy)
         E7devE19__3->SetMarkerSize(0.5);
         E7devE19__3->Draw("HISTSAME");
 
-        E7devE19__4->SetLineColor(6);
+        E7devE19__4->SetLineColor(8);
         E7devE19__4->SetLineWidth(2);
-        E7devE19__4->SetMarkerColor(6);
+        E7devE19__4->SetMarkerColor(8);
         E7devE19__4->SetMarkerStyle(20);
         E7devE19__4->SetMarkerSize(0.5);
         E7devE19__4->Draw("HISTSAME");
@@ -322,10 +322,10 @@ void xtalk_compare_multipleXtalk(int Energy)
 
         entry=leg_E7devE19->AddEntry("","MC with 1% xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(6);
+        entry->SetLineColor(8);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(6);
+        entry->SetMarkerColor(8);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
