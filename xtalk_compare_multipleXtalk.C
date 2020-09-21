@@ -258,19 +258,11 @@ void xtalk_compare_multipleXtalk(int Energy)
         E7devE19__1->GetYaxis()->SetRangeUser(0,Y_max*1.4);
         E7devE19__1->Draw("HIST");
 
-        TPaveText *pt = new TPaveText(0.2230294,0.9363613,0.3672606,0.995,"blNDC");
-        pt->SetName("title");
-        pt->SetBorderSize(0);
-        pt->SetFillColor(0);
-        pt->SetFillStyle(0);
-
-        Int_t ci;      // for color index setting
-        TColor *color; // for color definition with alpha
         ci = 1180;
         color = new TColor(ci, 0, 0, 0, " ", 0);
         pt->SetTextColor(ci);
         pt->SetTextFont(42);
-        TText *pt_LaTex = pt->AddText("E7devE19");
+        pt_LaTex = pt->AddText("E7devE19");
         pt->Draw();
 
         E7devE19__2->SetLineColor(2);
