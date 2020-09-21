@@ -6,13 +6,13 @@ void xtalk_compare_multipleXtalk(int Energy)
     char title[200];
     //int Energy = 300;
 
-    sprintf(title,"root_plot/DWCfixedcut_bx_27_36/1percentXtalk/plot_sim_%dGeV_EMN_fullbeamline_v46_5.root",Energy);
-    // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
-    TFile f_MC(title);
     sprintf(title,"root_plot/DWCfixedcut_bx_27_36/5percentXtalk/plot_sim_%dGeV_EMN_fullbeamline_v46_5.root",Energy);
     // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
-    TFile f_MC_1(title);
+    TFile f_MC(title);
     sprintf(title,"root_plot/DWCfixedcut_bx_27_36/10percentXtalk/plot_sim_%dGeV_EMN_fullbeamline_v46_5.root",Energy);
+    // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
+    TFile f_MC_1(title);
+    sprintf(title,"root_plot/DWCfixedcut_bx_27_36/1percentXtalk/plot_sim_%dGeV_EMN_fullbeamline_v46_5.root",Energy);
     // sprintf(title,"root_plot/plot_ntuple_sim_config22_pdgID11_beamMomentum%d_listFTFP_BERT_EMN_LeadNearHGCAL.root",Energy);
     TFile f_MC_2(title);
     sprintf(title,"root_plot/plot_data_%dGeV_Ele.root",Energy);
@@ -156,20 +156,20 @@ void xtalk_compare_multipleXtalk(int Energy)
 
         entry=leg->AddEntry("","MC with 1% xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(4);
+        entry->SetLineColor(6);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(4);
+        entry->SetMarkerColor(6);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
 
         entry=leg->AddEntry("","MC with 5% xtalk","lpflpf");
         entry->SetFillStyle(1001);
-        entry->SetLineColor(6);
+        entry->SetLineColor(4);
         entry->SetLineStyle(1);
         entry->SetLineWidth(2);
-        entry->SetMarkerColor(6);
+        entry->SetMarkerColor(4);
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
