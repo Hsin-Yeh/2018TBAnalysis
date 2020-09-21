@@ -292,25 +292,25 @@ void xtalk_compare_multipleXtalk(int Energy)
         E7devE19__5->Draw("SAME");
 
 
-        TLegend *leg = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
-        leg->SetBorderSize(1);
+        TLegend *leg_E7devE19 = new TLegend(0.18,0.7,0.48,0.9,NULL,"brNDC");
+        leg_E7devE19->SetBorderSize(1);
 
         ci = TColor::GetColor("#000000");
-        leg->SetTextColor(ci);
-        leg->SetTextFont(62);
+        leg_E7devE19->SetTextColor(ci);
+        leg_E7devE19->SetTextFont(62);
 
 
         ci = 1183;
         color = new TColor(ci, 0, 0, 0, " ", 0.011);
-        leg->SetLineColor(ci);
-        leg->SetLineStyle(1);
-        leg->SetLineWidth(1);
+        leg_E7devE19->SetLineColor(ci);
+        leg_E7devE19->SetLineStyle(1);
+        leg_E7devE19->SetLineWidth(1);
         ci = 1180;
         color = new TColor(ci, 1, 1, 1, " ", 0);
-        leg->SetFillColor(ci);
-        leg->SetFillStyle(1001);
-        // TLegendEntry *entry=leg->AddEntry("","w/ xtalk","lpf");
-        TLegendEntry *entry=leg->AddEntry("","data","lpf");
+        leg_E7devE19->SetFillColor(ci);
+        leg_E7devE19->SetFillStyle(1001);
+        // TLeg_E7devE19endEntry *entry=leg_E7devE19->AddEntry("","w/ xtalk","lpf");
+        entry=leg_E7devE19->AddEntry("","data","lpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(1);
         entry->SetLineStyle(1);
@@ -320,7 +320,7 @@ void xtalk_compare_multipleXtalk(int Energy)
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
 
-        entry=leg->AddEntry("","MC with 1% xtalk","lpflpf");
+        entry=leg_E7devE19->AddEntry("","MC with 1% xtalk","lpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(6);
         entry->SetLineStyle(1);
@@ -330,7 +330,7 @@ void xtalk_compare_multipleXtalk(int Energy)
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
 
-        entry=leg->AddEntry("","MC with 5% xtalk","lpflpf");
+        entry=leg_E7devE19->AddEntry("","MC with 5% xtalk","lpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(4);
         entry->SetLineStyle(1);
@@ -340,7 +340,7 @@ void xtalk_compare_multipleXtalk(int Energy)
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
 
-        entry=leg->AddEntry("","MC with 10% xtalk","lpflpf");
+        entry=leg_E7devE19->AddEntry("","MC with 10% xtalk","lpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(800);
         entry->SetLineStyle(1);
@@ -349,8 +349,8 @@ void xtalk_compare_multipleXtalk(int Energy)
         entry->SetMarkerStyle(20);
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
-        // entry=leg->AddEntry("","w/o xtalk","lpflpf");
-        entry=leg->AddEntry("","MC without xtalk","lpflpflpf");
+        // entry=leg_E7devE19->AddEntry("","w/o xtalk","lpflpf");
+        entry=leg_E7devE19->AddEntry("","MC without xtalk","lpflpflpf");
         entry->SetFillStyle(1001);
         entry->SetLineColor(2);
         entry->SetLineStyle(1);
@@ -360,8 +360,8 @@ void xtalk_compare_multipleXtalk(int Energy)
         entry->SetMarkerSize(0.5);
         entry->SetTextFont(42);
         sprintf(title,"e+ %d GeV layer%d",Energy, iL);
-        leg->SetHeader(title);
-        leg->Draw();
+        leg_E7devE19->SetHeader(title);
+        leg_E7devE19->Draw();
         Canvas_1->Update();
 
         sprintf(title,"plots/%dGeV/%dGeV_E7devE19_layer%02d.png", Energy, Energy, iL);
