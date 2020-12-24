@@ -21,7 +21,7 @@ int main(int argc, char** argv){
   app->Init();
   PlotSetting *P;
   P->root_logon();
-
+yo!
   for(int i = 0 ; i < argc ; ++i){
     arg_string = argv[i];
     all_args.push_back(arg_string);
@@ -119,7 +119,7 @@ void main_makePlots(bool Is_Data){
   }
   infile.close();
   makePlots *M;
-  M = new makePlots(chain1,chain2,chain3,filename);
+  M = new makePlots(chain1,chain2,chain3,filename)
   M->Is_Data = Is_Data;
   //M->Event_Display();
   M->Loop();

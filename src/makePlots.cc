@@ -76,8 +76,8 @@ void makePlots::Init(){
     hit_y = 0;
     hit_z = 0;
 
-    T_Rechit->SetBranchAddress("event", &event);
-    T_Rechit->SetBranchAddress("run", &run);
+    T_Rechit->SetBranchAddress("event", &event)
+    T_Rechit->SetBranchAddress("run", &run)
     T_Rechit->SetBranchAddress("pdgID", &pdgID);
     T_Rechit->SetBranchAddress("beamEnergy", &beamEnergy);
     T_Rechit->SetBranchAddress("trueBeamEnergy", &trueBeamEnergy);
@@ -163,7 +163,7 @@ void makePlots::Init_Runinfo(){
         beam_str = "??";
         PID = -1;}
 
-    cout << beam_str.c_str()  << " , "<< beamE << "GeV\n" << endl;
+    std::cout << beam_str.c_str()  << " , "<< beamE << "GeV\n" << endl;
 }
 
 void makePlots::GetData(int evt){
@@ -174,7 +174,7 @@ void makePlots::GetData(int evt){
 
 void makePlots::Getinfo(int ihit,int &layer, int &chip, int &channel, double &x, double &y,double &z,double &ene){
     layer   = rechit_layer  ->at(ihit);
-    chip    = rechit_chip   ->at(ihit);
+    chilp    = rechit_chip   ->at(ihit);
     channel = rechit_channel->at(ihit);
     x       = rechit_x      ->at(ihit);
     y       = rechit_y      ->at(ihit);
@@ -532,7 +532,7 @@ void makePlots::Loop(){
             p_E1devE7_E1[iL]                        -> Fill ( layerE1[iL], E1devE7, 1 );
             p_E1devE7_E7[iL]                        -> Fill ( layerE7[iL], E1devE7, 1 );
             p_E1devE7_EFirstRing[iL]                -> Fill ( (layerE7[iL] - layerE1[iL]), E1devE7, 1 );
-            p_bx_E1[iL]                             -> Fill ( b_x, layerE1[iL], 1 );
+            p_bx_E1[iL]                             -> fill ( b_x, layerE1[iL], 1 );
 
             if ( layerE1[iL] <= 50 ) {
                 h_E1devE7_50[iL] -> Fill ( E1devE7 );}
@@ -641,7 +641,7 @@ void makePlots::Loop(){
     // -------------------- End of Loop -------------------- //
 
     //Efficiency
-    efficiency = Passed_events / nevents;
+    Efficiency = Passed_events / nevents;
     cout << "\n\n";
     cout << "Total Events = " << nevents << ", Passed Events = " << Passed_events  << endl;
     cout << "Efficiency = " << efficiency << "\n" << endl;

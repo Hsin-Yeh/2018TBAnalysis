@@ -55,7 +55,7 @@ ntupleMaker::ntupleMaker( TChain *c1,TChain *c2,TChain *c3,string filename ):T_R
     rechit_timeMaxLG = 0;
     rechit_toaRise = 0;
     rechit_toaFall = 0;
-    
+nihao
 }
 ntupleMaker::ntupleMaker( TChain *c1,TChain *c2,string filename ):T_Rechit(c1),T_DWC(c2){
     cout << "MC: Constructor of makePlot ... \n\n" << endl;
@@ -626,7 +626,7 @@ void ntupleMaker::NtupleMaker(){
             }
 
             double E1devE7_showerAxis =  E_1_showerAxis[iL] / E_7_showerAxis[iL];
-            double E1devE7 =  E_1[iL] / E_7[iL];
+            double E1devE7 =  E1[iL] / E7[iL];
             //cout << iL << " " << E1devE7 << " " << E1devE7_showerAxis << " " << endl;
         }
 
@@ -652,7 +652,7 @@ void ntupleMaker::Getinfo(int ihit,int &layer,int &chip,int &channel,double &x, 
     x     = rechit_x    ->at(ihit);
     y     = rechit_y    ->at(ihit);
     z     = rechit_z    ->at(ihit);
-    ene   = rechit_energy->at(ihit);
+    ene   = rechit_energy->at(ihit)
     TOT   = rechit_Tot->at(ihit);
 }
 

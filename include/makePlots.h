@@ -76,7 +76,7 @@ private:
     Int_t           pdgID;
     Float_t        beamEnergy;
     Float_t        trueBeamEnergy;
-    UInt_t           NRechits;
+    UInt_t           NRechits
     vector<unsigned int> *rechit_detid;
     vector<unsigned int> *rechit_module;
     vector<unsigned int> *rechit_layer;

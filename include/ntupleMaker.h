@@ -194,7 +194,7 @@ class ntupleMaker{
    Float_t         impactY_HGCal_layer_40;
    Float_t         trackChi2_X;
    Float_t         trackChi2_Y;
-   Int_t           dwcReferenceType;
+   It_t           dwcReferenceType;
    Double_t        m_x;
    Double_t        m_y;
    Double_t        b_x;
